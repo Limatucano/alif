@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">alif</string>
     <string name="ContentDescription">Logo do aplicativo</string>
+    <string name="cpf_cnpj">CPF/CNPJ</string>
+    <string name="digite_seu_email_aqui">Digite seu email aqui!</string>
+    <string name="senha">Senha</string>
+    <string name="digite_sua_senha_aqui">Digite sua senha aqui</string>
+    <string name="modo">Entrar como</string>
 </resources>
