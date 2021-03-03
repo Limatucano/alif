@@ -12,12 +12,17 @@
         android:layout_height="640dp"
         android:background="@drawable/card_main"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:padding="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:constraint_referenced_ids="editText,textView" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -26,8 +31,97 @@
             app:srcCompat="@drawable/logo"
             android:contentDescription="@string/ContentDescription"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
+            />
 
+        <TextView
+            android:id="@+id/txt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/cpf_cnpj"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:autofillHints=""
+            android:hint="@string/digite_seu_email_aqui"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white" />
+
+        <TextView
+            android:id="@+id/txt_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/senha"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:autofillHints=""
+            android:hint="@string/digite_sua_senha_aqui"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white" />
+
+        <TextView
+            android:id="@+id/txt_modo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/modo"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txt_cliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cliente"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txt_lojista"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logista"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:backgroundTint="@color/white"
+            android:text="Entrar"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
     </LinearLayout>
     <View
         android:id="@+id/view_top"
