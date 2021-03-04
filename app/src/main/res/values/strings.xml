@@ -6,4 +6,6 @@
     <string name="senha">Senha</string>
     <string name="digite_sua_senha_aqui">Digite sua senha aqui</string>
     <string name="modo">Entrar como</string>
+    <string name="cliente">Cliente</string>
+    <string name="lojista">Lojista</string>
 </resources>
