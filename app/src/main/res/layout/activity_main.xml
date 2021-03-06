@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <RelativeLayout
+        android:id="@+id/box"
         android:layout_width="match_parent"
         android:layout_height="640dp"
         android:background="@drawable/card_main"
@@ -25,10 +25,12 @@
             app:srcCompat="@drawable/logo"
             android:contentDescription="@string/ContentDescription"
             android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
             />
 
         <TextView
             android:id="@+id/txt_email"
+            android:layout_below="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -41,13 +43,21 @@
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_below="@+id/txt_email"
+            android:layout_alignStart="@+id/txt_email"
+            android:layout_alignLeft="@+id/txt_email"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:autofillHints=""
+            android:backgroundTint="@color/white"
+            android:hint="@string/digite_seu_email_aqui"
             android:inputType="textEmailAddress"
             android:textColor="@color/white"
-            android:autofillHints=""
-            android:hint="@string/digite_seu_email_aqui"
-            android:textColorHint="@color/white"
-            android:backgroundTint="@color/white" />
+            android:textColorHint="@color/white" />
 
         <TextView
             android:id="@+id/txt_senha"
@@ -56,69 +66,66 @@
             android:text="@string/senha"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_below="@+id/email"/>
 
         <EditText
             android:id="@+id/senha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_below="@+id/txt_senha"
+            android:layout_alignStart="@+id/txt_senha"
+            android:layout_alignLeft="@+id/txt_senha"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:autofillHints=""
+            android:backgroundTint="@color/white"
+            android:hint="@string/digite_sua_senha_aqui"
             android:inputType="textEmailAddress"
             android:textColor="@color/white"
-            android:autofillHints=""
-            android:hint="@string/digite_sua_senha_aqui"
-            android:textColorHint="@color/white"
-            android:backgroundTint="@color/white" />
-
-        <TextView
-            android:id="@+id/txt_modo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/modo"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                xmlns:android="http://schemas.android.com/apk/res/android">
-                <RadioButton
-                    android:id="@+id/cliente"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cliente"
-                    android:textSize="16sp"
-                    android:textColor="@color/white"/>
-
-                <RadioButton
-                    android:id="@+id/lojista"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/lojista"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    />
-            </RadioGroup>
+            android:textColorHint="@color/white" />
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="51dp"
+            android:layout_below="@+id/senha"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="17dp"
             android:backgroundTint="@color/white"
-            android:text="Entrar"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/entrar"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
-        <View
-            android:id="@+id/view_top"
-            android:layout_width="163dp"
-            android:layout_height="163dp"
-            android:layout_marginTop="567dp"
-            android:layout_marginBottom="1dp"
-            android:background="@drawable/ball" />
-    </LinearLayout>
+        <Button
+            android:id="@+id/btn_cadastrar"
+            android:layout_width="148dp"
+            android:layout_height="51dp"
+            android:layout_below="@+id/senha"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/cadastrar_se"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:typeface="normal"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="1dp" />
+
+    </RelativeLayout>
 
     <View
         android:id="@+id/view_bottom"
