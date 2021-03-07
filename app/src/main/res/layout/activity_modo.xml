@@ -33,9 +33,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/modo"
+            android:layout_marginBottom="30dp"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="50dp"/>
 
         <RadioGroup
             android:id="@+id/grupo_radio"
@@ -43,32 +45,46 @@
             android:layout_below="@+id/txt_modo"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            xmlns:android="http://schemas.android.com/apk/res/android">
+            android:gravity="center"
+>
             <RadioButton
                 android:id="@+id/cliente"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="@string/cliente"
                 android:textSize="16sp"
-                android:layout_margin="16sp"
+                android:layout_marginRight="16sp"
                 android:button="@android:color/transparent"
                 android:background="@drawable/radio_selector"
-                android:elevation="4dp"
-                android:textColor="@drawable/text_color"/>
+                android:textColor="@drawable/text_color"
+                android:gravity="center_horizontal|center_vertical" />
 
             <RadioButton
                 android:id="@+id/lojista"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:gravity="center_horizontal|center_vertical"
                 android:text="@string/lojista"
-                android:layout_margin="16sp"
                 android:textSize="16sp"
                 android:button="@android:color/transparent"
                 android:background="@drawable/radio_selector"
-                android:elevation="4dp"
                 android:textColor="@drawable/text_color"
                 />
         </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_acessar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/grupo_radio"
+            android:layout_marginTop="50dp"
+            android:text="Acessar"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="1dp" />
 
     </RelativeLayout>
 
