@@ -85,7 +85,7 @@
             android:autofillHints=""
             android:backgroundTint="@color/white"
             android:hint="@string/digite_sua_senha_aqui"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
 
