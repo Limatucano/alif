@@ -29,7 +29,7 @@
             />
 
         <TextView
-            android:id="@+id/txt_email"
+            android:id="@+id/txt_cpf"
             android:layout_below="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,9 +43,9 @@
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_email"
-            android:layout_alignStart="@+id/txt_email"
-            android:layout_alignLeft="@+id/txt_email"
+            android:layout_below="@+id/txt_cpf"
+            android:layout_alignStart="@+id/txt_cpf"
+            android:layout_alignLeft="@+id/txt_cpf"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="15dp"
@@ -55,7 +55,7 @@
             android:autofillHints=""
             android:backgroundTint="@color/white"
             android:hint="@string/digite_seu_email_aqui"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
 
