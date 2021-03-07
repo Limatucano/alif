@@ -8,4 +8,6 @@
     <string name="modo">Entrar como</string>
     <string name="cliente">Cliente</string>
     <string name="lojista">Lojista</string>
+    <string name="cadastrar_se">Criar conta</string>
+    <string name="entrar">Entrar</string>
 </resources>
