@@ -74,6 +74,18 @@
                 />
         </RadioGroup>
 
+        <Button
+            android:id="@+id/btn_acessar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/grupo_radio"
+            android:layout_marginTop="50dp"
+            android:text="Acessar"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="1dp" />
+
     </RelativeLayout>
 
     <View
