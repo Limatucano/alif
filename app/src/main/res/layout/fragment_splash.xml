@@ -6,11 +6,25 @@
     tools:context=".SplashFragment"
     android:background="@color/white">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="294dp"
+        android:layout_height="363dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="100dp"
+        android:contentDescription="@string/ContentDescription"
+        android:src="@drawable/logo2" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="TESTANDO1"
-        android:gravity="center"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/seja_bem_vindo"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="500dp" />
+
+
 
 </FrameLayout>
