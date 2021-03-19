@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.tcc.alif.R
 
@@ -20,9 +21,8 @@ class ThirdScreen : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val finish = view.findViewById<TextView>(R.id.finish)
-        val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
         finish.setOnClickListener{
-
+            findNavController().navigate(R.id.action_viewPagerFragment_to_mainActivity)
         }
     }
 
