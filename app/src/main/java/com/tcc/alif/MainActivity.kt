@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         btn_cadastrar.setOnClickListener {
-            val teste = Intent(this, Slides::class.java)
+            val teste = Intent(this, ApresentacaoActivity::class.java)
             startActivity(teste)
 
         }
