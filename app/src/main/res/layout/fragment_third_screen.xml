@@ -89,7 +89,7 @@
         android:layout_marginRight="68dp"
         android:background="@drawable/button"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Próximo"
+        android:text="Finalizar"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
