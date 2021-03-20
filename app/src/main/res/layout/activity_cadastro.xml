@@ -72,6 +72,67 @@
 
         </RadioGroup>
     </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cadastropessoa"
+        android:layout_width="345dp"
+        android:layout_height="395dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="5dp"
+        app:cardBackgroundColor="@color/whitebackground"
+        android:layout_marginTop="30dp"
+        app:cardElevation="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cadastro_pessoa_fisica"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_margin="10dp"/>
+
+        <View
+            android:layout_marginLeft="10dp"
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="43dp"
+            android:layout_marginStart="10dp" />
+
+        <TextView
+            android:id="@+id/txt_nome"
+            android:layout_below="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="@string/nome"
+            android:textColor="@color/black"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp" />
+
+        <EditText
+            android:id="@+id/nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_cpf"
+            android:layout_alignStart="@+id/txt_cpf"
+            android:layout_alignLeft="@+id/txt_cpf"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:autofillHints=""
+            android:backgroundTint="@color/black"
+            android:hint="@string/digite_seu_nome_aqui"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+
+    </androidx.cardview.widget.CardView>
 
 
 
