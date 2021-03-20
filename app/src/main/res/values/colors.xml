@@ -4,4 +4,5 @@
     <color name="pink">#D9597B</color>
     <color name="black">#131313</color>
     <color name="white">#EFEFEF</color>
+    <color name="whitebackground">#FAFAFA</color>
 </resources>
