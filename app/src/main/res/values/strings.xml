@@ -31,4 +31,5 @@
     <string name="nome_da_empresa">Nome da Empresa</string>
     <string name="celular">Celular</string>
     <string name="digite_seu_n_mero_de_celular_aqui">Digite seu número de celular aqui</string>
+    <string name="cadastro_lojista">Cadastro Lojista</string>
 </resources>

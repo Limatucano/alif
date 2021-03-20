@@ -124,7 +124,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="@string/cadastro_pessoa_fisica"
+                    android:text="@string/cadastro_lojista"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/black"
                     android:textStyle="bold"
