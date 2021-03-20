@@ -22,7 +22,7 @@ class ThirdScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val finish = view.findViewById<TextView>(R.id.finish)
         finish.setOnClickListener{
-            findNavController().navigate(R.id.action_viewPagerFragment_to_mainActivity)
+            findNavController().navigate(R.id.action_viewPagerFragment_to_cadastroActivity)
         }
     }
 
