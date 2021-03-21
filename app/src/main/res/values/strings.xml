@@ -26,10 +26,7 @@
     <string name="data_de_nascimento">Data de Nascimento</string>
     <string name="digite_sua_data_de_nascimento_aqui">Digite sua data de nascimento aqui</string>
     <string name="digite_seu_cpf_ou_cnpj_aqui">Digite seu CPF ou CNPJ aqui</string>
-    <string name="cpf_cnpj">CPF/CNPJ</string>
     <string name="digite_o_nome_da_sua_empresa_aqui">Digite o nome da sua empresa aqui</string>
     <string name="nome_da_empresa">Nome da Empresa</string>
-    <string name="celular">Celular</string>
-    <string name="digite_seu_n_mero_de_celular_aqui">Digite seu número de celular aqui</string>
     <string name="cadastro_lojista">Cadastro Lojista</string>
 </resources>
