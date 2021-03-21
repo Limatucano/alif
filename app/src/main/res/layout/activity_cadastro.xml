@@ -9,100 +9,238 @@
     android:orientation="vertical"
     android:fillViewport="true">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/ic_wave_100s_953px">
 
-    <TextView
-        android:layout_width="286dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_marginTop="35dp"
-        android:text="@string/seja_bem_vindo_para_continuarmos_vou_precisar_de_alguns_dados_seu"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
+        <!--INICIO Card seleção de cadastro-->
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/selecao"
-        android:layout_width="345dp"
-        android:layout_height="154dp"
-        android:layout_gravity="center"
-        app:cardCornerRadius="5dp"
-        app:cardBackgroundColor="@color/whitebackground"
-        android:layout_marginTop="30dp"
-        app:cardElevation="10dp">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/selecao"
+            android:layout_width="345dp"
+            android:layout_height="154dp"
+            android:layout_centerHorizontal="true"
+            app:cardBackgroundColor="@color/whitebackground"
+            app:cardCornerRadius="5dp"
+            android:layout_marginTop="30dp"
+            app:cardElevation="10dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView2"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:text="@string/selecione_uma_categoria"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2">
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/selecione_uma_categoria"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <RadioButton
-                    android:id="@+id/lojista"
+                <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/lojista"
-                    android:textSize="16sp"
-                    android:buttonTint="@color/black"/>
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-                <RadioButton
-                    android:id="@+id/cliente"
-                    android:layout_width="wrap_content"
+                    <RadioButton
+                        android:id="@+id/lojista"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/black"
+                        android:checked="true"
+                        android:text="@string/lojista"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/cliente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/black"
+                        android:text="@string/cliente"
+                        android:textSize="16sp" />
+
+                </RadioGroup>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+        <!--FIM Card seleção de cadastro-->
+
+        <!--INICIO Card cadastro lojista-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cadastrolojista"
+            android:layout_width="345dp"
+            android:layout_height="395dp"
+            android:layout_gravity="center"
+            android:layout_below="@+id/selecao"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/whitebackground"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="10dp"
+            android:visibility="visible"
+            android:layout_centerHorizontal="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title_juridico"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/cliente"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/cadastro_lojista"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt_empresa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/nome_da_empresa"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:buttonTint="@color/black"/>
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_juridico" />
 
-            </RadioGroup>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nome_empresa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="@string/digite_o_nome_da_sua_empresa_aqui"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_empresa" />
+                <TextView
+                    android:id="@+id/txt_cnpj_cpf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/cpf_cnpj"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nome_empresa" />
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cnpj_cpf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="@string/digite_seu_cpf_ou_cnpj_aqui"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_cnpj_cpf" />
+                <TextView
+                    android:id="@+id/txt_celular_juridico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/celular"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cnpj_cpf" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/celular_juridico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="@string/digite_seu_n_mero_de_celular_aqui"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_celular_juridico" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+        <!--FIM Card cadastro lojista-->
+
+        <!--INICIO Card cadastro pessoa fisica-->
         <androidx.cardview.widget.CardView
             android:id="@+id/cadastropessoa"
             android:layout_width="345dp"
             android:layout_height="395dp"
+            android:layout_above="@+id/btn_cadastrar"
+            android:layout_below="@+id/selecao"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible"
             app:cardBackgroundColor="@color/whitebackground"
             app:cardCornerRadius="5dp"
             app:cardElevation="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="444dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
 
@@ -265,19 +403,27 @@
                     app:layout_constraintTop_toBottomOf="@+id/txt_nascimento" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-
+        <!--FIM Card cadastro pessoa fisica-->
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_cadastrar"
             android:layout_width="126dp"
             android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_below="@+id/cadastrolojista"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="240dp"
+            android:layout_marginLeft="240dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginRight="26dp"
             android:text="@string/salvar"
-            android:layout_gravity="end"
-            android:layout_marginRight="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
             android:textSize="12sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
-    </LinearLayout>
+    </RelativeLayout>
+
 
 </ScrollView>
