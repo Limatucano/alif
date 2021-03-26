@@ -18,6 +18,14 @@ class CadastroActivity : AppCompatActivity() {
         val radio_cliente   = findViewById<RadioButton>(R.id.cliente)
         val cadastropessoa  = findViewById<CardView>(R.id.cadastropessoa)
         val cadastrolojista = findViewById<CardView>(R.id.cadastrolojista)
+        val btn_cadastrar   = findViewById<Button>(R.id.btn_cadastrar)
+
+
+
+        btn_cadastrar.setOnClickListener {
+
+
+        }
 
 
         radio_lojista.setOnClickListener{
