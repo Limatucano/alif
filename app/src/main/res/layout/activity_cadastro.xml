@@ -176,7 +176,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/input_nome_empresa" />
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_cpf"
+                    android:id="@+id/input_cnpj_cpf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -215,7 +215,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/input_cpf" />
+                    app:layout_constraintTop_toBottomOf="@+id/input_cnpj_cpf" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_senha"
@@ -344,6 +344,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_nome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_nome"
+                    app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nome"
                     android:layout_width="match_parent"
@@ -360,7 +368,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_nome" />
-
+                </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:id="@+id/txt_cpf"
                     android:layout_width="match_parent"
@@ -376,8 +384,16 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nome" />
+                    app:layout_constraintTop_toBottomOf="@+id/input_nome" />
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_cpf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_cpf"
+                    app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/cpf"
                     android:layout_width="match_parent"
@@ -395,7 +411,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_cpf" />
-
+                </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:id="@+id/txt_celular"
                     android:layout_width="match_parent"
@@ -412,8 +428,16 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cpf" />
+                    app:layout_constraintTop_toBottomOf="@+id/input_cpf" />
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_celular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_celular"
+                    app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/celular"
                     android:layout_width="match_parent"
@@ -431,7 +455,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_celular" />
-
+                </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:id="@+id/txt_nascimento"
                     android:layout_width="match_parent"
@@ -448,8 +472,16 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/celular" />
+                    app:layout_constraintTop_toBottomOf="@+id/input_celular" />
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_data_nascimento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_nascimento"
+                    app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/data_nascimento"
                     android:layout_width="match_parent"
@@ -467,6 +499,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_nascimento" />
+                </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
         <!--FIM Card cadastro pessoa fisica-->
@@ -488,7 +521,6 @@
             android:text="@string/salvar"
             android:textSize="12sp"
             android:textStyle="bold" />
-
     </RelativeLayout>
 
 
