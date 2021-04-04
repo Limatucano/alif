@@ -1,4 +1,4 @@
-package com.tcc.alif
+package com.tcc.alif.ui
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.tcc.alif.R
 
 class SplashFragment : Fragment() {
 

@@ -1,18 +1,13 @@
-package com.tcc.alif
+package com.tcc.alif.ui
 
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
 import androidx.cardview.widget.CardView
-import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doBeforeTextChanged
-import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputEditText
-import org.w3c.dom.Text
-import java.util.regex.Pattern
+import com.tcc.alif.R
 
 
 class CadastroActivity : AppCompatActivity() {
@@ -39,6 +34,7 @@ class CadastroActivity : AppCompatActivity() {
         val data_nascimento  = findViewById<TextInputEditText>(R.id.data_nascimento)
 
         val regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&+-])[A-Za-z\\d@\$!%*#?&+-]{8,}\$".toRegex()
+
 
         btn_cadastrar.setOnClickListener{
             //validar campos conforme card que esta visivel no momento
