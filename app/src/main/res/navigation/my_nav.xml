@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.tcc.alif.SplashFragment"
+        android:name="com.tcc.alif.ui.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <activity
         android:id="@+id/cadastroActivity"
-        android:name="com.tcc.alif.CadastroActivity"
+        android:name="com.tcc.alif.ui.CadastroActivity"
         android:label="activity_cadastro"
         tools:layout="@layout/activity_cadastro" />
 </navigation>
