@@ -5,13 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.RadioButton
-import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doBeforeTextChanged
+import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import org.w3c.dom.Text
+import java.util.regex.Pattern
+
 
 class CadastroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,16 +38,19 @@ class CadastroActivity : AppCompatActivity() {
         val celular          = findViewById<TextInputEditText>(R.id.celular)
         val data_nascimento  = findViewById<TextInputEditText>(R.id.data_nascimento)
 
+        val regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&+-])[A-Za-z\\d@\$!%*#?&+-]{8,}\$".toRegex()
 
-        btn_cadastrar.setOnClickListener {
+        btn_cadastrar.setOnClickListener{
             //validar campos conforme card que esta visivel no momento
             if(radio_lojista.isChecked){
+                password_valid(senha_juridico.text.toString(),regex,senha_juridico)
                 validate(nome_empresa)
                 validate(cnpj_cpf)
                 validate(senha_juridico)
                 validate(celular_juridico)
             }
             if(radio_cliente.isChecked){
+                password_valid(senha.text.toString(),regex,senha)
                 validate(nome)
                 validate(cpf)
                 validate(senha)
@@ -89,6 +94,12 @@ class CadastroActivity : AppCompatActivity() {
             }
         }
 
+    }
+    //função para validar a senha, obrigando deixar ela forte BIRL
+    fun password_valid(t: String, regex: Regex, campo: TextInputEditText ){
+        if(!regex.containsMatchIn(t)){
+            campo.setError("Por favor, sua senha precisa ter pelo menos 8 caracteres, sendo eles: números, caracteres especiais(@,$,!,%,*,#,?,&,+,-) e letra maiuscula")
+        }
     }
     //função para validar campos obrigatórios
     fun validate(campo: TextInputEditText){
