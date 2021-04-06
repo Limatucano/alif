@@ -2,16 +2,10 @@ package com.tcc.alif.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
-import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputEditText
 import com.tcc.alif.R
 import com.tcc.alif.util.CPFUtil
