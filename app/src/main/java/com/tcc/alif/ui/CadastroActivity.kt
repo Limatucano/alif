@@ -2,12 +2,18 @@ package com.tcc.alif.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
+import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputEditText
 import com.tcc.alif.R
+import com.tcc.alif.util.CPFUtil
+import com.tcc.alif.util.Mask
 
 
 class CadastroActivity : AppCompatActivity() {
@@ -32,10 +38,10 @@ class CadastroActivity : AppCompatActivity() {
         val senha            = findViewById<TextInputEditText>(R.id.senha)
         val celular          = findViewById<TextInputEditText>(R.id.celular)
         val data_nascimento  = findViewById<TextInputEditText>(R.id.data_nascimento)
+        val textview3   = findViewById<TextView>(R.id.title_juridico)
+        val regex            = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&+-])[A-Za-z\\d@\$!%*#?&+-]{8,}\$".toRegex()
 
-        val regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&+-])[A-Za-z\\d@\$!%*#?&+-]{8,}\$".toRegex()
-
-
+        cpf.addTextChangedListener(Mask.mask("###.###.###-##", cpf))
         btn_cadastrar.setOnClickListener{
             //validar campos conforme card que esta visivel no momento
             if(radio_lojista.isChecked){
@@ -46,6 +52,9 @@ class CadastroActivity : AppCompatActivity() {
                 validate(celular_juridico)
             }
             if(radio_cliente.isChecked){
+                if(!CPFUtil.myValidateCPF(cpf.text.toString())){
+                    cpf.setError("CPF Inválido, digite um CPF válido para prosseguir")
+                }
                 password_valid(senha.text.toString(),regex,senha)
                 validate(nome)
                 validate(cpf)
@@ -108,4 +117,8 @@ class CadastroActivity : AppCompatActivity() {
             return campo.setError(null)
         }
     }
+}
+
+private fun TextInputEditText.doOnTextChanged() {
+    TODO("Not yet implemented")
 }
