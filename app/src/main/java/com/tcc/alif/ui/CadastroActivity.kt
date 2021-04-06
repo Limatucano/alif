@@ -15,6 +15,7 @@ import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputEditText
 import com.tcc.alif.R
 import com.tcc.alif.util.CPFUtil
+import com.tcc.alif.util.DateUtil
 import com.tcc.alif.util.Mask
 
 
@@ -60,6 +61,9 @@ class CadastroActivity : AppCompatActivity() {
                 validate(celular_juridico)
             }
             if(radio_cliente.isChecked){
+                if(!DateUtil.myValidateDate(data_nascimento.text.toString())){
+                    data_nascimento.setError("Data de Nascimento inválida")
+                }
                 if(!CPFUtil.myValidateCPF(cpf.text.toString())){
                     cpf.setError("CPF Inválido, digite um CPF válido para prosseguir")
                 }
