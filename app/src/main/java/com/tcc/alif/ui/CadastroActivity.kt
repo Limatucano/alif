@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputEditText
 import com.tcc.alif.R
@@ -38,10 +40,15 @@ class CadastroActivity : AppCompatActivity() {
         val senha            = findViewById<TextInputEditText>(R.id.senha)
         val celular          = findViewById<TextInputEditText>(R.id.celular)
         val data_nascimento  = findViewById<TextInputEditText>(R.id.data_nascimento)
-        val textview3   = findViewById<TextView>(R.id.title_juridico)
         val regex            = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&+-])[A-Za-z\\d@\$!%*#?&+-]{8,}\$".toRegex()
 
+
+
+        //Mascaras para pessoa fisica
         cpf.addTextChangedListener(Mask.mask("###.###.###-##", cpf))
+        celular.addTextChangedListener(Mask.mask("(##) #####-####",celular))
+        data_nascimento.addTextChangedListener(Mask.mask("##/##/####",data_nascimento))
+
         btn_cadastrar.setOnClickListener{
             //validar campos conforme card que esta visivel no momento
             if(radio_lojista.isChecked){
@@ -119,6 +126,3 @@ class CadastroActivity : AppCompatActivity() {
     }
 }
 
-private fun TextInputEditText.doOnTextChanged() {
-    TODO("Not yet implemented")
-}
