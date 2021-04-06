@@ -42,7 +42,8 @@ class CadastroActivity : AppCompatActivity() {
         val data_nascimento  = findViewById<TextInputEditText>(R.id.data_nascimento)
         val regex            = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&+-])[A-Za-z\\d@\$!%*#?&+-]{8,}\$".toRegex()
 
-
+        //Mascaras para pessoa juridica
+        celular_juridico.addTextChangedListener(Mask.mask("(##) #####-####", celular_juridico))
 
         //Mascaras para pessoa fisica
         cpf.addTextChangedListener(Mask.mask("###.###.###-##", cpf))
