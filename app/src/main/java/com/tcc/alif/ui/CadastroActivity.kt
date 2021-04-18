@@ -32,7 +32,6 @@ class CadastroActivity : AppCompatActivity() {
         val nome_empresa     = findViewById<TextInputEditText>(R.id.nome_empresa)
         val cpf_lojista      = findViewById<TextInputEditText>(R.id.cpf_lojista)
         val cnpj_lojista     = findViewById<TextInputEditText>(R.id.cnpj_lojista)
-        val senha_juridico   = findViewById<TextInputEditText>(R.id.senha_juridico)
         val celular_juridico = findViewById<TextInputEditText>(R.id.celular_juridico)
         val radio_cpf        = findViewById<RadioButton>(R.id.radio_cpf)
         val radio_cnpj       = findViewById<RadioButton>(R.id.radio_cnpj)
@@ -42,10 +41,8 @@ class CadastroActivity : AppCompatActivity() {
         //elementos pessoa fisica
         val nome             = findViewById<TextInputEditText>(R.id.nome)
         val cpf              = findViewById<TextInputEditText>(R.id.cpf)
-        val senha            = findViewById<TextInputEditText>(R.id.senha)
         val celular          = findViewById<TextInputEditText>(R.id.celular)
         val data_nascimento  = findViewById<TextInputEditText>(R.id.data_nascimento)
-        val regex            = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&+-])[A-Za-z\\d@\$!%*#?&+-]{8,}\$".toRegex()
 
         //Mascaras para pessoa juridica
         celular_juridico.addTextChangedListener(Mask.mask("(##) #####-####", celular_juridico))
@@ -67,7 +64,6 @@ class CadastroActivity : AppCompatActivity() {
                 if(!CNPJUtil.myValidateCNPJ(cnpj_lojista.text.toString())){
                     cnpj_lojista.error = "CNPJ Inválido, digite um CNPJ válido para prosseguir"
                 }
-                password_valid(senha_juridico.text.toString(),regex,senha_juridico)
                 validate(nome_empresa)
                 if(radio_cpf.isChecked){
                     validate(cpf_lojista)
@@ -75,7 +71,6 @@ class CadastroActivity : AppCompatActivity() {
                 if(radio_cnpj.isChecked){
                     validate(cnpj_lojista)
                 }
-                validate(senha_juridico)
                 validate(celular_juridico)
             }
             if(radio_cliente.isChecked){
@@ -85,10 +80,9 @@ class CadastroActivity : AppCompatActivity() {
                 if(!CPFUtil.myValidateCPF(cpf.text.toString())){
                     cpf.error = "CPF Inválido, digite um CPF válido para prosseguir"
                 }
-                password_valid(senha.text.toString(),regex,senha)
+
                 validate(nome)
                 validate(cpf)
-                validate(senha)
                 validate(celular)
                 validate(data_nascimento)
             }
@@ -121,13 +115,11 @@ class CadastroActivity : AppCompatActivity() {
                 cadastropessoa.visibility = View.INVISIBLE
                 clear_validate(nome)
                 clear_validate(cpf)
-                clear_validate(senha)
                 clear_validate(celular)
                 clear_validate(data_nascimento)
                 //limpa os campos do outro card
                 nome.text?.clear()
                 cpf.text?.clear()
-                senha.text?.clear()
                 celular.text?.clear()
                 data_nascimento.text?.clear()
             }
@@ -140,25 +132,18 @@ class CadastroActivity : AppCompatActivity() {
                 clear_validate(nome_empresa)
                 clear_validate(cpf_lojista)
                 clear_validate(cnpj_lojista)
-                clear_validate(senha_juridico)
                 clear_validate(celular_juridico)
                 //limpa os campos do outro card
                 nome_empresa.text?.clear()
                 cpf_lojista.text?.clear()
                 cnpj_lojista.text?.clear()
-                senha_juridico.text?.clear()
                 celular_juridico.text?.clear()
 
             }
         }
 
     }
-    //função para validar a senha, obrigando deixar ela forte BIRL
-    fun password_valid(t: String, regex: Regex, campo: TextInputEditText ){
-        if(!regex.containsMatchIn(t)){
-            campo.error = "Por favor, sua senha precisa ter pelo menos 8 caracteres, sendo eles: números, caracteres especiais(@,$,!,%,*,#,?,&,+,-) e letra maiuscula"
-        }
-    }
+
     //função para validar campos obrigatórios
     fun validate(campo: TextInputEditText){
         if(campo.text?.length == 0){

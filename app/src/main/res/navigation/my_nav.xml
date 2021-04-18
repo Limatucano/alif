@@ -20,12 +20,12 @@
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager" >
         <action
-            android:id="@+id/action_viewPagerFragment_to_cadastroActivity"
-            app:destination="@id/cadastroActivity" />
+            android:id="@+id/action_viewPagerFragment_to_firstCadstroActivity"
+            app:destination="@id/firstCadstroActivity" />
     </fragment>
     <activity
-        android:id="@+id/cadastroActivity"
-        android:name="com.tcc.alif.ui.CadastroActivity"
-        android:label="activity_cadastro"
-        tools:layout="@layout/activity_cadastro" />
+        android:id="@+id/firstCadstroActivity"
+        android:name="com.tcc.alif.ui.FirstCadstroActivity"
+        android:label="activity_first_cadstro"
+        tools:layout="@layout/activity_first_cadstro" />
 </navigation>
