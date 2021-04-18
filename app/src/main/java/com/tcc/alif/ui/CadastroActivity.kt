@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.tcc.alif.R
 import com.tcc.alif.util.CPFUtil
 import com.tcc.alif.util.DateUtil
@@ -24,11 +26,18 @@ class CadastroActivity : AppCompatActivity() {
         val cadastropessoa   = findViewById<CardView>(R.id.cadastropessoa)
         val cadastrolojista  = findViewById<CardView>(R.id.cadastrolojista)
         val btn_cadastrar    = findViewById<Button>(R.id.btn_cadastrar)
+
         //elementos pessoa juridica
         val nome_empresa     = findViewById<TextInputEditText>(R.id.nome_empresa)
-        val cnpj_cpf         = findViewById<TextInputEditText>(R.id.cnpj_cpf)
+        val cpf_lojista      = findViewById<TextInputEditText>(R.id.cpf_lojista)
+        val input_cpf_lojista  = findViewById<TextInputLayout>(R.id.input_cpf_lojista)
+        val input_cnpj_lojista = findViewById<TextInputLayout>(R.id.input_cnpj_lojista)
+        val cnpj_lojista     = findViewById<TextInputEditText>(R.id.cnpj_lojista)
         val senha_juridico   = findViewById<TextInputEditText>(R.id.senha_juridico)
         val celular_juridico = findViewById<TextInputEditText>(R.id.celular_juridico)
+        val radio_cpf        = findViewById<RadioButton>(R.id.radio_cpf)
+        val radio_cnpj       = findViewById<RadioButton>(R.id.radio_cnpj)
+        val txt_cnpj_cpf  = findViewById<TextView>(R.id.txt_cnpj_cpf)
         //elementos pessoa fisica
         val nome             = findViewById<TextInputEditText>(R.id.nome)
         val cpf              = findViewById<TextInputEditText>(R.id.cpf)
@@ -50,7 +59,7 @@ class CadastroActivity : AppCompatActivity() {
             if(radio_lojista.isChecked){
                 password_valid(senha_juridico.text.toString(),regex,senha_juridico)
                 validate(nome_empresa)
-                validate(cnpj_cpf)
+                validate(cpf_lojista)
                 validate(senha_juridico)
                 validate(celular_juridico)
             }
@@ -70,6 +79,27 @@ class CadastroActivity : AppCompatActivity() {
             }
 
         }
+        radio_cpf.setOnClickListener{
+            if(radio_cpf.isChecked){
+                input_cnpj_lojista.visibility = View.INVISIBLE
+                input_cpf_lojista.visibility  = View.VISIBLE
+                txt_cnpj_cpf.text   = "CPF"
+                clear_validate(cnpj_lojista)
+                //limpa o campo de cnpj
+                cnpj_lojista.text?.clear()
+            }
+        }
+        radio_cnpj.setOnClickListener{
+            if(radio_cnpj.isChecked){
+                input_cnpj_lojista.visibility = View.VISIBLE
+                input_cpf_lojista.visibility  = View.INVISIBLE
+                txt_cnpj_cpf.text   = "CNPJ"
+                clear_validate(cpf_lojista)
+                //limpa o campo de cpf
+                cpf_lojista.text?.clear()
+            }
+        }
+
         radio_lojista.setOnClickListener{
             if(radio_lojista.isChecked){
                 cadastrolojista.visibility = View.VISIBLE
@@ -93,12 +123,14 @@ class CadastroActivity : AppCompatActivity() {
                 cadastropessoa.visibility = View.VISIBLE
                 cadastrolojista.visibility = View.INVISIBLE
                 clear_validate(nome_empresa)
-                clear_validate(cnpj_cpf)
+                clear_validate(cpf_lojista)
+                clear_validate(cnpj_lojista)
                 clear_validate(senha_juridico)
                 clear_validate(celular_juridico)
                 //limpa os campos do outro card
                 nome_empresa.text?.clear()
-                cnpj_cpf.text?.clear()
+                cpf_lojista.text?.clear()
+                cnpj_lojista.text?.clear()
                 senha_juridico.text?.clear()
                 celular_juridico.text?.clear()
 
