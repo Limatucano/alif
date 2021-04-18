@@ -189,7 +189,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/txt_select_campo">
 
                     <RadioButton
-                        android:id="@+id/select_cpf"
+                        android:id="@+id/radio_cpf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
@@ -198,7 +198,7 @@
                         android:textSize="16sp" />
 
                     <RadioButton
-                        android:id="@+id/select_cnpj"
+                        android:id="@+id/radio_cnpj"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -217,23 +217,25 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="@string/cpf_cnpj"
+                    android:text="@string/cpf"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/radio_group_select" />
+                    app:layout_constraintTop_toBottomOf="@+id/radio_group_select"
+                    android:visibility="visible"/>
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/input_cnpj_cpf"
+                    android:id="@+id/input_cpf_lojista"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_cnpj_cpf"
-                    app:endIconMode="clear_text">
+                    app:endIconMode="clear_text"
+                    android:visibility="visible">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cnpj_cpf"
+                    android:id="@+id/cpf_lojista"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -241,14 +243,42 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:hint="@string/digite_seu_cpf_ou_cnpj_aqui"
+                    android:hint="@string/digite_seu_cpf_aqui"
                     android:inputType="number"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_cnpj_cpf" />
+                    app:layout_constraintTop_toBottomOf="@+id/txt_cpf_lojista" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_cnpj_lojista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_cnpj_cpf"
+                    app:endIconMode="clear_text"
+                    android:visibility="invisible">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cnpj_lojista"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:hint="Digite seu CNPJ aqui"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_cnpj_lojista" />
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <TextView
                     android:id="@+id/txt_senha_juridico"
                     android:layout_width="match_parent"
@@ -264,7 +294,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/input_cnpj_cpf" />
+                    app:layout_constraintTop_toBottomOf="@+id/input_cpf_lojista" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_senha_juridico"
@@ -356,7 +386,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
 
                 <TextView
                     android:id="@+id/textView3"
