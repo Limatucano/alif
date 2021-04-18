@@ -10,6 +10,7 @@ import androidx.cardview.widget.CardView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.tcc.alif.R
+import com.tcc.alif.util.CNPJUtil
 import com.tcc.alif.util.CPFUtil
 import com.tcc.alif.util.DateUtil
 import com.tcc.alif.util.Mask
@@ -30,14 +31,14 @@ class CadastroActivity : AppCompatActivity() {
         //elementos pessoa juridica
         val nome_empresa     = findViewById<TextInputEditText>(R.id.nome_empresa)
         val cpf_lojista      = findViewById<TextInputEditText>(R.id.cpf_lojista)
-        val input_cpf_lojista  = findViewById<TextInputLayout>(R.id.input_cpf_lojista)
-        val input_cnpj_lojista = findViewById<TextInputLayout>(R.id.input_cnpj_lojista)
         val cnpj_lojista     = findViewById<TextInputEditText>(R.id.cnpj_lojista)
         val senha_juridico   = findViewById<TextInputEditText>(R.id.senha_juridico)
         val celular_juridico = findViewById<TextInputEditText>(R.id.celular_juridico)
         val radio_cpf        = findViewById<RadioButton>(R.id.radio_cpf)
         val radio_cnpj       = findViewById<RadioButton>(R.id.radio_cnpj)
-        val txt_cnpj_cpf  = findViewById<TextView>(R.id.txt_cnpj_cpf)
+        val txt_cnpj_cpf     = findViewById<TextView>(R.id.txt_cnpj_cpf)
+        val input_cpf_lojista  = findViewById<TextInputLayout>(R.id.input_cpf_lojista)
+        val input_cnpj_lojista = findViewById<TextInputLayout>(R.id.input_cnpj_lojista)
         //elementos pessoa fisica
         val nome             = findViewById<TextInputEditText>(R.id.nome)
         val cpf              = findViewById<TextInputEditText>(R.id.cpf)
@@ -48,6 +49,9 @@ class CadastroActivity : AppCompatActivity() {
 
         //Mascaras para pessoa juridica
         celular_juridico.addTextChangedListener(Mask.mask("(##) #####-####", celular_juridico))
+        cpf_lojista.addTextChangedListener(Mask.mask("###.###.###-##", cpf_lojista))
+        cnpj_lojista.addTextChangedListener(Mask.mask("##.###.###/####-##", cnpj_lojista))
+
 
         //Mascaras para pessoa fisica
         cpf.addTextChangedListener(Mask.mask("###.###.###-##", cpf))
@@ -57,18 +61,29 @@ class CadastroActivity : AppCompatActivity() {
         btn_cadastrar.setOnClickListener{
             //validar campos conforme card que esta visivel no momento
             if(radio_lojista.isChecked){
+                if(!CPFUtil.myValidateCPF(cpf_lojista.text.toString())){
+                    cpf_lojista.error = "CPF Inválido, digite um CPF válido para prosseguir"
+                }
+                if(!CNPJUtil.myValidateCNPJ(cnpj_lojista.text.toString())){
+                    cnpj_lojista.error = "CNPJ Inválido, digite um CNPJ válido para prosseguir"
+                }
                 password_valid(senha_juridico.text.toString(),regex,senha_juridico)
                 validate(nome_empresa)
-                validate(cpf_lojista)
+                if(radio_cpf.isChecked){
+                    validate(cpf_lojista)
+                }
+                if(radio_cnpj.isChecked){
+                    validate(cnpj_lojista)
+                }
                 validate(senha_juridico)
                 validate(celular_juridico)
             }
             if(radio_cliente.isChecked){
                 if(!DateUtil.myValidateDate(data_nascimento.text.toString())){
-                    data_nascimento.setError("Data de Nascimento inválida")
+                    data_nascimento.error = "Data de Nascimento inválida"
                 }
                 if(!CPFUtil.myValidateCPF(cpf.text.toString())){
-                    cpf.setError("CPF Inválido, digite um CPF válido para prosseguir")
+                    cpf.error = "CPF Inválido, digite um CPF válido para prosseguir"
                 }
                 password_valid(senha.text.toString(),regex,senha)
                 validate(nome)
@@ -141,7 +156,7 @@ class CadastroActivity : AppCompatActivity() {
     //função para validar a senha, obrigando deixar ela forte BIRL
     fun password_valid(t: String, regex: Regex, campo: TextInputEditText ){
         if(!regex.containsMatchIn(t)){
-            campo.setError("Por favor, sua senha precisa ter pelo menos 8 caracteres, sendo eles: números, caracteres especiais(@,$,!,%,*,#,?,&,+,-) e letra maiuscula")
+            campo.error = "Por favor, sua senha precisa ter pelo menos 8 caracteres, sendo eles: números, caracteres especiais(@,$,!,%,*,#,?,&,+,-) e letra maiuscula"
         }
     }
     //função para validar campos obrigatórios
