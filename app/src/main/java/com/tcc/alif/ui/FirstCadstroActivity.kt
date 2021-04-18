@@ -15,7 +15,8 @@ class FirstCadstroActivity : AppCompatActivity() {
 
         val btn_prosseguir  = findViewById<Button>(R.id.btn_prosseguir)
         val senha           = findViewById<TextInputEditText>(R.id.senha)
-        val regex           = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&+-])[A-Za-z\\d@\$!%*#?&+-]{8,}\$".toRegex()
+        val regex_senha     = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&+-])[A-Za-z\\d@\$!%*#?&+-]{8,}\$".toRegex()
+        val regex_email     = "[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?".toRegex()
         val email           = findViewById<TextInputEditText>(R.id.email)
         val senha_confirmar = findViewById<TextInputEditText>(R.id.senha_confirmar)
         var vSenha: Boolean
@@ -23,7 +24,8 @@ class FirstCadstroActivity : AppCompatActivity() {
         var vSenhaConfirmar : Boolean
 
         btn_prosseguir.setOnClickListener {
-            password_valid(senha.text.toString(),regex,senha)
+            pattern_validate(senha.text.toString(),regex_senha,senha,"Por favor, sua senha precisa ter pelo menos 8 caracteres, sendo eles: números, caracteres especiais(@,\$,!,%,*,#,?,&,+,-) e letra maiuscula")
+            pattern_validate(email.text.toString(),regex_email,email, "Digite um email válido")
             vSenha = validate(senha)
             vEmail = validate(email)
             vSenhaConfirmar = validate(senha_confirmar)
@@ -40,10 +42,10 @@ class FirstCadstroActivity : AppCompatActivity() {
             }
         }
     }
-    //função para validar a senha, obrigando deixar ela forte BIRL
-    fun password_valid(t: String, regex: Regex, campo: TextInputEditText){
+    //função para validar usando regex
+    fun pattern_validate(t: String, regex: Regex, campo: TextInputEditText,error:String){
         if(!regex.containsMatchIn(t)){
-            campo.error = "Por favor, sua senha precisa ter pelo menos 8 caracteres, sendo eles: números, caracteres especiais(@,$,!,%,*,#,?,&,+,-) e letra maiuscula"
+            campo.error = error
         }
     }
     //função para validar campos obrigatórios
