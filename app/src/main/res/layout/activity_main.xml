@@ -54,7 +54,7 @@
             android:layout_marginBottom="15dp"
             android:autofillHints=""
             android:backgroundTint="@color/white"
-            android:hint="@string/digite_seu_email_aqui"
+            android:hint="@string/digite_seu_cpf_aqui"
             android:inputType="number"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
