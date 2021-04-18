@@ -29,4 +29,6 @@
     <string name="digite_o_nome_da_sua_empresa_aqui">Digite o nome da sua empresa aqui</string>
     <string name="nome_da_empresa">Nome da Empresa</string>
     <string name="cadastro_lojista">Cadastro Lojista</string>
+    <string name="cnpj">CNPJ</string>
+    <string name="selecione_o_documento_desejado">Selecione o documento desejado</string>
 </resources>
