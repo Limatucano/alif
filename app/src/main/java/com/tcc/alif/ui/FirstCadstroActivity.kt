@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.textfield.TextInputEditText
 import com.tcc.alif.R
 
@@ -19,25 +20,20 @@ class FirstCadstroActivity : AppCompatActivity() {
         val regex_email     = "[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?".toRegex()
         val email           = findViewById<TextInputEditText>(R.id.email)
         val senha_confirmar = findViewById<TextInputEditText>(R.id.senha_confirmar)
-        var vSenha: Boolean
-        var vEmail: Boolean
-        var vSenhaConfirmar : Boolean
 
         btn_prosseguir.setOnClickListener {
             pattern_validate(senha.text.toString(),regex_senha,senha,"Por favor, sua senha precisa ter pelo menos 8 caracteres, sendo eles: números, caracteres especiais(@,\$,!,%,*,#,?,&,+,-) e letra maiuscula")
             pattern_validate(email.text.toString(),regex_email,email, "Digite um email válido")
-            vSenha = validate(senha)
-            vEmail = validate(email)
-            vSenhaConfirmar = validate(senha_confirmar)
+            val vSenha = validate(senha)
+            val vEmail = validate(email)
+            val vSenhaConfirmar = validate(senha_confirmar)
 
-            if(!vSenha || !vEmail || !vSenhaConfirmar){
-
-            }else{
+            if(vSenha || vEmail || vSenhaConfirmar){
                 if(senha_confirmar.text.toString() != senha.text.toString()){
                     senha_confirmar.error = "senha inválida, digite a mesma senha do campo anterior"
                 }else{
-                    val cadastro_principal = Intent(this, CadastroActivity::class.java)
-                    startActivity(cadastro_principal)
+                    val cadastroPrincipal = Intent(this, CadastroActivity::class.java)
+                    startActivity(cadastroPrincipal)
                 }
             }
         }
