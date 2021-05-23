@@ -16,7 +16,6 @@ class CadastroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro)
-
         setupMasks()
         setupListeners()
 
@@ -38,10 +37,10 @@ class CadastroActivity : AppCompatActivity() {
             //validar campos conforme card que esta visivel no momento
             if(radioLojista.isChecked){
                 if(!CPFUtil.myValidateCPF(cpfLojista.text.toString())){
-                    cpfLojista.error = "CPF Inválido, digite um CPF válido para prosseguir"
+                    cpfLojista.error = getString(R.string.cpf_invalid_error)
                 }
                 if(!CNPJUtil.myValidateCNPJ(cnpjLojista.text.toString())){
-                    cnpjLojista.error = "CNPJ Inválido, digite um CNPJ válido para prosseguir"
+                    cnpjLojista.error = getString(R.string.cnpj_invalid_error)
                 }
                 ValidateUtil.validate(nomeEmpresa)
                 if(radioCpf.isChecked){
@@ -54,10 +53,10 @@ class CadastroActivity : AppCompatActivity() {
             }
             if(radioCliente.isChecked){
                 if(!DateUtil.myValidateDate(dataNascimento.text.toString())){
-                    dataNascimento.error = "Data de Nascimento inválida"
+                    dataNascimento.error = getString(R.string.date_invalid_error)
                 }
                 if(!CPFUtil.myValidateCPF(cpf.text.toString())){
-                    cpf.error = "CPF Inválido, digite um CPF válido para prosseguir"
+                    cpf.error = getString(R.string.cpf_invalid_error)
                 }
 
                 ValidateUtil.validate(nome)
@@ -71,7 +70,7 @@ class CadastroActivity : AppCompatActivity() {
             if(radioCpf.isChecked){
                 inputCnpjLojista.visibility = View.INVISIBLE
                 inputCpfLojista.visibility  = View.VISIBLE
-                txtCnpjCpf.text   = "CPF"
+                txtCnpjCpf.text   = getString(R.string.cpf)
                 ValidateUtil.clear_validate(cnpjLojista)
                 //limpa o campo de cnpj
                 cnpjLojista.text?.clear()
@@ -82,7 +81,7 @@ class CadastroActivity : AppCompatActivity() {
             if(radioCnpj.isChecked){
                 inputCnpjLojista.visibility = View.VISIBLE
                 inputCpfLojista.visibility  = View.INVISIBLE
-                txtCnpjCpf.text   = "CNPJ"
+                txtCnpjCpf.text   = getString(R.string.cnpj)
                 ValidateUtil.clear_validate(cpfLojista)
                 //limpa o campo de cpf
                 cpfLojista.text?.clear()

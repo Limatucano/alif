@@ -8,10 +8,12 @@ object ValidateUtil {
      * @param TextInputEditText
      * @return error field
      */
-    fun validate(campo: TextInputEditText){
+    fun validate(campo: TextInputEditText): Boolean {
         if(campo.text?.length == 0){
-            return campo.setError("Campo Vazio")
+            campo.error = "Campo Vazio"
+            return false
         }
+        return true
     }
     /**
      * the function clear validation fields
