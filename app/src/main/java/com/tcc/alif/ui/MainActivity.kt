@@ -3,26 +3,24 @@ package com.tcc.alif.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
+import com.tcc.alif.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewBinding : ActivityMainBinding by viewBinding()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btn_login = findViewById<Button>(R.id.btn_login)
-        val btn_cadastrar = findViewById<Button>(R.id.btn_cadastrar)
-
-
-        btn_login.setOnClickListener {
+        viewBinding.btnLogin.setOnClickListener {
             val intent = Intent(this, ModoActivity::class.java)
             startActivity(intent)
         }
-        btn_cadastrar.setOnClickListener {
+        viewBinding.btnCadastrar.setOnClickListener {
             val apresentacao = Intent(this, ApresentacaoActivity::class.java)
             startActivity(apresentacao)
-
         }
     }
 }

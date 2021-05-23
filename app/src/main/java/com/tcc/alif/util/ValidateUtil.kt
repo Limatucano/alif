@@ -6,7 +6,7 @@ object ValidateUtil {
     /**
      * the function to validate required fields
      * @param TextInputEditText
-     * @return error field
+     * @return Boolean
      */
     fun validate(campo: TextInputEditText): Boolean {
         if(campo.text?.length == 0){
