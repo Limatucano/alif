@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.tcc.alif.R
 
-class SecondScreen : Fragment() {
+class SecondScreenFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
