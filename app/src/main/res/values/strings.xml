@@ -35,4 +35,11 @@
     <string name="digite_novamente_a_senha">Digite novamente a senha</string>
     <string name="email">Email</string>
     <string name="prosseguir">Prosseguir</string>
+    <string name="password_invalid_error">Por favor, sua senha precisa ter pelo menos 8 caracteres, sendo eles: números, caracteres especiais(@,$,!,%,*,#,?,&amp;,+,-) e letra maiuscula</string>
+    <string name="email_invalid_error">Digite um email válido</string>
+    <string name="passwordTwo_invalid_error">senha inválida, digite a mesma senha do campo anterior</string>
+    <string name="cpf_invalid_error">CPF Inválido, digite um CPF válido para prosseguir</string>
+    <string name="cnpj_invalid_error">CNPJ Inválido, digite um CNPJ válido para prosseguir</string>
+    <string name="date_invalid_error">Data de Nascimento inválida</string>
+
 </resources>

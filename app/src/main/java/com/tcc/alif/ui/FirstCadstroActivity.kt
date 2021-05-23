@@ -3,53 +3,43 @@ package com.tcc.alif.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import androidx.fragment.app.FragmentManager
-import com.google.android.material.textfield.TextInputEditText
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
+import com.tcc.alif.databinding.ActivityFirstCadstroBinding
+import com.tcc.alif.util.RegexUtil
+import com.tcc.alif.util.ValidateUtil
 
 class FirstCadstroActivity : AppCompatActivity() {
+
+    private val viewBinding: ActivityFirstCadstroBinding by viewBinding()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first_cadstro)
+        setupListeners()
+    }
 
-        val btn_prosseguir  = findViewById<Button>(R.id.btn_prosseguir)
-        val senha           = findViewById<TextInputEditText>(R.id.senha)
-        val regex_senha     = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&+-])[A-Za-z\\d@\$!%*#?&+-]{8,}\$".toRegex()
-        val regex_email     = "[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?".toRegex()
-        val email           = findViewById<TextInputEditText>(R.id.email)
-        val senha_confirmar = findViewById<TextInputEditText>(R.id.senha_confirmar)
+    private fun setupListeners(){
+        val regexSenha = RegexUtil.passwordRegex()
+        val regexEmail = RegexUtil.emailRegex()
+        viewBinding.btnProsseguir.setOnClickListener {
 
-        btn_prosseguir.setOnClickListener {
-            pattern_validate(senha.text.toString(),regex_senha,senha,"Por favor, sua senha precisa ter pelo menos 8 caracteres, sendo eles: números, caracteres especiais(@,\$,!,%,*,#,?,&,+,-) e letra maiuscula")
-            pattern_validate(email.text.toString(),regex_email,email, "Digite um email válido")
-            val vSenha = validate(senha)
-            val vEmail = validate(email)
-            val vSenhaConfirmar = validate(senha_confirmar)
+            val validateRegexPassword = RegexUtil.pattern_validate(viewBinding.senha.text.toString(),regexSenha,viewBinding.senha,getString(R.string.password_invalid_error))
+            val validateRegexEmail = RegexUtil.pattern_validate(viewBinding.email.text.toString(),regexEmail,viewBinding.email, getString(R.string.email_invalid_error))
+            val validatePassword = ValidateUtil.validate(viewBinding.senha)
+            val validateEmail = ValidateUtil.validate(viewBinding.email)
+            val validatePasswordTwo = ValidateUtil.validate(viewBinding.senhaConfirmar)
 
-            if(vSenha || vEmail || vSenhaConfirmar){
-                if(senha_confirmar.text.toString() != senha.text.toString()){
-                    senha_confirmar.error = "senha inválida, digite a mesma senha do campo anterior"
-                }else{
-                    val cadastroPrincipal = Intent(this, CadastroActivity::class.java)
-                    startActivity(cadastroPrincipal)
+            if(validateRegexPassword && validateRegexEmail){
+                if(validatePassword && validateEmail && validatePasswordTwo){
+                    if(viewBinding.senhaConfirmar.text.toString() != viewBinding.senha.text.toString()){
+                        viewBinding.senhaConfirmar.error = getString(R.string.passwordTwo_invalid_error)
+                    }else{
+                        val cadastroPrincipal = Intent(this, CadastroActivity::class.java)
+                        startActivity(cadastroPrincipal)
+                    }
                 }
             }
         }
-    }
-    //função para validar usando regex
-    fun pattern_validate(t: String, regex: Regex, campo: TextInputEditText,error:String){
-        if(!regex.containsMatchIn(t)){
-            campo.error = error
-        }
-    }
-    //função para validar campos obrigatórios
-    fun validate(campo: TextInputEditText): Boolean{
-        if(campo.text?.length == 0){
-            campo.error = "Campo inválido, é obrigatório preencher"
-            return false
-        }
-        return true
     }
 }
