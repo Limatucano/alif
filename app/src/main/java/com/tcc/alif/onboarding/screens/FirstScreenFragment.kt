@@ -10,7 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.tcc.alif.R
 import com.tcc.alif.onboarding.ViewPagerAdapter
 
-class FirstScreen : Fragment() {
+class FirstScreenFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

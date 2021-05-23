@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.tcc.alif.R
-import com.tcc.alif.onboarding.screens.FirstScreen
-import com.tcc.alif.onboarding.screens.SecondScreen
-import com.tcc.alif.onboarding.screens.ThirdScreen
+import com.tcc.alif.onboarding.screens.FirstScreenFragment
+import com.tcc.alif.onboarding.screens.SecondScreenFragment
+import com.tcc.alif.onboarding.screens.ThirdScreenFragment
 
 
 class ViewPagerFragment : Fragment() {
@@ -25,9 +25,9 @@ class ViewPagerFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val fragmentList = arrayListOf<Fragment>(
-            FirstScreen(),
-            SecondScreen(),
-            ThirdScreen()
+            FirstScreenFragment(),
+            SecondScreenFragment(),
+            ThirdScreenFragment()
         )
         val adapter = ViewPagerAdapter(
             fragmentList,
