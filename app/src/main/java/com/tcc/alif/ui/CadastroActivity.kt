@@ -3,9 +3,7 @@ package com.tcc.alif.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.FragmentManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.textfield.TextInputEditText
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityCadastroBinding
 import com.tcc.alif.util.*
@@ -45,14 +43,14 @@ class CadastroActivity : AppCompatActivity() {
                 if(!CNPJUtil.myValidateCNPJ(cnpjLojista.text.toString())){
                     cnpjLojista.error = "CNPJ Inválido, digite um CNPJ válido para prosseguir"
                 }
-                validate(nomeEmpresa)
+                ValidateUtil.validate(nomeEmpresa)
                 if(radioCpf.isChecked){
-                    validate(cpfLojista)
+                    ValidateUtil.validate(cpfLojista)
                 }
                 if(radioCnpj.isChecked){
-                    validate(cnpjLojista)
+                    ValidateUtil.validate(cnpjLojista)
                 }
-                validate(celularJuridico)
+                ValidateUtil.validate(celularJuridico)
             }
             if(radioCliente.isChecked){
                 if(!DateUtil.myValidateDate(dataNascimento.text.toString())){
@@ -62,10 +60,10 @@ class CadastroActivity : AppCompatActivity() {
                     cpf.error = "CPF Inválido, digite um CPF válido para prosseguir"
                 }
 
-                validate(nome)
-                validate(cpf)
-                validate(celular)
-                validate(dataNascimento)
+                ValidateUtil.validate(nome)
+                ValidateUtil.validate(cpf)
+                ValidateUtil.validate(celular)
+                ValidateUtil.validate(dataNascimento)
             }
 
         }
@@ -74,17 +72,18 @@ class CadastroActivity : AppCompatActivity() {
                 inputCnpjLojista.visibility = View.INVISIBLE
                 inputCpfLojista.visibility  = View.VISIBLE
                 txtCnpjCpf.text   = "CPF"
-                clear_validate(cnpjLojista)
+                ValidateUtil.clear_validate(cnpjLojista)
                 //limpa o campo de cnpj
                 cnpjLojista.text?.clear()
             }
+
         }
         radioCnpj.setOnClickListener{
             if(radioCnpj.isChecked){
                 inputCnpjLojista.visibility = View.VISIBLE
                 inputCpfLojista.visibility  = View.INVISIBLE
                 txtCnpjCpf.text   = "CNPJ"
-                clear_validate(cpfLojista)
+                ValidateUtil.clear_validate(cpfLojista)
                 //limpa o campo de cpf
                 cpfLojista.text?.clear()
             }
@@ -94,10 +93,10 @@ class CadastroActivity : AppCompatActivity() {
             if(radioLojista.isChecked){
                 cadastrolojista.visibility = View.VISIBLE
                 cadastropessoa.visibility = View.INVISIBLE
-                clear_validate(nome)
-                clear_validate(cpf)
-                clear_validate(celular)
-                clear_validate(dataNascimento)
+                ValidateUtil.clear_validate(nome)
+                ValidateUtil.clear_validate(cpf)
+                ValidateUtil.clear_validate(celular)
+                ValidateUtil.clear_validate(dataNascimento)
                 //limpa os campos do outro card
                 nome.text?.clear()
                 cpf.text?.clear()
@@ -110,10 +109,10 @@ class CadastroActivity : AppCompatActivity() {
             if(radioCliente.isChecked){
                 cadastropessoa.visibility = View.VISIBLE
                 cadastrolojista.visibility = View.INVISIBLE
-                clear_validate(nomeEmpresa)
-                clear_validate(cpfLojista)
-                clear_validate(cnpjLojista)
-                clear_validate(celularJuridico)
+                ValidateUtil.clear_validate(nomeEmpresa)
+                ValidateUtil.clear_validate(cpfLojista)
+                ValidateUtil.clear_validate(cnpjLojista)
+                ValidateUtil.clear_validate(celularJuridico)
                 //limpa os campos do outro card
                 nomeEmpresa.text?.clear()
                 cpfLojista.text?.clear()
@@ -124,16 +123,6 @@ class CadastroActivity : AppCompatActivity() {
         }
     }
 
-    //função para validar campos obrigatórios
-    private fun validate(campo: TextInputEditText){
-        if(campo.text?.length == 0){
-            return campo.setError("Campo Vazio")
-        }
-    }
-    private fun clear_validate(campo: TextInputEditText){
-        if(campo.text?.length == 0) {
-            return campo.setError(null)
-        }
-    }
+
 }
 
