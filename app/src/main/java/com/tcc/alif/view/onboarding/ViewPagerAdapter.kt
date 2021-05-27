@@ -1,4 +1,4 @@
-package com.tcc.alif.onboarding
+package com.tcc.alif.view.onboarding
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

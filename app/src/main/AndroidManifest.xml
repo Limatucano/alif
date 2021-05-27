@@ -9,19 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Alif">
-        <activity android:name=".ui.FirstCadstroActivity"></activity>
-        <activity android:name=".ui.CadastroActivity" />
-        <activity android:name=".ui.ApresentacaoActivity">
+        <activity android:name=".view.ui.FirstCadstroActivity"></activity>
+        <activity android:name=".view.ui.CadastroActivity" />
+        <activity android:name=".view.ui.ApresentacaoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.MainActivity" />
+                android:value=".view.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.ModoActivity">
+        <activity android:name=".view.ui.ModoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.MainActivity" />
+                android:value=".view.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".view.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

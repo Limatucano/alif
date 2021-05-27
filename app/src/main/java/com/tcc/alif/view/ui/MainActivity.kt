@@ -1,4 +1,4 @@
-package com.tcc.alif.ui
+package com.tcc.alif.view.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

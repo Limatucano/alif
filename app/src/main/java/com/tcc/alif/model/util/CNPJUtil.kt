@@ -1,4 +1,4 @@
-package com.tcc.alif.util
+package com.tcc.alif.model.util
 
 import java.lang.Exception
 
