@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.annotations.SerializedName
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityFirstCadstroBinding
@@ -21,28 +22,6 @@ class FirstCadstroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first_cadstro)
         setupListeners()
-
-        viewBinding.btnTeste.setOnClickListener {
-            val apiService = RestApiService()
-            val teste = ClientInfo(
-                nome = "mathues",
-                sobrenome = "Lima",
-                cpf = "123456798",
-                nascimento = "1999-05-31",
-                numero_celular = "2132",
-                ddd_celular = "21",
-                email = "new@gmail.com",
-                senha = "matheus"
-            )
-            apiService.registerClient(teste){ status: Int?, clientInfo: ClientInfo? ->
-                Log.d("CREATING_CLIENT", status.toString())
-                if (clientInfo != null) {
-                    Log.d("CREATING_CLIENT", teste.toString())
-                } else {
-                    Log.d("CREATING_CLIENT","Error registering new user")
-                }
-            }
-     }
     }
 
     private fun setupListeners(){
@@ -61,8 +40,25 @@ class FirstCadstroActivity : AppCompatActivity() {
                     if(viewBinding.senhaConfirmar.text.toString() != viewBinding.senha.text.toString()){
                         viewBinding.senhaConfirmar.error = getString(R.string.passwordTwo_invalid_error)
                     }else{
-                        val cadastroPrincipal = Intent(this, CadastroActivity::class.java)
-                        startActivity(cadastroPrincipal)
+                        val apiService = RestApiService()
+                        val clientInfo = ClientInfo(
+                            email = viewBinding.email.text.toString(),
+                            nome  = null,
+                            cpf  = null,
+                            ddd_celular  = null,
+                            numero_celular  = null,
+                            nascimento  = null,
+                            senha  = null,
+                            sobrenome  = null,
+                        )
+                        apiService.verifyEmail(clientInfo){ status: Int?, clientInfo: ClientInfo? ->
+                            if (status != 200) {
+                                Snackbar.make(viewBinding.Layout, R.string.email_ja_existe, Snackbar.LENGTH_LONG ).show()
+                            } else {
+                                val cadastroPrincipal = Intent(this, CadastroActivity::class.java)
+                                startActivity(cadastroPrincipal)
+                            }
+                        }
                     }
                 }
             }

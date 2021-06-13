@@ -41,5 +41,6 @@
     <string name="cpf_invalid_error">CPF Inválido, digite um CPF válido para prosseguir</string>
     <string name="cnpj_invalid_error">CNPJ Inválido, digite um CNPJ válido para prosseguir</string>
     <string name="date_invalid_error">Data de Nascimento inválida</string>
+    <string name="email_ja_existe">Email já cadastrado!</string>
 
 </resources>

@@ -28,4 +28,26 @@ class RestApiService {
             }
         )
     }
+
+    fun verifyEmail(userData: ClientInfo, onResult : (Int?,ClientInfo?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.registerClient(userData).enqueue(
+            object : Callback<ClientInfo> {
+                override fun onFailure(call: Call<ClientInfo>, t: Throwable) {
+                    onResult(500,null)
+                }
+                override fun onResponse(call: Call<ClientInfo>, response: Response<ClientInfo>) {
+                    val  addedClient = response.body()
+                    val status = response.code()
+                    if(response.code() != 200){
+                        onResult(status,addedClient)
+                    }else{
+                        onResult(status,addedClient)
+                    }
+
+                }
+
+            }
+        )
+    }
 }
