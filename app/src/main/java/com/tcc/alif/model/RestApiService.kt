@@ -31,7 +31,7 @@ class RestApiService {
 
     fun verifyEmail(userData: ClientInfo, onResult : (Int?,ClientInfo?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
-        retrofit.registerClient(userData).enqueue(
+        retrofit.verifyEmail(userData).enqueue(
             object : Callback<ClientInfo> {
                 override fun onFailure(call: Call<ClientInfo>, t: Throwable) {
                     onResult(500,null)

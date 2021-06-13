@@ -52,6 +52,7 @@ class FirstCadstroActivity : AppCompatActivity() {
                             sobrenome  = null,
                         )
                         apiService.verifyEmail(clientInfo){ status: Int?, clientInfo: ClientInfo? ->
+                            Log.d("CREATING_CLIENT", status.toString())
                             if (status != 200) {
                                 Snackbar.make(viewBinding.Layout, R.string.email_ja_existe, Snackbar.LENGTH_LONG ).show()
                             } else {
