@@ -1,4 +1,4 @@
-package com.tcc.alif.ui
+package com.tcc.alif.view.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,8 +6,8 @@ import android.os.Bundle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityFirstCadstroBinding
-import com.tcc.alif.util.RegexUtil
-import com.tcc.alif.util.ValidateUtil
+import com.tcc.alif.model.util.RegexUtil
+import com.tcc.alif.model.util.ValidateUtil
 
 class FirstCadstroActivity : AppCompatActivity() {
 

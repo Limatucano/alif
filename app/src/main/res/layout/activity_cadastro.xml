@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CadastroActivity"
+    tools:context=".view.ui.CadastroActivity"
     android:background="#fff"
     android:orientation="vertical"
     android:fillViewport="true">

@@ -1,4 +1,4 @@
-package com.tcc.alif.onboarding.screens
+package com.tcc.alif.view.onboarding.screens
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.tcc.alif.R
-import com.tcc.alif.onboarding.ViewPagerAdapter
+import com.tcc.alif.view.onboarding.ViewPagerAdapter
 
 class FirstScreenFragment : Fragment() {
 
