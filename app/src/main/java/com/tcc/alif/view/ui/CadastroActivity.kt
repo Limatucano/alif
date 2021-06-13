@@ -7,7 +7,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityCadastroBinding
 import com.tcc.alif.model.util.*
-import com.tcc.alif.util.*
 
 
 class CadastroActivity : AppCompatActivity() {
