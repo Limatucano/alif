@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.ui.FirstCadstroActivity"
-    android:background="@drawable/ic_wave_100s_953px">
+    android:background="@drawable/ic_wave_100s_953px"
+    android:id="@+id/Layout">
 
     <ImageView
         android:layout_width="120dp"

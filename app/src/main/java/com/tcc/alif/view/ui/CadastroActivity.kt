@@ -6,19 +6,25 @@ import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityCadastroBinding
+import com.tcc.alif.model.ClientSerializable
 import com.tcc.alif.model.util.*
-import com.tcc.alif.util.*
 
 
 class CadastroActivity : AppCompatActivity() {
 
     private val viewBinding: ActivityCadastroBinding by viewBinding()
+    private var clientSerializable: ClientSerializable? = null
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro)
         setupMasks()
         setupListeners()
+        clientSerializable = intent.getSerializableExtra("serialzable") as ClientSerializable?
+        var email: String = clientSerializable?.getEmail().toString()
+        var senha: String = clientSerializable?.getSenha().toString()
+        viewBinding.emailHidden.text = email
+        viewBinding.senhaHidden.text = senha
 
     }
     private fun setupMasks() = with(viewBinding){
