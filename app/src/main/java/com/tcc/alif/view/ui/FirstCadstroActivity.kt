@@ -10,6 +10,7 @@ import com.google.gson.annotations.SerializedName
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityFirstCadstroBinding
 import com.tcc.alif.model.ClientInfo
+import com.tcc.alif.model.ClientSerializable
 import com.tcc.alif.model.RestApiService
 import com.tcc.alif.model.util.RegexUtil
 import com.tcc.alif.model.util.ValidateUtil
@@ -23,7 +24,16 @@ class FirstCadstroActivity : AppCompatActivity() {
         setContentView(R.layout.activity_first_cadstro)
         setupListeners()
     }
-
+    private fun sendData(email: String, senha: String){
+        val clientInfo = ClientSerializable()
+        clientInfo.setEmail(email)
+        clientInfo.setSenha(senha)
+        val intent = Intent(this, CadastroActivity::class.java)
+        val b = Bundle()
+        b.putSerializable("serialzable", clientInfo)
+        intent.putExtras(b)
+        startActivity(intent)
+    }
     private fun setupListeners(){
         val regexSenha = RegexUtil.passwordRegex()
         val regexEmail = RegexUtil.emailRegex()
@@ -43,21 +53,15 @@ class FirstCadstroActivity : AppCompatActivity() {
                         val apiService = RestApiService()
                         val clientInfo = ClientInfo(
                             email = viewBinding.email.text.toString(),
-                            nome  = null,
-                            cpf  = null,
-                            ddd_celular  = null,
-                            numero_celular  = null,
-                            nascimento  = null,
-                            senha  = null,
-                            sobrenome  = null,
                         )
                         apiService.verifyEmail(clientInfo){ status: Int?, clientInfo: ClientInfo? ->
                             Log.d("CREATING_CLIENT", status.toString())
                             if (status != 200) {
                                 Snackbar.make(viewBinding.Layout, R.string.email_ja_existe, Snackbar.LENGTH_LONG ).show()
                             } else {
-                                val cadastroPrincipal = Intent(this, CadastroActivity::class.java)
-                                startActivity(cadastroPrincipal)
+                                sendData(viewBinding.email.text.toString(), viewBinding.senha.text.toString())
+//                                val cadastroPrincipal = Intent(this, CadastroActivity::class.java)
+//                                startActivity(cadastroPrincipal)
                             }
                         }
                     }
