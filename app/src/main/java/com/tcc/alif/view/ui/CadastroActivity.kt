@@ -1,5 +1,6 @@
 package com.tcc.alif.view.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -93,8 +94,8 @@ class CadastroActivity : AppCompatActivity() {
                         Snackbar.make(viewBinding.Layout, "ERRO", Snackbar.LENGTH_LONG ).show()
                     } else {
                         Log.d("ALIF_API", "Usuario inserido com sucesso")
-//                                val cadastroPrincipal = Intent(this, CadastroActivity::class.java)
-//                                startActivity(cadastroPrincipal)
+                        val login = Intent(this@CadastroActivity, MainActivity::class.java)
+                        startActivity(login)
                     }
                 }
             }
