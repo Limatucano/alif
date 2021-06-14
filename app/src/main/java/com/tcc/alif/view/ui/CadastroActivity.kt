@@ -2,11 +2,15 @@ package com.tcc.alif.view.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.snackbar.Snackbar
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityCadastroBinding
+import com.tcc.alif.model.ClientInfo
 import com.tcc.alif.model.ClientSerializable
+import com.tcc.alif.model.RestApiService
 import com.tcc.alif.model.util.*
 
 
@@ -70,6 +74,29 @@ class CadastroActivity : AppCompatActivity() {
                 ValidateUtil.validate(cpf)
                 ValidateUtil.validate(celular)
                 ValidateUtil.validate(dataNascimento)
+
+                val apiService = RestApiService()
+                val arr = ClientInfo(
+                    email = emailHidden.text.toString(),
+                    senha = senhaHidden.text.toString(),
+                    nome = nome.text.toString(),
+                    cpf = cpf.text.toString(),
+                    numero_celular = celular.text.toString(),
+                    sobrenome = "",
+                    nascimento = "1999-05-31",
+                    ddd_celular = "",
+                )
+                Log.d("ALIF_API", arr.toString())
+                apiService.registerClient(arr){ status: Int?, clientInfo: ClientInfo? ->
+                    Log.d("ALIF_API", status.toString())
+                    if (status != 201) {
+                        Snackbar.make(viewBinding.Layout, "ERRO", Snackbar.LENGTH_LONG ).show()
+                    } else {
+                        Log.d("ALIF_API", "Usuario inserido com sucesso")
+//                                val cadastroPrincipal = Intent(this, CadastroActivity::class.java)
+//                                startActivity(cadastroPrincipal)
+                    }
+                }
             }
 
         }

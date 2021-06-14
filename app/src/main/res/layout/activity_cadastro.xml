@@ -7,7 +7,8 @@
     tools:context=".view.ui.CadastroActivity"
     android:background="#fff"
     android:orientation="vertical"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:id="@+id/Layout">
 
     <RelativeLayout
         android:layout_width="match_parent"
