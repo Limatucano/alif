@@ -56,7 +56,7 @@
             android:autofillHints=""
             android:backgroundTint="@color/white"
             android:hint="@string/digite_seu_email"
-            android:inputType="number"
+            android:inputType="textEmailAddress"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
 

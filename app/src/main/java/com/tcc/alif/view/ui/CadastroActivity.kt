@@ -87,9 +87,7 @@ class CadastroActivity : AppCompatActivity() {
                     nascimento = "1999-05-31",
                     ddd_celular = "",
                 )
-                Log.d("ALIF_API", arr.toString())
                 apiService.registerClient(arr){ status: Int?, clientInfo: ClientInfo? ->
-                    Log.d("ALIF_API", status.toString())
                     if (status != 201) {
                         Snackbar.make(viewBinding.Layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG ).show()
                     } else {
