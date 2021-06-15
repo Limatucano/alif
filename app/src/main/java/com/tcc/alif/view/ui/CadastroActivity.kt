@@ -91,10 +91,13 @@ class CadastroActivity : AppCompatActivity() {
                 apiService.registerClient(arr){ status: Int?, clientInfo: ClientInfo? ->
                     Log.d("ALIF_API", status.toString())
                     if (status != 201) {
-                        Snackbar.make(viewBinding.Layout, "ERRO", Snackbar.LENGTH_LONG ).show()
+                        Snackbar.make(viewBinding.Layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG ).show()
                     } else {
                         Log.d("ALIF_API", "Usuario inserido com sucesso")
                         val login = Intent(this@CadastroActivity, MainActivity::class.java)
+                        val b = Bundle()
+                        b.putSerializable("success", 0)
+                        login.putExtras(b)
                         startActivity(login)
                     }
                 }
