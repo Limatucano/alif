@@ -42,5 +42,9 @@
     <string name="cnpj_invalid_error">CNPJ Inválido, digite um CNPJ válido para prosseguir</string>
     <string name="date_invalid_error">Data de Nascimento inválida</string>
     <string name="email_ja_existe">Email já cadastrado!</string>
+    <string name="cadastrado_sucesso">Cadastrado com sucesso!</string>
+    <string name="erro_cadastrar">Erro ao cadastrar!</string>
+    <string name="erro_autenticacao">Erro na Autenticação</string>
+
 
 </resources>
