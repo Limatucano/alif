@@ -556,7 +556,11 @@
             android:text="@string/salvar"
             android:textSize="12sp"
             android:textStyle="bold" />
-
+        <ProgressBar
+            android:id="@+id/progress_loading"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/btn_cadastrar"/>
 
         <TextView
             android:id="@+id/email_hidden"

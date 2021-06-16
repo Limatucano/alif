@@ -45,6 +45,7 @@ class CadastroActivity : AppCompatActivity() {
         dataNascimento.addTextChangedListener(MaskUtils.dateMask(dataNascimento))
     }
     private fun setupListeners() = with(viewBinding){
+        viewBinding.progressLoading.visibility = View.INVISIBLE
         btnCadastrar.setOnClickListener{
             //validar campos conforme card que esta visivel no momento
             if(radioLojista.isChecked){
@@ -87,10 +88,14 @@ class CadastroActivity : AppCompatActivity() {
                     nascimento = "1999-05-31",
                     ddd_celular = "",
                 )
+                viewBinding.progressLoading.visibility = View.VISIBLE
                 apiService.registerClient(arr){ status: Int?, clientInfo: ClientInfo? ->
+                    viewBinding.progressLoading.isIndeterminate = true
                     if (status != 201) {
+                        viewBinding.progressLoading.isIndeterminate = false
                         Snackbar.make(viewBinding.Layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG ).show()
                     } else {
+                        viewBinding.progressLoading.isIndeterminate = false
                         Log.d("ALIF_API", "Usuario inserido com sucesso")
                         val login = Intent(this@CadastroActivity, MainActivity::class.java)
                         val b = Bundle()
