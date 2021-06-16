@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.annotations.SerializedName
@@ -37,8 +38,8 @@ class FirstCadstroActivity : AppCompatActivity() {
     private fun setupListeners(){
         val regexSenha = RegexUtil.passwordRegex()
         val regexEmail = RegexUtil.emailRegex()
+        viewBinding.progressLoading.visibility = View.INVISIBLE
         viewBinding.btnProsseguir.setOnClickListener {
-
             val validateRegexPassword = RegexUtil.pattern_validate(viewBinding.senha.text.toString(),regexSenha,viewBinding.senha,getString(R.string.password_invalid_error))
             val validateRegexEmail = RegexUtil.pattern_validate(viewBinding.email.text.toString(),regexEmail,viewBinding.email, getString(R.string.email_invalid_error))
             val validatePassword = ValidateUtil.validate(viewBinding.senha)
@@ -54,11 +55,15 @@ class FirstCadstroActivity : AppCompatActivity() {
                         val clientInfo = ClientInfo(
                             email = viewBinding.email.text.toString(),
                         )
+                        viewBinding.progressLoading.visibility = View.VISIBLE
                         apiService.verifyEmail(clientInfo){ status: Int?, clientInfo: ClientInfo? ->
-                            Log.d("CREATING_CLIENT", status.toString())
+                            viewBinding.progressLoading.isIndeterminate = true
+
                             if (status != 200) {
+                                viewBinding.progressLoading.isIndeterminate = false
                                 Snackbar.make(viewBinding.Layout, R.string.email_ja_existe, Snackbar.LENGTH_LONG ).show()
                             } else {
+                                viewBinding.progressLoading.isIndeterminate = false
                                 sendData(viewBinding.email.text.toString(), viewBinding.senha.text.toString())
 //                                val cadastroPrincipal = Intent(this, CadastroActivity::class.java)
 //                                startActivity(cadastroPrincipal)
