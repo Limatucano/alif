@@ -45,6 +45,7 @@
     <string name="cadastrado_sucesso">Cadastrado com sucesso!</string>
     <string name="erro_cadastrar">Erro ao cadastrar!</string>
     <string name="erro_autenticacao">Erro na Autenticação</string>
+    <string name="search_hint">Pesquise nome de filas ou nome de empresas</string>
 
 
 </resources>
