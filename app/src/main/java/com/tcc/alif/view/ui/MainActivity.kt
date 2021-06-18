@@ -41,6 +41,9 @@ class MainActivity : AppCompatActivity() {
                 }else{
                     viewBinding.progressLoading.isIndeterminate = false
                     val intent = Intent(this, ClienteActivity::class.java)
+                    val b = Bundle()
+                    b.putSerializable("email", viewBinding.email.text.toString())
+                    intent.putExtras(b)
                     startActivity(intent)
                 }
             }
