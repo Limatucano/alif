@@ -60,6 +60,7 @@ class FirstCadstroActivity : AppCompatActivity() {
                             viewBinding.progressLoading.isIndeterminate = true
 
                             if (status != 200) {
+                                viewBinding.progressLoading.visibility = View.INVISIBLE
                                 viewBinding.progressLoading.isIndeterminate = false
                                 Snackbar.make(viewBinding.Layout, R.string.email_ja_existe, Snackbar.LENGTH_LONG ).show()
                             } else {
