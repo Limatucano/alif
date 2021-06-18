@@ -2,8 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginRight="20dp"
-    android:layout_marginLeft="20dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
     android:layout_height="180dp"
     android:layout_width="180dp"
     app:cardCornerRadius="10dp"
@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvName"
+                android:id="@+id/nome_da_fila"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -37,7 +37,7 @@
                 tools:text="Pronto Atendimento Classificação Verde" />
 
             <TextView
-                android:id="@+id/tvSpecies"
+                android:id="@+id/nome_do_lojista"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -47,7 +47,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvName"
+                app:layout_constraintTop_toBottomOf="@+id/nome_da_fila"
                 app:layout_constraintVertical_bias="0.0"
                 tools:text="UPA Queimados" />
         </androidx.constraintlayout.widget.ConstraintLayout>

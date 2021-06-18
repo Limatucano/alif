@@ -1,6 +1,8 @@
 package com.tcc.alif.model.api
 
 import com.tcc.alif.model.ClientInfo
+import com.tcc.alif.model.MinhasFilas
+import com.tcc.alif.model.MinhasFilasPost
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers
@@ -28,4 +30,11 @@ interface AlifService {
     fun login(
             @Body userData: ClientInfo
     ): Call<ClientInfo>
+
+    //Pega todas filas do usuário
+    @Headers("Content-Type: application/json")
+    @POST("cliente/minhasfilas")
+    fun getMyFilas(
+            @Body userData: MinhasFilasPost
+    ): Call<MinhasFilas>
 }

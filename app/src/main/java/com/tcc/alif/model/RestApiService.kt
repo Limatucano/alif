@@ -72,4 +72,27 @@ class RestApiService {
                 }
         )
     }
+
+    fun getMyFilas(userData: MinhasFilasPost, onResult: (Int?, MinhasFilas?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.getMyFilas(userData).enqueue(
+                object : Callback<MinhasFilas> {
+                    override fun onFailure(call: Call<MinhasFilas>, t: Throwable) {
+                        onResult(500,null)
+                    }
+                    override fun onResponse(call: Call<MinhasFilas>, response: Response<MinhasFilas>) {
+                        val  addedClient = response.body()
+                        val status = response.code()
+                        Log.d("TESTANDOO",addedClient.toString())
+                        if(response.code() != 200){
+                            onResult(status,addedClient)
+                        }else{
+                            onResult(status,addedClient)
+                        }
+
+                    }
+
+                }
+        )
+    }
 }
