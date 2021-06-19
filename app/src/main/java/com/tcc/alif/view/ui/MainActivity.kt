@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                     viewBinding.progressLoading.isIndeterminate = false
                     Snackbar.make(viewBinding.Layout, R.string.erro_autenticacao, Snackbar.LENGTH_LONG ).show()
                 }else{
+                    viewBinding.progressLoading.visibility = View.INVISIBLE
                     viewBinding.progressLoading.isIndeterminate = false
                     val intent = Intent(this, ClienteActivity::class.java)
                     val b = Bundle()

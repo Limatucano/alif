@@ -13,7 +13,6 @@ import com.tcc.alif.model.domain.MinhasFilasData
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
 
 class ClienteActivity : AppCompatActivity() {
-    private var clientSerializable: ClientSerializable? = null
     private val viewBinding : ActivityMainBinding by viewBinding()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +26,7 @@ class ClienteActivity : AppCompatActivity() {
         apiService.getMyFilas(arr){ status: Int?, minhasFilas: MinhasFilas? ->
 
             if (status != 200) {
-                Snackbar.make(viewBinding.Layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG ).show()
+                Snackbar.make(viewBinding.Layout, R.string.erro_pegar_fila, Snackbar.LENGTH_LONG ).show()
             } else {
                 minhasFilas?.response?.let {
                     val fila : List<MinhasFilasData> = it.map{ fila ->

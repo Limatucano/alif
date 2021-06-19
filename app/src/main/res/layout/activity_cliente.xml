@@ -61,11 +61,11 @@
         app:layout_constraintTop_toBottomOf="@+id/searchView"
         tools:layout_editor_absoluteX="0dp"
         android:text="@string/minhas_filas"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:paddingLeft="30dp"
-        android:paddingStart="30dp" />
+        android:paddingLeft="20dp"
+        android:paddingStart="20dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFilas"
