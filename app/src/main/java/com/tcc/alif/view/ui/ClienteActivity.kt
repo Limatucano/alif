@@ -3,45 +3,38 @@ package com.tcc.alif.view.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
+import com.tcc.alif.FirstClienteFragment
 import com.tcc.alif.R
+import com.tcc.alif.SecondClienteFragment
+import com.tcc.alif.databinding.ActivityClienteBinding
 import com.tcc.alif.databinding.ActivityMainBinding
 import com.tcc.alif.model.*
 import com.tcc.alif.model.domain.MinhasFilasData
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
 
 class ClienteActivity : AppCompatActivity() , MinhasFilasAdapter.OnClickItemListener {
-    private val viewBinding : ActivityMainBinding by viewBinding()
+    private val viewBinding : ActivityClienteBinding by viewBinding()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cliente)
-        val rvFilas = findViewById<RecyclerView>(R.id.rvFilas)
-        val apiService = RestApiService()
-        var email = intent.getSerializableExtra("email")
-        val arr = MinhasFilasPost(
-                email = email.toString(),
-        )
-        apiService.getMyFilas(arr){ status: Int?, minhasFilas: MinhasFilas? ->
 
-            if (status != 200) {
-                Snackbar.make(viewBinding.Layout, R.string.erro_pegar_fila, Snackbar.LENGTH_LONG ).show()
-            } else {
-                minhasFilas?.response?.let {
-                    val fila : List<MinhasFilasData> = it.map{ fila ->
-                        MinhasFilasData(fila.nome_da_fila, fila.id_fila, fila.quantidade_vagas, fila.horario_abertura, fila.horario_fechamento, fila.intervalo, fila.id_lojista)
-                    }
 
-                    val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-                    rvFilas.post{
-                        rvFilas.layoutManager = layoutManager
-                        rvFilas.adapter = MinhasFilasAdapter(fila, this)
-                    }
-                }
+        val firstClienteFragment = FirstClienteFragment()
+        val secondClienteFragment = SecondClienteFragment()
 
+        setCurrentFragment(firstClienteFragment)
+
+        viewBinding.bottomNavigationView.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.home->setCurrentFragment(firstClienteFragment)
+                R.id.perfil->setCurrentFragment(secondClienteFragment)
             }
+            true
         }
     }
 
@@ -49,5 +42,9 @@ class ClienteActivity : AppCompatActivity() , MinhasFilasAdapter.OnClickItemList
         //TODO: Mandar todas informações da fila para a  activity de detalhamento
 
         Toast.makeText(this, items.nome_da_fila, Toast.LENGTH_LONG).show()
+    }
+    private fun setCurrentFragment(fragment: Fragment) = supportFragmentManager.beginTransaction().apply {
+        replace(R.id.flFragment, fragment)
+        commit()
     }
 }
