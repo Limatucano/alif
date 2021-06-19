@@ -92,6 +92,7 @@ class CadastroActivity : AppCompatActivity() {
                 apiService.registerClient(arr){ status: Int?, clientInfo: ClientInfo? ->
                     viewBinding.progressLoading.isIndeterminate = true
                     if (status != 201) {
+                        viewBinding.progressLoading.visibility = View.INVISIBLE
                         viewBinding.progressLoading.isIndeterminate = false
                         Snackbar.make(viewBinding.Layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG ).show()
                     } else {
