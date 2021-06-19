@@ -2,6 +2,7 @@ package com.tcc.alif.view.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -12,7 +13,7 @@ import com.tcc.alif.model.*
 import com.tcc.alif.model.domain.MinhasFilasData
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
 
-class ClienteActivity : AppCompatActivity() {
+class ClienteActivity : AppCompatActivity() , MinhasFilasAdapter.OnClickItemListener {
     private val viewBinding : ActivityMainBinding by viewBinding()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,17 +31,23 @@ class ClienteActivity : AppCompatActivity() {
             } else {
                 minhasFilas?.response?.let {
                     val fila : List<MinhasFilasData> = it.map{ fila ->
-                        MinhasFilasData(fila.nome_da_fila)
+                        MinhasFilasData(fila.nome_da_fila, fila.id_fila, fila.quantidade_vagas, fila.horario_abertura, fila.horario_fechamento, fila.intervalo, fila.id_lojista)
                     }
 
                     val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
                     rvFilas.post{
                         rvFilas.layoutManager = layoutManager
-                        rvFilas.adapter = MinhasFilasAdapter(fila)
+                        rvFilas.adapter = MinhasFilasAdapter(fila, this)
                     }
                 }
 
             }
         }
+    }
+
+    override fun onItemClick(items: MinhasFilasData, position: Int) {
+        //TODO: Mandar todas informações da fila para a  activity de detalhamento
+
+        Toast.makeText(this, items.nome_da_fila, Toast.LENGTH_LONG).show()
     }
 }
