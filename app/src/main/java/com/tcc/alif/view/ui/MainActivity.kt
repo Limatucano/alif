@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.tcc.alif.R
@@ -23,7 +24,8 @@ class MainActivity : AppCompatActivity() {
         viewBinding.progressLoading.visibility = View.INVISIBLE
         var mensagem = intent.getSerializableExtra("success")
         if(mensagem.toString() == "0"){
-            Snackbar.make(viewBinding.Layout, R.string.cadastrado_sucesso, Snackbar.LENGTH_LONG ).show()
+            //Snackbar.make(viewBinding.Layout, R.string.cadastrado_sucesso, Snackbar.LENGTH_LONG ).show()
+            Toast.makeText(this, R.string.cadastrado_sucesso, Toast.LENGTH_LONG).show()
         }
 
         viewBinding.btnLogin.setOnClickListener {
@@ -38,8 +40,10 @@ class MainActivity : AppCompatActivity() {
                 if (status != 200) {
                     viewBinding.progressLoading.visibility = View.INVISIBLE
                     viewBinding.progressLoading.isIndeterminate = false
-                    Snackbar.make(viewBinding.Layout, R.string.erro_autenticacao, Snackbar.LENGTH_LONG ).show()
+                    //Snackbar.make(viewBinding.Layout, R.string.erro_autenticacao, Snackbar.LENGTH_LONG ).show()
+                    Toast.makeText(this, R.string.erro_autenticacao, Toast.LENGTH_LONG).show()
                 }else{
+                    viewBinding.progressLoading.visibility = View.INVISIBLE
                     viewBinding.progressLoading.isIndeterminate = false
                     val intent = Intent(this, ClienteActivity::class.java)
                     val b = Bundle()

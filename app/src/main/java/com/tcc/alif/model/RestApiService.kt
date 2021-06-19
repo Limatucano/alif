@@ -83,7 +83,6 @@ class RestApiService {
                     override fun onResponse(call: Call<MinhasFilas>, response: Response<MinhasFilas>) {
                         val  addedClient = response.body()
                         val status = response.code()
-                        Log.d("TESTANDOO",addedClient.toString())
                         if(response.code() != 200){
                             onResult(status,addedClient)
                         }else{

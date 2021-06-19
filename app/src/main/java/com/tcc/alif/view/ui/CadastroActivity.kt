@@ -97,7 +97,6 @@ class CadastroActivity : AppCompatActivity() {
                         Snackbar.make(viewBinding.Layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG ).show()
                     } else {
                         viewBinding.progressLoading.isIndeterminate = false
-                        Log.d("ALIF_API", "Usuario inserido com sucesso")
                         val login = Intent(this@CadastroActivity, MainActivity::class.java)
                         val b = Bundle()
                         b.putSerializable("success", 0)
