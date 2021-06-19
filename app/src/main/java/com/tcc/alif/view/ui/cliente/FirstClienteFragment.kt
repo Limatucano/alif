@@ -1,27 +1,20 @@
-package com.tcc.alif
+package com.tcc.alif.view.ui.cliente
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.snackbar.Snackbar
-import com.tcc.alif.databinding.ActivityClienteBinding
+import com.tcc.alif.R
 import com.tcc.alif.model.MinhasFilas
 import com.tcc.alif.model.MinhasFilasPost
 import com.tcc.alif.model.RestApiService
 import com.tcc.alif.model.domain.MinhasFilasData
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
-import com.tcc.alif.view.ui.ClienteActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

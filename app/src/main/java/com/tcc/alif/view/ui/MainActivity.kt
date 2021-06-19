@@ -3,16 +3,14 @@ package com.tcc.alif.view.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.snackbar.Snackbar
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityMainBinding
 import com.tcc.alif.model.ClientInfo
-import com.tcc.alif.model.ClientSerializable
 import com.tcc.alif.model.RestApiService
+import com.tcc.alif.view.ui.cliente.ClienteActivity
 
 class MainActivity : AppCompatActivity() {
 
