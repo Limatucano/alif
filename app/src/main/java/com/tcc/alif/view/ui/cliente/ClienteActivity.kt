@@ -25,7 +25,7 @@ class ClienteActivity : AppCompatActivity() , MinhasFilasAdapter.OnClickItemList
         val FavoritosClienteFragment = FavoritosClienteFragment()
         val ConfigClienteFragment = ConfigClienteFragment()
         setCurrentFragment(HomeClienteFragment)
-
+        viewBinding.bottomNavigationView.menu.getItem(2).isChecked = true
         viewBinding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.home->setCurrentFragment(HomeClienteFragment)
