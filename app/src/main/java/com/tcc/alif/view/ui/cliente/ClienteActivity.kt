@@ -9,8 +9,8 @@ import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityClienteBinding
 import com.tcc.alif.model.domain.MinhasFilasData
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
-import com.tcc.alif.view.ui.cliente.FirstClienteFragment
-import com.tcc.alif.view.ui.cliente.SecondClienteFragment
+import com.tcc.alif.view.ui.cliente.HomeClienteFragment
+import com.tcc.alif.view.ui.cliente.PerfilClienteFragment
 
 class ClienteActivity : AppCompatActivity() , MinhasFilasAdapter.OnClickItemListener {
     private val viewBinding : ActivityClienteBinding by viewBinding()
@@ -19,15 +19,20 @@ class ClienteActivity : AppCompatActivity() , MinhasFilasAdapter.OnClickItemList
         setContentView(R.layout.activity_cliente)
 
 
-        val firstClienteFragment = FirstClienteFragment()
-        val secondClienteFragment = SecondClienteFragment()
-
-        setCurrentFragment(firstClienteFragment)
+        val HomeClienteFragment = HomeClienteFragment()
+        val PerfilClienteFragment = PerfilClienteFragment()
+        val PesquisarClienteFragment = PesquisarClienteFragment()
+        val FavoritosClienteFragment = FavoritosClienteFragment()
+        val ConfigClienteFragment = ConfigClienteFragment()
+        setCurrentFragment(HomeClienteFragment)
 
         viewBinding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.home->setCurrentFragment(firstClienteFragment)
-                R.id.perfil->setCurrentFragment(secondClienteFragment)
+                R.id.home->setCurrentFragment(HomeClienteFragment)
+                R.id.perfil->setCurrentFragment(PerfilClienteFragment)
+                R.id.procurar->setCurrentFragment(PesquisarClienteFragment)
+                R.id.favoritos->setCurrentFragment(FavoritosClienteFragment)
+                R.id.config->setCurrentFragment(ConfigClienteFragment)
             }
             true
         }
