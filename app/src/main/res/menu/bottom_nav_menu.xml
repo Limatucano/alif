@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/home"
-        android:title="@string/inicio"
-        android:icon="@drawable/home_icon_foreground"/>
-    <item
-        android:id="@+id/procurar"
-        android:title="@string/pesquisar"
-        android:icon="@drawable/search_icon_foreground"/>
 
     <item
         android:id="@+id/perfil"
         android:title="@string/perfil"
         android:icon="@drawable/user_icon_foreground"/>
+
+    <item
+        android:id="@+id/procurar"
+        android:title="@string/pesquisar"
+        android:icon="@drawable/search_icon_foreground">
+    </item>
+    <item
+        android:id="@+id/home"
+        android:title="@string/inicio"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/home_icon_foreground"/>
     <item
         android:id="@+id/favoritos"
         android:title="@string/Favoritos"
