@@ -35,7 +35,7 @@ class PerfilClienteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second_cliente, container, false)
+        return inflater.inflate(R.layout.fragment_perfil_cliente, container, false)
     }
 
     companion object {
