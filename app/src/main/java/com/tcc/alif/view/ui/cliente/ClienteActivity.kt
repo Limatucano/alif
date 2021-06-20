@@ -1,21 +1,16 @@
-package com.tcc.alif.view.ui
+package com.tcc.alif.view.ui.cliente
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.snackbar.Snackbar
-import com.tcc.alif.FirstClienteFragment
 import com.tcc.alif.R
-import com.tcc.alif.SecondClienteFragment
 import com.tcc.alif.databinding.ActivityClienteBinding
-import com.tcc.alif.databinding.ActivityMainBinding
-import com.tcc.alif.model.*
 import com.tcc.alif.model.domain.MinhasFilasData
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
+import com.tcc.alif.view.ui.cliente.HomeClienteFragment
+import com.tcc.alif.view.ui.cliente.PerfilClienteFragment
 
 class ClienteActivity : AppCompatActivity() , MinhasFilasAdapter.OnClickItemListener {
     private val viewBinding : ActivityClienteBinding by viewBinding()
@@ -24,15 +19,20 @@ class ClienteActivity : AppCompatActivity() , MinhasFilasAdapter.OnClickItemList
         setContentView(R.layout.activity_cliente)
 
 
-        val firstClienteFragment = FirstClienteFragment()
-        val secondClienteFragment = SecondClienteFragment()
-
-        setCurrentFragment(firstClienteFragment)
+        val HomeClienteFragment = HomeClienteFragment()
+        val PerfilClienteFragment = PerfilClienteFragment()
+        val PesquisarClienteFragment = PesquisarClienteFragment()
+        val FavoritosClienteFragment = FavoritosClienteFragment()
+        val ConfigClienteFragment = ConfigClienteFragment()
+        setCurrentFragment(HomeClienteFragment)
 
         viewBinding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.home->setCurrentFragment(firstClienteFragment)
-                R.id.perfil->setCurrentFragment(secondClienteFragment)
+                R.id.home->setCurrentFragment(HomeClienteFragment)
+                R.id.perfil->setCurrentFragment(PerfilClienteFragment)
+                R.id.procurar->setCurrentFragment(PesquisarClienteFragment)
+                R.id.favoritos->setCurrentFragment(FavoritosClienteFragment)
+                R.id.config->setCurrentFragment(ConfigClienteFragment)
             }
             true
         }
