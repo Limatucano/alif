@@ -48,6 +48,11 @@
     <string name="search_hint">Pesquise nome de filas ou nome de empresas</string>
     <string name="minhas_filas">Minhas Filas:</string>
     <string name="erro_pegar_fila">Erro ao obter suas filas :(</string>
+    <string name="inicio">Início</string>
+    <string name="perfil">Perfil</string>
+    <string name="pesquisar">Pesquisar</string>
+    <string name="Favoritos">Favoritos</string>
+    <string name="configuracao">Configuração</string>
 
 
 </resources>
