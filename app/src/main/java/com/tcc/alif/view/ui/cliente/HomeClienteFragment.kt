@@ -98,6 +98,7 @@ class HomeClienteFragment : Fragment(R.layout.fragment_first_cliente), MinhasFil
     }
 
     override fun onItemClick(items: MinhasFilasData, position: Int) {
+        //TODO: Mandar todas informações da fila para a  activity de detalhamento
         Toast.makeText(context, items.nome_da_fila, Toast.LENGTH_LONG).show()
     }
 }
