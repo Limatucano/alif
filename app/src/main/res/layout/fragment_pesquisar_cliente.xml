@@ -10,7 +10,7 @@
     android:paddingTop="10dp">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/campoPesquisar"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:paddingLeft="10dp"
@@ -21,12 +21,12 @@
         android:autofillHints=""
         android:background="@drawable/edit_pesquisar"
         android:inputType="text"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/buttonFiltro"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/button"
+        android:id="@+id/buttonFiltro"
         android:layout_width="53dp"
         android:layout_height="50dp"
         android:layout_marginTop="4dp"
@@ -36,15 +36,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="72dp"
+        android:layout_height="78dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/campoPesquisar">
+
+        <RadioButton
+            android:id="@+id/filasFiltro"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/radio_selector_filter"
+            android:button="@android:color/transparent"
+            android:gravity="center_horizontal|center_vertical"
+            android:padding="10dp"
+            android:text="Filas"
+            android:textColor="@drawable/text_color" />
+
+        <RadioButton
+            android:id="@+id/empresasFiltro"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/radio_selector_filter"
+            android:button="@android:color/transparent"
+            android:gravity="center_horizontal|center_vertical"
+            android:padding="10dp"
+            android:text="Empresas"
+            android:textColor="@drawable/text_color" />
+
+    </RadioGroup>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="646dp"
         android:fillViewport="true"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        tools:context=".view.ui.cliente.ClienteActivity"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        tools:context=".view.ui.cliente.ClienteActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -57,6 +94,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/resultado_item" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
