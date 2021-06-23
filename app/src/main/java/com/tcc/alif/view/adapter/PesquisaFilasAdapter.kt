@@ -10,9 +10,9 @@ import com.tcc.alif.model.domain.MinhasFilasData
 
 
 
-class MinhasFilasAdapter(private val items: List<MinhasFilasData>, var clickListener: OnClickItemListener) : RecyclerView.Adapter<MinhasFilasAdapter.ViewHolder>() {
+class PesquisaFilasAdapter(private val items: List<MinhasFilasData>, var clickListener: OnClickItemListener) : RecyclerView.Adapter<PesquisaFilasAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.minhas_filas_item,parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.resultado_item,parent, false)
 
         return ViewHolder(view)
     }

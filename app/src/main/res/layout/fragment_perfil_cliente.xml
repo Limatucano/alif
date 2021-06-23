@@ -7,29 +7,17 @@
     android:layout_height="wrap_content"
     tools:context=".view.ui.cliente.ClienteActivity">
 
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ball"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardNome"
         android:layout_width="match_parent"
         android:layout_height="90dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
