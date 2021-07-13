@@ -33,8 +33,11 @@ class ModoActivity : AppCompatActivity() {
                 intent.putExtras(b)
                 startActivity(intent)
             }
+        }
 
-
+        viewBinding.btnCadastrar.setOnClickListener {
+            val apresentacao = Intent(this, ApresentacaoActivity::class.java)
+            startActivity(apresentacao)
         }
 
 
