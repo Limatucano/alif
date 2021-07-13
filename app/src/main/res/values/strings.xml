@@ -54,6 +54,8 @@
     <string name="Favoritos">Favoritos</string>
     <string name="configuracao">Configuração</string>
     <string name="acessar">Acessar</string>
+    <string name="funcionarios">Funcionários</string>
+    <string name="filas">Filas</string>
 
 
 </resources>
