@@ -6,6 +6,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RestApiService {
+    /*
+    * Registra um novo lojista
+    *
+    * @param  userData Informações do lojista
+    *         onResult Função de callback
+    *
+    * */
     fun registerLojista(userData: LojistaInfo, onResult: (Int?, LojistaInfo?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.registerLojista(userData).enqueue(
@@ -27,6 +34,13 @@ class RestApiService {
             }
         )
     }
+    /*
+    * Registra um novo cliente
+    *
+    * @param  userData Informações do cliente
+    *         onResult Função de callback
+    *
+    * */
     fun registerClient(userData: ClientInfo, onResult : (Int?,ClientInfo?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.registerClient(userData).enqueue(
@@ -48,7 +62,13 @@ class RestApiService {
             }
         )
     }
-
+    /*
+    * Método para verificar se email já existe
+    *
+    * @param  userData Informações do cliente
+    *         onResult Função de callback
+    *
+    * */
     fun verifyEmail(userData: ClientInfo, onResult : (Int?,ClientInfo?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.verifyEmail(userData).enqueue(
@@ -70,6 +90,13 @@ class RestApiService {
             }
         )
     }
+    /*
+    * Realiza o login do lojista
+    *
+    * @param  userData Informações do lojista
+    *         onResult Função de callback
+    *
+    * */
     fun loginLojista(userData: LojistaInfo, onResult: (Int?, LojistaInfo?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.loginLojista(userData).enqueue(
@@ -92,6 +119,13 @@ class RestApiService {
         )
     }
 
+    /*
+    * Realiza o login do cliente
+    *
+    * @param  userData Informações do cliente
+    *         onResult Função de callback
+    *
+    * */
     fun login(userData: ClientInfo, onResult: (Int?, ClientInfo?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.login(userData).enqueue(
@@ -113,7 +147,13 @@ class RestApiService {
                 }
         )
     }
-
+    /*
+    * Pega todas filas correspondente ao usuário
+    *
+    * @param  userData Informações da fila
+    *         onResult Função de callback
+    *
+    * */
     fun getMyFilas(userData: MinhasFilasPost, onResult: (Int?, MinhasFilas?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.getMyFilas(userData).enqueue(
@@ -135,7 +175,13 @@ class RestApiService {
                 }
         )
     }
-
+    /*
+    * Filtra as filas por nome
+    *
+    * @param  userData Informações da fila
+    *         onResult Função de callback
+    *
+    * */
     fun getFilasByName(userData: MinhasFilasResponse, onResult: (Int?, MinhasFilas?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.getFilasByName(userData).enqueue(
