@@ -1,5 +1,6 @@
 package com.tcc.alif.model
 
+import android.util.Log
 import com.tcc.alif.model.api.AlifService
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,6 +24,7 @@ class RestApiService {
                 override fun onResponse(call: Call<LojistaInfo>, response: Response<LojistaInfo>) {
                     val  addedClient = response.body()
                     val status = response.code()
+                    Log.d("STATUS", response.code().toString())
                     if(response.code() != 200){
                         onResult(status,addedClient)
                     }else{
