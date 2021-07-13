@@ -13,6 +13,7 @@ import com.tcc.alif.model.ClientInfo
 import com.tcc.alif.model.LojistaInfo
 import com.tcc.alif.model.RestApiService
 import com.tcc.alif.view.ui.cliente.ClienteActivity
+import com.tcc.alif.view.ui.lojista.LojistaActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -71,11 +72,11 @@ class MainActivity : AppCompatActivity() {
                 }else{
                     viewBinding.progressLoading.visibility = View.INVISIBLE
                     viewBinding.progressLoading.isIndeterminate = false
-//                    val intent = Intent(this, ClienteActivity::class.java)
-//                    val b = Bundle()
-//                    b.putSerializable("email", viewBinding.email.text.toString())
-//                    intent.putExtras(b)
-//                    startActivity(intent)
+                    val intent = Intent(this, LojistaActivity::class.java)
+                    val b = Bundle()
+                    b.putSerializable("email", viewBinding.email.text.toString())
+                    intent.putExtras(b)
+                    startActivity(intent)
                 }
             }
         }
