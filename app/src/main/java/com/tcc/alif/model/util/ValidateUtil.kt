@@ -9,7 +9,7 @@ object ValidateUtil {
      * @return Boolean
      */
     fun validate(campo: TextInputEditText): Boolean {
-        if(campo.text?.length == 0){
+        if(campo.text.isNullOrBlank() || campo.text?.length == 0 || campo.text.isNullOrEmpty()){
             campo.error = "Campo Vazio"
             return false
         }
@@ -21,7 +21,7 @@ object ValidateUtil {
      * @return error field
      */
      fun clear_validate(campo: TextInputEditText){
-        if(campo.text?.length == 0) {
+        if(campo.text.isNullOrBlank() || campo.text?.length == 0 || campo.text.isNullOrEmpty()) {
             return campo.setError(null)
         }
     }
