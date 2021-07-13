@@ -3,7 +3,6 @@ package com.tcc.alif.view.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
@@ -11,6 +10,7 @@ import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityCadastroBinding
 import com.tcc.alif.model.ClientInfo
 import com.tcc.alif.model.ClientSerializable
+import com.tcc.alif.model.LojistaInfo
 import com.tcc.alif.model.RestApiService
 import com.tcc.alif.model.util.*
 
@@ -26,8 +26,8 @@ class CadastroActivity : AppCompatActivity() {
         setupMasks()
         setupListeners()
         clientSerializable = intent.getSerializableExtra("serialzable") as ClientSerializable?
-        var email: String = clientSerializable?.getEmail().toString()
-        var senha: String = clientSerializable?.getSenha().toString()
+        val email: String = clientSerializable?.getEmail().toString()
+        val senha: String = clientSerializable?.getSenha().toString()
         viewBinding.emailHidden.text = email
         viewBinding.senhaHidden.text = senha
 
@@ -55,14 +55,36 @@ class CadastroActivity : AppCompatActivity() {
                 if(!CNPJUtil.myValidateCNPJ(cnpjLojista.text.toString())){
                     cnpjLojista.error = getString(R.string.cnpj_invalid_error)
                 }
+                ValidateUtil.validate(celularJuridico)
                 ValidateUtil.validate(nomeEmpresa)
+                val apiService = RestApiService()
                 if(radioCpf.isChecked){
                     ValidateUtil.validate(cpfLojista)
+                    if(ValidateUtil.validate(celularJuridico) && ValidateUtil.validate(nomeEmpresa) && (ValidateUtil.validate(cpfLojista) || ValidateUtil.validate(cnpjLojista))) {
+                        val lojistaCPF = LojistaInfo(
+                            nome_fantasia = nomeEmpresa.text.toString(),
+                            tipo_doc = "CPF",
+                            doc = cpfLojista.text.toString(),
+                            email = emailHidden.text.toString(),
+                            senha = senhaHidden.text.toString()
+                        )
+                    }
                 }
                 if(radioCnpj.isChecked){
                     ValidateUtil.validate(cnpjLojista)
+                    if(ValidateUtil.validate(celularJuridico) && ValidateUtil.validate(nomeEmpresa) && (ValidateUtil.validate(cpfLojista) || ValidateUtil.validate(cnpjLojista))) {
+                        val lojistaCNPJ = LojistaInfo(
+                            nome_fantasia = nomeEmpresa.text.toString(),
+                            tipo_doc = "CNPJ",
+                            doc = cnpjLojista.text.toString(),
+                            email = emailHidden.text.toString(),
+                            senha = senhaHidden.text.toString()
+                        )
+
+                    }
                 }
-                ValidateUtil.validate(celularJuridico)
+                }
+
             }
             if(radioCliente.isChecked){
                 if(!DateUtil.myValidateDate(dataNascimento.text.toString())){
@@ -76,37 +98,36 @@ class CadastroActivity : AppCompatActivity() {
                 ValidateUtil.validate(cpf)
                 ValidateUtil.validate(celular)
                 ValidateUtil.validate(dataNascimento)
-
-                val apiService = RestApiService()
-                val arr = ClientInfo(
-                    email = emailHidden.text.toString(),
-                    senha = senhaHidden.text.toString(),
-                    nome = nome.text.toString(),
-                    cpf = cpf.text.toString(),
-                    numero_celular = celular.text.toString(),
-                    sobrenome = "",
-                    nascimento = "1999-05-31",
-                    ddd_celular = "",
-                )
-                viewBinding.progressLoading.visibility = View.VISIBLE
-                apiService.registerClient(arr){ status: Int?, clientInfo: ClientInfo? ->
-                    viewBinding.progressLoading.isIndeterminate = true
-                    if (status != 201) {
-                        viewBinding.progressLoading.visibility = View.INVISIBLE
-                        viewBinding.progressLoading.isIndeterminate = false
-                        Snackbar.make(viewBinding.Layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG ).show()
-                    } else {
-                        viewBinding.progressLoading.isIndeterminate = false
-                        val login = Intent(this@CadastroActivity, MainActivity::class.java)
-                        val b = Bundle()
-                        b.putSerializable("success", 0)
-                        login.putExtras(b)
-                        startActivity(login)
+                if(ValidateUtil.validate(nome) && ValidateUtil.validate(cpf) && ValidateUtil.validate(celular) && ValidateUtil.validate(dataNascimento)){
+                    val apiService = RestApiService()
+                    val arr = ClientInfo(
+                        email = emailHidden.text.toString(),
+                        senha = senhaHidden.text.toString(),
+                        nome = nome.text.toString(),
+                        cpf = cpf.text.toString(),
+                        numero_celular = celular.text.toString(),
+                        sobrenome = "",
+                        nascimento = "1999-05-31",
+                        ddd_celular = "",
+                    )
+                    viewBinding.progressLoading.visibility = View.VISIBLE
+                    apiService.registerClient(arr){ status: Int?, clientInfo: ClientInfo? ->
+                        viewBinding.progressLoading.isIndeterminate = true
+                        if (status != 201) {
+                            viewBinding.progressLoading.visibility = View.INVISIBLE
+                            viewBinding.progressLoading.isIndeterminate = false
+                            Snackbar.make(viewBinding.Layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG ).show()
+                        } else {
+                            viewBinding.progressLoading.isIndeterminate = false
+                            val login = Intent(this@CadastroActivity, MainActivity::class.java)
+                            val b = Bundle()
+                            b.putSerializable("success", 0)
+                            login.putExtras(b)
+                            startActivity(login)
+                        }
                     }
                 }
             }
-
-        }
         radioCpf.setOnClickListener{
             if(radioCpf.isChecked){
                 inputCnpjLojista.visibility = View.INVISIBLE
