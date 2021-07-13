@@ -25,15 +25,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.ui.MainActivity" />
         </activity>
-        <activity android:name=".view.ui.ModoActivity">
+        <activity android:name=".view.ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.ui.MainActivity" />
+                android:value=".view.ui.ModoActivity" />
         </activity>
-        <activity android:name=".view.ui.MainActivity">
+        <activity android:name=".view.ui.ModoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

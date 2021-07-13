@@ -6,6 +6,27 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RestApiService {
+    fun registerLojista(userData: LojistaInfo, onResult: (Int?, LojistaInfo?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.registerLojista(userData).enqueue(
+            object : Callback<LojistaInfo> {
+                override fun onFailure(call: Call<LojistaInfo>, t: Throwable) {
+                    onResult(500,null)
+                }
+                override fun onResponse(call: Call<LojistaInfo>, response: Response<LojistaInfo>) {
+                    val  addedClient = response.body()
+                    val status = response.code()
+                    if(response.code() != 200){
+                        onResult(status,addedClient)
+                    }else{
+                        onResult(status,addedClient)
+                    }
+
+                }
+
+            }
+        )
+    }
     fun registerClient(userData: ClientInfo, onResult : (Int?,ClientInfo?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.registerClient(userData).enqueue(
@@ -36,6 +57,27 @@ class RestApiService {
                     onResult(500,null)
                 }
                 override fun onResponse(call: Call<ClientInfo>, response: Response<ClientInfo>) {
+                    val  addedClient = response.body()
+                    val status = response.code()
+                    if(response.code() != 200){
+                        onResult(status,addedClient)
+                    }else{
+                        onResult(status,addedClient)
+                    }
+
+                }
+
+            }
+        )
+    }
+    fun loginLojista(userData: LojistaInfo, onResult: (Int?, LojistaInfo?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.loginLojista(userData).enqueue(
+            object : Callback<LojistaInfo> {
+                override fun onFailure(call: Call<LojistaInfo>, t: Throwable) {
+                    onResult(500,null)
+                }
+                override fun onResponse(call: Call<LojistaInfo>, response: Response<LojistaInfo>) {
                     val  addedClient = response.body()
                     val status = response.code()
                     if(response.code() != 200){
@@ -115,4 +157,6 @@ class RestApiService {
                 }
         )
     }
+
+
 }

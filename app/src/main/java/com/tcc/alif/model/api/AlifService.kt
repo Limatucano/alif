@@ -22,7 +22,22 @@ interface AlifService {
         @Body userData: ClientInfo
     ): Call<ClientInfo>
 
-    //Realizar login
+    //Cadastra lojista
+    @Headers("Content-Type: application/json")
+    @POST("lojista/cadastro")
+    fun registerLojista(
+        @Body userData: LojistaInfo
+    ):Call<LojistaInfo>
+
+    //Realiza login lojista
+    @Headers("Content-Type: application/json")
+    @POST("lojista/login")
+    fun loginLojista(
+        @Body userData: LojistaInfo
+    ):Call<LojistaInfo>
+
+
+    //Realiza login cliente
     @Headers("Content-Type: application/json")
     @POST("cliente/login")
     fun login(
