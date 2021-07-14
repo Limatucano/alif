@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Alif">
-        <activity android:name=".view.ui.lojista.LojistaActivity"></activity>
+        <activity android:name=".FormFilaLojistaActivity"></activity>
+        <activity android:name=".view.ui.lojista.LojistaActivity" />
         <activity android:name=".view.ui.cliente.ClienteActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
