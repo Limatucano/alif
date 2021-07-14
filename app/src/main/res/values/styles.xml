@@ -6,5 +6,14 @@
         <item name="colorPrimaryDark">@color/black</item>
         <item name="colorAccent">@color/white</item>
     </style>
-
+    <style name="SpinnerTimePickerDialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:calendarViewShown">false</item>
+    </style>
 </resources>

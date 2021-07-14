@@ -60,7 +60,10 @@
     <string name="nome_da_fila">Nome da Fila:</string>
     <string name="digite_o_nome_da_fila">Digite o nome da fila</string>
     <string name="n_mero_m_ximo_de_pessoas">Número máximo de pessoas:</string>
-    <string name="minutos_em_m_dia_at_ser_atendido">Minutos em média até ser atendido:</string>
+    <string name="tempo_a_ser_atendido">Tempo médio até ser atendido:</string>
+    <string name="digite_o_tempo_m_dio_a_ser_atendido">Digite o tempo médio a ser atendido</string>
+    <string name="horario_de_abertura_da_fila">Horário de abertura da fila</string>
+    <string name="digite_o_horario_de_abertura_da_fila">Digite o horário de abertura da fila</string>
 
 
 </resources>
