@@ -25,6 +25,7 @@ class FormFilaLojistaActivity : AppCompatActivity(){
         viewBinding.calendarHorarioFechamento.setOnClickListener {
             showTimePickerDialog(viewBinding.horarioFechamento)
         }
+
     }
     private fun showTimePickerDialog(field: TextInputEditText){
         val calendar = Calendar.getInstance()
