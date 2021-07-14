@@ -195,8 +195,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputHorarioAbertura"
-        android:layout_width="315dp"
-        android:layout_height="63dp"
+        android:layout_width="212dp"
+        android:layout_height="64dp"
         android:layout_marginTop="10dp"
         android:enabled="false"
         android:orientation="horizontal"
@@ -225,16 +225,90 @@
 
     <TextView
         android:id="@+id/calendarHorarioAbertura"
-        android:layout_width="60dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/pink"
+        android:background="@drawable/button"
+        android:paddingBottom="0dp"
+        android:textStyle="bold"
+        android:text="@string/selecione_o_horario"
+        android:gravity="center_horizontal|center_vertical"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.607"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/inputHorarioAbertura"
         app:layout_constraintTop_toBottomOf="@+id/txtHorarioAbertura" />
+
+
+    <TextView
+        android:id="@+id/txtHorarioFechamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/horario_de_fechamento_da_fila"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputHorarioAbertura" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputHorarioFechamento"
+        android:layout_width="212dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="10dp"
+        android:enabled="false"
+        android:orientation="horizontal"
+        app:endIconMode="clear_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHorarioFechamento">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/horarioFechamento"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:enabled="false"
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtHorarioFechamento" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/calendarHorarioFechamento"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button"
+        android:paddingBottom="0dp"
+        android:textStyle="bold"
+        android:text="@string/selecione_o_horario"
+        android:gravity="center_horizontal|center_vertical"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/inputHorarioAbertura"
+        app:layout_constraintTop_toBottomOf="@+id/txtHorarioFechamento" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

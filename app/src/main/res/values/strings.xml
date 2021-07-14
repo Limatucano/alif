@@ -64,6 +64,8 @@
     <string name="digite_o_tempo_m_dio_a_ser_atendido">Digite o tempo médio a ser atendido</string>
     <string name="horario_de_abertura_da_fila">Horário de abertura da fila</string>
     <string name="digite_o_horario_de_abertura_da_fila">Digite o horário de abertura da fila</string>
+    <string name="selecione_o_horario">Selecione o horário</string>
+    <string name="horario_de_fechamento_da_fila">Horário de Fechamento da fila</string>
 
 
 </resources>
