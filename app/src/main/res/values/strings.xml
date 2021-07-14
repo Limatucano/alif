@@ -54,6 +54,13 @@
     <string name="Favoritos">Favoritos</string>
     <string name="configuracao">Configuração</string>
     <string name="acessar">Acessar</string>
+    <string name="funcionarios">Funcionários</string>
+    <string name="filas">Filas</string>
+    <string name="nova_fila">Nova Fila</string>
+    <string name="nome_da_fila">Nome da Fila:</string>
+    <string name="digite_o_nome_da_fila">Digite o nome da fila</string>
+    <string name="n_mero_m_ximo_de_pessoas">Número máximo de pessoas:</string>
+    <string name="minutos_em_m_dia_at_ser_atendido">Minutos em média até ser atendido:</string>
 
 
 </resources>
