@@ -10,6 +10,13 @@ interface AlifService {
 
     //Cadastrar usuario
     @Headers("Content-Type: application/json")
+    @POST("fila")
+    fun registerFila(
+            @Body filaData: FilaInfo
+    ): Call<FilaInfo>
+
+    //Cadastrar usuario
+    @Headers("Content-Type: application/json")
     @POST("cliente/cadastro")
     fun registerClient(
         @Body userData: ClientInfo

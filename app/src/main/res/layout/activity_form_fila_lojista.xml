@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FormFilaLojistaActivity">
+    tools:context=".FormFilaLojistaActivity"
+    android:id="@+id/layout">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -321,6 +322,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtHorarioFechamento" />
 
             <TextView
+                android:id="@+id/salvarFila"
                 android:layout_width="108dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="35dp"
