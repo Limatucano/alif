@@ -60,7 +60,6 @@ class CadastroActivity : AppCompatActivity() {
                 ValidateUtil.validate(nomeEmpresa)
                 val apiService = RestApiService()
                 if (radioCpf.isChecked) {
-                    Log.d("TESTE","CPF")
                     ValidateUtil.validate(cpfLojista)
                     if (ValidateUtil.validate(celularJuridico) && ValidateUtil.validate(nomeEmpresa) && (ValidateUtil.validate(cpfLojista) || ValidateUtil.validate(cnpjLojista))) {
                         val lojistaCPF = LojistaInfo(
@@ -89,7 +88,6 @@ class CadastroActivity : AppCompatActivity() {
                     }
                 }
                 if (radioCnpj.isChecked) {
-                    Log.d("TESTE","CNPJ")
                     ValidateUtil.validate(cnpjLojista)
                     if (ValidateUtil.validate(celularJuridico) && ValidateUtil.validate(nomeEmpresa) && (ValidateUtil.validate(cpfLojista) || ValidateUtil.validate(cnpjLojista))) {
                         val lojistaCNPJ = LojistaInfo(

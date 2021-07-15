@@ -7,6 +7,30 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RestApiService {
+
+
+    fun registerFila(filaData: FilaInfo, onResult: (Int?, FilaInfo?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.registerFila(filaData).enqueue(
+                object : Callback<FilaInfo> {
+                    override fun onFailure(call: Call<FilaInfo>, t: Throwable) {
+                        onResult(500,null)
+                    }
+
+                    override fun onResponse(call: Call<FilaInfo>, response: Response<FilaInfo>) {
+                        val addedFila = response.body()
+                        val status = response.code()
+                        Log.d("STATUS", response.code().toString())
+                        if(response.code() != 200){
+                            onResult(status,addedFila)
+                        }else{
+                            onResult(status,addedFila)
+                        }
+                    }
+                }
+        )
+    }
+
     /*
     * Registra um novo lojista
     *
