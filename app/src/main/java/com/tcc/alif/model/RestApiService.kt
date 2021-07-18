@@ -8,7 +8,24 @@ import retrofit2.Response
 
 class RestApiService {
 
+    fun getLojistaData(data: LojistaInfo, onResult: (Int?, LojistaInfo?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.getLojistaData(data).enqueue(
+            object : Callback<LojistaInfo>{
+                override fun onResponse(call: Call<LojistaInfo>, response: Response<LojistaInfo>) {
+                    val data = response.body()
+                    val status = response.code()
+                    Log.d("STATUS", response.code().toString())
+                    onResult(status,data)
+                }
 
+                override fun onFailure(call: Call<LojistaInfo>, t: Throwable) {
+                    onResult(500,null)
+                }
+
+            }
+        )
+    }
     fun registerFila(filaData: FilaInfo, onResult: (Int?, FilaInfo?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.registerFila(filaData).enqueue(
