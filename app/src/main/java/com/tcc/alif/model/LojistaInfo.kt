@@ -3,6 +3,7 @@ package com.tcc.alif.model
 import com.google.gson.annotations.SerializedName
 
 data class LojistaInfo(
+    @SerializedName("id_lojista") val id_lojista: Int? = null,
     @SerializedName("nome_fantasia") val nome_fantasia: String? = "",
     @SerializedName("tipo_doc") val tipo_doc: String? = "",
     @SerializedName("doc") val doc: String? = "",
