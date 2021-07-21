@@ -56,6 +56,11 @@ class PerfilLojistaFragment : Fragment() {
                 "doc" to lojistaData.getString("doc", ""),
                 "nome" to lojistaData.getString("nome", "")
         )
+        viewBinding.editEmail.setText(lojistaSet["email"].toString())
+        viewBinding.editOcupacao.setText(lojistaSet["ocupacao"].toString())
+        viewBinding.editNomeFantasia.setText(lojistaSet["nome_fantasia"].toString())
+        viewBinding.editDoc.setText(lojistaSet["doc"].toString())
+        viewBinding.editNome.setText(lojistaSet["nome"].toString())
 
     }
 
