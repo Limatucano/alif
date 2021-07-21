@@ -1,7 +1,10 @@
 package com.tcc.alif.view.ui.lojista
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,7 +47,8 @@ class FilasLojistaFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        val teste = activity?.getSharedPreferences("LojistaData",Context.MODE_PRIVATE) ?: return
+        val email = teste.getString("email","")
         viewBinding.btnCriarFila.setOnClickListener {
             var intent = Intent(context, FormFilaLojistaActivity::class.java)
             startActivity(intent)
