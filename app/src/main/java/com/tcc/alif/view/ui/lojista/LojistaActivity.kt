@@ -1,24 +1,19 @@
 package com.tcc.alif.view.ui.lojista
 
-import android.content.Intent
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityClienteBinding
-import com.tcc.alif.model.ClientInfo
-import com.tcc.alif.model.LojistaData
 import com.tcc.alif.model.LojistaInfo
 import com.tcc.alif.model.RestApiService
-import com.tcc.alif.view.ui.cliente.ClienteActivity
 
 class LojistaActivity : AppCompatActivity() {
     private val viewBinding : ActivityClienteBinding by viewBinding()
-    var lojistaData: LojistaData? = null
+    //var lojistaData: LojistaData? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lojista)
@@ -31,16 +26,20 @@ class LojistaActivity : AppCompatActivity() {
         val apiService = RestApiService()
         apiService.getLojistaData(data) {status: Int?, response: LojistaInfo? ->
             if (status == 200) {
-                lojistaData = LojistaData(
-                    response?.id_lojista.toString().toInt(),
-                    response?.ocupacao.toString(),
-                    response?.nome_fantasia.toString(),
-                    response?.email.toString(),
-                    response?.doc.toString(),
-                    response?.nome.toString()
-                    )
-                viewBinding.nomeCliente.text = lojistaData?.nome_fantasia.toString()
-                Log.d("TESTE", lojistaData.toString())
+
+                val lojistaData = this.getSharedPreferences("LojistaData", Context.MODE_PRIVATE) ?: return@getLojistaData
+                with(lojistaData.edit()){
+                    putInt("id_lojista",response?.id_lojista.toString().toInt())
+                    putString("ocupacao",response?.ocupacao.toString())
+                    putString("nome_fantasia", response?.nome_fantasia.toString())
+                    putString("email", response?.email.toString())
+                    putString("doc", response?.doc.toString())
+                    putString("nome",response?.nome.toString())
+                    apply()
+                }
+
+                val nomeFantasia = lojistaData.getString("nome_fantasia", "")
+                viewBinding.nomeCliente.text = nomeFantasia
             }
         }
 

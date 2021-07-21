@@ -1,11 +1,18 @@
 package com.tcc.alif.view.ui.lojista
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.tcc.alif.FormFilaLojistaActivity
 import com.tcc.alif.R
+import com.tcc.alif.databinding.FragmentFilasLojistaBinding
+import com.tcc.alif.databinding.FragmentPerfilLojistaBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,6 +26,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class PerfilLojistaFragment : Fragment() {
     // TODO: Rename and change types of parameters
+    private val viewBinding : FragmentPerfilLojistaBinding by viewBinding()
     private var param1: String? = null
     private var param2: String? = null
 
@@ -37,6 +45,25 @@ class PerfilLojistaFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_perfil_lojista, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val lojistaData = activity?.getSharedPreferences("LojistaData", Context.MODE_PRIVATE) ?: return
+        val lojistaSet = mapOf(
+                "email" to lojistaData.getString("email", ""),
+                "id_lojista" to lojistaData.getInt("id_lojista", 0),
+                "ocupacao" to lojistaData.getString("ocupacao", ""),
+                "nome_fantasia" to lojistaData.getString("nome_fantasia", ""),
+                "doc" to lojistaData.getString("doc", ""),
+                "nome" to lojistaData.getString("nome", "")
+        )
+        viewBinding.editEmail.setText(lojistaSet["email"].toString())
+        viewBinding.editOcupacao.setText(lojistaSet["ocupacao"].toString())
+        viewBinding.editNomeFantasia.setText(lojistaSet["nome_fantasia"].toString())
+        viewBinding.editDoc.setText(lojistaSet["doc"].toString())
+        viewBinding.editNome.setText(lojistaSet["nome"].toString())
+
+    }
+
 
     companion object {
         /**
