@@ -8,6 +8,13 @@ import retrofit2.Response
 
 class RestApiService {
 
+    /*
+    * Resgata informações do lojista
+    *
+    * @param  data Informações do lojista
+    *         onResult Função de callback
+    *
+    * */
     fun getLojistaData(data: LojistaInfo, onResult: (Int?, LojistaInfo?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.getLojistaData(data).enqueue(
@@ -26,6 +33,14 @@ class RestApiService {
             }
         )
     }
+
+    /*
+    * Registra uma nova fila
+    *
+    * @param  filaData Informações da fila
+    *         onResult Função de callback
+    *
+    * */
     fun registerFila(filaData: FilaInfo, onResult: (Int?, FilaInfo?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.registerFila(filaData).enqueue(
