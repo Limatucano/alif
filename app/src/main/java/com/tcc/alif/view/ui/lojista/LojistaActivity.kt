@@ -43,16 +43,14 @@ class LojistaActivity : AppCompatActivity() {
         }
 
         val funcionariosLojistaFragment = FuncionariosLojistaFragment()
-        val homeLojistaFragment = HomeLojistaFragment()
         val filasLojistaFragment = FilasLojistaFragment()
         val perfilLojistaFragment = PerfilLojistaFragment()
         val configLojistaFragment = ConfigLojistaFragment()
 
-        setCurrentFragment(homeLojistaFragment)
-        viewBinding.bottomNavigationView.menu.getItem(2).isChecked = true
+        setCurrentFragment(filasLojistaFragment)
+        viewBinding.bottomNavigationView.menu.getItem(1).isChecked = true
         viewBinding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.home_func->setCurrentFragment(homeLojistaFragment)
                 R.id.funcionarios_func->setCurrentFragment(funcionariosLojistaFragment)
                 R.id.filas_func->setCurrentFragment(filasLojistaFragment)
                 R.id.config_func->setCurrentFragment(configLojistaFragment)
