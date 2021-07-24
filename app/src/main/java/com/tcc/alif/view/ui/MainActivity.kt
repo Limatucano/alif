@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewBinding.progressLoading.visibility = View.INVISIBLE
-        var modo = intent.getSerializableExtra("modo")
+        val modo = intent.getSerializableExtra("modo")
         Log.d("MODO", modo.toString())
-        var mensagem = intent.getSerializableExtra("success")
+        val mensagem = intent.getSerializableExtra("success")
         if(mensagem.toString() == "0"){
             //Snackbar.make(viewBinding.Layout, R.string.cadastrado_sucesso, Snackbar.LENGTH_LONG ).show()
             Toast.makeText(this, R.string.cadastrado_sucesso, Toast.LENGTH_LONG).show()

@@ -11,9 +11,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.tcc.alif.FormFilaLojistaActivity
 import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentFilasLojistaBinding
+import com.tcc.alif.databinding.FragmentPerfilLojistaBinding
 import com.tcc.alif.model.LojistaInfo
 import com.tcc.alif.model.MinhasFilas
 import com.tcc.alif.model.RestApiService
@@ -52,10 +52,11 @@ class FilasLojistaFragment : Fragment(R.layout.fragment_filas_lojista), MinhasFi
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val teste = activity?.getSharedPreferences("LojistaData",Context.MODE_PRIVATE) ?: return
-        val email = teste.getString("email","")
+        val preferences = activity?.getSharedPreferences("LojistaData",Context.MODE_PRIVATE) ?: return
+        val email = preferences.getString("email","")
         val service = RestApiService()
-        val data = LojistaInfo(id_lojista = 2)
+        val id_lojista = preferences.getInt("id_lojista", 0)
+        val data = LojistaInfo(id_lojista = id_lojista)
         service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
             if(status != 200){
                 Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
@@ -89,7 +90,11 @@ class FilasLojistaFragment : Fragment(R.layout.fragment_filas_lojista), MinhasFi
     }
 
     override fun onItemClick(items: MinhasFilasData, position: Int) {
-        items.let { Log.d("TESTE", it.nome_da_fila.toString()) }
-        Toast.makeText(context, items.nome_da_fila, Toast.LENGTH_LONG).show()
+    val intent = Intent(context, FormFilaLojistaActivity::class.java)
+        items.apply {
+            val b = Bundle()
+            b.putSerializable("modo", "cliente")
+            Log.d("TESTE", this.nome_da_fila.toString())
+        }
     }
 }

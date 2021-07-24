@@ -37,7 +37,6 @@ class LojistaActivity : AppCompatActivity() {
                     putString("nome",response?.nome.toString())
                     apply()
                 }
-
                 val nomeFantasia = lojistaData.getString("nome_fantasia", "")
                 viewBinding.nomeCliente.text = nomeFantasia
             }
