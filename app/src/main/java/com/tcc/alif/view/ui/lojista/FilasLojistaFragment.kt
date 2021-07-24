@@ -3,17 +3,22 @@ package com.tcc.alif.view.ui.lojista
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.FormFilaLojistaActivity
 import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentFilasLojistaBinding
-import com.tcc.alif.databinding.FragmentPesquisarClienteBinding
+import com.tcc.alif.model.LojistaInfo
+import com.tcc.alif.model.MinhasFilas
+import com.tcc.alif.model.RestApiService
+import com.tcc.alif.model.domain.MinhasFilasData
+import com.tcc.alif.view.adapter.MinhasFilasAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +30,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [FilasLojistaFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FilasLojistaFragment : Fragment() {
+class FilasLojistaFragment : Fragment(R.layout.fragment_filas_lojista), MinhasFilasAdapter.OnClickItemListener {
     private val viewBinding : FragmentFilasLojistaBinding by viewBinding()
     private var param1: String? = null
     private var param2: String? = null
@@ -49,8 +54,26 @@ class FilasLojistaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val teste = activity?.getSharedPreferences("LojistaData",Context.MODE_PRIVATE) ?: return
         val email = teste.getString("email","")
+        val service = RestApiService()
+        val data = LojistaInfo(id_lojista = 2)
+        service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
+            if(status != 200){
+                Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
+            }else{
+                response?.response?.let { filas ->
+                    val fila: List<MinhasFilasData> = filas.map{ fila ->
+                        MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista)
+                    }
+                    val layoutManager = LinearLayoutManager(context)
+                    viewBinding.rvMyFilasLojista.post{
+                        viewBinding.rvMyFilasLojista.layoutManager = layoutManager
+                        viewBinding.rvMyFilasLojista.adapter = MinhasFilasAdapter(fila, this, true)
+                    }
+                }
+            }
+        }
         viewBinding.btnCriarFila.setOnClickListener {
-            var intent = Intent(context, FormFilaLojistaActivity::class.java)
+            val intent = Intent(context, FormFilaLojistaActivity::class.java)
             startActivity(intent)
         }
     }
@@ -63,5 +86,10 @@ class FilasLojistaFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onItemClick(items: MinhasFilasData, position: Int) {
+        items.let { Log.d("TESTE", it.nome_da_fila.toString()) }
+        Toast.makeText(context, items.nome_da_fila, Toast.LENGTH_LONG).show()
     }
 }

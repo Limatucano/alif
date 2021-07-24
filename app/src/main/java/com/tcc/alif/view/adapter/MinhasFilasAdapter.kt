@@ -10,9 +10,14 @@ import com.tcc.alif.model.domain.MinhasFilasData
 
 
 
-class MinhasFilasAdapter(private val items: List<MinhasFilasData>, var clickListener: OnClickItemListener) : RecyclerView.Adapter<MinhasFilasAdapter.ViewHolder>() {
+class MinhasFilasAdapter(private val items: List<MinhasFilasData>, var clickListener: OnClickItemListener, var lojista: Boolean = false) : RecyclerView.Adapter<MinhasFilasAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.minhas_filas_item,parent, false)
+        var view = LayoutInflater.from(parent.context).inflate(R.layout.minhas_filas_item,parent, false)
+
+        if(lojista){
+            view = LayoutInflater.from(parent.context).inflate(R.layout.minhas_filas_lojista,parent, false)
+        }
+
 
         return ViewHolder(view)
     }
@@ -27,9 +32,10 @@ class MinhasFilasAdapter(private val items: List<MinhasFilasData>, var clickList
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val tvFila = itemView.findViewById<TextView>(R.id.nome_da_fila)
+
         fun bindView(item: MinhasFilasData) = with(itemView){
 
-            item?.let{
+            item.let{
                 tvFila.text = item.nome_da_fila
             }
 
