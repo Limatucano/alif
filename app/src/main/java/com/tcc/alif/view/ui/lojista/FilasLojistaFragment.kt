@@ -52,6 +52,37 @@ class FilasLojistaFragment : Fragment(R.layout.fragment_filas_lojista), MinhasFi
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        getMyFilas()
+        viewBinding.btnCriarFila.setOnClickListener {
+            val intent = Intent(context, FormFilaLojistaActivity::class.java)
+            startActivity(intent)
+
+        }
+    }
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            FilasLojistaFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
+
+    override fun onResume() {
+        getMyFilas()
+        super.onResume()
+    }
+    override fun onItemClick(items: MinhasFilasData, position: Int) {
+    val intent = Intent(context, FormFilaLojistaActivity::class.java)
+        items.apply {
+            val b = Bundle()
+            b.putSerializable("modo", "cliente")
+            Log.d("TESTE", this.nome_da_fila.toString())
+        }
+    }
+    private fun getMyFilas(){
         val preferences = activity?.getSharedPreferences("LojistaData",Context.MODE_PRIVATE) ?: return
         val email = preferences.getString("email","")
         val service = RestApiService()
@@ -72,29 +103,6 @@ class FilasLojistaFragment : Fragment(R.layout.fragment_filas_lojista), MinhasFi
                     }
                 }
             }
-        }
-        viewBinding.btnCriarFila.setOnClickListener {
-            val intent = Intent(context, FormFilaLojistaActivity::class.java)
-            startActivity(intent)
-        }
-    }
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FilasLojistaFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-
-    override fun onItemClick(items: MinhasFilasData, position: Int) {
-    val intent = Intent(context, FormFilaLojistaActivity::class.java)
-        items.apply {
-            val b = Bundle()
-            b.putSerializable("modo", "cliente")
-            Log.d("TESTE", this.nome_da_fila.toString())
         }
     }
 }
