@@ -9,6 +9,32 @@ import retrofit2.Response
 class RestApiService {
 
     /*
+    * Pega todas filas correspondente ao lojista
+    *
+    * @param  userData Informações da fila
+    *         onResult Função de callback
+    *
+    * */
+    fun getMyFilasLojista(userData: LojistaInfo, onResult: (Int?, MinhasFilas?)-> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.getMyFilasLojista(userData).enqueue(
+                object : Callback<MinhasFilas> {
+                    override fun onFailure(call: Call<MinhasFilas>, t: Throwable) {
+                        onResult(500,null)
+                    }
+                    override fun onResponse(call: Call<MinhasFilas>, response: Response<MinhasFilas>) {
+                        val  addedClient = response.body()
+                        val status = response.code()
+                        if(response.code() != 200){
+                            onResult(status,addedClient)
+                        }else{
+                            onResult(status,addedClient)
+                        }
+                    }
+                }
+        )
+    }
+    /*
     * Resgata informações do lojista
     *
     * @param  data Informações do lojista
