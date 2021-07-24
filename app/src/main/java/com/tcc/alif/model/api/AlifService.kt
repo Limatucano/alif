@@ -8,6 +8,13 @@ import retrofit2.http.POST
 
 interface AlifService {
 
+    //Pegar filas do lojista
+    @Headers("Content-Type: application/json")
+    @POST("lojista/minhasfilas")
+    fun getMyFilasLojista(
+            @Body lojistaData: LojistaInfo
+    ): Call<MinhasFilas>
+
     //Cadastrar usuario
     @Headers("Content-Type: application/json")
     @POST("lojista/data")

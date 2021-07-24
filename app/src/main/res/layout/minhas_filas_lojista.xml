@@ -27,7 +27,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/nomeFilaLojista"
+                android:id="@+id/nome_da_fila"
                 android:layout_width="341dp"
                 android:layout_height="24dp"
                 android:textColor="@color/black"

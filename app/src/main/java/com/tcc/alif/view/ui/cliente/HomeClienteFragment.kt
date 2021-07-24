@@ -62,7 +62,7 @@ class HomeClienteFragment : Fragment(R.layout.fragment_first_cliente), MinhasFil
             } else {
                 minhasFilas?.response?.let {
                     val fila : List<MinhasFilasData> = it.map{ fila ->
-                        MinhasFilasData(fila.nome_da_fila, fila.id_fila, fila.quantidade_vagas, fila.horario_abertura, fila.horario_fechamento, fila.intervalo, fila.id_lojista)
+                        MinhasFilasData(fila.nome_da_fila, fila.id_fila, fila.quantidade_vagas, fila.horario_abertura, fila.horario_fechamento, fila.tempo_medio, fila.id_lojista)
                     }
 
                     val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
