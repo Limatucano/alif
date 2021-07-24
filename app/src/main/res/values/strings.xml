@@ -69,6 +69,7 @@
     <string name="documento">Documento</string>
     <string name="nome_fantasia">Nome Fantasia</string>
     <string name="ocupacao">Ocupação</string>
+    <string name="btn_criar_fila">Criar Nova Fila</string>
 
 
 </resources>

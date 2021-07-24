@@ -2,6 +2,7 @@ package com.tcc.alif.view.ui.lojista
 
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -89,9 +90,11 @@ class FilasLojistaFragment : Fragment(R.layout.fragment_filas_lojista), MinhasFi
         val id_lojista = preferences.getInt("id_lojista", 0)
         val data = LojistaInfo(id_lojista = id_lojista)
         service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
+
             if(status != 200){
                 Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
             }else{
+                viewBinding.progressLoading.visibility = View.GONE
                 response?.response?.let { filas ->
                     val fila: List<MinhasFilasData> = filas.map{ fila ->
                         MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista)

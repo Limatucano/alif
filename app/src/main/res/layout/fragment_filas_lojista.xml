@@ -19,13 +19,22 @@
         android:background="@drawable/btn_lojista"
         android:focusable="true"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Criar Nova Fila"
+        android:text="@string/btn_criar_fila"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_loading"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scMyFilasLojista" />
 
     <ScrollView
         android:id="@+id/scMyFilasLojista"
