@@ -345,6 +345,23 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/calendarHorarioFechamento" />
+
+            <TextView
+                android:id="@+id/excluirFila"
+                android:layout_width="108dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/btn_lojista_excluir"
+                android:gravity="center_horizontal|center_vertical"
+                android:visibility="gone"
+                android:text="@string/excluir"
+                android:textColor="@color/pink"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/salvarFila"
+                app:layout_constraintEnd_toStartOf="@+id/salvarFila"
+                app:layout_constraintTop_toTopOf="@+id/salvarFila" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
