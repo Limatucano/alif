@@ -2,6 +2,7 @@ package com.tcc.alif.view.ui.lojista
 
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,9 +12,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.tcc.alif.FormFilaLojistaActivity
 import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentFilasLojistaBinding
+import com.tcc.alif.databinding.FragmentPerfilLojistaBinding
 import com.tcc.alif.model.LojistaInfo
 import com.tcc.alif.model.MinhasFilas
 import com.tcc.alif.model.RestApiService
@@ -52,29 +53,11 @@ class FilasLojistaFragment : Fragment(R.layout.fragment_filas_lojista), MinhasFi
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val teste = activity?.getSharedPreferences("LojistaData",Context.MODE_PRIVATE) ?: return
-        val email = teste.getString("email","")
-        val service = RestApiService()
-        val data = LojistaInfo(id_lojista = 2)
-        service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
-            if(status != 200){
-                Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
-            }else{
-                response?.response?.let { filas ->
-                    val fila: List<MinhasFilasData> = filas.map{ fila ->
-                        MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista)
-                    }
-                    val layoutManager = LinearLayoutManager(context)
-                    viewBinding.rvMyFilasLojista.post{
-                        viewBinding.rvMyFilasLojista.layoutManager = layoutManager
-                        viewBinding.rvMyFilasLojista.adapter = MinhasFilasAdapter(fila, this, true)
-                    }
-                }
-            }
-        }
+        getMyFilas()
         viewBinding.btnCriarFila.setOnClickListener {
             val intent = Intent(context, FormFilaLojistaActivity::class.java)
             startActivity(intent)
+
         }
     }
     companion object {
@@ -88,8 +71,51 @@ class FilasLojistaFragment : Fragment(R.layout.fragment_filas_lojista), MinhasFi
             }
     }
 
+    override fun onResume() {
+        getMyFilas()
+        super.onResume()
+    }
     override fun onItemClick(items: MinhasFilasData, position: Int) {
-        items.let { Log.d("TESTE", it.nome_da_fila.toString()) }
-        Toast.makeText(context, items.nome_da_fila, Toast.LENGTH_LONG).show()
+    val intent = Intent(context, FormFilaLojistaActivity::class.java)
+        items.apply {
+            val fila : HashMap<String, Any?> = hashMapOf(
+                "id_lojista" to this.id_lojista,
+                "id_fila" to this.id_fila,
+                "quantidade_vagas" to this.quantidade_vagas,
+                "nome_da_fila" to this.nome_da_fila,
+                "horario_abertura" to this.horario_abertura,
+                "horario_fechamento" to this.horario_fechamento,
+                "tempo_medio" to this.tempo_medio
+            )
+            val b = Bundle()
+            b.putSerializable("fila", fila)
+            intent.putExtras(b)
+            startActivity(intent)
+        }
+    }
+    private fun getMyFilas(){
+        val preferences = activity?.getSharedPreferences("LojistaData",Context.MODE_PRIVATE) ?: return
+        val email = preferences.getString("email","")
+        val service = RestApiService()
+        val id_lojista = preferences.getInt("id_lojista", 0)
+        val data = LojistaInfo(id_lojista = id_lojista)
+        service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
+
+            if(status != 200){
+                Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
+            }else{
+                viewBinding.progressLoading.visibility = View.GONE
+                response?.response?.let { filas ->
+                    val fila: List<MinhasFilasData> = filas.map{ fila ->
+                        MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista)
+                    }
+                    val layoutManager = LinearLayoutManager(context)
+                    viewBinding.rvMyFilasLojista.post{
+                        viewBinding.rvMyFilasLojista.layoutManager = layoutManager
+                        viewBinding.rvMyFilasLojista.adapter = MinhasFilasAdapter(fila, this, true)
+                    }
+                }
+            }
+        }
     }
 }

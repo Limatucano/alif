@@ -4,5 +4,4 @@
     android:tint="@color/pink">
         <corners
             android:radius="10dp"/>
-
 </shape>
