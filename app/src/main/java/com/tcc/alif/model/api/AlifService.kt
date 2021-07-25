@@ -2,13 +2,16 @@ package com.tcc.alif.model.api
 
 import com.tcc.alif.model.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
-import retrofit2.http.DELETE
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface AlifService {
+
+    //Atualizando fila
+    @Headers("Content-Type: application/json")
+    @PATCH("fila")
+    fun updateFila(
+            @Body filaData : FilaInfo
+    ): Call<MessageRequest>
 
     //Deletar fila
     @Headers("Content-Type: application/json")

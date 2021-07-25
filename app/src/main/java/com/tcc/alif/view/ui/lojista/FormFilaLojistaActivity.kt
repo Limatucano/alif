@@ -65,19 +65,36 @@ class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
         }
         viewBinding.salvarFila.setOnClickListener {
             val preferences = this.getSharedPreferences("LojistaData", Context.MODE_PRIVATE)
-            val dataFila = FilaInfo(
-                    nome_da_fila = viewBinding.nomeFila.text.toString(),
-                    quantidade_vagas = viewBinding.QuantidadeFila.text.toString().toInt(),
-                    horario_abertura = viewBinding.horarioAbertura.text.toString(),
-                    horario_fechamento = viewBinding.horarioFechamento.text.toString(),
-                    id_lojista = preferences.getInt("id_lojista", 0).toString(),
-                    tempo_medio = viewBinding.minutosMedia.text.toString(),
-            )
-            apiService.registerFila(dataFila) { status: Int?, filaData: FilaInfo? ->
-                if (status != 201) {
-                    Snackbar.make(viewBinding.layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG).show()
-                } else {
+            if(!fila.isNullOrEmpty()){
+                val dataUpdate = FilaInfo(
+                        nome_da_fila = viewBinding.nomeFila.text.toString(),
+                        quantidade_vagas = viewBinding.QuantidadeFila.text.toString().toInt(),
+                        horario_abertura = viewBinding.horarioAbertura.text.toString(),
+                        horario_fechamento = viewBinding.horarioFechamento.text.toString(),
+                        id_lojista = preferences.getInt("id_lojista", 0).toString(),
+                        tempo_medio = viewBinding.minutosMedia.text.toString(),
+                        id_fila = viewBinding.idFila.text.toString().toInt()
+                )
+                apiService.updateFila(dataUpdate){ status: Int?, response: MessageRequest? ->
                     finish()
+                }
+
+            }
+            if(fila.isNullOrEmpty()){
+                val dataFila = FilaInfo(
+                        nome_da_fila = viewBinding.nomeFila.text.toString(),
+                        quantidade_vagas = viewBinding.QuantidadeFila.text.toString().toInt(),
+                        horario_abertura = viewBinding.horarioAbertura.text.toString(),
+                        horario_fechamento = viewBinding.horarioFechamento.text.toString(),
+                        id_lojista = preferences.getInt("id_lojista", 0).toString(),
+                        tempo_medio = viewBinding.minutosMedia.text.toString(),
+                )
+                apiService.registerFila(dataFila) { status: Int?, filaData: FilaInfo? ->
+                    if (status != 201) {
+                        Snackbar.make(viewBinding.layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG).show()
+                    } else {
+                        finish()
+                    }
                 }
             }
         }
