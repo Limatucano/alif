@@ -2,6 +2,10 @@ package com.tcc.alif.model
 
 import com.google.gson.annotations.SerializedName
 
+data class MessageRequest(
+        @SerializedName("message")  val message : String? = ""
+)
+
 data class MinhasFilasPost(
         @SerializedName("email") val email: String? = ""
 )

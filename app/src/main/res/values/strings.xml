@@ -71,6 +71,7 @@
     <string name="ocupacao">Ocupação</string>
     <string name="btn_criar_fila">Criar Nova Fila</string>
     <string name="excluir">Excluir</string>
+    <string name="excluido_sucesso">Excluido com Sucesso</string>
 
 
 </resources>
