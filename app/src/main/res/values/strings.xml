@@ -56,7 +56,7 @@
     <string name="acessar">Acessar</string>
     <string name="funcionarios">Funcionários</string>
     <string name="filas">Filas</string>
-    <string name="nova_fila">Nova Fila</string>
+    <string name="fila">Fila</string>
     <string name="nome_da_fila">Nome da Fila:</string>
     <string name="digite_o_nome_da_fila">Digite o nome da fila</string>
     <string name="n_mero_m_ximo_de_pessoas">Número máximo de pessoas:</string>

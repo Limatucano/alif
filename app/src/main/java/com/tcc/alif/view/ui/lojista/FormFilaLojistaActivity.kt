@@ -51,10 +51,13 @@ class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
         viewBinding.calendarHorarioFechamento.setOnClickListener {
             showTimePickerDialog(viewBinding.horarioFechamento)
         }
+        viewBinding.btnVoltar.setOnClickListener {
+            finish()
+        }
         viewBinding.salvarFila.setOnClickListener {
             val apiService = RestApiService()
             val preferences = this.getSharedPreferences("LojistaData", Context.MODE_PRIVATE)
-            val fila = FilaInfo(
+            val dataFila = FilaInfo(
                     nome_da_fila = viewBinding.nomeFila.text.toString(),
                     quantidade_vagas = viewBinding.QuantidadeFila.text.toString().toInt(),
                     horario_abertura = viewBinding.horarioAbertura.text.toString(),
@@ -62,7 +65,7 @@ class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
                     id_lojista = preferences.getInt("id_lojista", 0).toString(),
                     tempo_medio = viewBinding.minutosMedia.text.toString(),
             )
-            apiService.registerFila(fila) { status: Int?, filaData: FilaInfo? ->
+            apiService.registerFila(dataFila) { status: Int?, filaData: FilaInfo? ->
                 if (status != 201) {
                     Snackbar.make(viewBinding.layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG).show()
                 } else {
