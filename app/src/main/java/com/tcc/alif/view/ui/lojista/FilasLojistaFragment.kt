@@ -78,9 +78,19 @@ class FilasLojistaFragment : Fragment(R.layout.fragment_filas_lojista), MinhasFi
     override fun onItemClick(items: MinhasFilasData, position: Int) {
     val intent = Intent(context, FormFilaLojistaActivity::class.java)
         items.apply {
+            val fila : HashMap<String, Any?> = hashMapOf(
+                "id_lojista" to this.id_lojista,
+                "id_fila" to this.id_fila,
+                "quantidade_vagas" to this.quantidade_vagas,
+                "nome_da_fila" to this.nome_da_fila,
+                "horario_abertura" to this.horario_abertura,
+                "horario_fechamento" to this.horario_fechamento,
+                "tempo_medio" to this.tempo_medio
+            )
             val b = Bundle()
-            b.putSerializable("modo", "cliente")
-            Log.d("TESTE", this.nome_da_fila.toString())
+            b.putSerializable("fila", fila)
+            intent.putExtras(b)
+            startActivity(intent)
         }
     }
     private fun getMyFilas(){

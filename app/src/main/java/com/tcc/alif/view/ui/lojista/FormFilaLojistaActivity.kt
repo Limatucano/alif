@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
@@ -15,14 +16,28 @@ import com.tcc.alif.databinding.ActivityFormFilaLojistaBinding
 import com.tcc.alif.model.FilaInfo
 import com.tcc.alif.model.RestApiService
 import com.tcc.alif.model.util.TimerPickerHelper
+import java.io.Serializable
 import java.util.*
+import kotlin.collections.HashMap
 
-class FormFilaLojistaActivity : AppCompatActivity(){
+class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
     private val viewBinding : ActivityFormFilaLojistaBinding by viewBinding()
     lateinit var timePicker : TimerPickerHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_fila_lojista)
+
+        val fila = intent.getSerializableExtra("fila") as HashMap<*, *>
+        if(!fila.isNullOrEmpty()){
+            viewBinding.nomeFila.setText(fila["nome_da_fila"].toString())
+            viewBinding.QuantidadeFila.setText(fila["quantidade_vagas"].toString())
+            viewBinding.minutosMedia.setText(fila["tempo_medio"].toString())
+            viewBinding.horarioAbertura.setText(fila["horario_abertura"].toString())
+            viewBinding.horarioFechamento.setText(fila["horario_fechamento"].toString())
+            viewBinding.idLojista.text = fila["id_fila"].toString()
+        }
+
+        Log.d("TESTE", viewBinding.idLojista.text.toString())
         timePicker = TimerPickerHelper(this, true, true)
         viewBinding.horarioAbertura.inputType = InputType.TYPE_NULL
         viewBinding.calendarHorarioAbertura.setOnClickListener {
