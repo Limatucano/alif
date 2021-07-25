@@ -8,6 +8,28 @@ import retrofit2.Response
 
 class RestApiService {
 
+    fun updateFila(filaData:FilaInfo, onResult: (Int?, MessageRequest?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.updateFila(filaData).enqueue(
+                object : Callback<MessageRequest>{
+                    override fun onFailure(call: Call<MessageRequest>, t: Throwable) {
+                        onResult(500,null)
+                    }
+
+                    override fun onResponse(call: Call<MessageRequest>, response: Response<MessageRequest>) {
+                        onResult(response.code(), response.body())
+                    }
+                }
+        )
+    }
+
+    /*
+    * Deletar fila com base no seu id
+    *
+    * @param  id_fila id da fila
+    *         onResult Função de callback
+    *
+    * */
     fun deleteFila(id_fila: String, onResult: (Int?, MessageRequest?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.deleteFila(id_fila).enqueue(

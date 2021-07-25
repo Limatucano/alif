@@ -9,4 +9,5 @@ data class FilaInfo(
     @SerializedName("horario_fechamento") val horario_fechamento: String? = "",
     @SerializedName("tempo_medio") val tempo_medio: String? = "",
     @SerializedName("id_lojista") val id_lojista: String? = "",
+    @SerializedName("id_fila") val id_fila: Int? = null,
 )
