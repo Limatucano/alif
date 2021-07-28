@@ -6,6 +6,12 @@ import retrofit2.http.*
 
 interface AlifService {
 
+    @Headers("Content-type: application/json")
+    @POST("funcionario")
+    fun insertNewFuncionario(
+        @Body funcionario: FuncionarioInfo
+    ):Call<MessageRequest>
+
     //Atualizando fila
     @Headers("Content-Type: application/json")
     @PATCH("fila")

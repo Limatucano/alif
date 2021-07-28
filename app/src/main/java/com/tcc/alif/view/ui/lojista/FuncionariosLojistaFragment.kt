@@ -41,7 +41,7 @@ class FuncionariosLojistaFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewBinding.btnCadastrarFuncionario.setOnClickListener {
-            val intent = Intent(context, FormFilaLojistaActivity::class.java)
+            val intent = Intent(context, FormFuncionarioLojistaActivity::class.java)
             startActivity(intent)
 
         }

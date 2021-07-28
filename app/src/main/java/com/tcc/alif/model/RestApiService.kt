@@ -8,6 +8,30 @@ import retrofit2.Response
 
 class RestApiService {
 
+
+    fun insertNewFuncionario(funcionario:FuncionarioInfo, onResult: (Int?, MessageRequest?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.insertNewFuncionario(funcionario).enqueue(
+            object : Callback<MessageRequest>{
+                override fun onResponse(call: Call<MessageRequest>, response: Response<MessageRequest>) {
+                    onResult(response.code(), response.body())
+                }
+
+                override fun onFailure(call: Call<MessageRequest>, t: Throwable) {
+                    onResult(500,null)
+                }
+
+            }
+        )
+    }
+
+    /*
+    * Atualiza fila com base no seu id
+    *
+    * @param  filaData todos campos são enviados
+    *         onResult Função de callback
+    *
+    * */
     fun updateFila(filaData:FilaInfo, onResult: (Int?, MessageRequest?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.updateFila(filaData).enqueue(
