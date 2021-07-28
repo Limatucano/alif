@@ -9,5 +9,4 @@ class MinhasFilasData(
         val tempo_medio:String?,
         val id_lojista:String?
 
-
 )

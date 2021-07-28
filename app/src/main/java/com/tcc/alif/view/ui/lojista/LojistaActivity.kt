@@ -41,20 +41,21 @@ class LojistaActivity : AppCompatActivity() {
                 viewBinding.nomeCliente.text = nomeFantasia
             }
         }
-
+        val homeLojistaFragment = HomeLojistaFragment()
         val funcionariosLojistaFragment = FuncionariosLojistaFragment()
         val filasLojistaFragment = FilasLojistaFragment()
         val perfilLojistaFragment = PerfilLojistaFragment()
         val configLojistaFragment = ConfigLojistaFragment()
 
-        setCurrentFragment(filasLojistaFragment)
-        viewBinding.bottomNavigationView.menu.getItem(1).isChecked = true
+        setCurrentFragment(homeLojistaFragment)
+        viewBinding.bottomNavigationView.menu.getItem(2).isChecked = true
         viewBinding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.funcionarios_func->setCurrentFragment(funcionariosLojistaFragment)
                 R.id.filas_func->setCurrentFragment(filasLojistaFragment)
                 R.id.config_func->setCurrentFragment(configLojistaFragment)
                 R.id.perfil_func->setCurrentFragment(perfilLojistaFragment)
+                R.id.home_func->setCurrentFragment(homeLojistaFragment)
             }
             true
         }
