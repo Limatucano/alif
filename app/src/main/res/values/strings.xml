@@ -72,6 +72,12 @@
     <string name="btn_criar_fila">Criar Nova Fila</string>
     <string name="excluir">Excluir</string>
     <string name="excluido_sucesso">Excluido com Sucesso</string>
+    <string name="btn_criar_funcionario">Cadastrar Funcionário</string>
+    <string name="funcionario">Funcionário</string>
+    <string name="nome_completo">Nome Completo</string>
+    <string name="digite_o_nome_completo">Digite o nome completo</string>
+    <string name="cargo">Cargo</string>
+    <string name="digite_o_cargo_do_funcionario">Digite o cargo do funcionário</string>
 
 
 </resources>
