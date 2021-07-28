@@ -7,6 +7,12 @@ import retrofit2.http.*
 interface AlifService {
 
     @Headers("Content-type: application/json")
+    @GET("lojista/{id_lojista}")
+    fun getMyFuncionarios(
+        @Path("id_lojista") id_lojista : String
+    ): Call<MeusFuncionarios>
+
+    @Headers("Content-type: application/json")
     @POST("funcionario")
     fun insertNewFuncionario(
         @Body funcionario: FuncionarioInfo
