@@ -7,6 +7,12 @@ import retrofit2.http.*
 interface AlifService {
 
     @Headers("Content-type: application/json")
+    @DELETE("funcionario/{cod_funcionario}")
+    fun deleteFuncionario(
+            @Path("cod_funcionario") cod_funcionario: String
+    ): Call<MessageRequest>
+
+    @Headers("Content-type: application/json")
     @GET("lojista/{id_lojista}")
     fun getMyFuncionarios(
         @Path("id_lojista") id_lojista : String

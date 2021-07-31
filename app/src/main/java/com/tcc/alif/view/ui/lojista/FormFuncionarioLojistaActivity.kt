@@ -36,6 +36,11 @@ class FormFuncionarioLojistaActivity : AppCompatActivity() {
             finish()
         }
 
+        viewBinding.excluirFuncionario.setOnClickListener {
+            apiService.deleteFuncionario(viewBinding.codFuncionario.text.toString()){ status: Int?, response: MessageRequest? ->
+                finish()
+            }
+        }
         viewBinding.salvarFuncionario.setOnClickListener {
             val preferences = this.getSharedPreferences("LojistaData", Context.MODE_PRIVATE)
             val funcionarioData = FuncionarioInfo(
