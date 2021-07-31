@@ -8,6 +8,59 @@ import retrofit2.Response
 
 class RestApiService {
 
+    /*
+    * atualiza funcionario
+    *
+    * @param  funcionario todos dados do funcionario
+    *         onResult Função de callback
+    *
+    * */
+    fun updateFuncionario(funcionario:FuncionarioInfo, onResult: (Int?, MessageRequest?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.updateFuncionario(funcionario).enqueue(
+                object : Callback<MessageRequest>{
+                    override fun onResponse(call: Call<MessageRequest>, response: Response<MessageRequest>) {
+                        onResult(response.code(), response.body())
+                    }
+
+                    override fun onFailure(call: Call<MessageRequest>, t: Throwable) {
+                        onResult(500,null)
+                    }
+
+                }
+        )
+    }
+
+    /*
+    * deleta funcionario
+    *
+    * @param  cod_funcionario código do funcionario, semelhante ao id
+    *         onResult Função de callback
+    *
+    * */
+    fun deleteFuncionario(cod_funcionario: String, onResult: (Int?, MessageRequest?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.deleteFuncionario(cod_funcionario).enqueue(
+                object : Callback<MessageRequest>{
+                    override fun onResponse(call: Call<MessageRequest>, response: Response<MessageRequest>) {
+                        onResult(response.code(), response.body())
+                    }
+
+                    override fun onFailure(call: Call<MessageRequest>, t: Throwable) {
+                        onResult(500, null)
+                    }
+                }
+        )
+    }
+
+
+    /*
+    * Pega funcionarios referente ao lojista
+    *
+    * @param  id_lojista id do lojista
+    *         onResult Função de callback
+    *
+    * */
     fun getMyFuncionarios(id_lojista: String, onResult: (Int?, MeusFuncionarios?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.getMyFuncionarios(id_lojista).enqueue(
