@@ -96,7 +96,7 @@ class FuncionariosLojistaFragment : Fragment(), MeusFuncionariosAdapter.OnClickI
                 viewBinding.progressLoading.visibility = View.GONE
                 response?.response?.let { funcionarios ->
                     val funcionario: List<MeusFuncionariosData> = funcionarios.map{ funcionario ->
-                        MeusFuncionariosData(funcionario.nome_funcionario,funcionario.cargo, funcionario.id_lojista, funcionario.cpf)
+                        MeusFuncionariosData(funcionario.cod_funcionario,funcionario.nome_funcionario,funcionario.cargo, funcionario.id_lojista, funcionario.cpf)
                     }
                     val layoutManager = LinearLayoutManager(context)
                     viewBinding.rvMyFuncionariosLojista.post{
@@ -109,6 +109,19 @@ class FuncionariosLojistaFragment : Fragment(), MeusFuncionariosAdapter.OnClickI
     }
 
     override fun onItemClick(items: MeusFuncionariosData, position: Int) {
-        TODO("Not yet implemented")
+        val intent = Intent(context, FormFuncionarioLojistaActivity::class.java)
+        items.apply {
+            val funcionario: HashMap<String, Any?> = hashMapOf(
+                    "nome_funcionario" to this.nome_funcionario,
+                    "cod_funcionario" to this.cod_funcionario,
+                    "cargo" to this.cargo,
+                    "id_lojista" to this.id_lojista,
+                    "cpf" to this.cpf
+            )
+            val b = Bundle()
+            b.putSerializable("funcionario", funcionario)
+            intent.putExtras(b)
+            startActivity(intent)
+        }
     }
 }

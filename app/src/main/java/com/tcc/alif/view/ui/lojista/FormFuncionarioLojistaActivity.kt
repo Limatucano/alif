@@ -3,6 +3,7 @@ package com.tcc.alif.view.ui.lojista
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityFormFilaLojistaBinding
@@ -17,6 +18,10 @@ class FormFuncionarioLojistaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val apiService = RestApiService()
         setContentView(R.layout.activity_form_funcionario_lojista)
+
+        val funcionario = intent?.getSerializableExtra("funcionario") as HashMap<*, *>?
+
+
 
         viewBinding.btnVoltar.setOnClickListener {
             finish()
