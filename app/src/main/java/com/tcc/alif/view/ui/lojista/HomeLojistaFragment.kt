@@ -1,11 +1,25 @@
 package com.tcc.alif.view.ui.lojista
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
+import com.tcc.alif.databinding.FragmentFuncionariosBinding
+import com.tcc.alif.databinding.FragmentHomeLojistaBinding
+import com.tcc.alif.model.LojistaInfo
+import com.tcc.alif.model.MinhasFilas
+import com.tcc.alif.model.RestApiService
+import com.tcc.alif.model.domain.MinhasFilasData
+import com.tcc.alif.view.adapter.MinhasFilasAdapter
+import com.tcc.alif.view.adapter.MinhasFilasHomeAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,8 +31,9 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeLojistaFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeLojistaFragment : Fragment() {
+class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListener {
     // TODO: Rename and change types of parameters
+    private val viewBinding : FragmentHomeLojistaBinding by viewBinding()
     private var param1: String? = null
     private var param2: String? = null
 
@@ -38,6 +53,33 @@ class HomeLojistaFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home_lojista, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val preferences = activity?.getSharedPreferences("LojistaData", Context.MODE_PRIVATE) ?: return
+        val service = RestApiService()
+        val id_lojista = preferences.getInt("id_lojista", 0)
+
+        val data = LojistaInfo(id_lojista = id_lojista)
+
+        service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
+            if(status != 200){
+                Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
+            }else{
+                response?.response?.let { filas ->
+                    val fila: List<MinhasFilasData> = filas.map{ fila ->
+                        MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista)
+                    }
+                    val layoutManager = LinearLayoutManager(context)
+                    viewBinding.rvFilasHome.post{
+                        viewBinding.rvFilasHome.layoutManager = layoutManager
+                        viewBinding.rvFilasHome.adapter = MinhasFilasHomeAdapter(fila, this)
+                    }
+                }
+            }
+        }
+    }
+
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -56,5 +98,8 @@ class HomeLojistaFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onItemClick(items: MinhasFilasData, position: Int) {
     }
 }
