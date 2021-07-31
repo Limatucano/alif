@@ -5,6 +5,7 @@ import android.os.Build
 import android.transition.AutoTransition
 import android.transition.Transition
 import android.transition.TransitionManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class MinhasFilasHomeAdapter(private val items: List<MinhasFilasData>,var clickL
         private val arrow_button: ImageButton = itemView.findViewById(R.id.arrow_button)
         private val hidden_view: LinearLayout = itemView.findViewById(R.id.hidden_view)
         private val base_cardView = itemView.findViewById<CardView>(R.id.base_cardView)
+        private val btnVerMais = itemView.findViewById<TextView>(R.id.btnVerMais)
         fun bindView(item: MinhasFilasData) = with(itemView){
 
             item.let{
@@ -51,22 +53,19 @@ class MinhasFilasHomeAdapter(private val items: List<MinhasFilasData>,var clickL
         fun initialize(item: MinhasFilasData, action: OnClickItemListener){
             tvFila.text = item.nome_da_fila
 
+            btnVerMais.setOnClickListener {
+                Log.d("TESTE", "AAAAAAAAA")
+            }
             arrow_button.setOnClickListener {
                 if(hidden_view.visibility == View.VISIBLE){
-                    TransitionManager.beginDelayedTransition(base_cardView, AutoTransition())
                     hidden_view.visibility = View.GONE
                     arrow_button.setBackgroundResource(R.drawable.expand_more)
                 }else{
-                    TransitionManager.beginDelayedTransition(base_cardView, AutoTransition())
                     hidden_view.visibility = View.VISIBLE
                     arrow_button.setBackgroundResource(R.drawable.expand_less)
                 }
                 action.onItemClick(item, adapterPosition)
             }
-
-//            itemView.setOnClickListener {
-//                action.onItemClick(item, adapterPosition)
-//            }
         }
     }
 
