@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityFormFilaLojistaBinding
@@ -21,7 +22,15 @@ class FormFuncionarioLojistaActivity : AppCompatActivity() {
 
         val funcionario = intent?.getSerializableExtra("funcionario") as HashMap<*, *>?
 
-
+        if(!funcionario.isNullOrEmpty()){
+            viewBinding.codFuncionario.setText(funcionario["cod_funcionario"].toString())
+            viewBinding.nomeFuncionario.setText(funcionario["nome_funcionario"].toString())
+            viewBinding.cargo.setText(funcionario["cargo"].toString())
+            viewBinding.cpf.setText(funcionario["cpf"].toString())
+            viewBinding.excluirFuncionario.visibility = View.VISIBLE
+        }else{
+            viewBinding.excluirFuncionario.visibility = View.GONE
+        }
 
         viewBinding.btnVoltar.setOnClickListener {
             finish()
