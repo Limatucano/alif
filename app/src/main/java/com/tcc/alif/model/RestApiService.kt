@@ -9,7 +9,30 @@ import retrofit2.Response
 class RestApiService {
 
     /*
-    * deleta funcionarios referente
+    * atualiza funcionario
+    *
+    * @param  funcionario todos dados do funcionario
+    *         onResult Função de callback
+    *
+    * */
+    fun updateFuncionario(funcionario:FuncionarioInfo, onResult: (Int?, MessageRequest?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.updateFuncionario(funcionario).enqueue(
+                object : Callback<MessageRequest>{
+                    override fun onResponse(call: Call<MessageRequest>, response: Response<MessageRequest>) {
+                        onResult(response.code(), response.body())
+                    }
+
+                    override fun onFailure(call: Call<MessageRequest>, t: Throwable) {
+                        onResult(500,null)
+                    }
+
+                }
+        )
+    }
+
+    /*
+    * deleta funcionario
     *
     * @param  cod_funcionario código do funcionario, semelhante ao id
     *         onResult Função de callback
