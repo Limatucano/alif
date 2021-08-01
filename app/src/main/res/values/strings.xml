@@ -78,6 +78,7 @@
     <string name="digite_o_nome_completo">Digite o nome completo</string>
     <string name="cargo">Cargo</string>
     <string name="digite_o_cargo_do_funcionario">Digite o cargo do funcionário</string>
+    <string name="detalhe_da_fila">Detalhe da Fila</string>
 
 
 </resources>
