@@ -1,10 +1,6 @@
 package com.tcc.alif.view.adapter
 
-import android.graphics.drawable.Drawable
 import android.os.Build
-import android.transition.AutoTransition
-import android.transition.Transition
-import android.transition.TransitionManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +9,9 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.tcc.alif.R
 import com.tcc.alif.model.domain.MinhasFilasData
-
 
 
 class MinhasFilasHomeAdapter(private val items: List<MinhasFilasData>,var clickListener: OnClickItemListener) : RecyclerView.Adapter<MinhasFilasHomeAdapter.ViewHolder>() {
@@ -38,14 +32,23 @@ class MinhasFilasHomeAdapter(private val items: List<MinhasFilasData>,var clickL
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         private val tvFila = itemView.findViewById<TextView>(R.id.filaName)
+        private val firstPessoa = itemView.findViewById<TextView>(R.id.firstPessoa)
+        private val secondPessoa = itemView.findViewById<TextView>(R.id.secondPessoa)
+        private val thirdPessoa = itemView.findViewById<TextView>(R.id.thirdPessoa)
         private val arrow_button: ImageButton = itemView.findViewById(R.id.arrow_button)
         private val hidden_view: LinearLayout = itemView.findViewById(R.id.hidden_view)
-        private val base_cardView = itemView.findViewById<CardView>(R.id.base_cardView)
         private val btnVerMais = itemView.findViewById<TextView>(R.id.btnVerMais)
         fun bindView(item: MinhasFilasData) = with(itemView){
 
             item.let{
                 tvFila.text = item.nome_da_fila
+//                if(!item.primeirosClientes.isNullOrEmpty()){
+//                    firstPessoa.text = if(item.primeirosClientes[0] == "null") "" else item.primeirosClientes[0]
+//                    secondPessoa.text = if(item.primeirosClientes[1] == "null") "" else item.primeirosClientes[1]
+//                    thirdPessoa.text = if(item.primeirosClientes[2] == "null") "" else item.primeirosClientes[2]
+//                }
+
+
             }
 
         }

@@ -14,9 +14,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentFuncionariosBinding
 import com.tcc.alif.databinding.FragmentHomeLojistaBinding
-import com.tcc.alif.model.LojistaInfo
-import com.tcc.alif.model.MinhasFilas
-import com.tcc.alif.model.RestApiService
+import com.tcc.alif.model.*
 import com.tcc.alif.model.domain.MinhasFilasData
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
 import com.tcc.alif.view.adapter.MinhasFilasHomeAdapter
@@ -36,7 +34,7 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
     private val viewBinding : FragmentHomeLojistaBinding by viewBinding()
     private var param1: String? = null
     private var param2: String? = null
-
+    private var responseList : Map<*,*>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -60,24 +58,35 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
         val id_lojista = preferences.getInt("id_lojista", 0)
 
         val data = LojistaInfo(id_lojista = id_lojista)
-
+        Thread{
         service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
             if(status != 200){
-                Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
+                activity?.runOnUiThread {
+                    Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
+                }
             }else{
-                response?.response?.let { filas ->
-                    val fila: List<MinhasFilasData> = filas.map{ fila ->
-                        MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista)
-                    }
-                    val layoutManager = LinearLayoutManager(context)
-                    viewBinding.rvFilasHome.post{
-                        viewBinding.rvFilasHome.layoutManager = layoutManager
-                        viewBinding.rvFilasHome.adapter = MinhasFilasHomeAdapter(fila, this)
+                service.getMeusPrimeirosClientes(data){s: Int?, r: MeusPrimeirosClientes? ->
+                    r?.response.let { meusClientes ->
+                        response?.response?.let { filas ->
+                            val fila: List<MinhasFilasData> = filas.map{ fila ->
+                                MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista, meusClientes?.get(fila.id_fila.toString()))
+                            }
+                            val layoutManager = LinearLayoutManager(context)
+                            activity?.runOnUiThread{
+                                viewBinding.rvFilasHome.post{
+                                    viewBinding.rvFilasHome.layoutManager = layoutManager
+                                    viewBinding.rvFilasHome.adapter = MinhasFilasHomeAdapter(fila, this)
+                                }
+                            }
+
+                        }
                     }
                 }
             }
         }
+        }.start()
     }
+
 
 
     companion object {

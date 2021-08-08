@@ -7,6 +7,12 @@ import retrofit2.http.*
 interface AlifService {
 
     @Headers("Content-Type: application/json")
+    @POST("lojista/meusprimeirosclientes")
+    fun meusprimeirosclientes(
+            @Body lojistaInfo : LojistaInfo
+    ):Call<MeusPrimeirosClientes>
+
+    @Headers("Content-Type: application/json")
     @PATCH("funcionario")
     fun updateFuncionario(
             @Body funcionario: FuncionarioInfo
