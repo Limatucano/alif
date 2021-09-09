@@ -38,19 +38,41 @@ class MinhasFilasHomeAdapter(private val items: List<MinhasFilasData>,var clickL
         private val arrow_button: ImageButton = itemView.findViewById(R.id.arrow_button)
         private val hidden_view: LinearLayout = itemView.findViewById(R.id.hidden_view)
         private val btnVerMais = itemView.findViewById<TextView>(R.id.btnVerMais)
+        private val firstLayout = itemView.findViewById<LinearLayout>(R.id.firstLayout)
+        private val secondLayout = itemView.findViewById<LinearLayout>(R.id.secondLayout)
+        private val thirdLayout = itemView.findViewById<LinearLayout>(R.id.thirdLayout)
+
+
         fun bindView(item: MinhasFilasData) = with(itemView){
 
             item.let{
                 tvFila.text = item.nome_da_fila
-//                if(!item.primeirosClientes.isNullOrEmpty()){
-//                    firstPessoa.text = if(item.primeirosClientes[0] == "null") "" else item.primeirosClientes[0]
-//                    secondPessoa.text = if(item.primeirosClientes[1] == "null") "" else item.primeirosClientes[1]
-//                    thirdPessoa.text = if(item.primeirosClientes[2] == "null") "" else item.primeirosClientes[2]
-//                }
-
-
+                if(item.primeirosClientes != null){
+                    firstPessoa.text = item.primeirosClientes.getOrNull(0)
+                    secondPessoa.text = item.primeirosClientes.getOrNull(1)
+                    thirdPessoa.text = item.primeirosClientes.getOrNull(2)
+                    setVisibilityOnItem(item.primeirosClientes.getOrNull(0),item.primeirosClientes.getOrNull(1),item.primeirosClientes.getOrNull(2))
+                }else{
+                    firstLayout.visibility = View.GONE
+                    secondLayout.visibility = View.GONE
+                    thirdLayout.visibility = View.GONE
+                }
             }
+        }
 
+        private fun setVisibilityOnItem(firstPerson : String?, secondPerson : String?, thirdPerson : String?){
+            if(firstPerson == null){
+                firstLayout.visibility = View.GONE
+                secondLayout.visibility = View.GONE
+                thirdLayout.visibility = View.GONE
+            }
+            if(secondPerson == null){
+                secondLayout.visibility = View.GONE
+                thirdLayout.visibility = View.GONE
+            }
+            if(thirdPerson == null){
+                thirdLayout.visibility = View.GONE
+            }
         }
         @RequiresApi(Build.VERSION_CODES.KITKAT)
         fun initialize(item: MinhasFilasData, action: OnClickItemListener){

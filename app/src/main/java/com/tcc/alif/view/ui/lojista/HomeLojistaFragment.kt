@@ -56,9 +56,12 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
         val preferences = activity?.getSharedPreferences("LojistaData", Context.MODE_PRIVATE) ?: return
         val service = RestApiService()
         val id_lojista = preferences.getInt("id_lojista", 0)
+        getData(service,id_lojista)
 
+    }
+
+    fun getData(service : RestApiService, id_lojista : Int){
         val data = LojistaInfo(id_lojista = id_lojista)
-        Thread{
         service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
             if(status != 200){
                 activity?.runOnUiThread {
@@ -66,6 +69,7 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
                 }
             }else{
                 service.getMeusPrimeirosClientes(data){s: Int?, r: MeusPrimeirosClientes? ->
+                    Log.d("TESTE",r.toString())
                     r?.response.let { meusClientes ->
                         response?.response?.let { filas ->
                             val fila: List<MinhasFilasData> = filas.map{ fila ->
@@ -78,15 +82,12 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
                                     viewBinding.rvFilasHome.adapter = MinhasFilasHomeAdapter(fila, this)
                                 }
                             }
-
                         }
                     }
                 }
             }
         }
-        }.start()
     }
-
 
 
     companion object {
