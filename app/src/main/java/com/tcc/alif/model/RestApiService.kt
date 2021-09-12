@@ -8,6 +8,22 @@ import retrofit2.Response
 
 class RestApiService {
 
+
+
+    fun getMeusPrimeirosClientes(lojistaInfo: LojistaInfo, onResult: (Int?, MeusPrimeirosClientes?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.meusprimeirosclientes(lojistaInfo).enqueue(
+                object : Callback<MeusPrimeirosClientes>{
+                    override fun onResponse(call: Call<MeusPrimeirosClientes>, response: Response<MeusPrimeirosClientes>) {
+                        onResult(response.code(), response.body())
+                    }
+
+                    override fun onFailure(call: Call<MeusPrimeirosClientes>, t: Throwable) {
+                        onResult(500, null)
+                    }
+                }
+        )
+    }
     /*
     * atualiza funcionario
     *
@@ -182,7 +198,6 @@ class RestApiService {
                 override fun onResponse(call: Call<LojistaInfo>, response: Response<LojistaInfo>) {
                     val data = response.body()
                     val status = response.code()
-                    Log.d("STATUS", response.code().toString())
                     onResult(status,data)
                 }
 
@@ -212,7 +227,6 @@ class RestApiService {
                     override fun onResponse(call: Call<FilaInfo>, response: Response<FilaInfo>) {
                         val addedFila = response.body()
                         val status = response.code()
-                        Log.d("STATUS", response.code().toString())
                         if(response.code() != 200){
                             onResult(status,addedFila)
                         }else{
@@ -240,7 +254,6 @@ class RestApiService {
                 override fun onResponse(call: Call<LojistaInfo>, response: Response<LojistaInfo>) {
                     val  addedClient = response.body()
                     val status = response.code()
-                    Log.d("STATUS", response.code().toString())
                     if(response.code() != 200){
                         onResult(status,addedClient)
                     }else{
