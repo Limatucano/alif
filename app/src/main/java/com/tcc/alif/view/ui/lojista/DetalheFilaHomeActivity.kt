@@ -22,6 +22,8 @@ class DetalheFilaHomeActivity : AppCompatActivity() {
             viewBinding.horarioFechamento.text = fila["horario_fechamento"].toString()
             viewBinding.numeroFila.text = fila["id_fila"].toString().padStart(5,'0')
         }
-
+        viewBinding.btnVoltar.setOnClickListener {
+            finish()
+        }
     }
 }
