@@ -14,6 +14,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentFuncionariosBinding
 import com.tcc.alif.databinding.FragmentHomeLojistaBinding
+import com.tcc.alif.databinding.MinhasFilasHomeItemBinding
 import com.tcc.alif.model.*
 import com.tcc.alif.model.domain.MinhasFilasData
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
@@ -34,7 +35,6 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
     private val viewBinding : FragmentHomeLojistaBinding by viewBinding()
     private var param1: String? = null
     private var param2: String? = null
-    private var responseList : Map<*,*>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -69,7 +69,6 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
                 }
             }else{
                 service.getMeusPrimeirosClientes(data){s: Int?, r: MeusPrimeirosClientes? ->
-                    Log.d("TESTE",r.toString())
                     r?.response.let { meusClientes ->
                         response?.response?.let { filas ->
                             val fila: List<MinhasFilasData> = filas.map{ fila ->
@@ -79,7 +78,7 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
                             activity?.runOnUiThread{
                                 viewBinding.rvFilasHome.post{
                                     viewBinding.rvFilasHome.layoutManager = layoutManager
-                                    viewBinding.rvFilasHome.adapter = MinhasFilasHomeAdapter(fila, this)
+                                    viewBinding.rvFilasHome.adapter = MinhasFilasHomeAdapter(fila, this, context)
                                 }
                             }
                         }
@@ -110,6 +109,6 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
             }
     }
 
-    override fun onItemClick(items: MinhasFilasData, position: Int) {
+    override fun onItemClick(items: MinhasFilasData, position: Int)  {
     }
 }

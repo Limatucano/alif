@@ -79,6 +79,8 @@
     <string name="cargo">Cargo</string>
     <string name="digite_o_cargo_do_funcionario">Digite o cargo do funcionário</string>
     <string name="detalhe_da_fila">Detalhe da Fila</string>
+    <string name="quantidade_placeholder">Quantidade Máxima: %s</string>
+    <string name="minutosMedia_placeholder">Minutos em Média: %s</string>
 
 
 </resources>

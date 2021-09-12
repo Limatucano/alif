@@ -1,6 +1,10 @@
 package com.tcc.alif.view.adapter
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +13,14 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.tcc.alif.R
 import com.tcc.alif.model.domain.MinhasFilasData
+import com.tcc.alif.view.ui.lojista.DetalheFilaHomeActivity
 
 
-class MinhasFilasHomeAdapter(private val items: List<MinhasFilasData>,var clickListener: OnClickItemListener) : RecyclerView.Adapter<MinhasFilasHomeAdapter.ViewHolder>() {
+class MinhasFilasHomeAdapter(private val items: List<MinhasFilasData>,var clickListener: OnClickItemListener, var context: Context?) : RecyclerView.Adapter<MinhasFilasHomeAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.minhas_filas_home_item,parent, false)
 
@@ -24,7 +30,7 @@ class MinhasFilasHomeAdapter(private val items: List<MinhasFilasData>,var clickL
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.initialize(items[position],clickListener)
+        holder.initialize(items[position],clickListener, context)
         holder.bindView(item)
     }
 
@@ -75,11 +81,26 @@ class MinhasFilasHomeAdapter(private val items: List<MinhasFilasData>,var clickL
             }
         }
         @RequiresApi(Build.VERSION_CODES.KITKAT)
-        fun initialize(item: MinhasFilasData, action: OnClickItemListener){
+        fun initialize(item: MinhasFilasData, action: OnClickItemListener, context: Context?){
             tvFila.text = item.nome_da_fila
 
             btnVerMais.setOnClickListener {
-                Log.d("TESTE", "AAAAAAAAA")
+                val intent = Intent(context, DetalheFilaHomeActivity::class.java)
+                item.apply {
+                    val fila : HashMap<String, Any?> = hashMapOf(
+                            "id_lojista" to this.id_lojista,
+                            "id_fila" to this.id_fila,
+                            "quantidade_vagas" to this.quantidade_vagas,
+                            "nome_da_fila" to this.nome_da_fila,
+                            "horario_abertura" to this.horario_abertura,
+                            "horario_fechamento" to this.horario_fechamento,
+                            "tempo_medio" to this.tempo_medio
+                    )
+                    val b = Bundle()
+                    b.putSerializable("fila", fila)
+                    intent.putExtras(b)
+                    context?.startActivity(intent)
+                }
             }
             arrow_button.setOnClickListener {
                 if(hidden_view.visibility == View.VISIBLE){
