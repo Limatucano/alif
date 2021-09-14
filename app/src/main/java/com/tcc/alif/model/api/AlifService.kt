@@ -7,6 +7,12 @@ import retrofit2.http.*
 interface AlifService {
 
     @Headers("Content-Type: application/json")
+    @GET("lojista/meusclientes/{id_fila}")
+    fun getMeusClientesFila(
+            @Path("id_fila") id_fila : String
+    ):Call<MeusClientesFila>
+
+    @Headers("Content-Type: application/json")
     @POST("lojista/meusprimeirosclientes")
     fun meusprimeirosclientes(
             @Body lojistaInfo : LojistaInfo

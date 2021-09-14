@@ -81,6 +81,7 @@
     <string name="detalhe_da_fila">Detalhe da Fila</string>
     <string name="quantidade_placeholder">Quantidade Máxima: %s</string>
     <string name="minutosMedia_placeholder">Minutos em Média: %s</string>
+    <string name="total_pessoas_fila">Total de Pessoas na Fila: %s</string>
 
 
 </resources>
