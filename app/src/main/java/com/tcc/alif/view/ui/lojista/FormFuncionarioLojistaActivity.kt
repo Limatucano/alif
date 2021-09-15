@@ -12,6 +12,7 @@ import com.tcc.alif.databinding.ActivityFormFuncionarioLojistaBinding
 import com.tcc.alif.model.FuncionarioInfo
 import com.tcc.alif.model.MessageRequest
 import com.tcc.alif.model.RestApiService
+import com.tcc.alif.model.util.ValidateUtil
 
 class FormFuncionarioLojistaActivity : AppCompatActivity() {
     private val viewBinding : ActivityFormFuncionarioLojistaBinding by viewBinding()
@@ -43,30 +44,46 @@ class FormFuncionarioLojistaActivity : AppCompatActivity() {
         }
         viewBinding.salvarFuncionario.setOnClickListener {
             val preferences = this.getSharedPreferences("LojistaData", Context.MODE_PRIVATE)
-            if(!funcionario.isNullOrEmpty()){
-                val funcionarioData = FuncionarioInfo(
-                        nome_funcionario = viewBinding.nomeFuncionario.text.toString(),
-                        cargo = viewBinding.cargo.text.toString(),
-                        id_lojista = preferences.getInt("id_lojista", 0).toString().toInt(),
-                        cpf = viewBinding.cpf.text.toString(),
-                        cod_funcionario = viewBinding.codFuncionario.text.toString().toInt()
-                )
-                apiService.updateFuncionario(funcionarioData){ status: Int?, response: MessageRequest? ->
-                    finish()
+            if(validateForm()){
+                if(!funcionario.isNullOrEmpty()){
+                    val funcionarioData = FuncionarioInfo(
+                            nome_funcionario = viewBinding.nomeFuncionario.text.toString(),
+                            cargo = viewBinding.cargo.text.toString(),
+                            id_lojista = preferences.getInt("id_lojista", 0).toString().toInt(),
+                            cpf = viewBinding.cpf.text.toString(),
+                            cod_funcionario = viewBinding.codFuncionario.text.toString().toInt()
+                    )
+                    apiService.updateFuncionario(funcionarioData){ status: Int?, response: MessageRequest? ->
+                        finish()
+                    }
+                }
+                if(funcionario.isNullOrEmpty()){
+                    val funcionarioData = FuncionarioInfo(
+                            nome_funcionario = viewBinding.nomeFuncionario.text.toString(),
+                            cargo = viewBinding.cargo.text.toString(),
+                            id_lojista = preferences.getInt("id_lojista", 0).toString().toInt(),
+                            cpf = viewBinding.cpf.text.toString(),
+                    )
+                    apiService.insertNewFuncionario(funcionarioData){ status: Int?, response: MessageRequest? ->
+                        finish()
+                    }
                 }
             }
-            if(funcionario.isNullOrEmpty()){
-                val funcionarioData = FuncionarioInfo(
-                        nome_funcionario = viewBinding.nomeFuncionario.text.toString(),
-                        cargo = viewBinding.cargo.text.toString(),
-                        id_lojista = preferences.getInt("id_lojista", 0).toString().toInt(),
-                        cpf = viewBinding.cpf.text.toString(),
-                )
-                apiService.insertNewFuncionario(funcionarioData){ status: Int?, response: MessageRequest? ->
-                    finish()
-                }
-            }
-
         }
+    }
+    /*
+    * Tem o objetivo de ser a ponte entre a validação e os campos
+    *
+    * @return  boolean
+    *
+    * */
+    fun validateForm():Boolean{
+        val validateNomeFuncionario = ValidateUtil.validate(viewBinding.nomeFuncionario)
+        val validateCpf = ValidateUtil.validate(viewBinding.cpf)
+
+        if(validateNomeFuncionario.and(validateCpf)){
+            return true
+        }
+        return false
     }
 }

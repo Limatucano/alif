@@ -20,6 +20,7 @@ import com.tcc.alif.model.FilaInfo
 import com.tcc.alif.model.MessageRequest
 import com.tcc.alif.model.RestApiService
 import com.tcc.alif.model.util.TimerPickerHelper
+import com.tcc.alif.model.util.ValidateUtil
 import java.io.Serializable
 import java.util.*
 import kotlin.collections.HashMap
@@ -65,40 +66,60 @@ class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
         }
         viewBinding.salvarFila.setOnClickListener {
             val preferences = this.getSharedPreferences("LojistaData", Context.MODE_PRIVATE)
-            if(!fila.isNullOrEmpty()){
-                val dataUpdate = FilaInfo(
-                        nome_da_fila = viewBinding.nomeFila.text.toString(),
-                        quantidade_vagas = viewBinding.QuantidadeFila.text.toString().toInt(),
-                        horario_abertura = viewBinding.horarioAbertura.text.toString(),
-                        horario_fechamento = viewBinding.horarioFechamento.text.toString(),
-                        id_lojista = preferences.getInt("id_lojista", 0).toString(),
-                        tempo_medio = viewBinding.minutosMedia.text.toString(),
-                        id_fila = viewBinding.idFila.text.toString().toInt()
-                )
-                apiService.updateFila(dataUpdate){ status: Int?, response: MessageRequest? ->
-                    finish()
+            if(validateForm()){
+                if(!fila.isNullOrEmpty()){
+                    val dataUpdate = FilaInfo(
+                            nome_da_fila = viewBinding.nomeFila.text.toString(),
+                            quantidade_vagas = viewBinding.QuantidadeFila.text.toString().toInt(),
+                            horario_abertura = viewBinding.horarioAbertura.text.toString(),
+                            horario_fechamento = viewBinding.horarioFechamento.text.toString(),
+                            id_lojista = preferences.getInt("id_lojista", 0).toString(),
+                            tempo_medio = viewBinding.minutosMedia.text.toString(),
+                            id_fila = viewBinding.idFila.text.toString().toInt()
+                    )
+                    apiService.updateFila(dataUpdate){ status: Int?, response: MessageRequest? ->
+                        finish()
+                    }
                 }
 
-            }
-            if(fila.isNullOrEmpty()){
-                val dataFila = FilaInfo(
-                        nome_da_fila = viewBinding.nomeFila.text.toString(),
-                        quantidade_vagas = viewBinding.QuantidadeFila.text.toString().toInt(),
-                        horario_abertura = viewBinding.horarioAbertura.text.toString(),
-                        horario_fechamento = viewBinding.horarioFechamento.text.toString(),
-                        id_lojista = preferences.getInt("id_lojista", 0).toString(),
-                        tempo_medio = viewBinding.minutosMedia.text.toString(),
-                )
-                apiService.registerFila(dataFila) { status: Int?, filaData: FilaInfo? ->
-                    if (status != 201) {
-                        Snackbar.make(viewBinding.layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG).show()
-                    } else {
-                        finish()
+                if(fila.isNullOrEmpty()){
+                    val dataFila = FilaInfo(
+                            nome_da_fila = viewBinding.nomeFila.text.toString(),
+                            quantidade_vagas = viewBinding.QuantidadeFila.text.toString().toInt(),
+                            horario_abertura = viewBinding.horarioAbertura.text.toString(),
+                            horario_fechamento = viewBinding.horarioFechamento.text.toString(),
+                            id_lojista = preferences.getInt("id_lojista", 0).toString(),
+                            tempo_medio = viewBinding.minutosMedia.text.toString(),
+                    )
+                    apiService.registerFila(dataFila) { status: Int?, filaData: FilaInfo? ->
+                        if (status != 201) {
+                            Snackbar.make(viewBinding.layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG).show()
+                        } else {
+                            finish()
+                        }
                     }
                 }
             }
         }
     }
+
+    /*
+    * Tem o objetivo de ser a ponte entre a validação e os campos
+    *
+    * @return  boolean
+    *
+    * */
+    fun validateForm():Boolean{
+        val validateNomeFila = ValidateUtil.validate(viewBinding.nomeFila)
+        val validateQuantidade = ValidateUtil.validate(viewBinding.QuantidadeFila)
+        val validateMinutosMedia = ValidateUtil.validate(viewBinding.minutosMedia)
+
+        if(validateNomeFila.and(validateMinutosMedia).and(validateQuantidade)){
+            return true
+        }
+        return false
+    }
+
     private fun showTimePickerDialog(field: TextInputEditText){
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
