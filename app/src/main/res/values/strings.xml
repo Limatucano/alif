@@ -21,6 +21,8 @@
     <string name="seja_bem_vindo_para_continuarmos_vou_precisar_de_alguns_dados_seu">Seja Bem Vindo, para continuarmos vou precisar de alguns dados seu...</string>
     <string name="cpf">CPF</string>
     <string name="salvar">Salvar</string>
+    <string name="atualizar">Atualizar</string>
+    <string name="salvar_alteracoes">Salvar Alterações</string>
     <string name="digite_seu_cpf_aqui">Digite seu CPF aqui</string>
     <string name="digite_seu_n_mero_de_celular_aqui">Digite seu número de celular aqui</string>
     <string name="celular">Celular</string>

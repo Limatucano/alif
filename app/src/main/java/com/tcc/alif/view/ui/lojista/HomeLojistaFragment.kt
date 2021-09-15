@@ -63,6 +63,7 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
                     Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
                 }
             }else{
+                viewBinding.progressLoading.visibility = View.GONE
                 service.getMeusPrimeirosClientes(data){s: Int?, r: MeusPrimeirosClientes? ->
                     r?.response.let { meusClientes ->
                         response?.response?.let { filas ->
