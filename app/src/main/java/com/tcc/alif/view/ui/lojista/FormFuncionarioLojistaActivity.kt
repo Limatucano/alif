@@ -12,6 +12,8 @@ import com.tcc.alif.databinding.ActivityFormFuncionarioLojistaBinding
 import com.tcc.alif.model.FuncionarioInfo
 import com.tcc.alif.model.MessageRequest
 import com.tcc.alif.model.RestApiService
+import com.tcc.alif.model.util.CPFUtil
+import com.tcc.alif.model.util.MaskUtils
 import com.tcc.alif.model.util.ValidateUtil
 
 class FormFuncionarioLojistaActivity : AppCompatActivity() {
@@ -20,7 +22,7 @@ class FormFuncionarioLojistaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val apiService = RestApiService()
         setContentView(R.layout.activity_form_funcionario_lojista)
-
+        viewBinding.cpf.addTextChangedListener(MaskUtils.cpfMask(viewBinding.cpf))
         val funcionario = intent?.getSerializableExtra("funcionario") as HashMap<*, *>?
 
         if(!funcionario.isNullOrEmpty()){
@@ -44,6 +46,10 @@ class FormFuncionarioLojistaActivity : AppCompatActivity() {
         }
         viewBinding.salvarFuncionario.setOnClickListener {
             val preferences = this.getSharedPreferences("LojistaData", Context.MODE_PRIVATE)
+            if (!CPFUtil.myValidateCPF(viewBinding.cpf.text.toString())) {
+                viewBinding.cpf.error = getString(R.string.cpf_invalid_error)
+                return@setOnClickListener
+            }
             if(validateForm()){
                 if(!funcionario.isNullOrEmpty()){
                     val funcionarioData = FuncionarioInfo(
