@@ -21,6 +21,8 @@
     <string name="seja_bem_vindo_para_continuarmos_vou_precisar_de_alguns_dados_seu">Seja Bem Vindo, para continuarmos vou precisar de alguns dados seu...</string>
     <string name="cpf">CPF</string>
     <string name="salvar">Salvar</string>
+    <string name="atualizar">Atualizar</string>
+    <string name="salvar_alteracoes">Salvar Alterações</string>
     <string name="digite_seu_cpf_aqui">Digite seu CPF aqui</string>
     <string name="digite_seu_n_mero_de_celular_aqui">Digite seu número de celular aqui</string>
     <string name="celular">Celular</string>
@@ -81,6 +83,7 @@
     <string name="detalhe_da_fila">Detalhe da Fila</string>
     <string name="quantidade_placeholder">Quantidade Máxima: %s</string>
     <string name="minutosMedia_placeholder">Minutos em Média: %s</string>
+    <string name="total_pessoas_fila">Total de Pessoas na Fila: %s</string>
 
 
 </resources>

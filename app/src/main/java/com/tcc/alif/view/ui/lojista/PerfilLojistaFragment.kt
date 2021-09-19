@@ -2,13 +2,19 @@ package com.tcc.alif.view.ui.lojista
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentPerfilLojistaBinding
+import com.tcc.alif.model.LojistaInfo
+import com.tcc.alif.model.MessageRequest
+import com.tcc.alif.model.MinhasFilas
+import com.tcc.alif.model.RestApiService
 import com.tcc.alif.view.ui.cliente.HomeClienteFragment
 
 // TODO: Rename parameter arguments, choose names that match
@@ -59,8 +65,32 @@ class PerfilLojistaFragment : Fragment() {
         viewBinding.editDoc.setText(lojistaSet["doc"].toString())
         viewBinding.editNome.setText(lojistaSet["nome"].toString())
 
-    }
+        viewBinding.salvarPerfil.setOnClickListener {
+            viewBinding.progressLoading.visibility = View.VISIBLE
+            val service = RestApiService()
+            val data = LojistaInfo(
+                    id_lojista = lojistaSet["id_lojista"] as Int?,
+                    email = viewBinding.editEmail.text.toString(),
+                    ocupacao = viewBinding.editOcupacao.text.toString(),
+                    nome_fantasia = viewBinding.editNomeFantasia.text.toString(),
+                    doc = viewBinding.editDoc.text.toString(),
+                    nome = viewBinding.editNome.text.toString()
+            )
 
+            service.updateProfileLojista(data){ status : Int?, response: MessageRequest? ->
+                Log.d("TESTE", status.toString())
+                if(status != 200){
+                    Toast.makeText(context, "Erro ao atualizar perfil", Toast.LENGTH_LONG).show()
+                    return@updateProfileLojista
+                }
+                viewBinding.progressLoading.visibility = View.GONE
+                Toast.makeText(context, "Perfil atualizado com sucesso!", Toast.LENGTH_LONG).show()
+            }
+        }
+
+
+
+    }
 
     companion object {
         /**

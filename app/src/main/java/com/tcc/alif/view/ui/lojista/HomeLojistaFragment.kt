@@ -1,9 +1,7 @@
 package com.tcc.alif.view.ui.lojista
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +10,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
-import com.tcc.alif.databinding.FragmentFuncionariosBinding
 import com.tcc.alif.databinding.FragmentHomeLojistaBinding
-import com.tcc.alif.databinding.MinhasFilasHomeItemBinding
 import com.tcc.alif.model.*
 import com.tcc.alif.model.domain.MinhasFilasData
-import com.tcc.alif.view.adapter.MinhasFilasAdapter
 import com.tcc.alif.view.adapter.MinhasFilasHomeAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -68,6 +63,7 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
                     Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
                 }
             }else{
+                viewBinding.progressLoading.visibility = View.GONE
                 service.getMeusPrimeirosClientes(data){s: Int?, r: MeusPrimeirosClientes? ->
                     r?.response.let { meusClientes ->
                         response?.response?.let { filas ->
