@@ -7,9 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.lojista.LojistaActivity">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardNome"
@@ -117,7 +119,11 @@
                     android:layout_marginBottom="4dp"
                     android:autofillHints=""
                     android:backgroundTint="#555555"
-                    android:inputType="text"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="none"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -305,6 +311,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/titleOcupacao" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/progress_loading"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardOcupacao"/>
 
         <TextView
             android:id="@+id/salvarPerfil"

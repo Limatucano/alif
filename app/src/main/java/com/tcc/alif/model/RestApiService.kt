@@ -9,6 +9,30 @@ import retrofit2.Response
 class RestApiService {
 
     /*
+    * Responsavel por atualizar perfil do lojista
+    *
+    * @param  lojistaInfo objeto com todos dados do lojista
+    *         onResult Função de callback
+    *
+    * */
+
+    fun updateProfileLojista(lojistaInfo: LojistaInfo, onResult: (Int?, MessageRequest?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.updateProfileLojista(lojistaInfo).enqueue(
+                object  : Callback<MessageRequest>{
+                    override fun onResponse(call: Call<MessageRequest>, response: Response<MessageRequest>) {
+                        Log.d("TESTE",response.message().toString())
+                        onResult(response.code(), response.body())
+                    }
+
+                    override fun onFailure(call: Call<MessageRequest>, t: Throwable) {
+                        onResult(500,null)
+                    }
+                }
+        )
+    }
+
+    /*
     * Pega todos clientes da fila
     *
     * @param  id_fila string com o id da fila
