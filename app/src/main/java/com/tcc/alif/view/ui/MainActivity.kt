@@ -11,7 +11,8 @@ import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityMainBinding
 import com.tcc.alif.model.ClientInfo
 import com.tcc.alif.model.LojistaInfo
-import com.tcc.alif.model.RestApiService
+import com.tcc.alif.model.restApiService.lojistaService
+import com.tcc.alif.model.restApiService.usuarioService
 import com.tcc.alif.view.ui.cliente.ClienteActivity
 import com.tcc.alif.view.ui.lojista.LojistaActivity
 
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewBinding.btnLogin.setOnClickListener {
-            val apiService = RestApiService()
+            val apiServiceUsuario = usuarioService()
+            val apiServiceLojista = lojistaService()
             val dataClient = ClientInfo(
                     email = viewBinding.email.text.toString(),
                     senha = viewBinding.senha.text.toString()
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             )
             if(modo == "cliente"){
             viewBinding.progressLoading.visibility = View.VISIBLE
-            apiService.login(dataClient) {status: Int?, clientInfo: ClientInfo? ->
+            apiServiceUsuario.login(dataClient) {status: Int?, clientInfo: ClientInfo? ->
                 viewBinding.progressLoading.isIndeterminate = true
                 if (status != 200) {
                     viewBinding.progressLoading.visibility = View.INVISIBLE
@@ -62,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             }
         }else if(modo == "lojista"){
             viewBinding.progressLoading.visibility = View.VISIBLE
-            apiService.loginLojista(dataLojista) {status: Int?, lojistaInfo: LojistaInfo? ->
+                apiServiceLojista.loginLojista(dataLojista) {status: Int?, lojistaInfo: LojistaInfo? ->
                 viewBinding.progressLoading.isIndeterminate = true
                 if (status != 200) {
                     viewBinding.progressLoading.visibility = View.INVISIBLE
