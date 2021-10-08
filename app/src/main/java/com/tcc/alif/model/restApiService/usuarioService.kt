@@ -1,5 +1,6 @@
 package com.tcc.alif.model.restApiService
 
+import android.util.Log
 import com.tcc.alif.model.*
 import com.tcc.alif.model.api.AlifService
 import retrofit2.Call
@@ -16,24 +17,18 @@ class usuarioService {
 *         onResult Função de callback
 *
 * */
-    fun registerClient(userData: ClientInfo, onResult : (Int?, ClientInfo?) -> Unit){
+    fun registerClient(userData: ClientInfo, onResult : (Int?, MessageRequest?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.registerClient(userData).enqueue(
-            object : Callback<ClientInfo> {
-                override fun onFailure(call: Call<ClientInfo>, t: Throwable) {
+            object : Callback<MessageRequest> {
+                override fun onFailure(call: Call<MessageRequest>, t: Throwable) {
                     onResult(500,null)
                 }
-                override fun onResponse(call: Call<ClientInfo>, response: Response<ClientInfo>) {
-                    val  addedClient = response.body()
+                override fun onResponse(call: Call<MessageRequest>, response: Response<MessageRequest>) {
+                    val addedClient = response.body()
                     val status = response.code()
-                    if(response.code() != 200){
-                        onResult(status,addedClient)
-                    }else{
-                        onResult(status,addedClient)
-                    }
-
+                    onResult(status,addedClient)
                 }
-
             }
         )
     }

@@ -311,11 +311,7 @@ class lojistaService {
                 override fun onResponse(call: Call<LojistaInfo>, response: Response<LojistaInfo>) {
                     val  addedClient = response.body()
                     val status = response.code()
-                    if(response.code() != 200){
-                        onResult(status,addedClient)
-                    }else{
-                        onResult(status,addedClient)
-                    }
+                    onResult(status,addedClient)
 
                 }
 
