@@ -19,6 +19,7 @@ import com.tcc.alif.model.LojistaInfo
 import com.tcc.alif.model.MinhasFilas
 import com.tcc.alif.model.RestApiService
 import com.tcc.alif.model.domain.MinhasFilasData
+import com.tcc.alif.model.restApiService.lojistaService
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -96,7 +97,7 @@ class FilasLojistaFragment : Fragment(R.layout.fragment_filas_lojista), MinhasFi
     private fun getMyFilas(){
         val preferences = activity?.getSharedPreferences("LojistaData",Context.MODE_PRIVATE) ?: return
         val email = preferences.getString("email","")
-        val service = RestApiService()
+        val service = lojistaService()
         val id_lojista = preferences.getInt("id_lojista", 0)
         val data = LojistaInfo(id_lojista = id_lojista)
         service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->

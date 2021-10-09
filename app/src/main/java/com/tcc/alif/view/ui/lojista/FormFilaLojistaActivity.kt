@@ -19,6 +19,7 @@ import com.tcc.alif.databinding.ActivityFormFilaLojistaBinding
 import com.tcc.alif.model.FilaInfo
 import com.tcc.alif.model.MessageRequest
 import com.tcc.alif.model.RestApiService
+import com.tcc.alif.model.restApiService.lojistaService
 import com.tcc.alif.model.util.TimerPickerHelper
 import com.tcc.alif.model.util.ValidateUtil
 import java.io.Serializable
@@ -29,7 +30,7 @@ class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
     private val viewBinding : ActivityFormFilaLojistaBinding by viewBinding()
     lateinit var timePicker : TimerPickerHelper
     override fun onCreate(savedInstanceState: Bundle?) {
-        val apiService = RestApiService()
+        val apiService = lojistaService()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_fila_lojista)
 

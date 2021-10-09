@@ -3,7 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/radio_normal.xml" value="0.23703703703703705" />
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/radio_selected.xml" value="0.23703703703703705" />
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/radio_selected_filter.xml" value="0.23703703703703705" />
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/radio_selector.xml" value="0.23703703703703705" />
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/radio_selector_filter.xml" value="0.23703703703703705" />
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/text_color.xml" value="0.23703703703703705" />
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/layout/activity_modo.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/layout/fragment_home_lojista.xml" value="0.2595108695652174" />
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/layout/fragment_pesquisar_cliente.xml" value="1.0" />
       </map>
     </option>
   </component>

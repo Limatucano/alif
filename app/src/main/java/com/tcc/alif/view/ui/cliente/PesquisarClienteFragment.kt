@@ -12,6 +12,7 @@ import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentPesquisarClienteBinding
 import com.tcc.alif.model.*
 import com.tcc.alif.model.domain.MinhasFilasData
+import com.tcc.alif.model.restApiService.usuarioService
 import com.tcc.alif.view.adapter.PesquisaFilasAdapter
 
 private const val ARG_PARAM1 = "param1"
@@ -50,7 +51,7 @@ class PesquisarClienteFragment : Fragment(R.layout.fragment_pesquisar_cliente) ,
         viewBinding.empresasFiltro.isChecked = false
 
 
-        val apiService = RestApiService()
+        val apiService = usuarioService()
 
         viewBinding.buttonFiltro.setOnClickListener {
 

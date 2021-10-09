@@ -13,6 +13,7 @@ import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentHomeLojistaBinding
 import com.tcc.alif.model.*
 import com.tcc.alif.model.domain.MinhasFilasData
+import com.tcc.alif.model.restApiService.lojistaService
 import com.tcc.alif.view.adapter.MinhasFilasHomeAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,13 +50,13 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val preferences = activity?.getSharedPreferences("LojistaData", Context.MODE_PRIVATE) ?: return
-        val service = RestApiService()
+        val service = lojistaService()
         val id_lojista = preferences.getInt("id_lojista", 0)
         getData(service,id_lojista)
 
     }
 
-    fun getData(service : RestApiService, id_lojista : Int){
+    fun getData(service : lojistaService, id_lojista : Int){
         val data = LojistaInfo(id_lojista = id_lojista)
         service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
             if(status != 200){

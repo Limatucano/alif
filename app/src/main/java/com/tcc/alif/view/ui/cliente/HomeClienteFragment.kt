@@ -14,6 +14,7 @@ import com.tcc.alif.model.MinhasFilas
 import com.tcc.alif.model.MinhasFilasPost
 import com.tcc.alif.model.RestApiService
 import com.tcc.alif.model.domain.MinhasFilasData
+import com.tcc.alif.model.restApiService.usuarioService
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
 
 
@@ -29,7 +30,6 @@ class HomeClienteFragment : Fragment(R.layout.fragment_first_cliente), MinhasFil
 
     private var param1: String? = null
     private var param2: String? = null
-    private val viewBinding : HomeClienteFragment by viewBinding()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -48,7 +48,7 @@ class HomeClienteFragment : Fragment(R.layout.fragment_first_cliente), MinhasFil
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val rvFilas = view.findViewById<RecyclerView>(R.id.rvFilas)
 
-        val apiService = RestApiService()
+        val apiService = usuarioService()
 
         var email = activity?.intent?.getSerializableExtra("email")
         val arr = MinhasFilasPost(
@@ -58,7 +58,6 @@ class HomeClienteFragment : Fragment(R.layout.fragment_first_cliente), MinhasFil
 
             if (status != 200) {
                 Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
-                //Snackbar.make(viewBinding., R.string.erro_pegar_fila, Snackbar.LENGTH_LONG ).show()
             } else {
                 minhasFilas?.response?.let {
                     val fila : List<MinhasFilasData> = it.map{ fila ->
