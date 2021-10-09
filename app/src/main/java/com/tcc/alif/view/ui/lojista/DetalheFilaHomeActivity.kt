@@ -2,7 +2,6 @@ package com.tcc.alif.view.ui.lojista
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,11 +9,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityDetalheFilaHomeBinding
 import com.tcc.alif.model.MeusClientesFila
-import com.tcc.alif.model.RestApiService
 import com.tcc.alif.model.domain.MeusClientesFilaData
-import com.tcc.alif.model.domain.MinhasFilasData
+import com.tcc.alif.model.restApiService.lojistaService
 import com.tcc.alif.view.adapter.MeusClientesFilaAdapter
-import com.tcc.alif.view.adapter.MinhasFilasHomeAdapter
 
 class DetalheFilaHomeActivity : AppCompatActivity() , MeusClientesFilaAdapter.OnClickItemListener{
     private val viewBinding : ActivityDetalheFilaHomeBinding by viewBinding()
@@ -37,7 +34,7 @@ class DetalheFilaHomeActivity : AppCompatActivity() , MeusClientesFilaAdapter.On
         }
     }
     fun getData(id_fila:String){
-        val service = RestApiService()
+        val service = lojistaService()
         service.getMeusClientesFila(id_fila){ status:Int?, response: MeusClientesFila? ->
             if(status != 200){
                 Toast.makeText(this,"Erro ao obter seus clientes :c ", Toast.LENGTH_LONG).show()

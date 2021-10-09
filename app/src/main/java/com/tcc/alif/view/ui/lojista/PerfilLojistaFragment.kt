@@ -1,3 +1,4 @@
+
 package com.tcc.alif.view.ui.lojista
 
 import android.content.Context
@@ -13,9 +14,7 @@ import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentPerfilLojistaBinding
 import com.tcc.alif.model.LojistaInfo
 import com.tcc.alif.model.MessageRequest
-import com.tcc.alif.model.MinhasFilas
-import com.tcc.alif.model.RestApiService
-import com.tcc.alif.view.ui.cliente.HomeClienteFragment
+import com.tcc.alif.model.restApiService.lojistaService
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -67,7 +66,7 @@ class PerfilLojistaFragment : Fragment() {
 
         viewBinding.salvarPerfil.setOnClickListener {
             viewBinding.progressLoading.visibility = View.VISIBLE
-            val service = RestApiService()
+            val service = lojistaService()
             val data = LojistaInfo(
                     id_lojista = lojistaSet["id_lojista"] as Int?,
                     email = viewBinding.editEmail.text.toString(),

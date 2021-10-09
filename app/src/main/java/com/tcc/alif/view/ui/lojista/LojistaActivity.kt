@@ -9,7 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityClienteBinding
 import com.tcc.alif.model.LojistaInfo
-import com.tcc.alif.model.RestApiService
+import com.tcc.alif.model.restApiService.lojistaService
 
 class LojistaActivity : AppCompatActivity() {
     private val viewBinding : ActivityClienteBinding by viewBinding()
@@ -23,7 +23,7 @@ class LojistaActivity : AppCompatActivity() {
             email = email.toString()
         )
 
-        val apiService = RestApiService()
+        val apiService = lojistaService()
         apiService.getLojistaData(data) {status: Int?, response: LojistaInfo? ->
             if (status == 200) {
 

@@ -9,11 +9,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityCadastroBinding
-import com.tcc.alif.model.ClientInfo
-import com.tcc.alif.model.ClientSerializable
-import com.tcc.alif.model.LojistaInfo
-import com.tcc.alif.model.RestApiService
+import com.tcc.alif.model.*
+import com.tcc.alif.model.restApiService.lojistaService
+import com.tcc.alif.model.restApiService.usuarioService
 import com.tcc.alif.model.util.*
+import java.text.SimpleDateFormat
 
 
 class CadastroActivity : AppCompatActivity() {
@@ -58,7 +58,7 @@ class CadastroActivity : AppCompatActivity() {
                 }
                 ValidateUtil.validate(celularJuridico)
                 ValidateUtil.validate(nomeEmpresa)
-                val apiService = RestApiService()
+                val apiService = lojistaService()
                 if (radioCpf.isChecked) {
                     ValidateUtil.validate(cpfLojista)
                     if (ValidateUtil.validate(celularJuridico) && ValidateUtil.validate(nomeEmpresa) && (ValidateUtil.validate(cpfLojista) || ValidateUtil.validate(cnpjLojista))) {
@@ -124,31 +124,27 @@ class CadastroActivity : AppCompatActivity() {
                     cpf.error = getString(R.string.cpf_invalid_error)
                 }
 
-                ValidateUtil.validate(nome)
-                ValidateUtil.validate(cpf)
-                ValidateUtil.validate(celular)
-                ValidateUtil.validate(dataNascimento)
+
                 if (ValidateUtil.validate(nome) && ValidateUtil.validate(cpf) && ValidateUtil.validate(celular) && ValidateUtil.validate(dataNascimento)) {
-                    val apiService = RestApiService()
-                    val arr = ClientInfo(
+                    val apiServiceUsuario = usuarioService()
+                    val nascimentoFormatado = formatDate(dataNascimento.text.toString(),"dd/mm/yyyy","yyyy-mm-dd")
+
+                    val clientData = ClientInfo(
                             email = emailHidden.text.toString(),
                             senha = senhaHidden.text.toString(),
                             nome = nome.text.toString(),
+                            nascimento = nascimentoFormatado,
                             cpf = cpf.text.toString(),
                             numero_celular = celular.text.toString(),
-                            sobrenome = "",
-                            nascimento = "1999-05-31",
-                            ddd_celular = "",
+                            sobrenome = ""
                     )
                     viewBinding.progressLoading.visibility = View.VISIBLE
-                    apiService.registerClient(arr) { status: Int?, clientInfo: ClientInfo? ->
-                        viewBinding.progressLoading.isIndeterminate = true
+                    apiServiceUsuario.registerClient(clientData) { status: Int?, clientInfo: MessageRequest? ->
+                        Log.d("TESTE",status.toString())
                         if (status != 201) {
                             viewBinding.progressLoading.visibility = View.INVISIBLE
-                            viewBinding.progressLoading.isIndeterminate = false
                             Snackbar.make(viewBinding.Layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG).show()
                         } else {
-                            viewBinding.progressLoading.isIndeterminate = false
                             val login = Intent(this@CadastroActivity, ModoActivity::class.java)
                             val b = Bundle()
                             b.putSerializable("success", 0)
@@ -204,6 +200,16 @@ class CadastroActivity : AppCompatActivity() {
                     celularJuridico.text?.clear()
             }
         }
+
+    fun formatDate(
+        date: String?,
+        initDateFormat: String?,
+        endDateFormat: String?
+    ): String? {
+        val initDate = SimpleDateFormat(initDateFormat).parse(date)
+        val formatter = SimpleDateFormat(endDateFormat)
+        return formatter.format(initDate)
+    }
 
 }
 

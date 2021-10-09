@@ -12,7 +12,8 @@ import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityFirstCadstroBinding
 import com.tcc.alif.model.ClientInfo
 import com.tcc.alif.model.ClientSerializable
-import com.tcc.alif.model.RestApiService
+import com.tcc.alif.model.restApiService.lojistaService
+import com.tcc.alif.model.restApiService.usuarioService
 import com.tcc.alif.model.util.RegexUtil
 import com.tcc.alif.model.util.ValidateUtil
 
@@ -51,7 +52,7 @@ class FirstCadstroActivity : AppCompatActivity() {
                     if(viewBinding.senhaConfirmar.text.toString() != viewBinding.senha.text.toString()){
                         viewBinding.senhaConfirmar.error = getString(R.string.passwordTwo_invalid_error)
                     }else{
-                        val apiService = RestApiService()
+                        val apiService = usuarioService()
                         val clientInfo = ClientInfo(
                             email = viewBinding.email.text.toString(),
                         )

@@ -80,7 +80,7 @@ interface AlifService {
     @Headers("Content-Type: application/json")
     @POST("fila")
     fun registerFila(
-            @Body filaData: FilaInfo
+        @Body filaData: FilaInfo
     ): Call<FilaInfo>
 
     //Cadastrar usuario
@@ -88,7 +88,7 @@ interface AlifService {
     @POST("cliente/cadastro")
     fun registerClient(
         @Body userData: ClientInfo
-    ): Call<ClientInfo>
+    ): Call<MessageRequest>
 
     //Verificar email
     @Headers("Content-Type: application/json")

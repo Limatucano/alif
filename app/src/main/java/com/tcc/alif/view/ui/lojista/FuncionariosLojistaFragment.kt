@@ -17,9 +17,9 @@ import com.tcc.alif.databinding.FragmentFuncionariosBinding
 import com.tcc.alif.model.LojistaInfo
 import com.tcc.alif.model.MeusFuncionarios
 import com.tcc.alif.model.MinhasFilas
-import com.tcc.alif.model.RestApiService
 import com.tcc.alif.model.domain.MeusFuncionariosData
 import com.tcc.alif.model.domain.MinhasFilasData
+import com.tcc.alif.model.restApiService.lojistaService
 import com.tcc.alif.view.adapter.MeusFuncionariosAdapter
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
 
@@ -86,7 +86,7 @@ class FuncionariosLojistaFragment : Fragment(), MeusFuncionariosAdapter.OnClickI
 
     private fun getMyFuncionarios(){
         val preferences = activity?.getSharedPreferences("LojistaData", Context.MODE_PRIVATE) ?: return
-        val service = RestApiService()
+        val service = lojistaService()
         val id_lojista = preferences.getInt("id_lojista", 0)
         service.getMyFuncionarios(id_lojista.toString()) { status: Int?, response: MeusFuncionarios? ->
 

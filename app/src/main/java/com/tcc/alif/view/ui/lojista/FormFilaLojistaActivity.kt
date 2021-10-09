@@ -1,16 +1,10 @@
 package com.tcc.alif.view.ui.lojista
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
@@ -18,7 +12,7 @@ import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityFormFilaLojistaBinding
 import com.tcc.alif.model.FilaInfo
 import com.tcc.alif.model.MessageRequest
-import com.tcc.alif.model.RestApiService
+import com.tcc.alif.model.restApiService.lojistaService
 import com.tcc.alif.model.util.TimerPickerHelper
 import com.tcc.alif.model.util.ValidateUtil
 import java.io.Serializable
@@ -29,7 +23,7 @@ class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
     private val viewBinding : ActivityFormFilaLojistaBinding by viewBinding()
     lateinit var timePicker : TimerPickerHelper
     override fun onCreate(savedInstanceState: Bundle?) {
-        val apiService = RestApiService()
+        val apiService = lojistaService()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_fila_lojista)
 
