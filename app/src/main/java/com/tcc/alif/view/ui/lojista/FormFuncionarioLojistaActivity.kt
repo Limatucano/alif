@@ -11,7 +11,7 @@ import com.tcc.alif.databinding.ActivityFormFilaLojistaBinding
 import com.tcc.alif.databinding.ActivityFormFuncionarioLojistaBinding
 import com.tcc.alif.model.FuncionarioInfo
 import com.tcc.alif.model.MessageRequest
-import com.tcc.alif.model.RestApiService
+import com.tcc.alif.model.restApiService.lojistaService
 import com.tcc.alif.model.util.CPFUtil
 import com.tcc.alif.model.util.MaskUtils
 import com.tcc.alif.model.util.ValidateUtil
@@ -20,7 +20,7 @@ class FormFuncionarioLojistaActivity : AppCompatActivity() {
     private val viewBinding : ActivityFormFuncionarioLojistaBinding by viewBinding()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val apiService = RestApiService()
+        val apiService = lojistaService()
         setContentView(R.layout.activity_form_funcionario_lojista)
         viewBinding.cpf.addTextChangedListener(MaskUtils.cpfMask(viewBinding.cpf))
         val funcionario = intent?.getSerializableExtra("funcionario") as HashMap<*, *>?

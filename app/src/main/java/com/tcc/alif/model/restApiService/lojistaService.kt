@@ -24,7 +24,6 @@ class lojistaService {
         retrofit.updateProfileLojista(lojistaInfo).enqueue(
             object  : Callback<MessageRequest> {
                 override fun onResponse(call: Call<MessageRequest>, response: Response<MessageRequest>) {
-                    Log.d("TESTE",response.message().toString())
                     onResult(response.code(), response.body())
                 }
 
@@ -232,11 +231,7 @@ class lojistaService {
                 override fun onResponse(call: Call<MinhasFilas>, response: Response<MinhasFilas>) {
                     val  addedClient = response.body()
                     val status = response.code()
-                    if(response.code() != 200){
-                        onResult(status,addedClient)
-                    }else{
-                        onResult(status,addedClient)
-                    }
+                    onResult(status,addedClient)
                 }
             }
         )
@@ -284,11 +279,7 @@ class lojistaService {
                 override fun onResponse(call: Call<FilaInfo>, response: Response<FilaInfo>) {
                     val addedFila = response.body()
                     val status = response.code()
-                    if(response.code() != 200){
-                        onResult(status,addedFila)
-                    }else{
-                        onResult(status,addedFila)
-                    }
+                    onResult(status,addedFila)
                 }
             }
         )
@@ -341,13 +332,9 @@ class lojistaService {
                     }else{
                         onResult(status,addedClient)
                     }
-
                 }
-
             }
         )
     }
-
-
 
 }

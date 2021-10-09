@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentFilasLojistaBinding
-import com.tcc.alif.databinding.FragmentPerfilLojistaBinding
 import com.tcc.alif.model.LojistaInfo
 import com.tcc.alif.model.MinhasFilas
-import com.tcc.alif.model.RestApiService
 import com.tcc.alif.model.domain.MinhasFilasData
 import com.tcc.alif.model.restApiService.lojistaService
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
