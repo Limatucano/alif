@@ -77,7 +77,6 @@ class PerfilLojistaFragment : Fragment() {
             )
 
             service.updateProfileLojista(data){ status : Int?, response: MessageRequest? ->
-                Log.d("TESTE", status.toString())
                 if(status != 200){
                     Toast.makeText(context, "Erro ao atualizar perfil", Toast.LENGTH_LONG).show()
                     return@updateProfileLojista

@@ -1,11 +1,15 @@
 package com.tcc.alif.view.ui.cliente
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
+import com.tcc.alif.databinding.FragmentPerfilClienteBinding
+import com.tcc.alif.databinding.FragmentPerfilLojistaBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,7 +22,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class PerfilClienteFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+    private val viewBinding : FragmentPerfilClienteBinding by viewBinding()
     private var param1: String? = null
     private var param2: String? = null
 
@@ -38,6 +42,22 @@ class PerfilClienteFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_perfil_cliente, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+       val clientData = activity?.getSharedPreferences("ClientData", Context.MODE_PRIVATE) ?: return
+       val clientSet = mapOf(
+           "id_cliente" to clientData.getInt("id_cliente", 0),
+           "nome" to clientData.getString("nome", ""),
+           "cpf" to clientData.getString("cpf", ""),
+           "nascimento" to clientData.getString("nascimento", ""),
+           "numero_celular" to clientData.getString("numero_celular", ""),
+           "email" to clientData.getString("email", "")
+       )
+       viewBinding.editNome.setText(clientSet["nome"].toString())
+       viewBinding.editCPF.setText(clientSet["cpf"].toString())
+       viewBinding.editCelular.setText(clientSet["numero_celular"].toString())
+       viewBinding.editEmail.setText(clientSet["email"].toString())
+
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
