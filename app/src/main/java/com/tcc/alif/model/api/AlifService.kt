@@ -6,6 +6,12 @@ import retrofit2.http.*
 
 interface AlifService {
 
+    @Headers("Content-type: application/json")
+    @GET("cliente/data/{email}")
+    fun getClientData(
+        @Path("email") email: String
+    ): Call<ClientInfo>
+
     @Headers("Content-Type: application/json")
     @PATCH("lojista/atualizarperfil")
     fun updateProfileLojista(
