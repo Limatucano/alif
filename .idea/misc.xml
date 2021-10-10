@@ -3,16 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/queue.xml" value="0.3402777777777778" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/radio_normal.xml" value="0.23703703703703705" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/radio_selected.xml" value="0.23703703703703705" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/radio_selected_filter.xml" value="0.23703703703703705" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/radio_selector.xml" value="0.23703703703703705" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/radio_selector_filter.xml" value="0.23703703703703705" />
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/svg_clock.xml" value="0.3402777777777778" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/text_color.xml" value="0.23703703703703705" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/layout/activity_cliente.xml" value="0.11503623188405797" />
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/layout/activity_detalhe_fila_cliente.xml" value="0.33" />
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/layout/activity_detalhe_fila_home.xml" value="0.15898825654923215" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/layout/activity_modo.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/layout/fragment_home_lojista.xml" value="0.2595108695652174" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/layout/fragment_pesquisar_cliente.xml" value="1.0" />
+        <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/layout/minhas_filas_home_item.xml" value="0.15898825654923215" />
       </map>
     </option>
   </component>

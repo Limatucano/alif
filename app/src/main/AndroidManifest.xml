@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Alif">
-        <activity android:name=".view.ui.lojista.DetalheFilaHomeActivity"></activity>
+        <activity
+            android:name=".DetalheFilaClienteActivity"
+            android:exported="true" />
+        <activity android:name=".view.ui.lojista.DetalheFilaHomeActivity" />
         <activity android:name=".view.ui.lojista.FormFuncionarioLojistaActivity" />
         <activity android:name=".view.ui.lojista.FormFilaLojistaActivity" />
         <activity android:name=".view.ui.lojista.LojistaActivity" />

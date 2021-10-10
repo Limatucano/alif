@@ -1,6 +1,7 @@
 package com.tcc.alif.view.ui.cliente
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -63,7 +64,6 @@ class PesquisarClienteFragment : Fragment(R.layout.fragment_pesquisar_cliente) ,
                 apiService.getFilasByName(arr){ status: Int?, minhasFilas: MinhasFilas? ->
                     if (status != 200) {
                         Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
-                        //Snackbar.make(viewBinding., R.string.erro_pegar_fila, Snackbar.LENGTH_LONG ).show()
                     } else {
                         minhasFilas?.response?.let {
                             val fila : List<MinhasFilasData> = it.map{ fila ->
@@ -108,6 +108,6 @@ class PesquisarClienteFragment : Fragment(R.layout.fragment_pesquisar_cliente) ,
     }
 
     override fun onItemClick(items: MinhasFilasData, position: Int) {
-        TODO("Not yet implemented")
+        Log.d("TESTE", items.nome_da_fila.toString())
     }
 }
