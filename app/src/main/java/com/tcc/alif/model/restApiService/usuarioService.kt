@@ -10,13 +10,31 @@ import retrofit2.Response
 class usuarioService {
 
 
+
+    fun getClientData(email: String, onResult: (Int?, ClientInfo?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.getClientData(email).enqueue(
+            object : Callback<ClientInfo> {
+                override fun onResponse(call: Call<ClientInfo>, response: Response<ClientInfo>) {
+                    val addedClient = response.body()
+                    val status = response.code()
+                    onResult(status,addedClient)
+                }
+
+                override fun onFailure(call: Call<ClientInfo>, t: Throwable) {
+                    onResult(500,null)
+                }
+
+            }
+        )
+    }
     /*
-* Registra um novo cliente
-*
-* @param  userData Informações do cliente
-*         onResult Função de callback
-*
-* */
+    * Registra um novo cliente
+    *
+    * @param  userData Informações do cliente
+    *         onResult Função de callback
+    *
+    * */
     fun registerClient(userData: ClientInfo, onResult : (Int?, MessageRequest?) -> Unit){
         val retrofit = ServiceBuilder.buildService(AlifService::class.java)
         retrofit.registerClient(userData).enqueue(

@@ -36,7 +36,6 @@
             android:paddingStart="40dp"
             android:paddingLeft="40dp"
             android:gravity="center_vertical"
-            android:text="Olá, Matheus Lima Corrêa"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />

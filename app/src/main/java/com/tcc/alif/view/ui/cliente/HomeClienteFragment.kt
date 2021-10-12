@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
+import com.tcc.alif.model.ClientInfo
 import com.tcc.alif.model.MinhasFilas
 import com.tcc.alif.model.MinhasFilasPost
 import com.tcc.alif.model.domain.MinhasFilasData
