@@ -1,5 +1,6 @@
 package com.tcc.alif.view.ui.cliente
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,12 +10,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.tcc.alif.DetalheFilaClienteActivity
 import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentPesquisarClienteBinding
 import com.tcc.alif.model.*
 import com.tcc.alif.model.domain.MinhasFilasData
 import com.tcc.alif.model.restApiService.usuarioService
 import com.tcc.alif.view.adapter.PesquisaFilasAdapter
+import com.tcc.alif.view.ui.lojista.DetalheFilaHomeActivity
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -108,6 +111,21 @@ class PesquisarClienteFragment : Fragment(R.layout.fragment_pesquisar_cliente) ,
     }
 
     override fun onItemClick(items: MinhasFilasData, position: Int) {
-        Log.d("TESTE", items.nome_da_fila.toString())
+        val intent = Intent(context, DetalheFilaClienteActivity::class.java)
+        items.apply {
+            val fila: HashMap<String, Any?> = hashMapOf(
+                "id_lojista" to this.id_lojista,
+                "id_fila" to this.id_fila,
+                "quantidade_vagas" to this.quantidade_vagas,
+                "nome_da_fila" to this.nome_da_fila,
+                "horario_abertura" to this.horario_abertura,
+                "horario_fechamento" to this.horario_fechamento,
+                "tempo_medio" to this.tempo_medio
+            )
+            val b = Bundle()
+            b.putSerializable("fila", fila)
+            intent.putExtras(b)
+            context?.startActivity(intent)
+        }
     }
 }
