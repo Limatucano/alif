@@ -24,5 +24,6 @@ data class MinhasFilasResponse(
         val horario_abertura:String? = "",
         val horario_fechamento:String? = "",
         val tempo_medio:String? = "",
-        val id_lojista:String? = ""
+        val id_lojista:String? = "",
+        val nome_fantasia:String? = ""
 )

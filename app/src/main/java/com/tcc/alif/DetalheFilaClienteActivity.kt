@@ -19,6 +19,7 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
             viewBinding.tempoMedio.text = getString(R.string.minutosMedia_placeholder,fila["tempo_medio"].toString())
             viewBinding.horaAbertura.text = fila["horario_abertura"].toString()
             viewBinding.horaFechamento.text = fila["horario_fechamento"].toString()
+            viewBinding.lojista.text = fila["nome_fantasia"].toString()
             //viewBinding.numeroFila.text = fila["id_fila"].toString().padStart(5,'0')
         }
         viewBinding.btnVoltar.setOnClickListener {

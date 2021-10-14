@@ -10,6 +10,8 @@ class MinhasFilasData(
         val horario_fechamento:String?,
         val tempo_medio:String?,
         val id_lojista:String?,
+        val nome_fantasia: String? = "",
         val primeirosClientes: List<String>? = null
+
 
 )

@@ -69,7 +69,7 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
                     r?.response.let { meusClientes ->
                         response?.response?.let { filas ->
                             val fila: List<MinhasFilasData> = filas.map{ fila ->
-                                MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista, meusClientes?.get(fila.id_fila.toString()))
+                                MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista, primeirosClientes = meusClientes?.get(fila.id_fila.toString()))
                             }
                             val layoutManager = LinearLayoutManager(context)
                             activity?.runOnUiThread{
