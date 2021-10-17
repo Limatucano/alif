@@ -84,6 +84,8 @@
     <string name="quantidade_placeholder">Quantidade Máxima: %s</string>
     <string name="minutosMedia_placeholder">Minutos em Média: %s</string>
     <string name="total_pessoas_fila">Total de Pessoas na Fila: %s</string>
+    <string name="pessoas">%s pessoas</string>
+    <string name="tempo_para_ser_atendido">%s min em média</string>
 
 
 </resources>

@@ -15,8 +15,8 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
 
         if(!fila.isNullOrEmpty()){
             viewBinding.nomeFila.text = fila["nome_da_fila"].toString()
-            viewBinding.qtdPessoasFila.text = getString(R.string.quantidade_placeholder,fila["quantidade_vagas"])
-            viewBinding.tempoMedio.text = getString(R.string.minutosMedia_placeholder,fila["tempo_medio"].toString())
+            viewBinding.qtdPessoasFila.text = getString(R.string.pessoas,fila["quantidade_vagas"])
+            viewBinding.tempoMedio.text = getString(R.string.tempo_para_ser_atendido,fila["tempo_medio"].toString())
             viewBinding.horaAbertura.text = fila["horario_abertura"].toString()
             viewBinding.horaFechamento.text = fila["horario_fechamento"].toString()
             viewBinding.lojista.text = fila["nome_fantasia"].toString()
