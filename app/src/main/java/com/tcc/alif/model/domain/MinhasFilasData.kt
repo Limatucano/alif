@@ -1,6 +1,5 @@
 package com.tcc.alif.model.domain
 
-import com.tcc.alif.model.MeusPrimeirosClientes
 
 class MinhasFilasData(
         val nome_da_fila: String?,
@@ -11,7 +10,6 @@ class MinhasFilasData(
         val tempo_medio:String?,
         val id_lojista:String?,
         val nome_fantasia: String? = "",
+        val quantidade_por_fila: String? = "",
         val primeirosClientes: List<String>? = null
-
-
 )
