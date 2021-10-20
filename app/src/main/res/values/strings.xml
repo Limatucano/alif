@@ -84,6 +84,10 @@
     <string name="quantidade_placeholder">Quantidade Máxima: %s</string>
     <string name="minutosMedia_placeholder">Minutos em Média: %s</string>
     <string name="total_pessoas_fila">Total de Pessoas na Fila: %s</string>
-
+    <string name="pessoas">%s pessoas</string>
+    <string name="tempo_para_ser_atendido">%s min em média</string>
+    <string name="inserido_com_sucesso_na_fila">Cadastrado com sucesso na Fila!</string>
+    <string name="ja_cadastrado_na_fila">Já cadastrado na Fila</string>
+    <string name="erro_cadastrar_na_fila">Erro ao se cadastrar na Fila :(</string>
 
 </resources>

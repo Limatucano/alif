@@ -70,7 +70,16 @@ class PesquisarClienteFragment : Fragment(R.layout.fragment_pesquisar_cliente) ,
                     } else {
                         minhasFilas?.response?.let {
                             val fila : List<MinhasFilasData> = it.map{ fila ->
-                                MinhasFilasData(fila.nome_da_fila, fila.id_fila, fila.quantidade_vagas, fila.horario_abertura, fila.horario_fechamento, fila.tempo_medio, fila.id_lojista)
+                                MinhasFilasData(
+                                    nome_da_fila = fila.nome_da_fila,
+                                    id_fila = fila.id_fila,
+                                    quantidade_vagas = fila.quantidade_vagas,
+                                    horario_abertura = fila.horario_abertura,
+                                    horario_fechamento = fila.horario_fechamento,
+                                    tempo_medio = fila.tempo_medio,
+                                    id_lojista = fila.id_lojista,
+                                    nome_fantasia = fila.nome_fantasia,
+                                    quantidade_por_fila = fila.quantidade_por_fila)
                             }
 
                             val layoutManager = LinearLayoutManager(context)
@@ -112,6 +121,7 @@ class PesquisarClienteFragment : Fragment(R.layout.fragment_pesquisar_cliente) ,
 
     override fun onItemClick(items: MinhasFilasData, position: Int) {
         val intent = Intent(context, DetalheFilaClienteActivity::class.java)
+
         items.apply {
             val fila: HashMap<String, Any?> = hashMapOf(
                 "id_lojista" to this.id_lojista,
@@ -120,7 +130,9 @@ class PesquisarClienteFragment : Fragment(R.layout.fragment_pesquisar_cliente) ,
                 "nome_da_fila" to this.nome_da_fila,
                 "horario_abertura" to this.horario_abertura,
                 "horario_fechamento" to this.horario_fechamento,
-                "tempo_medio" to this.tempo_medio
+                "tempo_medio" to this.tempo_medio,
+                "nome_fantasia" to this.nome_fantasia,
+                "quantidade_por_fila" to this.quantidade_por_fila
             )
             val b = Bundle()
             b.putSerializable("fila", fila)

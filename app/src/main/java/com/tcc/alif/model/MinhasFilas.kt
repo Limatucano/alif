@@ -6,6 +6,11 @@ data class MessageRequest(
         @SerializedName("message")  val message : String? = ""
 )
 
+data class inscreverFilaPost(
+        @SerializedName("id_cliente") val id_cliente: String,
+        @SerializedName("id_fila") val id_fila: String
+)
+
 data class MinhasFilasPost(
         @SerializedName("email") val email: String? = ""
 )
@@ -23,6 +28,9 @@ data class MinhasFilasResponse(
         val quantidade_vagas:String? = "",
         val horario_abertura:String? = "",
         val horario_fechamento:String? = "",
-        val tempo_medio:String? = "",
-        val id_lojista:String? = ""
+        var tempo_medio:String? = "",
+        val id_lojista:String? = "",
+        val nome_fantasia:String? = "",
+        val quantidade_por_fila: String? = ""
+
 )
