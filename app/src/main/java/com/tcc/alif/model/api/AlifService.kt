@@ -5,6 +5,11 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface AlifService {
+    @Headers("Content-type: application/json")
+    @POST("fila/detailfila")
+    fun getFilaById(
+        @Body filaData : FilaInfo
+    ): Call<MinhasFilas>
 
     @Headers("Content-type: application/json")
     @GET("cliente/data/{email}")

@@ -150,13 +150,33 @@ class usuarioService {
                     onResult(500,null)
                 }
                 override fun onResponse(call: Call<MinhasFilas>, response: Response<MinhasFilas>) {
-                    val  addedClient = response.body()
+                    val addedClient = response.body()
                     val status = response.code()
-                    if(response.code() != 200){
-                        onResult(status,addedClient)
-                    }else{
-                        onResult(status,addedClient)
-                    }
+                    onResult(status,addedClient)
+
+                }
+
+            }
+        )
+    }
+    /*
+    * Pega o tempo médio e quantidade de cliente na fila para atualizar o detalhe da fila
+    *
+    * @param  userData Informações da fila
+    *         onResult Função de callback
+    *
+    * */
+    fun getFilaById(userData: FilaInfo, onResult: (Int?, MinhasFilas?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.getFilaById(userData).enqueue(
+            object : Callback<MinhasFilas> {
+                override fun onFailure(call: Call<MinhasFilas>, t: Throwable) {
+                    onResult(500,null)
+                }
+                override fun onResponse(call: Call<MinhasFilas>, response: Response<MinhasFilas>) {
+                    val addedClient = response.body()
+                    val status = response.code()
+                    onResult(status,addedClient)
 
                 }
 
