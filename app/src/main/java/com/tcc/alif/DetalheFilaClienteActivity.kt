@@ -9,7 +9,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.databinding.ActivityDetalheFilaClienteBinding
 import com.tcc.alif.databinding.ActivityDetalheFilaHomeBinding
 import com.tcc.alif.model.FilaInfo
+import com.tcc.alif.model.MessageRequest
 import com.tcc.alif.model.MinhasFilas
+import com.tcc.alif.model.inscreverFilaPost
 import com.tcc.alif.model.restApiService.usuarioService
 
 class DetalheFilaClienteActivity : AppCompatActivity() {
@@ -18,20 +20,21 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalhe_fila_cliente)
         val fila = intent?.getSerializableExtra("fila") as HashMap<*, *>?
-
+        val apiService = usuarioService()
 
         if(!fila.isNullOrEmpty()){
             var tempoMedio = fila["tempo_medio"].toString().toInt() * fila["quantidade_por_fila"].toString().toInt()
             val filaInfo = FilaInfo(
                 id_fila = fila["id_fila"].toString().toInt(),
             )
-            val apiService = usuarioService()
+
             apiService.getFilaById(filaInfo){ status: Int?, minhasFilas: MinhasFilas? ->
                 if (status == 200) {
                     minhasFilas?.response?.get(0)?.let{
                         if(!it.tempo_medio.isNullOrEmpty() && !it.quantidade_por_fila.isNullOrEmpty()){
                            tempoMedio = it.tempo_medio.toString().toInt() * it.quantidade_por_fila.toString().toInt()
                            viewBinding.tempoMedio.text = getString(R.string.tempo_para_ser_atendido,tempoMedio.toString())
+                           viewBinding.qtdPessoasFila.text = getString(R.string.pessoas,it.quantidade_por_fila.toString())
                         }
                     }
                 }
@@ -54,8 +57,18 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
             val id_fila = fila?.get("id_fila")
             val id_cliente = clientData.getInt("id_cliente", 0)
 
-            Log.d("TESTE FILA", id_fila.toString())
-            Log.d("TESTE CLIENTE", id_cliente.toString())
+            val data = inscreverFilaPost(
+                id_fila = id_fila.toString(),
+                id_cliente = id_cliente.toString()
+            )
+
+            apiService.inscreverClienteFila(data){ status: Int?, message: MessageRequest? ->
+                when(status){
+                    201 -> Toast.makeText(this, R.string.inserido_com_sucesso_na_fila, Toast.LENGTH_LONG).show()
+                    409 -> Toast.makeText(this, R.string.ja_cadastrado_na_fila, Toast.LENGTH_LONG).show()
+                    else -> Toast.makeText(this, R.string.erro_cadastrar_na_fila, Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 }

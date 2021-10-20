@@ -184,4 +184,28 @@ class usuarioService {
         )
     }
 
+    /*
+    * Pega o tempo médio e quantidade de cliente na fila para atualizar o detalhe da fila
+    *
+    * @param  userData Informações da fila
+    *         onResult Função de callback
+    *
+    * */
+    fun inscreverClienteFila(userData: inscreverFilaPost, onResult: (Int?, MessageRequest?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.inscreverClienteFila(userData).enqueue(
+            object : Callback<MessageRequest> {
+                override fun onFailure(call: Call<MessageRequest>, t: Throwable) {
+                    onResult(500,null)
+                }
+                override fun onResponse(call: Call<MessageRequest>, response: Response<MessageRequest>) {
+                    val addedClient = response.body()
+                    val status = response.code()
+                    onResult(status,addedClient)
+                }
+
+            }
+        )
+    }
+
 }

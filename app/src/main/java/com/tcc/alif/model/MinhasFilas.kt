@@ -6,6 +6,11 @@ data class MessageRequest(
         @SerializedName("message")  val message : String? = ""
 )
 
+data class inscreverFilaPost(
+        @SerializedName("id_cliente") val id_cliente: String,
+        @SerializedName("id_fila") val id_fila: String
+)
+
 data class MinhasFilasPost(
         @SerializedName("email") val email: String? = ""
 )
