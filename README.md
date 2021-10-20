@@ -7,6 +7,10 @@ ALIF é um serviço genérico de gestão de filas de espera para médias e peque
 
 ## Stack
 
+### Data Base
+- Postgresql
+- Hospedado no heroku add-ons
+
 ### App
 - Kotlin
 - Android
@@ -18,7 +22,7 @@ ALIF é um serviço genérico de gestão de filas de espera para médias e peque
 - Node.JS
 - bcrypt
 - express
-- pg (usado para conectar com postgresql)
+- pg
 - jsonwebtoken
 
 ## Images
