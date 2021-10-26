@@ -58,7 +58,9 @@ class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
                 finish()
             }
         }
+        viewBinding.salvarFila.isClickable = true
         viewBinding.salvarFila.setOnClickListener {
+            viewBinding.salvarFila.isClickable = false
             val preferences = this.getSharedPreferences("LojistaData", Context.MODE_PRIVATE)
             if(validateForm()){
                 if(!fila.isNullOrEmpty()){
@@ -86,7 +88,9 @@ class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
                             tempo_medio = viewBinding.minutosMedia.text.toString(),
                     )
                     apiService.registerFila(dataFila) { status: Int?, filaData: FilaInfo? ->
+
                         if (status != 201) {
+                            viewBinding.salvarFila.isClickable = true
                             Snackbar.make(viewBinding.layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG).show()
                         } else {
                             finish()
