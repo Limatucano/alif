@@ -2,7 +2,6 @@ package com.tcc.alif.view.ui.cliente
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +9,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.tcc.alif.DetalheFilaClienteActivity
 import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentPesquisarClienteBinding
 import com.tcc.alif.model.*
 import com.tcc.alif.model.domain.MinhasFilasData
 import com.tcc.alif.model.restApiService.usuarioService
 import com.tcc.alif.view.adapter.PesquisaFilasAdapter
-import com.tcc.alif.view.ui.lojista.DetalheFilaHomeActivity
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
