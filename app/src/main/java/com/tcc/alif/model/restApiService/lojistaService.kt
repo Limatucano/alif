@@ -47,10 +47,14 @@ class lojistaService {
         retrofit.getMeusClientesFila(id_fila).enqueue(
             object : Callback<MeusClientesFila>{
                 override fun onResponse(call: Call<MeusClientesFila>, response: Response<MeusClientesFila>) {
+                    Log.d("TESTE - RESPONSE CODE",response.code().toString())
+                    Log.d("TESTE - RESPONSE BODY",response.body().toString())
                     onResult(response.code(), response.body())
                 }
 
                 override fun onFailure(call: Call<MeusClientesFila>, t: Throwable) {
+                    Log.d("TESTE - FAILED BODY",t.message.toString())
+                    Log.d("TESTE - FAILED CODE",t.cause.toString())
                     onResult(500,null)
                 }
 
