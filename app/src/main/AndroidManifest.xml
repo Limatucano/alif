@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Alif">
         <activity
-            android:name=".DetalheFilaClienteActivity"
+            android:name=".view.ui.cliente.DetalheFilaClienteActivity"
             android:exported="true" />
         <activity android:name=".view.ui.lojista.DetalheFilaHomeActivity" />
         <activity android:name=".view.ui.lojista.FormFuncionarioLojistaActivity" />

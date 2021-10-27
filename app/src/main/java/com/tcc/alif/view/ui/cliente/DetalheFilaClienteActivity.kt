@@ -1,18 +1,18 @@
-package com.tcc.alif
+package com.tcc.alif.view.ui.cliente
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityDetalheFilaClienteBinding
-import com.tcc.alif.databinding.ActivityDetalheFilaHomeBinding
 import com.tcc.alif.model.FilaInfo
 import com.tcc.alif.model.MessageRequest
 import com.tcc.alif.model.MinhasFilas
 import com.tcc.alif.model.inscreverFilaPost
 import com.tcc.alif.model.restApiService.usuarioService
+import javax.net.ssl.HttpsURLConnection
 
 class DetalheFilaClienteActivity : AppCompatActivity() {
     private val viewBinding : ActivityDetalheFilaClienteBinding by viewBinding()
@@ -64,8 +64,11 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
 
             apiService.inscreverClienteFila(data){ status: Int?, message: MessageRequest? ->
                 when(status){
-                    201 -> Toast.makeText(this, R.string.inserido_com_sucesso_na_fila, Toast.LENGTH_LONG).show()
-                    409 -> Toast.makeText(this, R.string.ja_cadastrado_na_fila, Toast.LENGTH_LONG).show()
+                    HttpsURLConnection.HTTP_CREATED -> {
+                        finish()
+                        Toast.makeText(this, R.string.inserido_com_sucesso_na_fila, Toast.LENGTH_LONG).show()
+                    }
+                    HttpsURLConnection.HTTP_CONFLICT -> Toast.makeText(this, R.string.ja_cadastrado_na_fila, Toast.LENGTH_LONG).show()
                     else -> Toast.makeText(this, R.string.erro_cadastrar_na_fila, Toast.LENGTH_LONG).show()
                 }
             }

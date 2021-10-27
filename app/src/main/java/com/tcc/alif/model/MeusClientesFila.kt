@@ -8,7 +8,7 @@ data class MeusClientesFila(
 
 data class MeusClientesFilaResponse(
     @SerializedName("nome_completo") val nome_completo: String? = "",
-    @SerializedName("numero_celular") val numero_celular: Int? = null,
+    @SerializedName("numero_celular") val numero_celular: String? = "",
     @SerializedName("email") val email: String? = "",
-    @SerializedName("nascimento") val nascimento: String? = null,
+    @SerializedName("nascimento") val nascimento: String? = "",
 )

@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityCadastroBinding
 import com.tcc.alif.model.*
@@ -61,7 +63,8 @@ class CadastroActivity : AppCompatActivity() {
                 val apiService = lojistaService()
                 if (radioCpf.isChecked) {
                     ValidateUtil.validate(cpfLojista)
-                    if (ValidateUtil.validate(celularJuridico) && ValidateUtil.validate(nomeEmpresa) && (ValidateUtil.validate(cpfLojista) || ValidateUtil.validate(cnpjLojista))) {
+
+                    if (verifyIfFormLojistaIsValid(celularJuridico,nomeEmpresa,cpfLojista,cnpjLojista)) {
                         val lojistaCPF = LojistaInfo(
                                 nome_fantasia = nomeEmpresa.text.toString(),
                                 tipo_doc = "CPF",
@@ -89,7 +92,7 @@ class CadastroActivity : AppCompatActivity() {
                 }
                 if (radioCnpj.isChecked) {
                     ValidateUtil.validate(cnpjLojista)
-                    if (ValidateUtil.validate(celularJuridico) && ValidateUtil.validate(nomeEmpresa) && (ValidateUtil.validate(cpfLojista) || ValidateUtil.validate(cnpjLojista))) {
+                    if (verifyIfFormLojistaIsValid(celularJuridico,nomeEmpresa,cpfLojista,cnpjLojista)) {
                         val lojistaCNPJ = LojistaInfo(
                                 nome_fantasia = nomeEmpresa.text.toString(),
                                 tipo_doc = "CNPJ",
@@ -124,8 +127,9 @@ class CadastroActivity : AppCompatActivity() {
                     cpf.error = getString(R.string.cpf_invalid_error)
                 }
 
+                val formClienteIsValid = DateUtil.myValidateDate(dataNascimento.text.toString()) && CPFUtil.myValidateCPF(cpf.text.toString()) && ValidateUtil.validate(nome) && ValidateUtil.validate(cpf) && ValidateUtil.validate(celular) && ValidateUtil.validate(dataNascimento)
 
-                if (ValidateUtil.validate(nome) && ValidateUtil.validate(cpf) && ValidateUtil.validate(celular) && ValidateUtil.validate(dataNascimento)) {
+                if (formClienteIsValid) {
                     val apiServiceUsuario = usuarioService()
                     val nascimentoFormatado = formatDate(dataNascimento.text.toString(),"dd/mm/yyyy","yyyy-mm-dd")
 
@@ -200,6 +204,10 @@ class CadastroActivity : AppCompatActivity() {
                     celularJuridico.text?.clear()
             }
         }
+    fun verifyIfFormLojistaIsValid(celularJuridico : TextInputEditText, nomeEmpresa : TextInputEditText, cpfLojista: TextInputEditText, cnpjLojista: TextInputEditText) : Boolean{
+        val formLojistaIsValid = CPFUtil.myValidateCPF(cpfLojista.text.toString()) && CNPJUtil.myValidateCNPJ(cnpjLojista.text.toString()) && ValidateUtil.validate(celularJuridico) && ValidateUtil.validate(nomeEmpresa) && (ValidateUtil.validate(cpfLojista) || ValidateUtil.validate(cnpjLojista))
+        return formLojistaIsValid
+    }
 
     fun formatDate(
         date: String?,
