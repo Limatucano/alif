@@ -129,7 +129,8 @@ class PesquisarClienteFragment : Fragment(R.layout.fragment_pesquisar_cliente) ,
                 "horario_fechamento" to this.horario_fechamento,
                 "tempo_medio" to this.tempo_medio,
                 "nome_fantasia" to this.nome_fantasia,
-                "quantidade_por_fila" to this.quantidade_por_fila
+                "quantidade_por_fila" to this.quantidade_por_fila,
+                "is_minha_fila" to false,
             )
             val b = Bundle()
             b.putSerializable("fila", fila)

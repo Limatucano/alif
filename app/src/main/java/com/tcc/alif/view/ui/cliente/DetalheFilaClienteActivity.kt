@@ -3,6 +3,8 @@ package com.tcc.alif.view.ui.cliente
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
@@ -23,11 +25,28 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
         val apiService = usuarioService()
 
         if(!fila.isNullOrEmpty()){
-            var tempoMedio = fila["tempo_medio"].toString().toInt() * fila["quantidade_por_fila"].toString().toInt()
+            var tempoMedio = 0
+            if(fila["tempo_medio"].toString().isNotEmpty() && fila["quantidade_por_fila"].toString().isNotEmpty()){
+                tempoMedio = fila["tempo_medio"].toString().toInt() * fila["quantidade_por_fila"].toString().toInt()
+            }
+            when(fila["is_minha_fila"]){
+                true -> {
+                    viewBinding.inscrever.visibility = View.GONE
+                    viewBinding.cancelar.visibility = View.VISIBLE
+                }
+                false -> {
+                    viewBinding.inscrever.visibility = View.VISIBLE
+                    viewBinding.cancelar.visibility = View.GONE
+                }
+            }
             val filaInfo = FilaInfo(
                 id_fila = fila["id_fila"].toString().toInt(),
             )
-
+            if(fila["is_minha_fila"].toString().toBoolean()){
+                Log.d("TESTE", fila["is_minha_fila"].toString() + "certo")
+            }else{
+                Log.d("TESTE", fila["is_minha_fila"].toString() + "errado")
+            }
             apiService.getFilaById(filaInfo){ status: Int?, minhasFilas: MinhasFilas? ->
                 if (status == 200) {
                     minhasFilas?.response?.get(0)?.let{
