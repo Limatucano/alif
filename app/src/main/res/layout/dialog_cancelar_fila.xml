@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:padding="10dp">
+        <TextView
+            android:id="@+id/titleDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diz para a gente o por quê deseja sair da fila"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <RadioGroup
+            android:id="@+id/grupo_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleDialog">
+
+            <RadioButton
+                android:id="@+id/compromisso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Compromisso externo"
+                android:textSize="16sp"
+                android:buttonTint="@color/black"
+                android:paddingStart="20dp"
+                android:paddingLeft="20dp" />
+            <RadioButton
+                android:id="@+id/naoQuer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Não desejo mais estar na fila"
+                android:textSize="16sp"
+                android:buttonTint="@color/black"
+                android:paddingStart="20dp"
+                android:paddingLeft="20dp" />
+            <RadioButton
+                android:id="@+id/demora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Demora no atendimento"
+                android:textSize="16sp"
+                android:buttonTint="@color/black"
+                android:paddingStart="20dp"
+                android:paddingLeft="20dp" />
+            <RadioButton
+                android:id="@+id/localFechado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Local fechado"
+                android:textSize="16sp"
+                android:buttonTint="@color/black"
+                android:paddingStart="20dp"
+                android:paddingLeft="20dp" />
+
+            <RadioButton
+                android:id="@+id/outros"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Outros"
+                android:textSize="16sp"
+                android:buttonTint="@color/black"
+                android:paddingStart="20dp"
+                android:paddingLeft="20dp" />
+        </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grupo_radio">
+
+        <TextView
+            android:id="@+id/confirmarSaida"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:background="@drawable/btn_cancelar_saida"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Cancelar"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="30dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/cancelarSaida"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_cancelar"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Sair da fila"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

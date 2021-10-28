@@ -4,8 +4,11 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityDetalheFilaClienteBinding
@@ -69,6 +72,15 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
         }
         viewBinding.btnVoltar.setOnClickListener {
             finish()
+        }
+
+        viewBinding.cancelar.setOnClickListener {
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_cancelar_fila,null)
+            val builder = AlertDialog.Builder(this).setView(dialogView).show()
+
+            dialogView.findViewById<TextView>(R.id.confirmarSaida).setOnClickListener {
+                builder.dismiss()
+            }
         }
 
         viewBinding.inscrever.setOnClickListener {
