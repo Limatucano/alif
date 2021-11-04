@@ -86,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/grupo_radio">
 
         <TextView
-            android:id="@+id/confirmarSaida"
+            android:id="@+id/cancelarSaida"
             android:layout_width="140dp"
             android:layout_height="50dp"
             android:layout_gravity="end"
@@ -103,7 +103,7 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/cancelarSaida"
+            android:id="@+id/confirmarSaida"
             android:layout_width="140dp"
             android:layout_height="50dp"
             android:background="@drawable/btn_cancelar"

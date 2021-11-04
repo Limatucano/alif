@@ -12,10 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityDetalheFilaClienteBinding
-import com.tcc.alif.model.FilaInfo
-import com.tcc.alif.model.MessageRequest
-import com.tcc.alif.model.MinhasFilas
-import com.tcc.alif.model.inscreverFilaPost
+import com.tcc.alif.model.*
 import com.tcc.alif.model.restApiService.usuarioService
 import javax.net.ssl.HttpsURLConnection
 
@@ -26,6 +23,14 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detalhe_fila_cliente)
         val fila = intent?.getSerializableExtra("fila") as HashMap<*, *>?
         val apiService = usuarioService()
+        val clientData = this.getSharedPreferences("ClientData", Context.MODE_PRIVATE)
+        val id_fila = fila?.get("id_fila")
+        val id_cliente = clientData.getInt("id_cliente", 0)
+
+        val data = clienteAndFilaPost(
+            id_fila = id_fila.toString(),
+            id_cliente = id_cliente.toString()
+        )
 
         if(!fila.isNullOrEmpty()){
             var tempoMedio = 0
@@ -45,11 +50,6 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
             val filaInfo = FilaInfo(
                 id_fila = fila["id_fila"].toString().toInt(),
             )
-            if(fila["is_minha_fila"].toString().toBoolean()){
-                Log.d("TESTE", fila["is_minha_fila"].toString() + "certo")
-            }else{
-                Log.d("TESTE", fila["is_minha_fila"].toString() + "errado")
-            }
             apiService.getFilaById(filaInfo){ status: Int?, minhasFilas: MinhasFilas? ->
                 if (status == 200) {
                     minhasFilas?.response?.get(0)?.let{
@@ -79,20 +79,19 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
             val builder = AlertDialog.Builder(this).setView(dialogView).show()
 
             dialogView.findViewById<TextView>(R.id.confirmarSaida).setOnClickListener {
+                apiService.sairClienteFila(data){ status: Int?, message: MessageRequest? ->
+                    if(status == 202){
+                        finish()
+                    }
+                }
+
+            }
+            dialogView.findViewById<TextView>(R.id.cancelarSaida).setOnClickListener {
                 builder.dismiss()
             }
         }
 
         viewBinding.inscrever.setOnClickListener {
-            val clientData = this.getSharedPreferences("ClientData", Context.MODE_PRIVATE)
-            val id_fila = fila?.get("id_fila")
-            val id_cliente = clientData.getInt("id_cliente", 0)
-
-            val data = inscreverFilaPost(
-                id_fila = id_fila.toString(),
-                id_cliente = id_cliente.toString()
-            )
-
             apiService.inscreverClienteFila(data){ status: Int?, message: MessageRequest? ->
                 when(status){
                     HttpsURLConnection.HTTP_CREATED -> {

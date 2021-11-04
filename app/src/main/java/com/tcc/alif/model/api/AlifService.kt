@@ -7,9 +7,15 @@ import retrofit2.http.*
 interface AlifService {
 
     @Headers("Content-type: application/json")
+    @POST("cliente/sairfila")
+    fun sairClienteFila(
+        @Body data : clienteAndFilaPost
+    ): Call<MessageRequest>
+
+    @Headers("Content-type: application/json")
     @POST("cliente/inscreverfila")
     fun inscreverClienteFila(
-        @Body data : inscreverFilaPost
+        @Body data : clienteAndFilaPost
     ): Call<MessageRequest>
 
     @Headers("Content-type: application/json")

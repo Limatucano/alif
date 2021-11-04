@@ -47,9 +47,20 @@ class HomeClienteFragment : Fragment(R.layout.fragment_first_cliente), MinhasFil
         val view = inflater.inflate(R.layout.fragment_first_cliente, container, false)
         return view
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val rvFilas = view.findViewById<RecyclerView>(R.id.rvFilas)
 
+    override fun onStart() {
+        super.onStart()
+        val view = getView()
+        if(view !== null){
+            getMinhasFilas(view)
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        getMinhasFilas(view)
+    }
+    fun getMinhasFilas(view: View){
+        val rvFilas = view.findViewById<RecyclerView>(R.id.rvFilas)
         val apiService = usuarioService()
 
         var email = activity?.intent?.getSerializableExtra("email")
@@ -76,7 +87,6 @@ class HomeClienteFragment : Fragment(R.layout.fragment_first_cliente), MinhasFil
             }
         }
     }
-
     companion object {
         /**
          * Use this factory method to create a new instance of
