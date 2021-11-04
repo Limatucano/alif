@@ -218,8 +218,6 @@ class usuarioService {
                 ) {
                     val body = response.body()
                     val status = response.code()
-                    Log.d("TESTE - Metodo", userData.toString())
-                    Log.d("TESTE - Metodo", status.toString())
                     onResult(status, body)
                 }
 

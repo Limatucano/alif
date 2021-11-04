@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
+import com.tcc.alif.databinding.ActivityClienteBinding
 import com.tcc.alif.databinding.FragmentPerfilClienteBinding
 import com.tcc.alif.databinding.FragmentPerfilLojistaBinding
 import com.tcc.alif.model.ClientInfo
@@ -74,7 +76,6 @@ class PerfilClienteFragment : Fragment() {
                email = viewBinding.editEmail.text.toString()
            )
            apiService.atualizarPerfilCliente(userData){status: Int?, response: MessageRequest? ->
-               Log.d("TESTE",userData.toString())
                 when(status){
                     HttpsURLConnection.HTTP_OK -> {
                         Toast.makeText(
@@ -82,6 +83,18 @@ class PerfilClienteFragment : Fragment() {
                             "Atualizado com sucesso",
                             Toast.LENGTH_LONG
                         ).show()
+                        with(clientData.edit()){
+                            putInt("id_cliente", clientSet["id_cliente"].toString().toInt())
+                            putString("nome", viewBinding.editNome.text.toString())
+                            putString("cpf", viewBinding.editCPF.text.toString())
+                            putString("nascimento", clientSet["nascimento"].toString())
+                            putString("numero_celular", viewBinding.editCelular.text.toString())
+                            putString("email", viewBinding.editEmail.text.toString())
+                            apply()
+                        }
+                        val nomeCliente = clientData.getString("nome", "")
+                        val clienteNameActivityField = requireActivity().findViewById<TextView>(R.id.nome_cliente)
+                        clienteNameActivityField.text = nomeCliente
                     }
                     else -> {
                         Toast.makeText(
