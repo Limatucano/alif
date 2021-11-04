@@ -7,6 +7,12 @@ import retrofit2.http.*
 interface AlifService {
 
     @Headers("Content-type: application/json")
+    @PATCH("cliente/atualizarperfil")
+    fun atualizarPerfilCliente(
+        @Body userData: ClientInfo
+    ): Call<MessageRequest>
+
+    @Headers("Content-type: application/json")
     @POST("cliente/sairfila")
     fun sairClienteFila(
         @Body data : clienteAndFilaPost

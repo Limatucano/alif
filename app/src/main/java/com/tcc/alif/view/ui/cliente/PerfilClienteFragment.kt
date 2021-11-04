@@ -2,14 +2,22 @@ package com.tcc.alif.view.ui.cliente
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
+import com.tcc.alif.databinding.ActivityClienteBinding
 import com.tcc.alif.databinding.FragmentPerfilClienteBinding
 import com.tcc.alif.databinding.FragmentPerfilLojistaBinding
+import com.tcc.alif.model.ClientInfo
+import com.tcc.alif.model.MessageRequest
+import com.tcc.alif.model.restApiService.usuarioService
+import javax.net.ssl.HttpsURLConnection
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,6 +51,7 @@ class PerfilClienteFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+       val apiService = usuarioService()
        val clientData = activity?.getSharedPreferences("ClientData", Context.MODE_PRIVATE) ?: return
        val clientSet = mapOf(
            "id_cliente" to clientData.getInt("id_cliente", 0),
@@ -56,6 +65,47 @@ class PerfilClienteFragment : Fragment() {
        viewBinding.editCPF.setText(clientSet["cpf"].toString())
        viewBinding.editCelular.setText(clientSet["numero_celular"].toString())
        viewBinding.editEmail.setText(clientSet["email"].toString())
+
+
+       viewBinding.salvarPerfil.setOnClickListener {
+           val userData = ClientInfo(
+               id_cliente = clientSet["id_cliente"].toString().toInt(),
+               nome = viewBinding.editNome.text.toString(),
+               cpf = viewBinding.editCPF.text.toString(),
+               numero_celular = viewBinding.editCelular.text.toString(),
+               email = viewBinding.editEmail.text.toString()
+           )
+           apiService.atualizarPerfilCliente(userData){status: Int?, response: MessageRequest? ->
+                when(status){
+                    HttpsURLConnection.HTTP_OK -> {
+                        Toast.makeText(
+                            context,
+                            "Atualizado com sucesso",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        with(clientData.edit()){
+                            putInt("id_cliente", clientSet["id_cliente"].toString().toInt())
+                            putString("nome", viewBinding.editNome.text.toString())
+                            putString("cpf", viewBinding.editCPF.text.toString())
+                            putString("nascimento", clientSet["nascimento"].toString())
+                            putString("numero_celular", viewBinding.editCelular.text.toString())
+                            putString("email", viewBinding.editEmail.text.toString())
+                            apply()
+                        }
+                        val nomeCliente = clientData.getString("nome", "")
+                        val clienteNameActivityField = requireActivity().findViewById<TextView>(R.id.nome_cliente)
+                        clienteNameActivityField.text = nomeCliente
+                    }
+                    else -> {
+                        Toast.makeText(
+                            context,
+                            "Erro ao atualizar :(",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+           }
+       }
 
     }
     companion object {
