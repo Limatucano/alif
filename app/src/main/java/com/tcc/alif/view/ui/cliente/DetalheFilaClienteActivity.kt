@@ -86,7 +86,6 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
                 }
 
 
-                Log.d("TESTE A ", TextSelectedRadioButton)
                 val data = clienteAndFilaPost(
                     id_fila = id_fila.toString(),
                     id_cliente = id_cliente.toString(),
@@ -111,7 +110,7 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
             )
             apiService.inscreverClienteFila(data){ status: Int?, message: MessageRequest? ->
                 when(status){
-                    HttpsURLConnection.HTTP_CREATED -> {
+                    HttpsURLConnection.HTTP_CREATED,HttpsURLConnection.HTTP_ACCEPTED -> {
                         finish()
                         Toast.makeText(this, R.string.inserido_com_sucesso_na_fila, Toast.LENGTH_LONG).show()
                     }
