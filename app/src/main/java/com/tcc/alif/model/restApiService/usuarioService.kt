@@ -208,6 +208,29 @@ class usuarioService {
         )
     }
 
+    fun atualizarPerfilCliente(userData: ClientInfo, onResult: (Int?, MessageRequest?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(AlifService::class.java)
+        retrofit.atualizarPerfilCliente(userData).enqueue(
+            object : Callback<MessageRequest>{
+                override fun onResponse(
+                    call: Call<MessageRequest>,
+                    response: Response<MessageRequest>
+                ) {
+                    val body = response.body()
+                    val status = response.code()
+                    Log.d("TESTE - Metodo", userData.toString())
+                    Log.d("TESTE - Metodo", status.toString())
+                    onResult(status, body)
+                }
+
+                override fun onFailure(call: Call<MessageRequest>, t: Throwable) {
+                    onResult(500,null)
+                }
+
+            }
+        )
+    }
+
     /*
     * remove cliente da fila
     *
