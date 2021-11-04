@@ -1,6 +1,8 @@
 package com.tcc.alif.view.ui.cliente
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -45,9 +47,20 @@ class HomeClienteFragment : Fragment(R.layout.fragment_first_cliente), MinhasFil
         val view = inflater.inflate(R.layout.fragment_first_cliente, container, false)
         return view
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val rvFilas = view.findViewById<RecyclerView>(R.id.rvFilas)
 
+    override fun onStart() {
+        super.onStart()
+        val view = getView()
+        if(view !== null){
+            getMinhasFilas(view)
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        getMinhasFilas(view)
+    }
+    fun getMinhasFilas(view: View){
+        val rvFilas = view.findViewById<RecyclerView>(R.id.rvFilas)
         val apiService = usuarioService()
 
         var email = activity?.intent?.getSerializableExtra("email")
@@ -74,7 +87,6 @@ class HomeClienteFragment : Fragment(R.layout.fragment_first_cliente), MinhasFil
             }
         }
     }
-
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -95,7 +107,26 @@ class HomeClienteFragment : Fragment(R.layout.fragment_first_cliente), MinhasFil
     }
 
     override fun onItemClick(items: MinhasFilasData, position: Int) {
-        //TODO: Mandar todas informações da fila para a  activity de detalhamento
-        Toast.makeText(context, items.nome_da_fila, Toast.LENGTH_LONG).show()
+        val intent = Intent(context, DetalheFilaClienteActivity::class.java)
+
+        items.apply {
+            val fila: HashMap<String, Any?> = hashMapOf(
+                "id_lojista" to this.id_lojista,
+                "id_fila" to this.id_fila,
+                "quantidade_vagas" to this.quantidade_vagas,
+                "nome_da_fila" to this.nome_da_fila,
+                "horario_abertura" to this.horario_abertura,
+                "horario_fechamento" to this.horario_fechamento,
+                "tempo_medio" to this.tempo_medio,
+                "nome_fantasia" to this.nome_fantasia,
+                "quantidade_por_fila" to this.quantidade_por_fila,
+                "is_minha_fila" to true,
+            )
+
+            val b = Bundle()
+            b.putSerializable("fila", fila)
+            intent.putExtras(b)
+            context?.startActivity(intent)
+        }
     }
 }

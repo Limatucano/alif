@@ -91,7 +91,7 @@ class MinhasFilasHomeAdapter(private val items: List<MinhasFilasData>,var clickL
                             "nome_da_fila" to this.nome_da_fila,
                             "horario_abertura" to this.horario_abertura,
                             "horario_fechamento" to this.horario_fechamento,
-                            "tempo_medio" to this.tempo_medio
+                            "tempo_medio" to this.tempo_medio,
                     )
                     val b = Bundle()
                     b.putSerializable("fila", fila)

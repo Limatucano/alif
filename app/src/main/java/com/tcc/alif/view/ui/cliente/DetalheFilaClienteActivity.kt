@@ -3,14 +3,18 @@ package com.tcc.alif.view.ui.cliente
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityDetalheFilaClienteBinding
-import com.tcc.alif.model.FilaInfo
-import com.tcc.alif.model.MessageRequest
-import com.tcc.alif.model.MinhasFilas
-import com.tcc.alif.model.inscreverFilaPost
+import com.tcc.alif.model.*
 import com.tcc.alif.model.restApiService.usuarioService
 import javax.net.ssl.HttpsURLConnection
 
@@ -21,13 +25,30 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detalhe_fila_cliente)
         val fila = intent?.getSerializableExtra("fila") as HashMap<*, *>?
         val apiService = usuarioService()
+        val clientData = this.getSharedPreferences("ClientData", Context.MODE_PRIVATE)
+        val id_fila = fila?.get("id_fila")
+        val id_cliente = clientData.getInt("id_cliente", 0)
+
+
 
         if(!fila.isNullOrEmpty()){
-            var tempoMedio = fila["tempo_medio"].toString().toInt() * fila["quantidade_por_fila"].toString().toInt()
+            var tempoMedio = 0
+            if(fila["tempo_medio"].toString().isNotEmpty() && fila["quantidade_por_fila"].toString().isNotEmpty()){
+                tempoMedio = fila["tempo_medio"].toString().toInt() * fila["quantidade_por_fila"].toString().toInt()
+            }
+            when(fila["is_minha_fila"]){
+                true -> {
+                    viewBinding.inscrever.visibility = View.GONE
+                    viewBinding.cancelar.visibility = View.VISIBLE
+                }
+                false -> {
+                    viewBinding.inscrever.visibility = View.VISIBLE
+                    viewBinding.cancelar.visibility = View.GONE
+                }
+            }
             val filaInfo = FilaInfo(
                 id_fila = fila["id_fila"].toString().toInt(),
             )
-
             apiService.getFilaById(filaInfo){ status: Int?, minhasFilas: MinhasFilas? ->
                 if (status == 200) {
                     minhasFilas?.response?.get(0)?.let{
@@ -52,19 +73,44 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
             finish()
         }
 
-        viewBinding.inscrever.setOnClickListener {
-            val clientData = this.getSharedPreferences("ClientData", Context.MODE_PRIVATE)
-            val id_fila = fila?.get("id_fila")
-            val id_cliente = clientData.getInt("id_cliente", 0)
+        viewBinding.cancelar.setOnClickListener {
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_cancelar_fila,null)
+            val builder = AlertDialog.Builder(this).setView(dialogView).show()
+            val IdSelectedRadioButton = dialogView.findViewById<RadioGroup>(R.id.grupo_radio)
+            var TextSelectedRadioButton = ""
 
-            val data = inscreverFilaPost(
+
+            dialogView.findViewById<TextView>(R.id.confirmarSaida).setOnClickListener {
+                if(IdSelectedRadioButton.checkedRadioButtonId !== 1){
+                    TextSelectedRadioButton = dialogView.findViewById<RadioButton>(IdSelectedRadioButton.checkedRadioButtonId).text.toString()
+                }
+
+
+                val data = clienteAndFilaPost(
+                    id_fila = id_fila.toString(),
+                    id_cliente = id_cliente.toString(),
+                    motivo_saida = TextSelectedRadioButton
+                )
+                apiService.sairClienteFila(data){ status: Int?, message: MessageRequest? ->
+                    if(status == 202){
+                        finish()
+                    }
+                }
+
+            }
+            dialogView.findViewById<TextView>(R.id.cancelarSaida).setOnClickListener {
+                builder.dismiss()
+            }
+        }
+
+        viewBinding.inscrever.setOnClickListener {
+            val data = clienteAndFilaPost(
                 id_fila = id_fila.toString(),
                 id_cliente = id_cliente.toString()
             )
-
             apiService.inscreverClienteFila(data){ status: Int?, message: MessageRequest? ->
                 when(status){
-                    HttpsURLConnection.HTTP_CREATED -> {
+                    HttpsURLConnection.HTTP_CREATED,HttpsURLConnection.HTTP_ACCEPTED -> {
                         finish()
                         Toast.makeText(this, R.string.inserido_com_sucesso_na_fila, Toast.LENGTH_LONG).show()
                     }
