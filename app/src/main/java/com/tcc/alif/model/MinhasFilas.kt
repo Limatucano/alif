@@ -8,7 +8,8 @@ data class MessageRequest(
 
 data class clienteAndFilaPost(
         @SerializedName("id_cliente") val id_cliente: String,
-        @SerializedName("id_fila") val id_fila: String
+        @SerializedName("id_fila") val id_fila: String,
+        @SerializedName("motivo_saida") val motivo_saida: String? = null,
 )
 
 data class MinhasFilasPost(

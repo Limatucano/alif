@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -27,10 +29,7 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
         val id_fila = fila?.get("id_fila")
         val id_cliente = clientData.getInt("id_cliente", 0)
 
-        val data = clienteAndFilaPost(
-            id_fila = id_fila.toString(),
-            id_cliente = id_cliente.toString()
-        )
+
 
         if(!fila.isNullOrEmpty()){
             var tempoMedio = 0
@@ -77,8 +76,22 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
         viewBinding.cancelar.setOnClickListener {
             val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_cancelar_fila,null)
             val builder = AlertDialog.Builder(this).setView(dialogView).show()
+            val IdSelectedRadioButton = dialogView.findViewById<RadioGroup>(R.id.grupo_radio)
+            var TextSelectedRadioButton = ""
+
 
             dialogView.findViewById<TextView>(R.id.confirmarSaida).setOnClickListener {
+                if(IdSelectedRadioButton.checkedRadioButtonId !== 1){
+                    TextSelectedRadioButton = dialogView.findViewById<RadioButton>(IdSelectedRadioButton.checkedRadioButtonId).text.toString()
+                }
+
+
+                Log.d("TESTE A ", TextSelectedRadioButton)
+                val data = clienteAndFilaPost(
+                    id_fila = id_fila.toString(),
+                    id_cliente = id_cliente.toString(),
+                    motivo_saida = TextSelectedRadioButton
+                )
                 apiService.sairClienteFila(data){ status: Int?, message: MessageRequest? ->
                     if(status == 202){
                         finish()
@@ -92,6 +105,10 @@ class DetalheFilaClienteActivity : AppCompatActivity() {
         }
 
         viewBinding.inscrever.setOnClickListener {
+            val data = clienteAndFilaPost(
+                id_fila = id_fila.toString(),
+                id_cliente = id_cliente.toString()
+            )
             apiService.inscreverClienteFila(data){ status: Int?, message: MessageRequest? ->
                 when(status){
                     HttpsURLConnection.HTTP_CREATED -> {
