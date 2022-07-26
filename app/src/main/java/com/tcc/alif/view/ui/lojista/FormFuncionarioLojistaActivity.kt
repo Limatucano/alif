@@ -3,24 +3,21 @@ package com.tcc.alif.view.ui.lojista
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
-import com.tcc.alif.databinding.ActivityFormFilaLojistaBinding
 import com.tcc.alif.databinding.ActivityFormFuncionarioLojistaBinding
-import com.tcc.alif.model.FuncionarioInfo
-import com.tcc.alif.model.MessageRequest
-import com.tcc.alif.model.restApiService.lojistaService
-import com.tcc.alif.model.util.CPFUtil
-import com.tcc.alif.model.util.MaskUtils
-import com.tcc.alif.model.util.ValidateUtil
+import com.tcc.alif.data.FuncionarioInfo
+import com.tcc.alif.data.MessageRequest
+import com.tcc.alif.data.util.CPFUtil
+import com.tcc.alif.data.util.MaskUtils
+import com.tcc.alif.data.util.ValidateUtil
 
 class FormFuncionarioLojistaActivity : AppCompatActivity() {
     private val viewBinding : ActivityFormFuncionarioLojistaBinding by viewBinding()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val apiService = lojistaService()
+        //val apiService = lojistaService()
         setContentView(R.layout.activity_form_funcionario_lojista)
         viewBinding.cpf.addTextChangedListener(MaskUtils.cpfMask(viewBinding.cpf))
         val funcionario = intent?.getSerializableExtra("funcionario") as HashMap<*, *>?
@@ -40,9 +37,9 @@ class FormFuncionarioLojistaActivity : AppCompatActivity() {
         }
 
         viewBinding.excluirFuncionario.setOnClickListener {
-            apiService.deleteFuncionario(viewBinding.codFuncionario.text.toString()){ status: Int?, response: MessageRequest? ->
-                finish()
-            }
+//            apiService.deleteFuncionario(viewBinding.codFuncionario.text.toString()){ status: Int?, response: MessageRequest? ->
+//                finish()
+//            }
         }
         viewBinding.salvarFuncionario.setOnClickListener {
             val preferences = this.getSharedPreferences("LojistaData", Context.MODE_PRIVATE)
@@ -59,9 +56,9 @@ class FormFuncionarioLojistaActivity : AppCompatActivity() {
                             cpf = viewBinding.cpf.text.toString(),
                             cod_funcionario = viewBinding.codFuncionario.text.toString().toInt()
                     )
-                    apiService.updateFuncionario(funcionarioData){ status: Int?, response: MessageRequest? ->
-                        finish()
-                    }
+//                    apiService.updateFuncionario(funcionarioData){ status: Int?, response: MessageRequest? ->
+//                        finish()
+//                    }
                 }
                 if(funcionario.isNullOrEmpty()){
                     val funcionarioData = FuncionarioInfo(
@@ -70,9 +67,9 @@ class FormFuncionarioLojistaActivity : AppCompatActivity() {
                             id_lojista = preferences.getInt("id_lojista", 0).toString().toInt(),
                             cpf = viewBinding.cpf.text.toString(),
                     )
-                    apiService.insertNewFuncionario(funcionarioData){ status: Int?, response: MessageRequest? ->
-                        finish()
-                    }
+//                    apiService.insertNewFuncionario(funcionarioData){ status: Int?, response: MessageRequest? ->
+//                        finish()
+//                    }
                 }
             }
         }

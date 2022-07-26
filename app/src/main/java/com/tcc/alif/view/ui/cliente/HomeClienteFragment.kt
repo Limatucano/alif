@@ -2,7 +2,6 @@ package com.tcc.alif.view.ui.cliente
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
-import com.tcc.alif.model.ClientInfo
-import com.tcc.alif.model.MinhasFilas
-import com.tcc.alif.model.MinhasFilasPost
-import com.tcc.alif.model.domain.MinhasFilasData
-import com.tcc.alif.model.restApiService.usuarioService
+import com.tcc.alif.data.MinhasFilas
+import com.tcc.alif.data.MinhasFilasPost
+import com.tcc.alif.data.domain.MinhasFilasData
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
 
 
@@ -61,31 +57,31 @@ class HomeClienteFragment : Fragment(R.layout.fragment_first_cliente), MinhasFil
     }
     fun getMinhasFilas(view: View){
         val rvFilas = view.findViewById<RecyclerView>(R.id.rvFilas)
-        val apiService = usuarioService()
-
-        var email = activity?.intent?.getSerializableExtra("email")
-        val arr = MinhasFilasPost(
-            email = email.toString(),
-        )
-        apiService.getMyFilas(arr){ status: Int?, minhasFilas: MinhasFilas? ->
-
-            if (status != 200) {
-                Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
-            } else {
-                minhasFilas?.response?.let {
-                    val fila : List<MinhasFilasData> = it.map{ fila ->
-                        MinhasFilasData(fila.nome_da_fila, fila.id_fila, fila.quantidade_vagas, fila.horario_abertura, fila.horario_fechamento, fila.tempo_medio, fila.id_lojista)
-                    }
-
-                    val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    rvFilas.post{
-                        rvFilas.layoutManager = layoutManager
-                        rvFilas.adapter = MinhasFilasAdapter(fila, this)
-                    }
-                }
-
-            }
-        }
+//        val apiService = usuarioService()
+//
+//        var email = activity?.intent?.getSerializableExtra("email")
+//        val arr = MinhasFilasPost(
+//            email = email.toString(),
+//        )
+//        apiService.getMyFilas(arr){ status: Int?, minhasFilas: MinhasFilas? ->
+//
+//            if (status != 200) {
+//                Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
+//            } else {
+//                minhasFilas?.response?.let {
+//                    val fila : List<MinhasFilasData> = it.map{ fila ->
+//                        MinhasFilasData(fila.nome_da_fila, fila.id_fila, fila.quantidade_vagas, fila.horario_abertura, fila.horario_fechamento, fila.tempo_medio, fila.id_lojista)
+//                    }
+//
+//                    val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+//                    rvFilas.post{
+//                        rvFilas.layoutManager = layoutManager
+//                        rvFilas.adapter = MinhasFilasAdapter(fila, this)
+//                    }
+//                }
+//
+//            }
+//        }
     }
     companion object {
         /**

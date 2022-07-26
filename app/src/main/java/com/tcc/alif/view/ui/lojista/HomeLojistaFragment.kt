@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentHomeLojistaBinding
-import com.tcc.alif.model.*
-import com.tcc.alif.model.domain.MinhasFilasData
-import com.tcc.alif.model.restApiService.lojistaService
+import com.tcc.alif.data.*
+import com.tcc.alif.data.domain.MinhasFilasData
 import com.tcc.alif.view.adapter.MinhasFilasHomeAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -50,40 +49,40 @@ class HomeLojistaFragment : Fragment(), MinhasFilasHomeAdapter.OnClickItemListen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val preferences = activity?.getSharedPreferences("LojistaData", Context.MODE_PRIVATE) ?: return
-        val service = lojistaService()
-        val id_lojista = preferences.getInt("id_lojista", 0)
-        getData(service,id_lojista)
+//        val service = lojistaService()
+//        val id_lojista = preferences.getInt("id_lojista", 0)
+//        getData(service,id_lojista)
 
     }
 
-    fun getData(service : lojistaService, id_lojista : Int){
-        val data = LojistaInfo(id_lojista = id_lojista)
-        service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
-            if(status != 200){
-                activity?.runOnUiThread {
-                    Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
-                }
-            }else{
-                viewBinding.progressLoading.visibility = View.GONE
-                service.getMeusPrimeirosClientes(data){s: Int?, r: MeusPrimeirosClientes? ->
-                    r?.response.let { meusClientes ->
-                        response?.response?.let { filas ->
-                            val fila: List<MinhasFilasData> = filas.map{ fila ->
-                                MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista, primeirosClientes = meusClientes?.get(fila.id_fila.toString()))
-                            }
-                            val layoutManager = LinearLayoutManager(context)
-                            activity?.runOnUiThread{
-                                viewBinding.rvFilasHome.post{
-                                    viewBinding.rvFilasHome.layoutManager = layoutManager
-                                    viewBinding.rvFilasHome.adapter = MinhasFilasHomeAdapter(fila, this, context)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    fun getData(service : lojistaService, id_lojista : Int){
+//        val data = LojistaInfo(id_lojista = id_lojista)
+//        service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
+//            if(status != 200){
+//                activity?.runOnUiThread {
+//                    Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
+//                }
+//            }else{
+//                viewBinding.progressLoading.visibility = View.GONE
+//                service.getMeusPrimeirosClientes(data){s: Int?, r: MeusPrimeirosClientes? ->
+//                    r?.response.let { meusClientes ->
+//                        response?.response?.let { filas ->
+//                            val fila: List<MinhasFilasData> = filas.map{ fila ->
+//                                MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista, primeirosClientes = meusClientes?.get(fila.id_fila.toString()))
+//                            }
+//                            val layoutManager = LinearLayoutManager(context)
+//                            activity?.runOnUiThread{
+//                                viewBinding.rvFilasHome.post{
+//                                    viewBinding.rvFilasHome.layoutManager = layoutManager
+//                                    viewBinding.rvFilasHome.adapter = MinhasFilasHomeAdapter(fila, this, context)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 
     companion object {

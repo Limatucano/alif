@@ -3,6 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_full_logo.xml" value="0.2085" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_logo.xml" value="0.2085" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/radio_custom.xml" value="0.287" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/radio_selected.xml" value="0.287" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/radio_selector.xml" value="0.287" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/text_color.xml" value="0.287" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/activity_apresentacao.xml" value="0.3446557971014493" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/activity_main.xml" value="0.17831813576494426" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/activity_modo.xml" value="0.11851851851851852" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_login.xml" value="0.3446557971014493" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_mode.xml" value="0.33" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_splash.xml" value="0.11851851851851852" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/btn_cancelar.xml" value="0.29814814814814816" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/btn_cancelarSaida.xml" value="0.24259259259259258" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/btn_cancelar_saida.xml" value="0.24259259259259258" />
@@ -37,6 +49,9 @@
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/layout/minhas_filas_home_item.xml" value="0.15898825654923215" />
       </map>
     </option>
+  </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

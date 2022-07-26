@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/modeFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -28,4 +28,26 @@
         android:name="com.tcc.alif.view.ui.FirstCadstroActivity"
         android:label="activity_first_cadstro"
         tools:layout="@layout/activity_first_cadstro" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.tcc.alif.view.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_splashFragment"
+            app:destination="@id/splashFragment" />
+        <argument
+            android:name="mode"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/modeFragment"
+        android:name="com.tcc.alif.view.ui.signin.ModeFragment"
+        android:label="ModeFragment" >
+        <action
+            android:id="@+id/action_modeFragment_to_splashFragment"
+            app:destination="@id/splashFragment" />
+        <action
+            android:id="@+id/action_modeFragment_to_loginFragment2"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

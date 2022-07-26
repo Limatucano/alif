@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tcc.alif.R
-import com.tcc.alif.model.domain.MeusFuncionariosData
-import com.tcc.alif.model.domain.MinhasFilasData
-
+import com.tcc.alif.data.domain.MeusFuncionariosData
 
 
 class MeusFuncionariosAdapter(private val items: List<MeusFuncionariosData>, var clickListener: OnClickItemListener) : RecyclerView.Adapter<MeusFuncionariosAdapter.ViewHolder>() {

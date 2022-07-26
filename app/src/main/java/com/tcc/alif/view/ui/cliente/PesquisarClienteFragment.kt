@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentPesquisarClienteBinding
-import com.tcc.alif.model.*
-import com.tcc.alif.model.domain.MinhasFilasData
-import com.tcc.alif.model.restApiService.usuarioService
+import com.tcc.alif.data.*
+import com.tcc.alif.data.domain.MinhasFilasData
 import com.tcc.alif.view.adapter.PesquisaFilasAdapter
 
 private const val ARG_PARAM1 = "param1"
@@ -52,47 +51,47 @@ class PesquisarClienteFragment : Fragment(R.layout.fragment_pesquisar_cliente) ,
         viewBinding.empresasFiltro.isChecked = false
 
 
-        val apiService = usuarioService()
-
-        viewBinding.buttonFiltro.setOnClickListener {
-
-            if(viewBinding.filasFiltro.isChecked){
-                val arr = MinhasFilasResponse(
-                        nome_da_fila = viewBinding.campoPesquisar.text.toString(),
-                )
-
-                apiService.getFilasByName(arr){ status: Int?, minhasFilas: MinhasFilas? ->
-                    if (status != 200) {
-                        Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
-                    } else {
-                        minhasFilas?.response?.let {
-                            val fila : List<MinhasFilasData> = it.map{ fila ->
-                                MinhasFilasData(
-                                    nome_da_fila = fila.nome_da_fila,
-                                    id_fila = fila.id_fila,
-                                    quantidade_vagas = fila.quantidade_vagas,
-                                    horario_abertura = fila.horario_abertura,
-                                    horario_fechamento = fila.horario_fechamento,
-                                    tempo_medio = fila.tempo_medio,
-                                    id_lojista = fila.id_lojista,
-                                    nome_fantasia = fila.nome_fantasia,
-                                    quantidade_por_fila = fila.quantidade_por_fila)
-                            }
-
-                            val layoutManager = LinearLayoutManager(context)
-                            viewBinding.rvResultado.post{
-                                viewBinding.rvResultado.layoutManager = layoutManager
-                                viewBinding.rvResultado.adapter = PesquisaFilasAdapter(fila, this)
-                            }
-                        }
-
-                    }
-                }
-            }
-            if(viewBinding.empresasFiltro.isChecked){
-                //TODO: filtrar lojistas aqui
-            }
-        }
+//        val apiService = usuarioService()
+//
+//        viewBinding.buttonFiltro.setOnClickListener {
+//
+//            if(viewBinding.filasFiltro.isChecked){
+//                val arr = MinhasFilasResponse(
+//                        nome_da_fila = viewBinding.campoPesquisar.text.toString(),
+//                )
+//
+//                apiService.getFilasByName(arr){ status: Int?, minhasFilas: MinhasFilas? ->
+//                    if (status != 200) {
+//                        Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
+//                    } else {
+//                        minhasFilas?.response?.let {
+//                            val fila : List<MinhasFilasData> = it.map{ fila ->
+//                                MinhasFilasData(
+//                                    nome_da_fila = fila.nome_da_fila,
+//                                    id_fila = fila.id_fila,
+//                                    quantidade_vagas = fila.quantidade_vagas,
+//                                    horario_abertura = fila.horario_abertura,
+//                                    horario_fechamento = fila.horario_fechamento,
+//                                    tempo_medio = fila.tempo_medio,
+//                                    id_lojista = fila.id_lojista,
+//                                    nome_fantasia = fila.nome_fantasia,
+//                                    quantidade_por_fila = fila.quantidade_por_fila)
+//                            }
+//
+//                            val layoutManager = LinearLayoutManager(context)
+//                            viewBinding.rvResultado.post{
+//                                viewBinding.rvResultado.layoutManager = layoutManager
+//                                viewBinding.rvResultado.adapter = PesquisaFilasAdapter(fila, this)
+//                            }
+//                        }
+//
+//                    }
+//                }
+//            }
+//            if(viewBinding.empresasFiltro.isChecked){
+//                //TODO: filtrar lojistas aqui
+//            }
+//        }
 
     }
 

@@ -3,7 +3,6 @@ package com.tcc.alif.view.ui.lojista
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,16 +11,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
-import com.tcc.alif.databinding.FragmentFilasLojistaBinding
 import com.tcc.alif.databinding.FragmentFuncionariosBinding
-import com.tcc.alif.model.LojistaInfo
-import com.tcc.alif.model.MeusFuncionarios
-import com.tcc.alif.model.MinhasFilas
-import com.tcc.alif.model.domain.MeusFuncionariosData
-import com.tcc.alif.model.domain.MinhasFilasData
-import com.tcc.alif.model.restApiService.lojistaService
+import com.tcc.alif.data.MeusFuncionarios
+import com.tcc.alif.data.domain.MeusFuncionariosData
 import com.tcc.alif.view.adapter.MeusFuncionariosAdapter
-import com.tcc.alif.view.adapter.MinhasFilasAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -86,26 +79,26 @@ class FuncionariosLojistaFragment : Fragment(), MeusFuncionariosAdapter.OnClickI
 
     private fun getMyFuncionarios(){
         val preferences = activity?.getSharedPreferences("LojistaData", Context.MODE_PRIVATE) ?: return
-        val service = lojistaService()
-        val id_lojista = preferences.getInt("id_lojista", 0)
-        service.getMyFuncionarios(id_lojista.toString()) { status: Int?, response: MeusFuncionarios? ->
-
-            if(status != 200){
-                Toast.makeText(context, "Erro ao buscar seus funcionários :(", Toast.LENGTH_LONG).show()
-            }else{
-                viewBinding.progressLoading.visibility = View.GONE
-                response?.response?.let { funcionarios ->
-                    val funcionario: List<MeusFuncionariosData> = funcionarios.map{ funcionario ->
-                        MeusFuncionariosData(funcionario.cod_funcionario,funcionario.nome_funcionario,funcionario.cargo, funcionario.id_lojista, funcionario.cpf)
-                    }
-                    val layoutManager = LinearLayoutManager(context)
-                    viewBinding.rvMyFuncionariosLojista.post{
-                        viewBinding.rvMyFuncionariosLojista.layoutManager = layoutManager
-                        viewBinding.rvMyFuncionariosLojista.adapter = MeusFuncionariosAdapter(funcionario, this)
-                    }
-                }
-            }
-        }
+        //val service = lojistaService()
+//        val id_lojista = preferences.getInt("id_lojista", 0)
+//        service.getMyFuncionarios(id_lojista.toString()) { status: Int?, response: MeusFuncionarios? ->
+//
+//            if(status != 200){
+//                Toast.makeText(context, "Erro ao buscar seus funcionários :(", Toast.LENGTH_LONG).show()
+//            }else{
+//                viewBinding.progressLoading.visibility = View.GONE
+//                response?.response?.let { funcionarios ->
+//                    val funcionario: List<MeusFuncionariosData> = funcionarios.map{ funcionario ->
+//                        MeusFuncionariosData(funcionario.cod_funcionario,funcionario.nome_funcionario,funcionario.cargo, funcionario.id_lojista, funcionario.cpf)
+//                    }
+//                    val layoutManager = LinearLayoutManager(context)
+//                    viewBinding.rvMyFuncionariosLojista.post{
+//                        viewBinding.rvMyFuncionariosLojista.layoutManager = layoutManager
+//                        viewBinding.rvMyFuncionariosLojista.adapter = MeusFuncionariosAdapter(funcionario, this)
+//                    }
+//                }
+//            }
+//        }
     }
 
     override fun onItemClick(items: MeusFuncionariosData, position: Int) {

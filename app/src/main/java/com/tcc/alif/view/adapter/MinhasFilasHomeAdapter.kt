@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.tcc.alif.R
-import com.tcc.alif.model.domain.MinhasFilasData
+import com.tcc.alif.data.domain.MinhasFilasData
 import com.tcc.alif.view.ui.lojista.DetalheFilaHomeActivity
 
 

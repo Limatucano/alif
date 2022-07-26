@@ -2,9 +2,7 @@ package com.tcc.alif.view.ui.lojista
 
 import android.content.Context
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,10 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.tcc.alif.R
 import com.tcc.alif.databinding.FragmentFilasLojistaBinding
-import com.tcc.alif.model.LojistaInfo
-import com.tcc.alif.model.MinhasFilas
-import com.tcc.alif.model.domain.MinhasFilasData
-import com.tcc.alif.model.restApiService.lojistaService
+import com.tcc.alif.data.LojistaInfo
+import com.tcc.alif.data.MinhasFilas
+import com.tcc.alif.data.domain.MinhasFilasData
 import com.tcc.alif.view.adapter.MinhasFilasAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -95,26 +92,26 @@ class FilasLojistaFragment : Fragment(R.layout.fragment_filas_lojista), MinhasFi
     private fun getMyFilas(){
         val preferences = activity?.getSharedPreferences("LojistaData",Context.MODE_PRIVATE) ?: return
         val email = preferences.getString("email","")
-        val service = lojistaService()
-        val id_lojista = preferences.getInt("id_lojista", 0)
-        val data = LojistaInfo(id_lojista = id_lojista)
-        service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
-
-            if(status != 200){
-                Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
-            }else{
-                viewBinding.progressLoading.visibility = View.GONE
-                response?.response?.let { filas ->
-                    val fila: List<MinhasFilasData> = filas.map{ fila ->
-                        MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista)
-                    }
-                    val layoutManager = LinearLayoutManager(context)
-                    viewBinding.rvMyFilasLojista.post{
-                        viewBinding.rvMyFilasLojista.layoutManager = layoutManager
-                        viewBinding.rvMyFilasLojista.adapter = MinhasFilasAdapter(fila, this, true)
-                    }
-                }
-            }
-        }
+//        val service = lojistaService()
+//        val id_lojista = preferences.getInt("id_lojista", 0)
+//        val data = LojistaInfo(id_lojista = id_lojista)
+//        service.getMyFilasLojista(data) { status: Int?, response: MinhasFilas? ->
+//
+//            if(status != 200){
+//                Toast.makeText(context, R.string.erro_pegar_fila, Toast.LENGTH_LONG).show()
+//            }else{
+//                viewBinding.progressLoading.visibility = View.GONE
+//                response?.response?.let { filas ->
+//                    val fila: List<MinhasFilasData> = filas.map{ fila ->
+//                        MinhasFilasData(fila.nome_da_fila,fila.id_fila,fila.quantidade_vagas,fila.horario_abertura, fila.horario_fechamento,fila.tempo_medio, fila.id_lojista)
+//                    }
+//                    val layoutManager = LinearLayoutManager(context)
+//                    viewBinding.rvMyFilasLojista.post{
+//                        viewBinding.rvMyFilasLojista.layoutManager = layoutManager
+//                        viewBinding.rvMyFilasLojista.adapter = MinhasFilasAdapter(fila, this, true)
+//                    }
+//                }
+//            }
+//        }
     }
 }

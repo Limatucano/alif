@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tcc.alif.R
-import com.tcc.alif.model.domain.MeusClientesFilaData
-import com.tcc.alif.model.domain.MinhasFilasData
+import com.tcc.alif.data.domain.MeusClientesFilaData
 import com.tcc.alif.view.ui.lojista.DetalheFilaHomeActivity
 
 

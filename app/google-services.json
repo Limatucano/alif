@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "114053584588",
+    "project_id": "alif-tcc",
+    "storage_bucket": "alif-tcc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114053584588:android:cac1194ff42b0edba75469",
+        "android_client_info": {
+          "package_name": "com.tcc.alif"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114053584588-dttqfd6i03si23s46b24lsiefa3fsfkp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tcc.alif",
+            "certificate_hash": "d7ca2c9871b020d7ec1910bc751210e06b66ace3"
+          }
+        },
+        {
+          "client_id": "114053584588-e8qu1rmpu1dvh2a8dngm0ermmm6d4fip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDd6J5kxdtHqfGRT_8sax0AK22XGmUdBqo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114053584588-e8qu1rmpu1dvh2a8dngm0ermmm6d4fip.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

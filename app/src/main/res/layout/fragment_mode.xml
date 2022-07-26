@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:contentDescription="@string/ContentDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_full_logo" />
+
+        <TextView
+            android:id="@+id/txt_modo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/modo"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+        <RadioGroup
+            android:id="@+id/grupo_radio"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_below="@+id/txt_modo"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/txt_modo">
+
+            <RadioButton
+                android:id="@+id/cliente"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="6"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:elevation="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:tag="C"
+                android:text="@string/cliente"
+                android:textColor="@drawable/text_color"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/lojista"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="6"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:elevation="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:tag="A"
+                android:text="@string/lojista"
+                android:textColor="@drawable/text_color"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_acessar"
+            style="@style/ButtonPrimary"
+            android:layout_width="0dp"
+            android:text="@string/acessar"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/grupo_radio" />
+
+        <Button
+            android:id="@+id/btn_cadastrar"
+            style="@style/ButtonSecondary"
+            android:layout_width="0dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/cadastrar_se"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_acessar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

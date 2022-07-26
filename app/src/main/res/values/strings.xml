@@ -8,7 +8,7 @@
     <string name="digite_sua_senha_aqui">Digite sua senha aqui</string>
     <string name="modo">Como você deseja acessar?</string>
     <string name="cliente">Cliente</string>
-    <string name="lojista">Lojista</string>
+    <string name="lojista">Administrador</string>
     <string name="cadastrar_se">Criar conta</string>
     <string name="entrar">Entrar</string>
     <!-- TODO: Remove or change this placeholder text -->

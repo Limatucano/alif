@@ -10,11 +10,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.tcc.alif.R
 import com.tcc.alif.databinding.ActivityFormFilaLojistaBinding
-import com.tcc.alif.model.FilaInfo
-import com.tcc.alif.model.MessageRequest
-import com.tcc.alif.model.restApiService.lojistaService
-import com.tcc.alif.model.util.TimerPickerHelper
-import com.tcc.alif.model.util.ValidateUtil
+import com.tcc.alif.data.FilaInfo
+import com.tcc.alif.data.MessageRequest
+import com.tcc.alif.data.util.TimerPickerHelper
+import com.tcc.alif.data.util.ValidateUtil
 import java.io.Serializable
 import java.util.*
 import kotlin.collections.HashMap
@@ -23,7 +22,7 @@ class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
     private val viewBinding : ActivityFormFilaLojistaBinding by viewBinding()
     lateinit var timePicker : TimerPickerHelper
     override fun onCreate(savedInstanceState: Bundle?) {
-        val apiService = lojistaService()
+        //val apiService = lojistaService()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_fila_lojista)
 
@@ -54,9 +53,9 @@ class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
             finish()
         }
         viewBinding.excluirFila.setOnClickListener {
-            apiService.deleteFila(viewBinding.idFila.text.toString()){ status: Int?, response: MessageRequest? ->
-                finish()
-            }
+//            apiService.deleteFila(viewBinding.idFila.text.toString()){ status: Int?, response: MessageRequest? ->
+//                finish()
+//            }
         }
         viewBinding.salvarFila.isClickable = true
         viewBinding.salvarFila.setOnClickListener {
@@ -73,9 +72,9 @@ class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
                             tempo_medio = viewBinding.minutosMedia.text.toString(),
                             id_fila = viewBinding.idFila.text.toString().toInt()
                     )
-                    apiService.updateFila(dataUpdate){ status: Int?, response: MessageRequest? ->
-                        finish()
-                    }
+//                    apiService.updateFila(dataUpdate){ status: Int?, response: MessageRequest? ->
+//                        finish()
+//                    }
                 }
 
                 if(fila.isNullOrEmpty()){
@@ -87,15 +86,15 @@ class FormFilaLojistaActivity : AppCompatActivity(), Serializable{
                             id_lojista = preferences.getInt("id_lojista", 0).toString(),
                             tempo_medio = viewBinding.minutosMedia.text.toString(),
                     )
-                    apiService.registerFila(dataFila) { status: Int?, filaData: FilaInfo? ->
-
-                        if (status != 201) {
-                            viewBinding.salvarFila.isClickable = true
-                            Snackbar.make(viewBinding.layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG).show()
-                        } else {
-                            finish()
-                        }
-                    }
+//                    apiService.registerFila(dataFila) { status: Int?, filaData: FilaInfo? ->
+//
+//                        if (status != 201) {
+//                            viewBinding.salvarFila.isClickable = true
+//                            Snackbar.make(viewBinding.layout, R.string.erro_cadastrar, Snackbar.LENGTH_LONG).show()
+//                        } else {
+//                            finish()
+//                        }
+//                    }
                 }
             }
         }
