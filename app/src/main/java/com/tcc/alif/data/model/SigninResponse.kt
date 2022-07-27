@@ -1,6 +1,9 @@
 package com.tcc.alif.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class SigninResponse(
     val name : String,
     val secondName : String,
@@ -9,5 +12,6 @@ data class SigninResponse(
     val birthDate : String,
     val email : String,
     val priority : Boolean?,
-    val idConsumer : String?
-)
+    val idConsumer : String?,
+    val idAdministrator : String?
+) : Parcelable

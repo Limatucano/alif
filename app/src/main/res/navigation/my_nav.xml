@@ -34,20 +34,52 @@
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_splashFragment"
-            app:destination="@id/splashFragment" />
+            app:destination="@id/splashFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
         <argument
             android:name="mode"
             app:argType="string" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeClienteFragment"
+            app:destination="@id/homeClienteFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_loginFragment_to_mainAdministratorFragment"
+            app:destination="@id/mainAdministratorFragment" />
     </fragment>
     <fragment
         android:id="@+id/modeFragment"
-        android:name="com.tcc.alif.view.ui.signin.ModeFragment"
+        android:name="com.tcc.alif.view.ui.mode.ModeFragment"
         android:label="ModeFragment" >
         <action
-            android:id="@+id/action_modeFragment_to_splashFragment"
-            app:destination="@id/splashFragment" />
-        <action
             android:id="@+id/action_modeFragment_to_loginFragment2"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/homeClienteFragment"
+        android:name="com.tcc.alif.view.ui.cliente.HomeClienteFragment"
+        android:label="HomeClienteFragment" >
+        <argument
+            android:name="user"
+            app:argType="com.tcc.alif.data.model.SigninResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainAdministratorFragment"
+        android:name="com.tcc.alif.view.ui.lojista.MainAdministratorFragment"
+        android:label="MainAdministratorFragment" >
+        <argument
+            android:name="user"
+            app:argType="com.tcc.alif.data.model.SigninResponse" />
     </fragment>
 </navigation>

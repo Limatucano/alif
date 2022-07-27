@@ -1,5 +1,6 @@
 package com.tcc.alif.data.util
 
+import android.widget.EditText
 import com.google.android.material.textfield.TextInputEditText
 
 object ValidateUtil {
@@ -8,7 +9,7 @@ object ValidateUtil {
      * @param TextInputEditText
      * @return Boolean
      */
-    fun validate(campo: TextInputEditText): Boolean {
+    fun validate(campo: EditText): Boolean {
         if(campo.text.isNullOrBlank() || campo.text?.length == 0 || campo.text.isNullOrEmpty()){
             campo.error = "Campo Vazio"
             return false
@@ -20,7 +21,7 @@ object ValidateUtil {
      * @param TextInputEditText
      * @return error field
      */
-     fun clear_validate(campo: TextInputEditText){
+     fun clear_validate(campo: EditText){
         if(campo.text.isNullOrBlank() || campo.text?.length == 0 || campo.text.isNullOrEmpty()) {
             return campo.setError(null)
         }

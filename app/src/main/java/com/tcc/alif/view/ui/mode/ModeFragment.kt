@@ -1,4 +1,4 @@
-package com.tcc.alif.view.ui.signin
+package com.tcc.alif.view.ui.mode
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -30,7 +30,7 @@ class ModeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
-        viewBinding.btnAcessar.setOnClickListener {
+        viewBinding.continueButton.setOnClickListener {
             val idChecked = viewBinding.grupoRadio.checkedRadioButtonId
 
             if(idChecked == -1){
@@ -42,11 +42,6 @@ class ModeFragment : Fragment() {
             direction = ModeFragmentDirections.actionModeFragmentToLoginFragment2(mode)
             view.findNavController().navigate(direction)
 
-        }
-
-        viewBinding.btnCadastrar.setOnClickListener {
-            direction = ModeFragmentDirections.actionModeFragmentToSplashFragment()
-            view.findNavController().navigate(direction)
         }
     }
 }
