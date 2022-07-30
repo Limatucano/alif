@@ -1,13 +1,10 @@
 package com.tcc.alif.view.ui.login
 
-import android.icu.math.MathContext
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.google.android.material.textfield.TextInputEditText
 import com.tcc.alif.data.model.Signin
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.util.Constants.ADMINISTRATOR_MODE
@@ -79,7 +76,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun openHomeScreen(signinResponse : SigninResponse){
         when(mode){
             ADMINISTRATOR_MODE -> {
-                val direction = LoginFragmentDirections.actionLoginFragmentToMainAdministratorFragment(signinResponse)
+                val direction = LoginFragmentDirections.actionLoginFragmentToCompaniesFragment(signinResponse)
                 requireView().findNavController().navigate(direction)
             }
             CONSUMER_MODE -> {

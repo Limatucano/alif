@@ -14,7 +14,8 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/logo"
@@ -52,11 +53,11 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_modo">
 
             <RadioButton
-                android:id="@+id/cliente"
+                android:id="@+id/consumerRadio"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                android:layout_weight="6"
+                android:layout_weight="10"
                 android:background="@drawable/radio_selector"
                 android:button="@android:color/transparent"
                 android:elevation="10dp"
@@ -74,11 +75,11 @@
                 android:layout_weight="1" />
 
             <RadioButton
-                android:id="@+id/lojista"
+                android:id="@+id/administratorRadio"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                android:layout_weight="6"
+                android:layout_weight="10"
                 android:background="@drawable/radio_selector"
                 android:button="@android:color/transparent"
                 android:elevation="10dp"
@@ -91,15 +92,6 @@
                 android:textStyle="bold" />
         </RadioGroup>
 
-        <ImageView
-            android:id="@+id/continueButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_forward"
-            android:layout_marginTop="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/grupo_radio" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

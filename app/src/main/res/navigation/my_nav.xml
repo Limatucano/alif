@@ -50,8 +50,8 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_loginFragment_to_mainAdministratorFragment"
-            app:destination="@id/mainAdministratorFragment" />
+            android:id="@+id/action_loginFragment_to_companiesFragment"
+            app:destination="@id/companiesFragment" />
     </fragment>
     <fragment
         android:id="@+id/modeFragment"
@@ -68,18 +68,26 @@
     </fragment>
     <fragment
         android:id="@+id/homeClienteFragment"
-        android:name="com.tcc.alif.view.ui.cliente.HomeClienteFragment"
+        android:name="com.tcc.alif.view.ui.consumer.HomeConsumerFragment"
         android:label="HomeClienteFragment" >
         <argument
             android:name="user"
             app:argType="com.tcc.alif.data.model.SigninResponse" />
     </fragment>
     <fragment
-        android:id="@+id/mainAdministratorFragment"
-        android:name="com.tcc.alif.view.ui.lojista.MainAdministratorFragment"
-        android:label="MainAdministratorFragment" >
+        android:id="@+id/companiesFragment"
+        android:name="com.tcc.alif.view.ui.companies.CompaniesFragment"
+        android:label="fragment_companies"
+        tools:layout="@layout/fragment_companies" >
         <argument
             android:name="user"
             app:argType="com.tcc.alif.data.model.SigninResponse" />
+        <action
+            android:id="@+id/action_companiesFragment_to_mainAdministratorFragment"
+            app:destination="@id/mainAdministratorFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/mainAdministratorFragment"
+        android:name="com.tcc.alif.view.ui.lojista.MainAdministratorFragment"
+        android:label="MainAdministratorFragment" />
 </navigation>

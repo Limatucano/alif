@@ -11,7 +11,7 @@
     <string name="lojista">Administrador</string>
     <string name="cadastrar_se">Criar conta</string>
     <string name="entrar">Entrar</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="seja_bem_vindo">Seja Bem Vindo!</string>
     <string name="selecione_uma_categoria">Selecione uma Categoria</string>
@@ -89,5 +89,7 @@
     <string name="inserido_com_sucesso_na_fila">Cadastrado com sucesso na Fila!</string>
     <string name="ja_cadastrado_na_fila">Já cadastrado na Fila</string>
     <string name="erro_cadastrar_na_fila">Erro ao se cadastrar na Fila :(</string>
+
+    <string name="companies_title">Empresas</string>
 
 </resources>

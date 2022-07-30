@@ -1,5 +1,6 @@
 package com.tcc.alif.data.api
 
+import com.tcc.alif.data.model.Companies
 import com.tcc.alif.data.model.Signin
 import com.tcc.alif.data.model.SigninResponse
 import retrofit2.Response
@@ -11,6 +12,12 @@ interface AlifService {
     suspend fun signin(
         @Body user : Signin
     ) : Response<SigninResponse>
+
+    @POST("administrator/companies")
+    suspend fun getAllCompanies(
+        @Body idAdministrator : Map<String,String>
+    ) : Response<Companies>
+
 //    @Headers("Content-type: application/json")
 //    @PATCH("cliente/atualizarperfil")
 //    fun atualizarPerfilCliente(

@@ -2,8 +2,11 @@ package com.tcc.alif.view.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
@@ -12,6 +15,12 @@ open class BaseFragment<V: ViewBinding>(private val inflate : Inflate<V>) : Frag
 
     private lateinit var _binding : V
     val binding get() = _binding
+
+    protected fun setupToolbar(toolbar: Toolbar, title : String, navigationBack : Boolean){
+        toolbar.title = title
+        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(navigationBack)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

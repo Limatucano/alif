@@ -1,23 +1,21 @@
-package com.tcc.alif.view.ui.cliente
+package com.tcc.alif.view.ui.consumer
 
 import android.os.Bundle
 import android.view.View
-import com.tcc.alif.data.domain.MinhasFilasData
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.databinding.FragmentFirstClienteBinding
-import com.tcc.alif.view.adapter.MinhasFilasAdapter
 import com.tcc.alif.view.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeClienteFragment : BaseFragment<FragmentFirstClienteBinding>(FragmentFirstClienteBinding::inflate), MinhasFilasAdapter.OnClickItemListener {
+class HomeConsumerFragment : BaseFragment<FragmentFirstClienteBinding>(FragmentFirstClienteBinding::inflate){
 
     private lateinit var user : SigninResponse
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bundle = arguments ?: return
-        val args = HomeClienteFragmentArgs.fromBundle(bundle)
+        val args = HomeConsumerFragmentArgs.fromBundle(bundle)
         user = args.user
     }
 
@@ -25,8 +23,4 @@ class HomeClienteFragment : BaseFragment<FragmentFirstClienteBinding>(FragmentFi
 
     }
 
-
-    override fun onItemClick(items: MinhasFilasData, position: Int) {
-
-    }
 }

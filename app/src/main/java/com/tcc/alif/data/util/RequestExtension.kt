@@ -6,16 +6,15 @@ import retrofit2.Response
 fun <T> Response<T>.request(
     onSuccess : ((t: T) -> Unit)? = null,
     onError : ((e : String) -> Unit)? = null,
-    onLoading : ((loading : Boolean) -> Unit)
+    onLoading : ((loading : Boolean) -> Unit)? = null,
 ){
+    onLoading?.invoke(true)
     try {
-        onLoading.invoke(true)
-
         if(this.isSuccessful && this.body() != null){
-            onLoading.invoke(false)
+            onLoading?.invoke(false)
             onSuccess?.invoke(this.body()!!)
         }else{
-            onLoading.invoke(false)
+            onLoading?.invoke(false)
             onError?.invoke(this.errorBody().toString())
         }
 

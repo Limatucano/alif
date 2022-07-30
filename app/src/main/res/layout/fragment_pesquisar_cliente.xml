@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ui.cliente.ClienteActivity"
+    tools:context=".view.ui.consumer.ClienteActivity"
     android:id="@+id/Layout"
     android:paddingTop="10dp">
 
@@ -81,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        tools:context=".view.ui.cliente.ClienteActivity">
+        tools:context=".view.ui.consumer.ClienteActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

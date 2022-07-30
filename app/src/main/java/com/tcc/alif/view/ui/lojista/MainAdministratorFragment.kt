@@ -11,13 +11,9 @@ import com.tcc.alif.view.ui.BaseFragment
 
 class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>(FragmentMainAdministratorBinding::inflate) {
 
-    private lateinit var user : SigninResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val bundle = arguments ?: return
-        val args = MainAdministratorFragmentArgs.fromBundle(bundle)
-        user = args.user
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,11 +21,12 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
 
 
         //TODO : to refactor this feature, because has deprecated methods
-        val homeLojistaFragment = HomeLojistaFragment(user)
-        val funcionariosLojistaFragment = FuncionariosLojistaFragment()
-        val filasLojistaFragment = FilasLojistaFragment()
-        val perfilLojistaFragment = PerfilLojistaFragment()
-        val configLojistaFragment = ConfigLojistaFragment()
+        //TODO : refactor names and include new fragments
+        val homeLojistaFragment = HomeLojistaFragment()
+        val funcionariosLojistaFragment = HomeLojistaFragment()
+        val filasLojistaFragment = HomeLojistaFragment()
+        val perfilLojistaFragment = HomeLojistaFragment()
+        val configLojistaFragment = HomeLojistaFragment()
 
         setCurrentFragment(homeLojistaFragment)
         binding.bottomNavigationView.menu.getItem(2).isChecked = true
