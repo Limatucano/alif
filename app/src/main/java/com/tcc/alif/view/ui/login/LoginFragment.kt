@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import com.tcc.alif.R
 import com.tcc.alif.data.model.Signin
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.util.Constants.ADMINISTRATOR_MODE
@@ -32,6 +33,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupToolbar(
+            toolbar = binding.toolbar,
+            navigationBack = false
+        )
         setListeners()
         setObservers()
     }
@@ -61,10 +66,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 ))
             }
 
-        }
-
-        backButton.setOnClickListener {
-            requireActivity().onBackPressed()
         }
 
         btnCadastrar.setOnClickListener {

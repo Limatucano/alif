@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ui.lojista.LojistaActivity"
+    tools:context=".view.ui.administrator.LojistaActivity"
     android:id="@+id/Layout"
     android:background="@color/background">
 

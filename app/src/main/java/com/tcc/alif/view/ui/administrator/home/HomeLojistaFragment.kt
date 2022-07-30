@@ -1,9 +1,8 @@
-package com.tcc.alif.view.ui.lojista
+package com.tcc.alif.view.ui.administrator.home
 
 import android.os.Bundle
 import android.view.View
 import com.tcc.alif.databinding.FragmentHomeLojistaBinding
-import com.tcc.alif.data.domain.MinhasFilasData
 import com.tcc.alif.view.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 

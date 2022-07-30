@@ -18,19 +18,25 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ModeFragment : BaseFragment<FragmentModeBinding>(FragmentModeBinding::inflate) {
 
-    private lateinit var direction : NavDirections
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
         setListener()
     }
 
     private fun setListener() = binding.run{
-        grupoRadio.setOnCheckedChangeListener { _, checkedId ->
-            val radioButtonSelected = requireView().findViewById<RadioButton>(checkedId)
-            val mode : String = radioButtonSelected.tag.toString()
-            direction = ModeFragmentDirections.actionModeFragmentToLoginFragment2(mode)
-            requireView().findNavController().navigate(direction)
+
+        consumerRadio.setOnClickListener { view ->
+            navigate(view.tag.toString())
         }
+
+        administratorRadio.setOnClickListener { view ->
+            navigate(view.tag.toString())
+        }
+
+    }
+
+    private fun navigate(mode : String){
+        val direction = ModeFragmentDirections.actionModeFragmentToLoginFragment2(mode)
+        requireView().findNavController().navigate(direction)
     }
 }

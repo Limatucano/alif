@@ -1,11 +1,14 @@
 package com.tcc.alif.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class Companies(
     val companies: List<CompanyResponse>
 )
 
+@Parcelize
 data class CompanyResponse(
     @SerializedName("id_empresa") val idCompany : Int,
     @SerializedName("ocupacao") val category : String,
@@ -17,8 +20,8 @@ data class CompanyResponse(
     @SerializedName("numero") val numberHouse : String,
     @SerializedName("cidade") val city : String,
     @SerializedName("cep") val zipCode : String,
-    @SerializedName("estado") val state : String,
+    @SerializedName("uf") val state : String,
     @SerializedName("complemento") val addressContinued : String,
     val cnpj : String,
     val uuid : String
-)
+) : Parcelable

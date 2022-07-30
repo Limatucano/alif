@@ -85,9 +85,21 @@
         <action
             android:id="@+id/action_companiesFragment_to_mainAdministratorFragment"
             app:destination="@id/mainAdministratorFragment" />
+        <action
+            android:id="@+id/action_companiesFragment_to_companyFormFragment"
+            app:destination="@id/companyFormFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainAdministratorFragment"
-        android:name="com.tcc.alif.view.ui.lojista.MainAdministratorFragment"
-        android:label="MainAdministratorFragment" />
+        android:name="com.tcc.alif.view.ui.administrator.MainAdministratorFragment"
+        android:label="MainAdministratorFragment" >
+        <argument
+            android:name="company"
+            app:argType="com.tcc.alif.data.model.Company" />
+    </fragment>
+    <fragment
+        android:id="@+id/companyFormFragment"
+        android:name="com.tcc.alif.view.ui.companies.CompanyFormFragment"
+        android:label="fragment_company_form"
+        tools:layout="@layout/fragment_company_form" />
 </navigation>

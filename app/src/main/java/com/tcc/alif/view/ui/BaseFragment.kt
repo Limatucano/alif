@@ -16,10 +16,12 @@ open class BaseFragment<V: ViewBinding>(private val inflate : Inflate<V>) : Frag
     private lateinit var _binding : V
     val binding get() = _binding
 
-    protected fun setupToolbar(toolbar: Toolbar, title : String, navigationBack : Boolean){
+    protected fun setupToolbar(toolbar: Toolbar, title : String = "", navigationBack : Boolean){
         toolbar.title = title
-        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(navigationBack)
+        (requireActivity() as AppCompatActivity).apply {
+            setSupportActionBar(toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(navigationBack)
+        }
     }
 
     override fun onCreateView(

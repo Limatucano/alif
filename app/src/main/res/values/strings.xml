@@ -91,5 +91,18 @@
     <string name="erro_cadastrar_na_fila">Erro ao se cadastrar na Fila :(</string>
 
     <string name="companies_title">Empresas</string>
+    <string name="company_form_title">Cadastro Empresa</string>
+    <string name="nome_fantasia_tv">Nome Fantasia</string>
+    <string name="nome_proprietario_tv">Nome proprietário</string>
+    <string name="telefone_tv">Telefone</string>
+    <string name="rua_tv">Rua</string>
+    <string name="bairro_tv">Bairro</string>
+    <string name="numero_tv">Número</string>
+    <string name="cidade_tv">Cidade</string>
+    <string name="cep_tv">Cep</string>
+    <string name="complemento_tv">Complemento</string>
+    <string name="company_title">Empresa</string>
+    <string name="company_subtitle">Agora precisamos de algumas informações sobre a empresa.</string>
+    <string name="uf_tv">Uf</string>
 
 </resources>

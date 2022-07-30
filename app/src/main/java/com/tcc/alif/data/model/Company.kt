@@ -1,5 +1,9 @@
 package com.tcc.alif.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Company(
     val idCompany : Int,
     val category : String,
@@ -15,4 +19,4 @@ data class Company(
     val addressContinued : String,
     val cnpj : String,
     val uuid : String
-)
+) : Parcelable
