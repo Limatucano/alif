@@ -5,19 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp">
+    android:paddingBottom="10dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/base_cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_margin="10dp"
         app:cardCornerRadius="2dp"
-        app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -35,29 +31,22 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/filaName"
+                    android:id="@+id/queueName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="20dp"
-                    android:gravity="center_vertical"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    style="@style/TitleList"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Pediatra 31/07/2021 - Manhã"
-                    android:layout_marginEnd="20dp" />
+                    tools:text="Pediatra 31/07/2021 - Manhã" />
 
                 <ImageButton
                     android:id="@+id/arrow_button"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     android:background="@drawable/expand_more"
-                    android:contentDescription="Arrow button"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -65,7 +54,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
-                android:id="@+id/hidden_view"
+                android:id="@+id/previewList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"

@@ -2,10 +2,7 @@ package com.tcc.alif.di
 
 
 import com.tcc.alif.data.api.AlifService
-import com.tcc.alif.data.repository.CompaniesRepository
-import com.tcc.alif.data.repository.CompaniesRepositoryImpl
-import com.tcc.alif.data.repository.SigninRepository
-import com.tcc.alif.data.repository.SigninRepositoryImpl
+import com.tcc.alif.data.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,4 +21,9 @@ class RepositoryModule {
     fun provideCompaniesRepository(
         alifService: AlifService
     ) : CompaniesRepository = CompaniesRepositoryImpl(alifService)
+
+    @Provides
+    fun provideAdministratorRepository(
+        alifService: AlifService
+    ) : AdministratorRepository = AdministratorRepositoryImpl(alifService)
 }

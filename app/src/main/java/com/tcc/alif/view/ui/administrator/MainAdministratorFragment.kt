@@ -7,7 +7,7 @@ import com.tcc.alif.R
 import com.tcc.alif.data.model.Company
 import com.tcc.alif.databinding.FragmentMainAdministratorBinding
 import com.tcc.alif.view.ui.BaseFragment
-import com.tcc.alif.view.ui.administrator.home.HomeLojistaFragment
+import com.tcc.alif.view.ui.administrator.home.HomeFragment
 
 
 class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>(FragmentMainAdministratorBinding::inflate) {
@@ -27,13 +27,13 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
 
         //TODO : to refactor this feature, because has deprecated methods
         //TODO : refactor names and include new fragments
-        val homeLojistaFragment = HomeLojistaFragment()
-        val funcionariosLojistaFragment = HomeLojistaFragment()
-        val filasLojistaFragment = HomeLojistaFragment()
-        val perfilLojistaFragment = HomeLojistaFragment()
-        val configLojistaFragment = HomeLojistaFragment()
+        val homeFragment = HomeFragment(company)
+        val funcionariosLojistaFragment = HomeFragment(company)
+        val filasLojistaFragment = HomeFragment(company)
+        val perfilLojistaFragment = HomeFragment(company)
+        val configLojistaFragment = HomeFragment(company)
 
-        setCurrentFragment(homeLojistaFragment)
+        setCurrentFragment(homeFragment)
         binding.bottomNavigationView.menu.getItem(HOME_INDEX).isChecked = true
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
@@ -41,7 +41,7 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
                 R.id.filas_func->setCurrentFragment(filasLojistaFragment)
                 R.id.config_func->setCurrentFragment(configLojistaFragment)
                 R.id.perfil_func->setCurrentFragment(perfilLojistaFragment)
-                R.id.home_func->setCurrentFragment(homeLojistaFragment)
+                R.id.home_func->setCurrentFragment(homeFragment)
             }
             true
         }
