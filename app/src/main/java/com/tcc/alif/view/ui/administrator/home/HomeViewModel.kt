@@ -26,12 +26,11 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getQueuesBy(idCompany : String){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.getQueuesBy(idCompany).request (
+        viewModelScope.request (
+                blockToRun = { repository.getQueuesBy(idCompany)},
                 onSuccess = { state.postValue(HomeState.Success(it)) },
                 onLoading = { state.postValue(HomeState.Loading(it)) },
                 onError = {state.postValue(HomeState.Error(it))}
             )
         }
-    }
 }

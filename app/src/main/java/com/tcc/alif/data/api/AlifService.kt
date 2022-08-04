@@ -12,16 +12,16 @@ interface AlifService {
     @POST("user/signin")
     suspend fun signin(
         @Body user : Signin
-    ) : Response<SigninResponse>
+    ) : SigninResponse
 
     @POST("administrator/companies")
     suspend fun getAllCompanies(
         @Body idAdministrator : Map<String,String>
-    ) : Response<Companies>
+    ) : Companies
 
     @POST("administrator/queues")
     suspend fun getQueuesBy(
         @Body idCompany : Map<String,String>
-    ) : Response<Queues>
+    ) : Queues
 
 }

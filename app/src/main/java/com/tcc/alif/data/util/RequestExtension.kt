@@ -1,25 +1,27 @@
 package com.tcc.alif.data.util
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import retrofit2.Response
 
 
-fun <T> Response<T>.request(
+fun <T> CoroutineScope.request(
+    blockToRun : suspend  CoroutineScope.() -> T,
     onSuccess : ((t: T) -> Unit)? = null,
     onError : ((e : String) -> Unit)? = null,
     onLoading : ((loading : Boolean) -> Unit)? = null,
 ){
-    onLoading?.invoke(true)
-    try {
-        if(this.isSuccessful && this.body() != null){
+    launch{
+        onLoading?.invoke(true)
+        try {
+            val result = blockToRun()
             onLoading?.invoke(false)
-            onSuccess?.invoke(this.body()!!)
-        }else{
+            onSuccess?.invoke(result)
+        }catch (error : Exception){
             onLoading?.invoke(false)
-            onError?.invoke(this.errorBody().toString())
+            onError?.invoke(error.message ?: "")
         }
-
-    }catch (error : Exception){
-        onError?.invoke(error.message ?: "")
     }
+
 
 }

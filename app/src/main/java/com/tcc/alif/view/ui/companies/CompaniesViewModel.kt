@@ -27,13 +27,13 @@ class CompaniesViewModel @Inject constructor(
         val body = mapOf(
             ADMINISTRATOR_ID_REQUEST to idAdministrator
         )
-        viewModelScope.launch(Dispatchers.IO) {
-            companiesRepository.getAllCompanies(body).request(
+        viewModelScope.request(
+                blockToRun = { companiesRepository.getAllCompanies(body)},
                 onSuccess = { state.postValue(CompanyState.Success(it)) },
                 onLoading = { state.postValue(CompanyState.Loading(it)) },
                 onError = {state.postValue(CompanyState.Error(it))}
             )
-        }
+
     }
 
     companion object{

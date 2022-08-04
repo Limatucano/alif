@@ -18,5 +18,12 @@ data class QueueResponse(
     @SerializedName("descricao_categoria") val descriptionCategory : String,
     @SerializedName("prioridade_categoria") val priorityCategory : Boolean,
     @SerializedName("tempo_medio_categoria") val averageTimeCategory : String,
-    @SerializedName("createdby") val employeeCreator : String
+    @SerializedName("createdby") val employeeCreator : String,
+    @SerializedName("primeirosClientes") val firstConsumers : List<ConsumerResume>?
+)
+
+data class ConsumerResume(
+    @SerializedName("posicao") val position : Int,
+    @SerializedName("nome") val name : String,
+    val cpf : String
 )

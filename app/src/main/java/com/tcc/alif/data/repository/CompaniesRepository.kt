@@ -6,14 +6,14 @@ import retrofit2.Response
 import javax.inject.Inject
 
 interface CompaniesRepository{
-    suspend fun getAllCompanies(idAdministrator : Map<String,String>) : Response<Companies>
+    suspend fun getAllCompanies(idAdministrator : Map<String,String>) : Companies
 }
 
 class CompaniesRepositoryImpl @Inject constructor(
     val alifService: AlifService
     ) : CompaniesRepository{
 
-    override suspend fun getAllCompanies(idAdministrator: Map<String,String>) : Response<Companies> = alifService.getAllCompanies(idAdministrator)
+    override suspend fun getAllCompanies(idAdministrator: Map<String,String>) : Companies = alifService.getAllCompanies(idAdministrator)
 
 
 }

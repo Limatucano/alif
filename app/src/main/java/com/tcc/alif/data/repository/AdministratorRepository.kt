@@ -7,17 +7,19 @@ import javax.inject.Inject
 
 interface AdministratorRepository{
 
-    suspend fun getQueuesBy(idCompany : String) : Response<Queues>
+    suspend fun getQueuesBy(idCompany : String) : Queues
 }
 
 class AdministratorRepositoryImpl @Inject constructor(
     private val service: AlifService
 ) : AdministratorRepository {
 
-    override suspend fun getQueuesBy(idCompany: String) : Response<Queues> {
-        return service.getQueuesBy(mapOf(
-            "idCompany" to idCompany
-        ))
+    override suspend fun getQueuesBy(idCompany: String): Queues {
+        return service.getQueuesBy(
+            mapOf(
+                "idCompany" to idCompany
+            )
+        )
     }
 
 }

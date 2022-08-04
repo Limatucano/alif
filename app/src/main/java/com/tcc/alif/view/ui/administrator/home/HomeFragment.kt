@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tcc.alif.R
 import com.tcc.alif.data.model.Company
 import com.tcc.alif.data.model.Queues
 import com.tcc.alif.databinding.FragmentHomeLojistaBinding
@@ -26,20 +27,29 @@ class HomeFragment(private val company : Company) : BaseFragment<FragmentHomeLoj
             )
         )
         setObserver()
-
+        setupToolbar(
+            toolbar = binding.toolbar,
+            title = getString(R.string.queues_title),
+        )
     }
 
     private fun setObserver(){
         viewModel.state.observe(viewLifecycleOwner){ state ->
             when(state){
-                is HomeState.Loading -> Toast.makeText(requireContext(),"ALOOO ${state.loading}",
-                    Toast.LENGTH_SHORT).show()
+                is HomeState.Loading -> updateLoading(state.loading)
                 is HomeState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
-                is HomeState.Success -> setViews(state.response)
+                is HomeState.Success -> {
+                    setViews(state.response)
+                    updateLoading(false)
+                }
             }
         }
     }
 
+    private fun updateLoading(loading : Boolean) = binding.run{
+        homeSwipe.isEnabled = loading
+        homeSwipe.isRefreshing = loading
+    }
     private fun setViews(response : Queues) = binding.run{
         rvQueues.adapter = QueuesAdapter(requireContext(),response){
 

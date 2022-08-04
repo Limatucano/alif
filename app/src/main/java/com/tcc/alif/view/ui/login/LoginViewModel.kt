@@ -26,14 +26,12 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun authUser(signin : Signin){
-        viewModelScope.launch(Dispatchers.IO) {
-            signinRepository.signin(signin).request(
+        viewModelScope.request(
+                blockToRun = { signinRepository.signin(signin)},
                 onSuccess = { user.postValue(SigninState.SuccessSignin(it)) },
                 onLoading = { user.postValue(SigninState.Loading(it)) },
-                onError = {user.postValue(SigninState.Error(it))}
+                onError = { user.postValue(SigninState.Error(it))}
             )
         }
-    }
-
 
 }

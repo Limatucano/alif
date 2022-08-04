@@ -7,7 +7,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 interface SigninRepository {
-    suspend fun signin(signin : Signin) : Response<SigninResponse>
+    suspend fun signin(signin : Signin) : SigninResponse
 }
 
 class SigninRepositoryImpl @Inject constructor(
@@ -15,6 +15,6 @@ class SigninRepositoryImpl @Inject constructor(
 ) : SigninRepository{
 
 
-    override suspend fun signin(signin: Signin) : Response<SigninResponse> = alifService.signin(signin)
+    override suspend fun signin(signin: Signin) : SigninResponse = alifService.signin(signin)
 
 }

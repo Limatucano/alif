@@ -14,6 +14,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
         app:cardCornerRadius="2dp"
+        app:cardBackgroundColor="#6BFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -36,6 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     style="@style/TitleList"
+                    android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -58,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                tools:visibility="visible"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,13 +78,16 @@
                         android:layout_margin="20dp"
                         android:textStyle="bold"
                         android:textSize="20sp"
+                        android:textColor="@color/white"
                         android:text="1" />
                     <TextView
-                        android:id="@+id/firstPessoa"
+                        android:id="@+id/firstConsumer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
                         android:textStyle="bold"
+                        android:tag="1"
+                        android:textColor="@color/white"
                         android:textSize="14sp"
                         tools:text="Matheus Lima Corrêa" />
                 </LinearLayout>
@@ -96,13 +102,16 @@
                         android:layout_margin="20dp"
                         android:textStyle="bold"
                         android:textSize="20sp"
+                        android:textColor="@color/white"
                         android:text="2" />
                     <TextView
-                        android:id="@+id/secondPessoa"
+                        android:id="@+id/secondConsumer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
                         android:textStyle="bold"
+                        android:tag="2"
+                        android:textColor="@color/white"
                         android:textSize="14sp"
                         tools:text="Daniel Spinola Trindade" />
                 </LinearLayout>
@@ -116,14 +125,17 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
                         android:textStyle="bold"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         android:text="3" />
                     <TextView
-                        android:id="@+id/thirdPessoa"
+                        android:id="@+id/thirdConsumer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
                         android:textStyle="bold"
+                        android:tag="3"
+                        android:textColor="@color/white"
                         android:textSize="14sp"
                         tools:text="Jonas de boa show" />
                 </LinearLayout>

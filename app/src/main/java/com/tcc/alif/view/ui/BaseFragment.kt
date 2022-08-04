@@ -16,7 +16,11 @@ open class BaseFragment<V: ViewBinding>(private val inflate : Inflate<V>) : Frag
     private lateinit var _binding : V
     val binding get() = _binding
 
-    protected fun setupToolbar(toolbar: Toolbar, title : String = "", navigationBack : Boolean){
+    protected fun setupToolbar(
+        toolbar: Toolbar,
+        title : String = "",
+        navigationBack : Boolean = false
+    ){
         toolbar.title = title
         (requireActivity() as AppCompatActivity).apply {
             setSupportActionBar(toolbar)
