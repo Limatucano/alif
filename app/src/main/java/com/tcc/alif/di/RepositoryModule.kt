@@ -18,11 +18,6 @@ class RepositoryModule {
     ) : SigninRepository = SigninRepositoryImpl(alifService)
 
     @Provides
-    fun provideCompaniesRepository(
-        alifService: AlifService
-    ) : CompaniesRepository = CompaniesRepositoryImpl(alifService)
-
-    @Provides
     fun provideAdministratorRepository(
         alifService: AlifService
     ) : AdministratorRepository = AdministratorRepositoryImpl(alifService)

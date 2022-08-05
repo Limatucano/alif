@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.model.Company
@@ -11,7 +12,10 @@ import com.tcc.alif.data.model.Queues
 import com.tcc.alif.databinding.FragmentHomeLojistaBinding
 import com.tcc.alif.view.adapter.QueuesAdapter
 import com.tcc.alif.view.ui.BaseFragment
+import com.tcc.alif.view.ui.administrator.MainAdministratorFragment
+import com.tcc.alif.view.ui.administrator.MainAdministratorFragmentDirections
 import com.tcc.alif.view.ui.login.SigninState
+import com.tcc.alif.view.ui.mode.ModeFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,8 +55,9 @@ class HomeFragment(private val company : Company) : BaseFragment<FragmentHomeLoj
         homeSwipe.isRefreshing = loading
     }
     private fun setViews(response : Queues) = binding.run{
-        rvQueues.adapter = QueuesAdapter(requireContext(),response){
-
+        rvQueues.adapter = QueuesAdapter(requireContext(),response){ queue ->
+            val direction = MainAdministratorFragmentDirections.actionMainAdministratorFragmentToQueueFragment(queue)
+            requireView().findNavController().navigate(direction)
         }
     }
 }

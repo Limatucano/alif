@@ -140,7 +140,7 @@
                         tools:text="Jonas de boa show" />
                 </LinearLayout>
                 <TextView
-                    android:id="@+id/btnVerMais"
+                    android:id="@+id/btnSeeMore"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@color/pink"

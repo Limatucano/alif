@@ -39,6 +39,11 @@ class QueuesAdapter(
             secondConsumer.text = secondConsumerValue
             thirdConsumer.text = thirdConsumerValue
 
+
+            btnSeeMore.setOnClickListener {
+                action.invoke(queue)
+            }
+
             root.setOnClickListener {
                 val isVisible = previewList.visibility != View.VISIBLE
 

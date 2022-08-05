@@ -96,10 +96,22 @@
         <argument
             android:name="company"
             app:argType="com.tcc.alif.data.model.Company" />
+        <action
+            android:id="@+id/action_mainAdministratorFragment_to_queueFragment"
+            app:destination="@id/queueFragment" />
     </fragment>
     <fragment
         android:id="@+id/companyFormFragment"
         android:name="com.tcc.alif.view.ui.companies.CompanyFormFragment"
         android:label="fragment_company_form"
         tools:layout="@layout/fragment_company_form" />
+    <fragment
+        android:id="@+id/queueFragment"
+        android:name="com.tcc.alif.view.ui.queue.QueueFragment"
+        android:label="fragment_queue"
+        tools:layout="@layout/fragment_queue" >
+        <argument
+            android:name="queue"
+            app:argType="com.tcc.alif.data.model.QueueResponse" />
+    </fragment>
 </navigation>

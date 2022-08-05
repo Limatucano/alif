@@ -3,16 +3,14 @@ package com.tcc.alif.view.ui.companies
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tcc.alif.data.repository.CompaniesRepository
+import com.tcc.alif.data.repository.AdministratorRepository
 import com.tcc.alif.data.util.request
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CompaniesViewModel @Inject constructor(
-    private val companiesRepository: CompaniesRepository
+    private val repository: AdministratorRepository
 ) : ViewModel() {
 
     val state = MutableLiveData<CompanyState>()
@@ -28,7 +26,7 @@ class CompaniesViewModel @Inject constructor(
             ADMINISTRATOR_ID_REQUEST to idAdministrator
         )
         viewModelScope.request(
-                blockToRun = { companiesRepository.getAllCompanies(body)},
+                blockToRun = { repository.getAllCompanies(body)},
                 onSuccess = { state.postValue(CompanyState.Success(it)) },
                 onLoading = { state.postValue(CompanyState.Loading(it)) },
                 onError = {state.postValue(CompanyState.Error(it))}

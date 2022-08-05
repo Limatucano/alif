@@ -1,11 +1,15 @@
 package com.tcc.alif.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Queues(
     val queues : List<QueueResponse>
-)
+) : Parcelable
 
+@Parcelize
 data class QueueResponse(
     @SerializedName("id_fila") val idQueue : Int,
     @SerializedName("nome") val name : String,
@@ -20,10 +24,11 @@ data class QueueResponse(
     @SerializedName("tempo_medio_categoria") val averageTimeCategory : String,
     @SerializedName("createdby") val employeeCreator : String,
     @SerializedName("primeirosClientes") val firstConsumers : List<ConsumerResume>?
-)
+) : Parcelable
 
+@Parcelize
 data class ConsumerResume(
     @SerializedName("posicao") val position : Int,
     @SerializedName("nome") val name : String,
     val cpf : String
-)
+) : Parcelable
