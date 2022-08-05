@@ -1,9 +1,6 @@
 package com.tcc.alif.data.api
 
-import com.tcc.alif.data.model.Companies
-import com.tcc.alif.data.model.Queues
-import com.tcc.alif.data.model.Signin
-import com.tcc.alif.data.model.SigninResponse
+import com.tcc.alif.data.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -23,5 +20,10 @@ interface AlifService {
     suspend fun getQueuesBy(
         @Body idCompany : Map<String,String>
     ) : Queues
+
+    @GET("administrator/calls/")
+    suspend fun getCallsBy(
+        @Query("idQueue") idQueue : Int
+    ) : Calls
 
 }
