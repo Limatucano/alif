@@ -1,23 +1,20 @@
 package com.tcc.alif.view.ui.companies
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.tcc.alif.R
 import com.tcc.alif.data.model.Companies
 import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.data.model.SigninResponse
+import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.data.util.toCompany
 import com.tcc.alif.databinding.FragmentCompaniesBinding
 import com.tcc.alif.view.adapter.CompaniesAdapter
 import com.tcc.alif.view.ui.BaseFragment
-import com.tcc.alif.view.ui.login.LoginFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,15 +37,24 @@ class CompaniesFragment : BaseFragment<FragmentCompaniesBinding>(FragmentCompani
         setupToolbar(
             toolbar = binding.toolbar,
             title = getString(R.string.companies_title),
-            navigationBack = false
         )
-        setObservers()
-        setListeners()
-        binding.rvCompanies.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
-        binding.rvCompanies.addItemDecoration(DividerItemDecoration(requireContext(),LinearLayoutManager.VERTICAL))
         if(user.idAdministrator != null){
             viewModel.handleIntent(CompanyIntent.getAllCompanies(user.idAdministrator!!))
         }
+        setObservers()
+        setListeners()
+        setViews()
+
+    }
+
+    private fun setViews() = binding.run {
+        rvCompanies.setLinearLayout(
+            context = requireContext(),
+            orientation = LinearLayoutManager.VERTICAL,
+            reverseLayout = false,
+            withItemDecoration = true
+        )
+
     }
 
     private fun setListeners() = binding.run{
@@ -70,11 +76,19 @@ class CompaniesFragment : BaseFragment<FragmentCompaniesBinding>(FragmentCompani
     private fun setObservers(){
         viewModel.state.observe(viewLifecycleOwner){ state ->
             when(state){
-                is CompanyState.Success -> setAdapter(state.response)
+                is CompanyState.Success -> {
+                    setAdapter(state.response)
+                    updateLoading(false)
+                }
                 is CompanyState.Error -> Toast.makeText(requireContext(), "Não foi", Toast.LENGTH_SHORT).show()
-                is CompanyState.Loading -> Toast.makeText(requireContext(), "ta indo", Toast.LENGTH_SHORT).show()
+                is CompanyState.Loading -> updateLoading(state.loading)
             }
         }
+    }
+
+    private fun updateLoading(loading : Boolean) = binding.run{
+        companiesSwipe.isEnabled = loading
+        companiesSwipe.isRefreshing = loading
     }
 
 }

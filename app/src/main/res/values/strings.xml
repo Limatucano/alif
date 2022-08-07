@@ -18,7 +18,7 @@
     <string name="nome">Nome</string>
     <string name="cadastro_pessoa_fisica">Cadastro Pessoa Física</string>
     <string name="digite_seu_nome_aqui">Digite seu nome aqui</string>
-    <string name="seja_bem_vindo_para_continuarmos_vou_precisar_de_alguns_dados_seu">Seja Bem Vindo, para continuarmos vou precisar de alguns dados seu...</string>
+    <string name="seja_bem_vindo_para_continuarmos_vou_precisar_de_alguns_dados_seu">Seja Bem Vindo, para continuarmos vou precisar de alguns dados seu…</string>
     <string name="cpf">CPF</string>
     <string name="salvar">Salvar</string>
     <string name="atualizar">Atualizar</string>
@@ -106,5 +106,13 @@
     <string name="uf_tv">Uf</string>
 
     <string name="queues_title">Filas</string>
+
+    <string name="queue_status"><![CDATA[<b>Status:</b>%s]]></string>
+    <string name="queue_will_open"><![CDATA[<b>Abre às:</b>%s]]></string>
+    <string name="queue_opened"><![CDATA[<b>Abriu às:</b>%s]]></string>
+    <string name="queue_will_close"><![CDATA[<b>Fecha às:</b>%s]]></string>
+    <string name="queue_closed"><![CDATA[<b>Fechou às:</b>%s]]></string>
+    <string name="queue_available_quantity"><![CDATA[<b>Quantidade Disponível:</b>%s]]></string>
+    <string name="queue_title">Fila</string>
 
 </resources>

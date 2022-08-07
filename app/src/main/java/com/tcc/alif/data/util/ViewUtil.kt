@@ -1,7 +1,11 @@
 package com.tcc.alif.data.util
 
+import android.content.Context
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 fun View.animateVisibility(
     visible : Boolean,
@@ -43,4 +47,25 @@ fun View.translate(
     val anim = AnimationUtils.loadAnimation(this.context,animId)
     if(duration != null) anim.duration = duration
     startAnimation(anim)
+}
+
+fun RecyclerView.setLinearLayout(
+    context : Context,
+    orientation : Int,
+    reverseLayout : Boolean,
+    withItemDecoration : Boolean = false
+){
+    this.layoutManager = LinearLayoutManager(
+        context,
+        orientation,
+        reverseLayout
+    )
+    if(withItemDecoration){
+        this.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                orientation
+            )
+        )
+    }
 }
