@@ -45,23 +45,30 @@ class QueuesAdapter(
             }
 
             root.setOnClickListener {
-                val isVisible = previewList.visibility != View.VISIBLE
+                animateVisibilityDetail(binding)
+            }
 
-                if(isVisible){
-                    arrowButton.background = AppCompatResources.getDrawable(context,R.drawable.expand_less)
-                }else{
-                    arrowButton.background = AppCompatResources.getDrawable(context,R.drawable.expand_more)
-                }
-
-                previewList.animateVisibility(
-                    visible = isVisible,
-                    useInvisible = false,
-                    inAnimationId = R.anim.anim_fade_in,
-                    outAnimationId = null
-                )
+            arrowButton.setOnClickListener {
+                animateVisibilityDetail(binding)
             }
 
         }
+    }
+    private fun animateVisibilityDetail(binding : QueuesHomeItemBinding) = binding.run{
+        val isVisible = previewList.visibility != View.VISIBLE
+
+        if(isVisible){
+            arrowButton.background = AppCompatResources.getDrawable(context,R.drawable.expand_less)
+        }else{
+            arrowButton.background = AppCompatResources.getDrawable(context,R.drawable.expand_more)
+        }
+
+        previewList.animateVisibility(
+            visible = isVisible,
+            useInvisible = false,
+            inAnimationId = R.anim.anim_fade_in,
+            outAnimationId = null
+        )
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
