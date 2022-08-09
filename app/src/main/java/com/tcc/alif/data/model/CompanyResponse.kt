@@ -21,7 +21,7 @@ data class CompanyResponse(
     @SerializedName("cidade") val city : String,
     @SerializedName("cep") val zipCode : String,
     @SerializedName("uf") val state : String,
-    @SerializedName("complemento") val addressContinued : String,
+    @SerializedName("complemento") val addressContinued : String?,
     val cnpj : String,
     val uuid : String
 ) : Parcelable

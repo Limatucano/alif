@@ -95,7 +95,7 @@
         android:label="MainAdministratorFragment" >
         <argument
             android:name="company"
-            app:argType="com.tcc.alif.data.model.Company" />
+            app:argType="com.tcc.alif.data.model.CompanyResponse" />
         <action
             android:id="@+id/action_mainAdministratorFragment_to_queueFragment"
             app:destination="@id/queueFragment" />

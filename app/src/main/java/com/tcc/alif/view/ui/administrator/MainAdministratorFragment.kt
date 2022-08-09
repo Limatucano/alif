@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.tcc.alif.R
-import com.tcc.alif.data.model.Company
+import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.databinding.FragmentMainAdministratorBinding
 import com.tcc.alif.view.ui.BaseFragment
 import com.tcc.alif.view.ui.administrator.home.HomeFragment
@@ -12,7 +12,7 @@ import com.tcc.alif.view.ui.administrator.home.HomeFragment
 
 class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>(FragmentMainAdministratorBinding::inflate) {
 
-    private lateinit var company : Company
+    private lateinit var company : CompanyResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

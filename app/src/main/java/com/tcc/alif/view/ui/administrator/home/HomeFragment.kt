@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.model.Company
+import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.data.model.Queues
 import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentHomeLojistaBinding
@@ -17,7 +18,7 @@ import com.tcc.alif.view.ui.administrator.MainAdministratorFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment(private val company : Company) : BaseFragment<FragmentHomeLojistaBinding>(FragmentHomeLojistaBinding::inflate) {
+class HomeFragment(private val company : CompanyResponse) : BaseFragment<FragmentHomeLojistaBinding>(FragmentHomeLojistaBinding::inflate) {
 
     private val viewModel : HomeViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

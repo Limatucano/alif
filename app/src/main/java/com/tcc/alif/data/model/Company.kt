@@ -16,7 +16,7 @@ data class Company(
     val city : String,
     val zipCode : String,
     val state : String,
-    val addressContinued : String,
+    val addressContinued : String?,
     val cnpj : String,
     val uuid : String
 ) : Parcelable

@@ -65,7 +65,7 @@ class CompaniesFragment : BaseFragment<FragmentCompaniesBinding>(FragmentCompani
     }
 
     private fun companySelected(companyResponse : CompanyResponse){
-        val direction = CompaniesFragmentDirections.actionCompaniesFragmentToMainAdministratorFragment(companyResponse.toCompany())
+        val direction = CompaniesFragmentDirections.actionCompaniesFragmentToMainAdministratorFragment(companyResponse)
         requireView().findNavController().navigate(direction)
     }
 
