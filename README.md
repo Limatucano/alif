@@ -1,31 +1,27 @@
 # ALIF
 
-#### English
+### English
+#### About Project
 ALIF is a generic queue managment service for medium and small companies, with it you can create, delete, update and manage your queue more easily than using excel or any spreadsheet program.
-#### Português
-ALIF é um serviço genérico de gestão de filas de espera para médias e pequenas empresas, com ele pode cirar, apagar, atualizar e gerir a sua fila mais facilmente do que utilizar excel ou qualquer programa de panilha eletrônica.
 
-## Stack
+#### Note 🚧
+ALIF born with me in the android world, this made me use it as a learning medium, but it had a cost, like a lot of technical debt. For this reason the project is going through a lot of refactoring, including layout, architecture and business rules.
 
-### Data Base
-- Postgresql
-- Hospedado no heroku add-ons
+### Português
+#### Sobre o projeto
+ALIF é um serviço genérico de gestão de filas de espera para médias e pequenas empresas, com ele pode criar, apagar, atualizar e gerir a sua fila mais facilmente do que utilizar excel ou qualquer programa de panilha eletrônica.
 
-### App
+#### Nota 🚧
+ALIF é um projeto que nasceu junto comigo no mundo android, isso fez com que eu utilizasse ele como um meio de aprendizado, porém o custo disso foi que ele possuia diversos débitos técnicos. Por esse motivo o projeto está passando por uma grande refatoração, incluindo layout, arquitetura e regras de negócios.
+
+### Tech
+- MVVM
+- Injeção de dependência com Hilt
+- Coroutines
+- Jetpack libraries
 - Kotlin
 - Android
 - ViewBinding
 - Retrofit
-
-### [API](https://github.com/Limatucano/backEnd_Alif)
-- Javascript
-- Node.JS
-- bcrypt
-- express
-- pg
-- jsonwebtoken
-
-## Images
-<img width="200" alt="image1" src="https://user-images.githubusercontent.com/38586541/136994679-097f8611-3518-40b7-b335-59187207feb3.png">
-<img width="200" alt="image1" src="https://user-images.githubusercontent.com/38586541/136994535-43494aed-b4e4-405a-a270-3467f0b49ec1.png">
+- GSON
 
