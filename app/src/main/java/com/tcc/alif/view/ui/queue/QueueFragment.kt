@@ -31,7 +31,6 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar(
-            toolbar = binding.toolbar,
             title = queue.name,
         )
         setIntent()

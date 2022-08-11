@@ -16,7 +16,6 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
         super.onViewCreated(view, savedInstanceState)
 
         setupToolbar(
-            toolbar = binding.toolbar,
             title = getString(R.string.company_form_title),
             navigationBack = true
         )

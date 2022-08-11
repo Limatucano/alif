@@ -34,8 +34,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         super.onViewCreated(view, savedInstanceState)
 
         setupToolbar(
-            toolbar = binding.toolbar,
-            navigationBack = false
+            navigationBack = true,
         )
         setListeners()
         setObservers()
@@ -44,7 +43,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun setObservers() = loginViewModel.run{
         user.observe(viewLifecycleOwner){ state ->
             when(state){
-                is SigninState.Loading -> Toast.makeText(requireContext(),"ALOOO ${state.loading}",Toast.LENGTH_SHORT).show()
+                is SigninState.Loading -> updateLoading(state.loading)
                 is SigninState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
                 is SigninState.SuccessSignin -> openHomeScreen(state.response)
             }
@@ -86,6 +85,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
         }
     }
+
+    private fun updateLoading(loading : Boolean) = binding.run{
+        loginSwipe.isEnabled = loading
+        loginSwipe.isRefreshing = loading
+    }
+
     private fun validateFields() : Boolean = binding.run { ValidateUtil.validate(emailEdit) && ValidateUtil.validate(passwordEdit) }
 
 

@@ -21,6 +21,11 @@ class ModeFragment : BaseFragment<FragmentModeBinding>(FragmentModeBinding::infl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
         setListener()
+
+        setupToolbar(
+            navigationBack = false,
+            visibility = false
+        )
     }
 
     private fun setListener() = binding.run{

@@ -26,8 +26,7 @@ class HomeFragment(private val company : CompanyResponse) : BaseFragment<Fragmen
         setViews()
         setObserver()
         setupToolbar(
-            toolbar = binding.toolbar,
-            title = getString(R.string.queues_title),
+            title = getString(R.string.queues_title)
         )
         viewModel.handleIntent(
             HomeIntent.getQueuesBy(
@@ -36,8 +35,13 @@ class HomeFragment(private val company : CompanyResponse) : BaseFragment<Fragmen
         )
     }
 
+    private fun setListener() = binding.run {
+//        backIv.setOnClickListener {
+//            requireActivity().onBackPressed()
+//        }
+    }
     private fun setViews() = binding.run{
-        binding.rvQueues.setLinearLayout(
+        rvQueues.setLinearLayout(
             context = requireContext(),
             orientation = LinearLayoutManager.VERTICAL,
             reverseLayout = false,

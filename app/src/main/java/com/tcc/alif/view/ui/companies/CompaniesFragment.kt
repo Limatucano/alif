@@ -35,8 +35,7 @@ class CompaniesFragment : BaseFragment<FragmentCompaniesBinding>(FragmentCompani
         super.onViewCreated(view, savedInstanceState)
 
         setupToolbar(
-            toolbar = binding.toolbar,
-            title = getString(R.string.companies_title),
+            title = getString(R.string.companies_title)
         )
         if(user.idAdministrator != null){
             viewModel.handleIntent(CompanyIntent.getAllCompanies(user.idAdministrator!!))
