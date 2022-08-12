@@ -8,7 +8,6 @@ import androidx.annotation.RequiresApi
 import dagger.hilt.android.qualifiers.ApplicationContext
 
 object NetworkUtil {
-    @RequiresApi(Build.VERSION_CODES.M)
     fun isNetworkAvailable(@ApplicationContext context : Context): Boolean {
 
         val connectivityManager: ConnectivityManager = context.getSystemService(
