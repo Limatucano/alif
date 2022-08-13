@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fixed_cardView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,10 +21,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             style="@style/TitleList"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:maxLines="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Pediatra 31/07/2021 - Manhã" />
+
+        <TextView
+            android:id="@+id/queueStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/queueName"
+            app:layout_constraintTop_toBottomOf="@+id/queueName" />
+
 
         <ImageButton
             android:id="@+id/arrow_button"

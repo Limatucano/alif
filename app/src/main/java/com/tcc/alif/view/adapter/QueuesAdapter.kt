@@ -38,7 +38,7 @@ class QueuesAdapter(
             firstConsumer.text = firstConsumerValue
             secondConsumer.text = secondConsumerValue
             thirdConsumer.text = thirdConsumerValue
-
+            queueStatus.text = queue.status
 
             btnSeeMore.setOnClickListener {
                 action.invoke(queue)

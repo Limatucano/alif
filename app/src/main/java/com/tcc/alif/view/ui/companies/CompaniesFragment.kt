@@ -11,7 +11,6 @@ import com.tcc.alif.data.model.Companies
 import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.util.setLinearLayout
-import com.tcc.alif.data.util.toCompany
 import com.tcc.alif.databinding.FragmentCompaniesBinding
 import com.tcc.alif.view.adapter.CompaniesAdapter
 import com.tcc.alif.view.ui.BaseFragment

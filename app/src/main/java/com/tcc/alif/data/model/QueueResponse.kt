@@ -2,6 +2,7 @@ package com.tcc.alif.data.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.tcc.alif.R
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -24,7 +25,20 @@ data class QueueResponse(
     @SerializedName("tempo_medio_categoria") val averageTimeCategory : String,
     @SerializedName("createdby") val employeeCreator : String,
     @SerializedName("primeirosClientes") val firstConsumers : List<ConsumerResume>?
-) : Parcelable
+) : Parcelable{
+
+    fun getStatusStringRes(status : String) : Int? =
+        when(status){
+            OPENED_STATUS -> R.string.opened_status
+            CLOSED_STATUS -> R.string.closed_status
+            else -> null
+        }
+
+    companion object {
+        const val OPENED_STATUS = "ABERTO"
+        const val CLOSED_STATUS = "FECHADO"
+    }
+}
 
 @Parcelize
 data class ConsumerResume(

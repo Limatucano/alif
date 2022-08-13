@@ -114,5 +114,7 @@
     <string name="queue_closed"><![CDATA[<b>Fechou às:</b>%s]]></string>
     <string name="queue_available_quantity"><![CDATA[<b>Quantidade Disponível:</b>%s]]></string>
     <string name="queue_title">Fila</string>
+    <string name="opened_status">Aberto</string>
+    <string name="closed_status">Fechado</string>
 
 </resources>
