@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
@@ -25,6 +26,8 @@ open class BaseFragment<V: ViewBinding>(private val inflate : Inflate<V>) : Frag
             visibility = visibility
         )
     }
+
+    fun getToolbar() : Toolbar = (requireActivity() as BaseActivity<*>).getToolbar()
 
     override fun onCreateView(
         inflater: LayoutInflater,

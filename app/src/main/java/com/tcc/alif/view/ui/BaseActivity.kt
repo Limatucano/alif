@@ -1,10 +1,9 @@
 package com.tcc.alif.view.ui
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
 import com.tcc.alif.R
 import com.tcc.alif.data.util.setVisible
@@ -33,6 +32,9 @@ open class BaseActivity<V : ViewBinding>(val inflate : Factory<V>) : AppCompatAc
             onBackPressed()
         }
     }
+
+    fun getToolbar() : Toolbar = customToolbar.toolbar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
