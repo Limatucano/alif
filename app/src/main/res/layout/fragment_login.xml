@@ -74,7 +74,7 @@
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/black"
             android:hint="@string/digite_sua_senha_aqui"
-            android:inputType="textPassword"
+            android:inputType="numberPassword"
             android:minHeight="48dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"

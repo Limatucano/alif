@@ -43,6 +43,11 @@ android {
 
 dependencies {
 
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
     //HILT
     implementation "com.google.dagger:hilt-android:2.37"
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'

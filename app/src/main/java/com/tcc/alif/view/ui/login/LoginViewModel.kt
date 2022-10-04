@@ -1,15 +1,15 @@
 package com.tcc.alif.view.ui.login
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tcc.alif.data.model.Signin
 import com.tcc.alif.data.repository.SigninRepository
-import com.tcc.alif.data.util.request
+import com.tcc.alif.data.util.requestFirebase
+import com.tcc.alif.data.util.zipFirebaseToOther
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,7 +17,7 @@ class LoginViewModel @Inject constructor(
     private val signinRepository: SigninRepository
 ) : ViewModel(){
 
-    var user = MutableLiveData<SigninState>()
+    var state = MutableLiveData<SigninState>()
 
     fun handleIntent(intent : SigninIntent){
         when(intent){
@@ -26,12 +26,22 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun authUser(signin : Signin){
-        viewModelScope.request(
-                blockToRun = { signinRepository.signin(signin)},
-                onSuccess = { user.postValue(SigninState.SuccessSignin(it)) },
-                onLoading = { user.postValue(SigninState.Loading(it)) },
-                onError = { user.postValue(SigninState.Error(it))}
-            )
-        }
+        viewModelScope.launch(Dispatchers.IO){
+            signinRepository.signin(signin).collect{ response ->
+                response.requestFirebase(
+                    blockToRun = this,
+                    onSuccess = { success ->
 
+                        state.postValue(SigninState.SuccessSignin(success.user?.uid))
+                    },
+                    onError = { error ->
+                        state.postValue(SigninState.Error(error))
+                    },
+                    onLoading = { loading ->
+                        state.postValue(SigninState.Loading(loading))
+                    }
+                )
+            }
+        }
+    }
 }

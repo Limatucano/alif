@@ -41,20 +41,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun setObservers() = loginViewModel.run{
-        user.observe(viewLifecycleOwner){ state ->
+        state.observe(viewLifecycleOwner){ state ->
             when(state){
                 is SigninState.Loading -> updateLoading(state.loading)
                 is SigninState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
-                is SigninState.SuccessSignin -> openHomeScreen(state.response)
+                //is SigninState.SuccessSignin -> openHomeScreen(state.response)
             }
         }
     }
 
     private fun setListeners() = binding.run {
         loginButton.setOnClickListener {
-
-            emailEdit.setText(MOCK_EMAIL)
-            passwordEdit.setText(MOCK_PASS)
             if(validateFields()){
                 loginViewModel.handleIntent(SigninIntent.Signin(
                     Signin(

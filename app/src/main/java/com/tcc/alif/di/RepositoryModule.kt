@@ -1,7 +1,10 @@
 package com.tcc.alif.di
 
 
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.tcc.alif.data.api.AlifService
+import com.tcc.alif.data.datasource.SignInDataSource
 import com.tcc.alif.data.repository.*
 import dagger.Module
 import dagger.Provides
@@ -14,8 +17,17 @@ class RepositoryModule {
 
     @Provides
     fun provideSigninRepository(
-        alifService: AlifService
-    ) : SigninRepository = SigninRepositoryImpl(alifService)
+        signInDataSource: SignInDataSource
+    ) : SigninRepository = SigninRepositoryImpl(signInDataSource)
+
+    @Provides
+    fun provideSignInDataSource(
+        firebaseAuth: FirebaseAuth,
+        firebaseFirestore: FirebaseFirestore
+    ) : SignInDataSource = SignInDataSource(
+        firebaseAuth = firebaseAuth,
+        firebaseFirestore = firebaseFirestore
+    )
 
     @Provides
     fun provideAdministratorRepository(
