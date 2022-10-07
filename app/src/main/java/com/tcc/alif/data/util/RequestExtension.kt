@@ -1,12 +1,14 @@
 package com.tcc.alif.data.util
 
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.QuerySnapshot
+import com.tcc.alif.data.model.Response
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
-
+import kotlin.coroutines.coroutineContext
+import kotlin.coroutines.resumeWithException
 
 fun <T> CoroutineScope.request(
     blockToRun : suspend  CoroutineScope.() -> T,
@@ -23,6 +25,33 @@ fun <T> CoroutineScope.request(
         }catch (error : Exception){
             onLoading?.invoke(false)
             onError?.invoke(error.message ?: "")
+        }
+    }
+}
+
+suspend fun <T> Task<T>.await(): T {
+    if (isComplete) {
+        val e = exception
+        return if (e == null) {
+            if (isCanceled) {
+                throw CancellationException(
+                    "Task $this was cancelled normally.")
+            } else {
+                result
+            }
+        } else {
+            throw e
+        }
+    }
+
+    return suspendCancellableCoroutine { block ->
+        addOnCompleteListener {
+            val e = exception
+            if (e == null) {
+                if (isCanceled) block.cancel() else block.resume(result, null)
+            } else {
+                block.resumeWithException(e)
+            }
         }
     }
 }

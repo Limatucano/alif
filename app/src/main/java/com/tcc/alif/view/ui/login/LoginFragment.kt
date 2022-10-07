@@ -5,13 +5,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.tcc.alif.R
 import com.tcc.alif.data.model.Signin
 import com.tcc.alif.data.model.SigninResponse
-import com.tcc.alif.data.util.Constants.ADMINISTRATOR_MODE
-import com.tcc.alif.data.util.Constants.CONSUMER_MODE
-import com.tcc.alif.data.util.Constants.MOCK_EMAIL
-import com.tcc.alif.data.util.Constants.MOCK_PASS
+import com.tcc.alif.data.model.local.AccountType
 import com.tcc.alif.data.util.ValidateUtil
 import com.tcc.alif.databinding.FragmentLoginBinding
 import com.tcc.alif.view.ui.BaseFragment
@@ -21,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
     private val loginViewModel : LoginViewModel by viewModels()
-    private var mode : String = ""
+    private lateinit var mode : AccountType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +41,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             when(state){
                 is SigninState.Loading -> updateLoading(state.loading)
                 is SigninState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
-                //is SigninState.SuccessSignin -> openHomeScreen(state.response)
+                is SigninState.Success -> openHomeScreen(state.user)
             }
         }
     }
@@ -72,11 +68,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private fun openHomeScreen(signinResponse : SigninResponse){
         when(mode){
-            ADMINISTRATOR_MODE -> {
+            AccountType.ADMINISTRATOR -> {
                 val direction = LoginFragmentDirections.actionLoginFragmentToCompaniesFragment(signinResponse)
                 requireView().findNavController().navigate(direction)
             }
-            CONSUMER_MODE -> {
+            AccountType.CONSUMER -> {
                 val direction = LoginFragmentDirections.actionLoginFragmentToHomeClienteFragment(signinResponse)
                 requireView().findNavController().navigate(direction)
             }
@@ -89,6 +85,5 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun validateFields() : Boolean = binding.run { ValidateUtil.validate(emailEdit) && ValidateUtil.validate(passwordEdit) }
-
 
 }

@@ -41,7 +41,7 @@
             app:popExitAnim="@anim/slide_out_right"/>
         <argument
             android:name="mode"
-            app:argType="string" />
+            app:argType="com.tcc.alif.data.model.local.AccountType" />
         <action
             android:id="@+id/action_loginFragment_to_homeClienteFragment"
             app:destination="@id/homeClienteFragment"

@@ -8,4 +8,6 @@ object Constants {
 
     const val MOCK_EMAIL  = "neymar@teste3"
     const val MOCK_PASS = "teste"
+
+    const val USER_UNAUTHORIZED = "Permissão Negada"
 }
