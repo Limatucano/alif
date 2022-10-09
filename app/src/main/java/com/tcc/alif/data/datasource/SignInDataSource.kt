@@ -32,7 +32,7 @@ class SignInDataSource @Inject constructor(
     fun getUserData(
         uid: String?
     ) : Task<QuerySnapshot>{
-         return firebaseFirestore.collection("person")
+         return firebaseFirestore.collection("user")
             .whereEqualTo("uid", uid)
             .get()
     }

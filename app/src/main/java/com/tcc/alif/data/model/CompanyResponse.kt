@@ -2,6 +2,7 @@ package com.tcc.alif.data.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.tcc.alif.data.util.emptyIfNull
 import kotlinx.parcelize.Parcelize
 
 data class Companies(
@@ -10,18 +11,37 @@ data class Companies(
 
 @Parcelize
 data class CompanyResponse(
-    @SerializedName("id_empresa") val idCompany : Int,
-    @SerializedName("ocupacao") val category : String,
-    @SerializedName("nome_fantasia") val tradeName : String,
-    @SerializedName("nome_proprietario")val ownerName : String,
-    @SerializedName("telefone") val telephone : String,
-    @SerializedName("rua") val street : String,
-    @SerializedName("bairro") val district : String,
-    @SerializedName("numero") val numberHouse : String,
-    @SerializedName("cidade") val city : String,
-    @SerializedName("cep") val zipCode : String,
-    @SerializedName("uf") val state : String,
-    @SerializedName("complemento") val addressContinued : String?,
-    val cnpj : String,
-    val uuid : String
-) : Parcelable
+    val idCompany : String? = null,
+    val category : String? = null,
+    val tradeName : String? = null,
+    val ownerName : String? = null,
+    val telephone : String? = null,
+    val street : String? = null,
+    val district : String? = null,
+    val numberHouse : String? = null,
+    val city : String? = null,
+    val zipCode : String? = null,
+    val state : String? = null,
+    val addressContinued : String? = null,
+    val cnpj : String? = null,
+    val uuid : String? = null
+) : Parcelable {
+
+    fun toCompanyResponse(map: MutableMap<String, Any>) =
+        CompanyResponse(
+            idCompany = map["idCompany"].toString().emptyIfNull(),
+            category = map["category"].toString().emptyIfNull(),
+            tradeName = map["tradeName"].toString().emptyIfNull(),
+            ownerName = map["ownerName"].toString().emptyIfNull(),
+            telephone = map["telephone"].toString().emptyIfNull(),
+            street = map["street"].toString().emptyIfNull(),
+            district = map["district"].toString().emptyIfNull(),
+            numberHouse = map["numberHouse"].toString().emptyIfNull(),
+            city = map["city"].toString().emptyIfNull(),
+            zipCode = map["zipcode"].toString().emptyIfNull(),
+            state = map["state"].toString().emptyIfNull(),
+            addressContinued = map["addressContinued"].toString().emptyIfNull(),
+            cnpj = map["cnpj"].toString().emptyIfNull(),
+            uuid = map["uid"].toString().emptyIfNull()
+        )
+}

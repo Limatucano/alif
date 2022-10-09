@@ -36,9 +36,9 @@ class CompaniesFragment : BaseFragment<FragmentCompaniesBinding>(FragmentCompani
         setupToolbar(
             title = getString(R.string.companies_title)
         )
-//        if(user.isAdministrator != null){
-//            viewModel.handleIntent(CompanyIntent.getAllCompanies(user.isAdministrator!!))
-//        }
+        if(user.isAdministrator != null){
+            viewModel.handleIntent(CompanyIntent.GetAllCompanies(user.companies))
+        }
         setObservers()
         setListeners()
         setViews()

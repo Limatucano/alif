@@ -62,19 +62,27 @@ fun <T>Task<T>.requestFirebase(
     onError: ((e: String) -> Unit)? = null,
     onLoading: ((loading: Boolean) -> Unit)? = null
 ){
-    blockToRun.launch{
-        onLoading?.invoke(true)
-    }
-    addOnSuccessListener {
-        blockToRun.launch(Dispatchers.Main){
-            onLoading?.invoke(false)
-            onSuccess?.invoke(it)
+    try {
+        blockToRun.launch{
+            onLoading?.invoke(true)
         }
-    }.addOnFailureListener {
+        addOnSuccessListener {
+            blockToRun.launch(Dispatchers.Main){
+                onLoading?.invoke(false)
+                onSuccess?.invoke(it)
+            }
+        }.addOnFailureListener {
+            blockToRun.launch(Dispatchers.Main) {
+                onLoading?.invoke(false)
+                onError?.invoke(it.message ?: UNKNOWN_ERROR)
+            }
+        }
+    }catch (e: Exception){
         blockToRun.launch(Dispatchers.Main) {
             onLoading?.invoke(false)
-            onError?.invoke(it.message ?: UNKNOWN_ERROR)
+            onError?.invoke(e.message ?: UNKNOWN_ERROR)
         }
     }
+
 }
 const val UNKNOWN_ERROR = "Erro desconhecido"

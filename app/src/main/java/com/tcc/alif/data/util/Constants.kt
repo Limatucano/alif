@@ -6,8 +6,9 @@ object Constants {
     const val ADMINISTRATOR_MODE = "A"
     const val CONSUMER_MODE = "C"
 
-    const val MOCK_EMAIL  = "neymar@teste3"
-    const val MOCK_PASS = "teste"
+    ////// collections
+    const val COMPANY_COLLECTION = "company"
+    const val USER_COLLECTION = "user"
 
     const val USER_UNAUTHORIZED = "Permissão Negada"
 }
