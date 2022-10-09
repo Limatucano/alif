@@ -9,15 +9,12 @@ import javax.inject.Inject
 interface AdministratorRepository{
 
     suspend fun getQueuesBy(idCompany : String) : Queues
-    suspend fun getAllCompanies(idAdministrator : Map<String,String>) : Companies
     suspend fun getCallsBy(idQueue : Int) : Calls
 }
 
 class AdministratorRepositoryImpl @Inject constructor(
     private val service: AlifService
 ) : AdministratorRepository {
-
-    override suspend fun getAllCompanies(idAdministrator: Map<String,String>) : Companies = service.getAllCompanies(idAdministrator)
 
     override suspend fun getCallsBy(idQueue: Int): Calls = service.getCallsBy(idQueue)
 

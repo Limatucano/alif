@@ -15,7 +15,8 @@ data class SigninResponse(
     val priority : Boolean? = null,
     val isConsumer : Boolean? = null,
     val isAdministrator : Boolean? = null,
-    val companies: List<String> = listOf()
+    val companies: List<String> = listOf(),
+    val uid: String = ""
 ) : Parcelable{
 
     fun toSignResponse(map: MutableMap<String, Any>) =
@@ -29,6 +30,7 @@ data class SigninResponse(
             priority = map["priority"] as Boolean?,
             isConsumer = map["isConsumer"] as Boolean?,
             isAdministrator = map["isAdministrator"] as Boolean?,
-            companies = map["companies"] as List<String>
+            companies = map["companies"] as List<String>,
+            uid = map["uid"].toString().emptyIfNull()
         )
 }

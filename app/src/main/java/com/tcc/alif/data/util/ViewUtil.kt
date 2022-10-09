@@ -3,9 +3,20 @@ package com.tcc.alif.data.util
 import android.content.Context
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.EditText
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
+
+fun List<EditText>.validateFields() : Boolean{
+    this.forEach {
+        if(it.text.isEmpty() || it.text.isBlank()){
+            return false
+        }
+    }
+    return true
+}
 
 fun View.animateVisibility(
     visible : Boolean,

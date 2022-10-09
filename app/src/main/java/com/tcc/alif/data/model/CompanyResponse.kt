@@ -23,8 +23,7 @@ data class CompanyResponse(
     val zipCode : String? = null,
     val state : String? = null,
     val addressContinued : String? = null,
-    val cnpj : String? = null,
-    val uuid : String? = null
+    val cnpj : String? = null
 ) : Parcelable {
 
     fun toCompanyResponse(map: MutableMap<String, Any>) =
@@ -41,7 +40,6 @@ data class CompanyResponse(
             zipCode = map["zipcode"].toString().emptyIfNull(),
             state = map["state"].toString().emptyIfNull(),
             addressContinued = map["addressContinued"].toString().emptyIfNull(),
-            cnpj = map["cnpj"].toString().emptyIfNull(),
-            uuid = map["uid"].toString().emptyIfNull()
+            cnpj = map["cnpj"].toString().emptyIfNull()
         )
 }

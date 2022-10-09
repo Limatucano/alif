@@ -1,188 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/companySwipe"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.ui.companies.CompanyFormFragment">
 
-    <TextView
-        android:id="@+id/title"
-        style="@style/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/company_title"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/subtitle"
-        style="@style/SubTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
-        android:text="@string/company_subtitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <ScrollView
-        android:id="@+id/scrollView3"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/saveCompany"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/subtitle"
+            style="@style/SubTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/company_subtitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/scrollView3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/saveCompany"
+            app:layout_constraintTop_toBottomOf="@+id/subtitle">
 
-            <TextView
-                android:id="@+id/tradeNameTv"
-                style="@style/TitleEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nome_fantasia_tv" />
-
-            <EditText
-                android:id="@+id/tradeNameEt"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:orientation="vertical"
+                android:padding="10dp">
 
-            <TextView
-                android:id="@+id/ownerNameTv"
-                style="@style/TitleEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nome_proprietario_tv" />
+                <TextView
+                    android:id="@+id/tradeNameTv"
+                    style="@style/TitleEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nome_fantasia_tv" />
 
-            <EditText
-                android:id="@+id/ownerNameEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
+                <EditText
+                    android:id="@+id/tradeNameEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
 
-            <TextView
-                android:id="@+id/telephoneTv"
-                style="@style/TitleEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/telefone_tv" />
+                <TextView
+                    android:id="@+id/ownerNameTv"
+                    style="@style/TitleEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nome_proprietario_tv" />
 
-            <EditText
-                android:id="@+id/telephoneEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
+                <EditText
+                    android:id="@+id/ownerNameEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
 
-            <TextView
-                android:id="@+id/streetTv"
-                style="@style/TitleEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rua_tv" />
+                <TextView
+                    android:id="@+id/telephoneTv"
+                    style="@style/TitleEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/telefone_tv" />
 
-            <EditText
-                android:id="@+id/streetEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
+                <EditText
+                    android:id="@+id/telephoneEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
 
-            <TextView
-                android:id="@+id/districtTv"
-                style="@style/TitleEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bairro_tv" />
+                <TextView
+                    android:id="@+id/streetTv"
+                    style="@style/TitleEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rua_tv" />
 
-            <EditText
-                android:id="@+id/districtEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
+                <EditText
+                    android:id="@+id/streetEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
 
-            <TextView
-                android:id="@+id/numberTv"
-                style="@style/TitleEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/numero_tv" />
+                <TextView
+                    android:id="@+id/districtTv"
+                    style="@style/TitleEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bairro_tv" />
 
-            <EditText
-                android:id="@+id/numberEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
+                <EditText
+                    android:id="@+id/districtEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
 
-            <TextView
-                android:id="@+id/cityTv"
-                style="@style/TitleEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cidade_tv" />
+                <TextView
+                    android:id="@+id/numberTv"
+                    style="@style/TitleEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/numero_tv" />
 
-            <EditText
-                android:id="@+id/cityEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
+                <EditText
+                    android:id="@+id/numberEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
 
-            <TextView
-                android:id="@+id/zipTv"
-                style="@style/TitleEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cep_tv" />
+                <TextView
+                    android:id="@+id/cityTv"
+                    style="@style/TitleEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cidade_tv" />
 
-            <EditText
-                android:id="@+id/zipEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
+                <EditText
+                    android:id="@+id/cityEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
 
-            <TextView
-                android:id="@+id/ufTv"
-                style="@style/TitleEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/uf_tv" />
+                <TextView
+                    android:id="@+id/zipTv"
+                    style="@style/TitleEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cep_tv" />
 
-            <EditText
-                android:id="@+id/ufEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
+                <EditText
+                    android:id="@+id/zipEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
 
-            <TextView
-                android:id="@+id/addressContinuedTv"
-                style="@style/TitleEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/complemento_tv" />
+                <TextView
+                    android:id="@+id/ufTv"
+                    style="@style/TitleEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/uf_tv" />
 
-            <EditText
-                android:id="@+id/addressContinuedEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
+                <EditText
+                    android:id="@+id/ufEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
 
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                    android:id="@+id/addressContinuedTv"
+                    style="@style/TitleEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/complemento_tv" />
 
-    <Button
-        android:id="@+id/saveCompany"
-        style="@style/ButtonPrimary"
-        android:layout_width="0dp"
-        android:layout_margin="10dp"
-        android:text="@string/salvar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <EditText
+                    android:id="@+id/addressContinuedEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/saveCompany"
+            style="@style/ButtonPrimary"
+            android:layout_width="0dp"
+            android:layout_margin="10dp"
+            android:text="@string/salvar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

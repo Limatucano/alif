@@ -2,8 +2,12 @@ package com.tcc.alif.data.util
 
 import android.widget.EditText
 import com.google.android.material.textfield.TextInputEditText
+import java.util.*
 
 object ValidateUtil {
+
+    fun generateUUID() : String = UUID.randomUUID().toString()
+
     /**
      * the function to validate required fields
      * @param TextInputEditText
