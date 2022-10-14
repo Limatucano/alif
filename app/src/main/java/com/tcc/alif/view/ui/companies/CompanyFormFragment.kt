@@ -31,7 +31,6 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
         setObservers()
     }
 
-    //TODO: Implement save user in sharedPreferences to get user in other sections
     private fun setListener() = binding.apply{
         saveCompany.setOnClickListener {
             if(getAllFields().validateFields()){
