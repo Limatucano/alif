@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.tcc.alif.data.local.SharedPreferencesHelper
+import javax.inject.Inject
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 open class BaseFragment<V: ViewBinding>(private val inflate : Inflate<V>) : Fragment() {
@@ -14,6 +16,8 @@ open class BaseFragment<V: ViewBinding>(private val inflate : Inflate<V>) : Frag
     private lateinit var _binding : V
     val binding get() = _binding
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferencesHelper
 
     fun setupToolbar(
         title : String = "",

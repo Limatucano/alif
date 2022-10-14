@@ -41,7 +41,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             when(state){
                 is SigninState.Loading -> updateLoading(state.loading)
                 is SigninState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
-                is SigninState.Success -> openHomeScreen(state.user)
+                is SigninState.Success -> {
+                    sharedPreferences.userId = state.user.uid
+                    openHomeScreen(state.user)
+                }
             }
         }
     }

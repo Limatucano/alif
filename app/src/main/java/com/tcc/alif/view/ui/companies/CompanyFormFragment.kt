@@ -1,14 +1,12 @@
 package com.tcc.alif.view.ui.companies
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.tcc.alif.R
+import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
 import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.data.util.ValidateUtil.generateUUID
 import com.tcc.alif.data.util.emptyIfNull
@@ -40,7 +38,7 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
                 viewModel.handleIntent(
                     intent = CompanyIntent.SaveNewCompany(
                         company = generateModel(),
-                        idUser = "d0FzOUlnhpX9rdI32XHxAwvL5q93"
+                        idUser = sharedPreferences.userId ?: EMPTY_STRING
                     )
                 )
             }
@@ -56,6 +54,7 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
                 }
                 is CompanyState.Error -> Toast.makeText(requireContext(), "Não foi", Toast.LENGTH_SHORT).show()
                 is CompanyState.Loading -> updateLoading(state.loading)
+                else -> throw IllegalArgumentException("State not mapped")
             }
         }
     }
