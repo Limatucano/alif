@@ -11,6 +11,19 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/whitebackground</item>
-        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="InputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="colorOnSurface">@color/mediumGray</item>
+        <item name="hintTextColor">@color/highGray</item>
+        <item name="colorPrimary">@color/highGray</item>
+        <item name="colorAccent">@color/highGray</item>
+    </style>
+
+    <style name="EditText">
+        <item name="colorAccent">@color/highGray</item>
+        <item name="colorControlNormal">@color/mediumGray</item>
+        <item name="colorControlHighlight">@color/mediumGray</item>
+        <item name="colorControlActivated">@color/mediumGray</item>
     </style>
 </resources>

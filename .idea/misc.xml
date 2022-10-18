@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.17831813576494426" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/expand_less.xml" value="0.247" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/expand_more.xml" value="0.2355" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_arrow.xml" value="0.357" />
@@ -31,7 +32,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/company_item.xml" value="0.25" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/custom_toolbar.xml" value="0.33605072463768115" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_companies.xml" value="0.22" />
-        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_company_form.xml" value="0.3532608695652174" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_company_form.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_employee.xml" value="0.19583333333333333" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_first_cliente.xml" value="0.33016304347826086" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_home_lojista.xml" value="0.33" />

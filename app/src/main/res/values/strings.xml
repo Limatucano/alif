@@ -100,6 +100,8 @@
     <string name="numero_tv">Número</string>
     <string name="cidade_tv">Cidade</string>
     <string name="cep_tv">Cep</string>
+    <string name="cnpj_tv">CNPJ</string>
+    <string name="category_tv">Categoria</string>
     <string name="complemento_tv">Complemento</string>
     <string name="company_title">Empresa</string>
     <string name="company_subtitle">Agora precisamos de algumas informações sobre a empresa.</string>
@@ -116,5 +118,16 @@
     <string name="queue_title">Fila</string>
     <string name="opened_status">Aberto</string>
     <string name="closed_status">Fechado</string>
+
+    <string name="barberShop">Cabeleireiro e Barbearia</string>
+    <string name="restaurant">Restaurante</string>
+    <string name="electrician">Eletricista</string>
+    <string name="foods">Alimentação</string>
+    <string name="clothing">Roupas</string>
+    <string name="health">Saúde</string>
+    <string name="driver">Motorista</string>
+    <string name="trade">Comércio Varejista</string>
+    <string name="wholesaler">Comércio Atacadista</string>
+    <string name="parking">Estacionamento</string>
 
 </resources>

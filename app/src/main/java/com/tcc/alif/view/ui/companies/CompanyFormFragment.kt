@@ -2,12 +2,14 @@ package com.tcc.alif.view.ui.companies
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
 import com.tcc.alif.data.model.CompanyResponse
+import com.tcc.alif.data.model.local.getAllCategories
 import com.tcc.alif.data.util.ValidateUtil.generateUUID
 import com.tcc.alif.data.util.emptyIfNull
 import com.tcc.alif.data.util.validateFields
@@ -27,13 +29,26 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
             title = getString(R.string.company_form_title),
             navigationBack = true
         )
+        setViews()
         setListener()
         setObservers()
     }
 
+    private fun setViews() = binding.apply {
+        val titlesCategories = getAllCategories().map {
+            requireContext().getString(it)
+        }
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            titlesCategories
+        )
+        categoryAc.setAdapter(adapter)
+    }
+
     private fun setListener() = binding.apply{
         saveCompany.setOnClickListener {
-            if(getAllFields().validateFields()){
+            if(getRequiredFields().validateFields()){
                 viewModel.handleIntent(
                     intent = CompanyIntent.SaveNewCompany(
                         company = generateModel(),
@@ -67,12 +82,13 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
         companySwipe.isRefreshing = loading
     }
 
-    //TODO: Improve form - uf field as select, implement zipcode query to complete other fields
-    //TODO: Add category and cnpj fields to form
+    //TODO: Improve form - uf field as select, implement zipcode query(https://viacep.com.br/ws/01153-000/json/) to complete other fields
+    //TODO: Add mask to zipcode, telephone and cnpj
+
     private fun generateModel() =
         CompanyResponse(
             idCompany = generateUUID(),
-            category = "Barbearia",
+            category = binding.categoryAc.editableText.toString(),
             tradeName = binding.tradeNameEt.text.toString().emptyIfNull(),
             ownerName = binding.ownerNameEt.text.toString().emptyIfNull(),
             telephone = binding.telephoneEt.text.toString().emptyIfNull(),
@@ -83,10 +99,10 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
             zipCode = binding.zipEt.text.toString().emptyIfNull(),
             state = binding.ufEt.text.toString().emptyIfNull(),
             addressContinued = binding.addressContinuedEt.text.toString().emptyIfNull(),
-            cnpj = "59463657000138"
+            cnpj = binding.cnpjEt.text.toString().emptyIfNull()
         )
 
-    private fun getAllFields() =
+    private fun getRequiredFields() =
         listOf(
             binding.tradeNameEt,
             binding.ownerNameEt,
@@ -97,6 +113,5 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
             binding.cityEt,
             binding.zipEt,
             binding.ufEt,
-            binding.addressContinuedEt
         )
 }

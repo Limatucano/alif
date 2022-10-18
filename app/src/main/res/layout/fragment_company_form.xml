@@ -40,136 +40,257 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <TextView
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tradeNameTv"
-                    style="@style/TitleEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nome_fantasia_tv" />
-
-                <EditText
-                    android:id="@+id/tradeNameEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:hint="@string/nome_fantasia_tv"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
 
-                <TextView
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tradeNameEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/ownerNameTv"
-                    style="@style/TitleEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nome_proprietario_tv" />
-
-                <EditText
-                    android:id="@+id/ownerNameEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:hint="@string/nome_proprietario_tv"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
 
-                <TextView
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ownerNameEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/cnpjTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cnpj_tv"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cnpjEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText"
+                        android:inputType="number"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/categoryTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/category_tv"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/categoryAc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:theme="@style/EditText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/telephoneTv"
-                    style="@style/TitleEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/telefone_tv" />
-
-                <EditText
-                    android:id="@+id/telephoneEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:hint="@string/telefone_tv"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
 
-                <TextView
-                    android:id="@+id/streetTv"
-                    style="@style/TitleEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/rua_tv" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/telephoneEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText"
+                        android:inputType="number"/>
 
-                <EditText
-                    android:id="@+id/streetEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:id="@+id/districtTv"
-                    style="@style/TitleEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bairro_tv" />
-
-                <EditText
-                    android:id="@+id/districtEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
-
-                <TextView
-                    android:id="@+id/numberTv"
-                    style="@style/TitleEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/numero_tv" />
-
-                <EditText
-                    android:id="@+id/numberEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-
-                <TextView
-                    android:id="@+id/cityTv"
-                    style="@style/TitleEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cidade_tv" />
-
-                <EditText
-                    android:id="@+id/cityEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
-
-                <TextView
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/zipTv"
-                    style="@style/TitleEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cep_tv" />
-
-                <EditText
-                    android:id="@+id/zipEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:hint="@string/cep_tv"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
 
-                <TextView
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/zipEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText"
+                        android:inputType="number"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/streetTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/rua_tv"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/streetEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/districtTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/bairro_tv"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/districtEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/numberTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/numero_tv"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/numberEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText"
+                        android:inputType="number"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/cityTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cidade_tv"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cityEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/ufTv"
-                    style="@style/TitleEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/uf_tv" />
-
-                <EditText
-                    android:id="@+id/ufEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:hint="@string/uf_tv"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
 
-                <TextView
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ufEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/addressContinuedTv"
-                    style="@style/TitleEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/complemento_tv" />
-
-                <EditText
-                    android:id="@+id/addressContinuedEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:hint="@string/complemento_tv"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/addressContinuedEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </ScrollView>
 
