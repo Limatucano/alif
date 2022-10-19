@@ -8,30 +8,31 @@ object MaskUtils {
     private const val CPF_MASK = "###.###.###-##"
     private const val CNPJ_MASK = "##.###.###/####-##"
     private const val DATE_MASK = "##/##/####"
+    private const val ZIPCODE_MASK = "#####-###"
 
-    /**
-     * the function to set cellphone mask
-     * @param EditText
-     * @return void
-     */
-    fun cellphoneMask(editText: EditText) = Mask.mask(CELLPHONE_MASK, editText)
-    /**
-     * the function to set cpf mask
-     * @param EditText
-     * @return void
-     */
-    fun cpfMask(editText: EditText) = Mask.mask(CPF_MASK, editText)
-    /**
-     * the function to set cnpj mask
-     * @param EditText
-     * @return void
-     */
-    fun cnpjMask(editText: EditText) = Mask.mask(CNPJ_MASK, editText)
-    /**
-     * the function to set date mask
-     * @param EditText
-     * @return void
-     */
-    fun dateMask(editText: EditText) = Mask.mask(DATE_MASK, editText)
+    fun EditText.setZipCodeMask() = Mask.mask(
+        mask = ZIPCODE_MASK,
+        editText = this
+    )
+
+    fun EditText.setCellphoneMask() = Mask.mask(
+        mask = CELLPHONE_MASK,
+        editText = this
+    )
+
+    fun EditText.setCpfMask() = Mask.mask(
+        mask = CPF_MASK,
+        editText = this
+    )
+
+    fun EditText.setCnpjMask() = Mask.mask(
+        mask = CNPJ_MASK,
+        editText = this
+    )
+
+    fun EditText.setDateMask() = Mask.mask(
+        mask = DATE_MASK,
+        editText = this
+    )
 
 }

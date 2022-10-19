@@ -3,7 +3,6 @@ package com.tcc.alif.view.ui.companies
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -13,6 +12,9 @@ import com.tcc.alif.data.model.AddressResponse
 import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.data.model.local.getAllCategories
 import com.tcc.alif.data.model.local.getAllStates
+import com.tcc.alif.data.util.MaskUtils.setCellphoneMask
+import com.tcc.alif.data.util.MaskUtils.setCnpjMask
+import com.tcc.alif.data.util.MaskUtils.setZipCodeMask
 import com.tcc.alif.data.util.ValidateUtil.generateUUID
 import com.tcc.alif.data.util.emptyIfNull
 import com.tcc.alif.data.util.validateFields
@@ -38,6 +40,11 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
     }
 
     private fun setViews() = binding.apply {
+
+        telephoneEt.addTextChangedListener(telephoneEt.setCellphoneMask())
+        cnpjEt.addTextChangedListener(cnpjEt.setCnpjMask())
+        zipEt.addTextChangedListener(zipEt.setZipCodeMask())
+
         val statesAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_list_item_1,
@@ -87,7 +94,9 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
                     updateLoading(false)
                     goToCompanies()
                 }
-                is CompanyState.Error -> Toast.makeText(requireContext(), "Não foi", Toast.LENGTH_SHORT).show()
+                is CompanyState.Error -> {
+                    updateLoading(false)
+                }
                 is CompanyState.Loading -> updateLoading(state.loading)
                 is CompanyState.Address -> {
                     updateLoading(false)
@@ -114,7 +123,6 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
         companySwipe.isRefreshing = loading
     }
 
-    //TODO: Add mask to zipcode, telephone and cnpj
     private fun generateModel() =
         CompanyResponse(
             idCompany = generateUUID(),
