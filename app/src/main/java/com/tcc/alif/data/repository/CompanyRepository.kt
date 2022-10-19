@@ -5,7 +5,7 @@ import com.tcc.alif.data.model.CompanyResponse
 import javax.inject.Inject
 
 class CompanyRepository @Inject constructor(
-    private val dataSource: CompanyDataSource
+    private val dataSource: CompanyDataSource,
 ) {
 
     fun getAllCompaniesByUser(idUser: String) = dataSource.getAllCompaniesByUser(idUser = idUser)
@@ -14,5 +14,7 @@ class CompanyRepository @Inject constructor(
         company = company,
         idUser = idUser
     )
+
+    suspend fun getAddress(cep: String) = dataSource.getAddress(cep)
 
 }

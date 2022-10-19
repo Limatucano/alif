@@ -5,6 +5,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import com.tcc.alif.data.api.CepService
 import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.data.model.Response
 import com.tcc.alif.data.model.SigninResponse
@@ -17,8 +18,11 @@ import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class CompanyDataSource @Inject constructor(
-    private val firebaseFirestore: FirebaseFirestore
+    private val firebaseFirestore: FirebaseFirestore,
+    private val cepService: CepService
 ) {
+
+    suspend fun getAddress(cep: String) = cepService.getAddress(cep)
 
     fun getAllCompaniesByUser(idUser: String) : Flow<Response<QuerySnapshot>> = flow{
         emit(Response.Loading(true))

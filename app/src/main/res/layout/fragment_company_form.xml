@@ -259,15 +259,16 @@
                     android:theme="@style/InputLayout"
                     android:layout_marginTop="@dimen/margin_default"
                     app:boxBackgroundMode="filled"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                     app:boxCollapsedPaddingTop="0dp"
                     app:boxBackgroundColor="@null">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/ufEt"
+                    <AutoCompleteTextView
+                        android:id="@+id/ufAc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:theme="@style/EditText"
-                        android:inputType="text"/>
+                        android:inputType="none"
+                        android:theme="@style/EditText" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

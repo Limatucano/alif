@@ -2,6 +2,7 @@ package com.tcc.alif.data.util
 
 object Constants {
     const val API_BASE_URL = "https://backend-api-alif.herokuapp.com/"
+    const val API_CEP_URL = "https://viacep.com.br/ws/"
 
     const val ADMINISTRATOR_MODE = "A"
     const val CONSUMER_MODE = "C"

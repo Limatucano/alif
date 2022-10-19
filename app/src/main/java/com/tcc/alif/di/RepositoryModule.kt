@@ -4,6 +4,7 @@ package com.tcc.alif.di
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tcc.alif.data.api.AlifService
+import com.tcc.alif.data.api.CepService
 import com.tcc.alif.data.datasource.CompanyDataSource
 import com.tcc.alif.data.datasource.SignInDataSource
 import com.tcc.alif.data.repository.*
@@ -32,9 +33,11 @@ class RepositoryModule {
 
     @Provides
     fun provideCompanyDataSource(
-        firebaseFirestore: FirebaseFirestore
+        firebaseFirestore: FirebaseFirestore,
+        cepService: CepService
     ) : CompanyDataSource = CompanyDataSource(
-        firebaseFirestore = firebaseFirestore
+        firebaseFirestore = firebaseFirestore,
+        cepService = cepService
     )
 
     @Provides

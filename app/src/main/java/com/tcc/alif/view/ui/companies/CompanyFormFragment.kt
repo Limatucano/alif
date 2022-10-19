@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
+import com.tcc.alif.data.model.AddressResponse
 import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.data.model.local.getAllCategories
+import com.tcc.alif.data.model.local.getAllStates
 import com.tcc.alif.data.util.ValidateUtil.generateUUID
 import com.tcc.alif.data.util.emptyIfNull
 import com.tcc.alif.data.util.validateFields
@@ -35,6 +38,13 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
     }
 
     private fun setViews() = binding.apply {
+        val statesAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            getAllStates()
+        )
+        ufAc.setAdapter(statesAdapter)
+
         val titlesCategories = getAllCategories().map {
             requireContext().getString(it)
         }
@@ -57,6 +67,17 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
                 )
             }
         }
+
+        zipEt.addTextChangedListener {
+            val zipCode = it.toString()
+            if(zipCode.isNotEmpty() && zipCode.length > MIN_ZIP_TO_REQUEST){
+                viewModel.handleIntent(
+                    intent = CompanyIntent.GetAddress(
+                        cep = zipCode
+                    )
+                )
+            }
+        }
     }
 
     private fun setObservers(){
@@ -68,9 +89,20 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
                 }
                 is CompanyState.Error -> Toast.makeText(requireContext(), "Não foi", Toast.LENGTH_SHORT).show()
                 is CompanyState.Loading -> updateLoading(state.loading)
+                is CompanyState.Address -> {
+                    updateLoading(false)
+                    updateAddress(state.addressResponse)
+                }
                 else -> throw IllegalArgumentException("State not mapped")
             }
         }
+    }
+
+    private fun updateAddress(address: AddressResponse) = binding.run{
+        streetEt.setText(address.publicPlace)
+        districtEt.setText(address.district)
+        cityEt.setText(address.city)
+        ufAc.setText(address.uf, false)
     }
 
     private fun goToCompanies(){
@@ -82,9 +114,7 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
         companySwipe.isRefreshing = loading
     }
 
-    //TODO: Improve form - uf field as select, implement zipcode query(https://viacep.com.br/ws/01153-000/json/) to complete other fields
     //TODO: Add mask to zipcode, telephone and cnpj
-
     private fun generateModel() =
         CompanyResponse(
             idCompany = generateUUID(),
@@ -97,7 +127,7 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
             numberHouse = binding.numberEt.text.toString().emptyIfNull(),
             city = binding.cityEt.text.toString().emptyIfNull(),
             zipCode = binding.zipEt.text.toString().emptyIfNull(),
-            state = binding.ufEt.text.toString().emptyIfNull(),
+            state = binding.ufAc.editableText.toString().emptyIfNull(),
             addressContinued = binding.addressContinuedEt.text.toString().emptyIfNull(),
             cnpj = binding.cnpjEt.text.toString().emptyIfNull()
         )
@@ -111,7 +141,10 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
             binding.districtEt,
             binding.numberEt,
             binding.cityEt,
-            binding.zipEt,
-            binding.ufEt,
+            binding.zipEt
         )
+
+    companion object{
+        const val MIN_ZIP_TO_REQUEST = 6
+    }
 }

@@ -6,12 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.tcc.alif.data.model.Companies
 import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.data.model.Response
-import com.tcc.alif.data.repository.AdministratorRepository
 import com.tcc.alif.data.repository.CompanyRepository
 import com.tcc.alif.data.util.request
-import com.tcc.alif.data.util.requestFirebase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,7 +26,17 @@ class CompaniesViewModel @Inject constructor(
                 company = intent.company,
                 idUser = intent.idUser
             )
+            is CompanyIntent.GetAddress -> getAddress(intent.cep)
         }
+    }
+
+    private fun getAddress(cep: String){
+        viewModelScope.request(
+            blockToRun = { repository.getAddress(cep) },
+            onSuccess = { state.postValue(CompanyState.Address(it)) },
+            onLoading = { state.postValue(CompanyState.Loading(it)) },
+            onError = { state.postValue(CompanyState.Error(it)) }
+        )
     }
 
     private fun saveNewCompany(

@@ -119,6 +119,36 @@
     <string name="opened_status">Aberto</string>
     <string name="closed_status">Fechado</string>
 
+    <!--  states  -->
+    <string name="RJ">Rio de Janeiro</string>
+    <string name="MG">Minas Gerais</string>
+    <string name="SP">São Paulo</string>
+    <string name="ES">Espírito Santo</string>
+    <string name="AC">Acre</string>
+    <string name="AL">Alagoas</string>
+    <string name="AP">Amapá</string>
+    <string name="AM">Amazonas</string>
+    <string name="BA">Bahia</string>
+    <string name="CE">Ceará</string>
+    <string name="GO">Goiás</string>
+    <string name="MA">Maranhão</string>
+    <string name="MT">Mato Grosso</string>
+    <string name="MS">Mato Grosso do Sul</string>
+    <string name="PA">Pará</string>
+    <string name="PB">Paraíba</string>
+    <string name="PR">Paraná</string>
+    <string name="PE">Pernambuco</string>
+    <string name="PI">Piauí</string>
+    <string name="RN">Rio Grande do Norte</string>
+    <string name="RS">Rio Grande do Sul</string>
+    <string name="RO">Rondônia</string>
+    <string name="RR">Roraima</string>
+    <string name="SC">Santa Catarina</string>
+    <string name="SE">Sergipe</string>
+    <string name="TO">Tocantis</string>
+    <string name="DF">Distrito Federal</string>
+
+    <!--  categories  -->
     <string name="barberShop">Cabeleireiro e Barbearia</string>
     <string name="restaurant">Restaurante</string>
     <string name="electrician">Eletricista</string>

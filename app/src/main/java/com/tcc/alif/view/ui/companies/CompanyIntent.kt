@@ -9,4 +9,5 @@ sealed class CompanyIntent {
         val company: CompanyResponse,
         val idUser: String
     ) : CompanyIntent()
+    data class GetAddress(val cep: String) : CompanyIntent()
 }
