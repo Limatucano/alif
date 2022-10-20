@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
-import com.tcc.alif.data.model.Company
 import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.data.model.Queues
 import com.tcc.alif.data.util.setLinearLayout
@@ -29,7 +28,7 @@ class HomeFragment(private val company : CompanyResponse) : BaseFragment<Fragmen
             title = getString(R.string.queues_title)
         )
         viewModel.handleIntent(
-            HomeIntent.getQueuesBy(
+            HomeIntent.GetQueuesBy(
                 idCompany = company.idCompany.toString()
             )
         )
@@ -54,8 +53,8 @@ class HomeFragment(private val company : CompanyResponse) : BaseFragment<Fragmen
             when(state){
                 is HomeState.Loading -> updateLoading(state.loading)
                 is HomeState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
-                is HomeState.Success -> {
-                    setAdapter(state.response)
+                is HomeState.QueuesData -> {
+                    setAdapter(state.queues)
                     updateLoading(false)
                 }
             }

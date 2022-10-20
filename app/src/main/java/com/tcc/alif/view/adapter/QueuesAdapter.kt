@@ -4,14 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.tcc.alif.R
-import com.tcc.alif.data.model.*
+import com.tcc.alif.data.model.QueueResponse
+import com.tcc.alif.data.model.Queues
+import com.tcc.alif.data.model.Service
 import com.tcc.alif.data.util.animateVisibility
 import com.tcc.alif.data.util.setVisible
-import com.tcc.alif.databinding.CompanyItemBinding
 import com.tcc.alif.databinding.QueuesHomeItemBinding
 
 class QueuesAdapter(
@@ -25,20 +25,9 @@ class QueuesAdapter(
 
         fun bind(queue : QueueResponse) = binding.run{
             queueName.text = queue.name
+            setupFirstConsumers(queue.service)
 
-
-            val firstConsumerValue = queue.firstConsumers?.firstOrNull{it.position == FIRST_CONSUMER}?.name
-            val secondConsumerValue = queue.firstConsumers?.firstOrNull{it.position == SECOND_CONSUMER}?.name
-            val thirdConsumerValue = queue.firstConsumers?.firstOrNull{it.position == THIRD_CONSUMER}?.name
-
-            firstLayout.setVisible(firstConsumerValue != null)
-            secondLayout.setVisible(secondConsumerValue != null)
-            thirdLayout.setVisible(thirdConsumerValue != null)
-
-            firstConsumer.text = firstConsumerValue
-            secondConsumer.text = secondConsumerValue
-            thirdConsumer.text = thirdConsumerValue
-            queueStatus.text = queue.status
+            queueStatus.text = queue.status?.let { context.getString(it) }
 
             btnSeeMore.setOnClickListener {
                 action.invoke(queue)
@@ -52,6 +41,24 @@ class QueuesAdapter(
                 animateVisibilityDetail(binding)
             }
 
+        }
+
+        private fun setupFirstConsumers(services: List<Service>) = binding.run{
+            val servicesSorted = services.sortedWith { first, second ->
+                first.enrollmentTime.compareTo(second.enrollmentTime)
+            }
+
+            val firstConsumerValue = servicesSorted.getOrNull(0)?.name
+            val secondConsumerValue = servicesSorted.getOrNull(1)?.name
+            val thirdConsumerValue = servicesSorted.getOrNull(2)?.name
+
+            firstLayout.setVisible( firstConsumerValue != null)
+            secondLayout.setVisible(secondConsumerValue != null)
+            thirdLayout.setVisible(thirdConsumerValue != null)
+
+            firstConsumer.text = firstConsumerValue
+            secondConsumer.text = secondConsumerValue
+            thirdConsumer.text = thirdConsumerValue
         }
     }
     private fun animateVisibilityDetail(binding : QueuesHomeItemBinding) = binding.run{
@@ -81,10 +88,4 @@ class QueuesAdapter(
     }
 
     override fun getItemCount(): Int = queues.queues.size
-
-    companion object {
-        const val FIRST_CONSUMER = 1
-        const val SECOND_CONSUMER = 2
-        const val THIRD_CONSUMER = 3
-    }
 }

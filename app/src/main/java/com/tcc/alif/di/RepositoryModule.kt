@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tcc.alif.data.api.AlifService
 import com.tcc.alif.data.api.CepService
+import com.tcc.alif.data.datasource.AdministratorDataSource
 import com.tcc.alif.data.datasource.CompanyDataSource
 import com.tcc.alif.data.datasource.SignInDataSource
 import com.tcc.alif.data.repository.*
@@ -41,9 +42,18 @@ class RepositoryModule {
     )
 
     @Provides
+    fun provideAdministratorDataSource(
+        firebaseFirestore: FirebaseFirestore
+    ) : AdministratorDataSource = AdministratorDataSource(
+        firebaseFirestore = firebaseFirestore
+    )
+
+    @Provides
     fun provideAdministratorRepository(
-        alifService: AlifService
-    ) : AdministratorRepository = AdministratorRepositoryImpl(alifService)
+        administratorDataSource: AdministratorDataSource
+    ) : AdministratorRepository = AdministratorRepository(
+        administratorDataSource = administratorDataSource
+    )
 
     @Provides
     fun provideCompanyRepository(

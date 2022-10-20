@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.tcc.alif.data.repository.AdministratorRepository
 import com.tcc.alif.data.util.request
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,18 +18,20 @@ class HomeViewModel @Inject constructor(
 
     fun handleIntent(intent : HomeIntent){
         when(intent){
-            is HomeIntent.getQueuesBy -> {
+            is HomeIntent.GetQueuesBy -> {
                 getQueuesBy(intent.idCompany)
             }
         }
     }
 
     private fun getQueuesBy(idCompany : String){
-        viewModelScope.request (
-                blockToRun = { repository.getQueuesBy(idCompany)},
-                onSuccess = { state.postValue(HomeState.Success(it)) },
+        viewModelScope.launch {
+            repository.getQueuesByCompany(idCompany = idCompany).request(
+                blockToRun = this,
+                onError = { state.postValue(HomeState.Error(it)) },
                 onLoading = { state.postValue(HomeState.Loading(it)) },
-                onError = {state.postValue(HomeState.Error(it))}
+                onSuccess = { state.postValue(HomeState.QueuesData(it)) }
             )
         }
+    }
 }

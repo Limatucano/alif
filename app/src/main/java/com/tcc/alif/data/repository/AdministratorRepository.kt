@@ -1,29 +1,17 @@
 package com.tcc.alif.data.repository
 
-import com.tcc.alif.data.api.AlifService
+import com.tcc.alif.data.datasource.AdministratorDataSource
 import com.tcc.alif.data.model.Calls
-import com.tcc.alif.data.model.Companies
-import com.tcc.alif.data.model.Queues
 import javax.inject.Inject
 
-interface AdministratorRepository{
+class AdministratorRepository @Inject constructor(
+    private val administratorDataSource: AdministratorDataSource
+) {
 
-    suspend fun getQueuesBy(idCompany : String) : Queues
-    suspend fun getCallsBy(idQueue : Int) : Calls
-}
+    fun getCallsBy(idQueue: String): Calls = Calls(listOf())
 
-class AdministratorRepositoryImpl @Inject constructor(
-    private val service: AlifService
-) : AdministratorRepository {
-
-    override suspend fun getCallsBy(idQueue: Int): Calls = service.getCallsBy(idQueue)
-
-    override suspend fun getQueuesBy(idCompany: String): Queues {
-        return service.getQueuesBy(
-            mapOf(
-                "idCompany" to idCompany
-            )
-        )
-    }
+    fun getQueuesByCompany(idCompany: String) = administratorDataSource.getQueuesByCompany(
+        idCompany = idCompany
+    )
 
 }

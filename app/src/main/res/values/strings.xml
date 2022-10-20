@@ -118,6 +118,7 @@
     <string name="queue_title">Fila</string>
     <string name="opened_status">Aberto</string>
     <string name="closed_status">Fechado</string>
+    <string name="pendent_status">Pendente</string>
 
     <!--  states  -->
     <string name="RJ">Rio de Janeiro</string>

@@ -1,38 +1,54 @@
 package com.tcc.alif.data.model
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.google.firebase.Timestamp
 import com.tcc.alif.R
+import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_FORMAT
+import com.tcc.alif.data.util.emptyIfNull
+import com.tcc.alif.data.util.toStringDate
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Queues(
-    val queues : List<QueueResponse>
+    var queues : List<QueueResponse>
 ) : Parcelable
 
 @Parcelize
 data class QueueResponse(
-    @SerializedName("id_fila") val idQueue : Int,
-    @SerializedName("nome") val name : String,
-    val status : String,
-    @SerializedName("data_hora_abertura") val openingTime : String,
-    @SerializedName("data_hora_fechamento") val closingTime : String,
-    @SerializedName("quantidade_vagas") val quantity : Int,
-    @SerializedName("descricao") val description : String?,
-    @SerializedName("titulo_categoria") val titleCategory : String,
-    @SerializedName("descricao_categoria") val descriptionCategory : String,
-    @SerializedName("prioridade_categoria") val priorityCategory : Boolean,
-    @SerializedName("tempo_medio_categoria") val averageTimeCategory : String,
-    @SerializedName("createdby") val employeeCreator : String,
-    @SerializedName("primeirosClientes") val firstConsumers : List<ConsumerResume>?
+    val idQueue : String = "",
+    val name : String = "",
+    val status : Int? = null,
+    val openingTime : String = "",
+    val closingTime : String = "",
+    val quantity : Int? = null,
+    val description : String? = null,
+    val titleCategory : String = "",
+    val averageTime : Int? = null,
+    val employeeCreator : String? = "",
+    var service : List<Service> = listOf()
 ) : Parcelable{
 
-    fun getStatusStringRes(status : String) : Int? =
+    private fun getStatusStringRes(status : String) : Int =
         when(status){
             OPENED_STATUS -> R.string.opened_status
             CLOSED_STATUS -> R.string.closed_status
-            else -> null
+            else -> R.string.pendent_status
         }
+
+    fun toQueueResponse(map: MutableMap<String, Any>) =
+        QueueResponse(
+            idQueue = map["idQueue"].toString().emptyIfNull(),
+            name = map["name"].toString().emptyIfNull(),
+            status = getStatusStringRes(map["status"].toString()),
+            openingTime = (map["openingTime"] as Timestamp).toDate().toStringDate(NORMAL_DATE_FORMAT),
+            closingTime = (map["closingTime"] as Timestamp).toDate().toStringDate(NORMAL_DATE_FORMAT),
+            quantity = map["quantity"].toString().toInt(),
+            description = map["description"].toString().emptyIfNull(),
+            titleCategory = map["category"].toString().emptyIfNull(),
+            averageTime = map["averageTime"].toString().toInt(),
+            employeeCreator = "",
+            service = (map["service"] as ArrayList<HashMap<String, Any>>).map { Service().toListService(it) }
+        )
 
     companion object {
         const val OPENED_STATUS = "ABERTO"
@@ -41,8 +57,17 @@ data class QueueResponse(
 }
 
 @Parcelize
-data class ConsumerResume(
-    @SerializedName("posicao") val position : Int,
-    @SerializedName("nome") val name : String,
-    val cpf : String
-) : Parcelable
+data class Service(
+    val enrollmentTime: Timestamp = Timestamp(0,0),
+    val status: String = "",
+    val userId: String = "",
+    var name: String = ""
+) : Parcelable {
+
+    fun toListService(map: HashMap<String,Any>) =
+        Service(
+            enrollmentTime = (map["enrollmentTime"] as Timestamp),
+            status = map["status"].toString().emptyIfNull(),
+            userId = map["userId"].toString().emptyIfNull()
+        )
+}

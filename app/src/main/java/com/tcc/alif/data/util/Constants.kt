@@ -10,6 +10,7 @@ object Constants {
     ////// collections
     const val COMPANY_COLLECTION = "company"
     const val USER_COLLECTION = "user"
+    const val QUEUE_COLLECTION = "queue"
 
     const val USER_UNAUTHORIZED = "Permissão Negada"
 }

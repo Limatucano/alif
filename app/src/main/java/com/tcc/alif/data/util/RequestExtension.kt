@@ -1,8 +1,29 @@
 package com.tcc.alif.data.util
 
 import com.google.android.gms.tasks.Task
+import com.tcc.alif.data.model.Response
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlin.coroutines.resumeWithException
+
+
+fun <T>Flow<Response<T>>.request(
+    blockToRun : CoroutineScope,
+    onSuccess : ((t: T) -> Unit)? = null,
+    onError : ((e : String) -> Unit)? = null,
+    onLoading : ((loading : Boolean) -> Unit)? = null,
+){
+    blockToRun.launch {
+        collect{ response ->
+            when(response){
+                is Response.Loading -> onLoading?.invoke(response.loading)
+                is Response.Success -> onSuccess?.invoke(response.data)
+                is Response.Error -> onError?.invoke(response.message ?: UNKNOWN_ERROR)
+            }
+        }
+    }
+}
 
 fun <T> CoroutineScope.request(
     blockToRun : suspend  CoroutineScope.() -> T,

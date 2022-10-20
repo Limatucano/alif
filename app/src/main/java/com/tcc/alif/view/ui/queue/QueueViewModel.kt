@@ -21,7 +21,7 @@ class QueueViewModel @Inject constructor(
         }
     }
 
-    private fun getCallsBy(idQueue : Int){
+    private fun getCallsBy(idQueue : String){
         viewModelScope.request(
             blockToRun = { repository.getCallsBy(idQueue) },
             onSuccess = { state.postValue(BaseState.Success(it)) },
