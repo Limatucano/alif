@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <dimen name="margin_default" tools:ignore="MissingDefaultResource">10dp</dimen>
+    <dimen name="margin_default">10dp</dimen>
+    <dimen name="margin_high">48dp</dimen>
+    <dimen name="margin_medium">32dp</dimen>
+
+    <dimen name="card_elevation_default">10dp</dimen>
 </resources>

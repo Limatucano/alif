@@ -6,7 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.tcc.alif.data.repository.AdministratorRepository
 import com.tcc.alif.data.util.request
 import com.tcc.alif.view.ui.BaseState
+import com.tcc.alif.view.ui.administrator.home.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,12 +24,13 @@ class QueueViewModel @Inject constructor(
     }
 
     private fun getCallsBy(idQueue : String){
-        viewModelScope.request(
-            blockToRun = { repository.getCallsBy(idQueue) },
-            onSuccess = { state.postValue(BaseState.Success(it)) },
-            onLoading = { state.postValue(BaseState.Loading(it)) },
-            onError = { state.postValue(BaseState.Error(it)) }
-        )
+        viewModelScope.launch {
+            repository.getCallsBy(idQueue = idQueue).request(
+                blockToRun = this,
+                onSuccess = { state.postValue(BaseState.Success(it)) },
+                onLoading = { state.postValue(BaseState.Loading(it)) },
+                onError = { state.postValue(BaseState.Error(it)) }
+            )
+        }
     }
-
 }

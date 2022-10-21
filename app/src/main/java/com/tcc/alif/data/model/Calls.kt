@@ -1,18 +1,16 @@
 package com.tcc.alif.data.model
 
-import com.google.gson.annotations.SerializedName
-
 data class Calls(
-    val calls : List<Call>
+    var calls : List<Call>,
+    val quantity: Int
 )
 
 data class Call(
-    @SerializedName("posicao") val position : Int,
-    @SerializedName("id_cliente") val idConsumer : Int,
-    @SerializedName("nome_funcionario") val employeeName : String,
-    @SerializedName("cargo") val employeeRole : String,
-    @SerializedName("nome_cliente") val consumerName : String,
-    @SerializedName("numero_celular") val cellphone : String,
-    @SerializedName("data_nascimento") val birthDate : String,
+    val idConsumer : String,
+    val employeeName : String,
+    val employeeRole : String,
+    val consumerName : String,
+    val cellphone : String,
+    val birthDate : String,
     val cpf : String
 )

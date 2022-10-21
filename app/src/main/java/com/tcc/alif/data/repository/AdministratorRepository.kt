@@ -8,7 +8,9 @@ class AdministratorRepository @Inject constructor(
     private val administratorDataSource: AdministratorDataSource
 ) {
 
-    fun getCallsBy(idQueue: String): Calls = Calls(listOf())
+    fun getCallsBy(idQueue: String) = administratorDataSource.getCallsByQueue(
+        idQueue = idQueue
+    )
 
     fun getQueuesByCompany(idCompany: String) = administratorDataSource.getQueuesByCompany(
         idCompany = idCompany

@@ -1,9 +1,6 @@
 package com.tcc.alif.view.ui.administrator.queue
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -13,9 +10,6 @@ import com.tcc.alif.R
 import com.tcc.alif.data.model.Call
 import com.tcc.alif.data.model.Calls
 import com.tcc.alif.data.model.QueueResponse
-import com.tcc.alif.data.model.QueueResponse.Companion.CLOSED_STATUS
-import com.tcc.alif.data.model.QueueResponse.Companion.OPENED_STATUS
-import com.tcc.alif.data.util.DateFormats
 import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT
 import com.tcc.alif.data.util.fromHtml
 import com.tcc.alif.data.util.setLinearLayout
@@ -33,7 +27,6 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
     private lateinit var queue : QueueResponse
     private lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var callsAdapter: CallsAdapter
-    private var menu: Menu? = null
     private val viewModel : QueueViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +49,7 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
     private fun setIntent(){
         viewModel.handleIntent(QueueIntent.GetCalls(queue.idQueue))
     }
+
     private fun setViews() = binding.run{
         titleTv.text = queue.name
         descricaoTv.text = queue.description
@@ -90,10 +84,17 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
                 is BaseState.Loading -> updateLoading(state.loading)
                 is BaseState.Success<*> -> {
                     setAdapter(state.response as Calls)
+                    updateAvailableQuantity(state.response as Calls)
                     updateLoading(false)
                 }
                 is BaseState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+    private fun updateAvailableQuantity(calls: Calls) = binding.run{
+        queue.quantity?.let { total ->
+            val availableQuantity = total - calls.quantity
+            availableQuantityTv.text = resources.getString(R.string.queue_available_quantity, availableQuantity.toString()).fromHtml()
         }
     }
 

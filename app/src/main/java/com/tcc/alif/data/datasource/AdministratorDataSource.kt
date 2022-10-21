@@ -1,10 +1,7 @@
 package com.tcc.alif.data.datasource
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.tcc.alif.data.model.QueueResponse
-import com.tcc.alif.data.model.Queues
-import com.tcc.alif.data.model.Response
-import com.tcc.alif.data.model.Service
+import com.tcc.alif.data.model.*
 import com.tcc.alif.data.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -14,13 +11,38 @@ class AdministratorDataSource @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore
 ){
 
+    fun getCallsByQueue(idQueue: String) :Flow<Response<Calls>> = flow {
+        emit(Response.loading(true))
+        val queue = getQueue(idQueue)
+
+        val service = QueueResponse().toQueueResponse(
+            queue.documents[0].data
+        ).service
+
+        val calls = Calls(
+            calls = service.map {
+                val userData = getUserData(it.userId)
+                Call(
+                    idConsumer = userData.uid,
+                    employeeName = "",
+                    employeeRole = "",
+                    consumerName = userData.name,
+                    cellphone = userData.cellphone,
+                    birthDate = userData.birthDate,
+                    cpf = userData.cpf
+                )
+            },
+            quantity = service.size
+        )
+
+        emit(Response.success(calls))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
     fun getQueuesByCompany(idCompany: String) : Flow<Response<Queues>> = flow{
         emit(Response.Loading(true))
-        val queues = firebaseFirestore
-            .collection(Constants.QUEUE_COLLECTION)
-            .whereEqualTo("idCompany",idCompany)
-            .get()
-            .await()
+        val queues = getQueues(idCompany)
 
         val queuesData = Queues(
             queues = queues.map {
@@ -42,7 +64,7 @@ class AdministratorDataSource @Inject constructor(
                 employeeCreator = "",
                 service = queueResponse.service.map { service ->
                     Service(
-                        name = getUserName(service.userId),
+                        name = getUserData(service.userId).name,
                         userId = service.userId,
                         enrollmentTime = service.enrollmentTime,
                         status = service.status
@@ -56,13 +78,27 @@ class AdministratorDataSource @Inject constructor(
         emit(Response.error(it.message ?: UNKNOWN_ERROR))
     }.flowOn(Dispatchers.IO)
 
-    private suspend fun getUserName(userId: String): String{
+    private suspend fun getQueues(idCompany: String) = firebaseFirestore
+        .collection(Constants.QUEUE_COLLECTION)
+        .whereEqualTo("idCompany",idCompany)
+        .get()
+        .await()
+
+    private suspend fun getQueue(idQueue: String) = firebaseFirestore
+        .collection(Constants.QUEUE_COLLECTION)
+        .whereEqualTo("idQueue", idQueue)
+        .get()
+        .await()
+
+    private suspend fun getUserData(userId: String): SigninResponse {
         val user = firebaseFirestore
             .collection(Constants.USER_COLLECTION)
             .whereEqualTo("uid", userId)
             .get()
             .await()
-        val name = user.documents[0].data?.get("name").toString().emptyIfNull()
-        return name
+        val userMapped = user.documents[0].data?.let {
+            SigninResponse().toSignResponse(it)
+        }
+        return userMapped ?: SigninResponse()
     }
 }

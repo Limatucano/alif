@@ -35,20 +35,25 @@ data class QueueResponse(
             else -> R.string.pendent_status
         }
 
-    fun toQueueResponse(map: MutableMap<String, Any>) =
-        QueueResponse(
-            idQueue = map["idQueue"].toString().emptyIfNull(),
-            name = map["name"].toString().emptyIfNull(),
-            status = getStatusStringRes(map["status"].toString()),
-            openingTime = (map["openingTime"] as Timestamp),
-            closingTime = (map["closingTime"] as Timestamp),
-            quantity = map["quantity"].toString().toInt(),
-            description = map["description"].toString().emptyIfNull(),
-            titleCategory = map["category"].toString().emptyIfNull(),
-            averageTime = map["averageTime"].toString().toInt(),
-            employeeCreator = "",
-            service = (map["service"] as ArrayList<HashMap<String, Any>>).map { Service().toListService(it) }
-        )
+    fun toQueueResponse(map: MutableMap<String, Any>?): QueueResponse{
+        return if(map == null){
+            QueueResponse()
+        }else{
+            QueueResponse(
+                idQueue = map["idQueue"].toString().emptyIfNull(),
+                name = map["name"].toString().emptyIfNull(),
+                status = getStatusStringRes(map["status"].toString()),
+                openingTime = (map["openingTime"] as Timestamp),
+                closingTime = (map["closingTime"] as Timestamp),
+                quantity = map["quantity"].toString().toInt(),
+                description = map["description"].toString().emptyIfNull(),
+                titleCategory = map["category"].toString().emptyIfNull(),
+                averageTime = map["averageTime"].toString().toInt(),
+                employeeCreator = "",
+                service = (map["service"] as ArrayList<HashMap<String, Any>>).map { Service().toListService(it) }
+            )
+        }
+    }
 
     companion object {
         const val OPENED_STATUS = "ABERTO"

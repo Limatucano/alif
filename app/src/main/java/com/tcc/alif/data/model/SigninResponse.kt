@@ -7,7 +7,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class SigninResponse(
     val name : String = "",
-    val secondName : String = "",
     val cpf : String = "",
     val cellphone : String = "",
     val birthDate : String = "",
@@ -22,7 +21,6 @@ data class SigninResponse(
     fun toSignResponse(map: MutableMap<String, Any>) =
         SigninResponse(
             name = map["name"].toString().emptyIfNull(),
-            secondName = map["secondname"].toString().emptyIfNull(),
             cpf = map["cpf"].toString().emptyIfNull(),
             cellphone = map["cellphone"].toString().emptyIfNull(),
             birthDate = map["birthdate"].toString().emptyIfNull(),
