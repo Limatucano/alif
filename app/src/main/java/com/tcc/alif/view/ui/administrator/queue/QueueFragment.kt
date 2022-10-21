@@ -11,6 +11,7 @@ import com.tcc.alif.data.model.Call
 import com.tcc.alif.data.model.Calls
 import com.tcc.alif.data.model.QueueResponse
 import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT
+import com.tcc.alif.data.util.emptyIfNull
 import com.tcc.alif.data.util.fromHtml
 import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.data.util.toStringDate
@@ -53,6 +54,8 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
     private fun setViews() = binding.run{
         titleTv.text = queue.name
         descricaoTv.text = queue.description
+        quantityTotalTv.text = resources.getString(R.string.quantity_total, queue.quantity.toString().emptyIfNull()).fromHtml()
+
         queue.status?.let {
             val currentStatus = requireContext().getString(it)
             val openingTime = queue.openingTime.toDate().toStringDate(NORMAL_DATE_WITH_HOURS_FORMAT)
@@ -108,7 +111,7 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
     }
 
     private fun selectedCall(call : Call){
-
+        call.idConsumer
     }
 
     private fun setItemTouchHelper(active: Boolean){

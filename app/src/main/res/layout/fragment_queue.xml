@@ -67,6 +67,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/openTv"
                 tools:text="@string/queue_closed" />
 
+            <TextView
+                android:id="@+id/quantityTotalTv"
+                style="@style/InternalScreenDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/openTv"
+                app:layout_constraintTop_toBottomOf="@+id/openTv"
+                tools:text="@string/quantity_total" />
+
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
