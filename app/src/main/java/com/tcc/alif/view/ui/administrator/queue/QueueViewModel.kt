@@ -1,4 +1,4 @@
-package com.tcc.alif.view.ui.queue
+package com.tcc.alif.view.ui.administrator.queue
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

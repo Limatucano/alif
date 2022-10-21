@@ -1,22 +1,25 @@
-package com.tcc.alif.view.ui.queue
+package com.tcc.alif.view.ui.administrator.queue
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.model.Call
 import com.tcc.alif.data.model.Calls
 import com.tcc.alif.data.model.QueueResponse
+import com.tcc.alif.data.model.QueueResponse.Companion.CLOSED_STATUS
+import com.tcc.alif.data.model.QueueResponse.Companion.OPENED_STATUS
+import com.tcc.alif.data.util.DateFormats
+import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT
+import com.tcc.alif.data.util.fromHtml
 import com.tcc.alif.data.util.setLinearLayout
+import com.tcc.alif.data.util.toStringDate
 import com.tcc.alif.databinding.FragmentQueueBinding
 import com.tcc.alif.view.adapter.CallsAdapter
 import com.tcc.alif.view.ui.BaseFragment
@@ -40,20 +43,6 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
         queue = args.queue
     }
 
-    override fun onCreateOptionsMenu(
-        menu: Menu,
-        inflater: MenuInflater
-    ) {
-        inflater.inflate(R.menu.menu_queue, menu)
-        this.menu = menu
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar(
@@ -62,13 +51,31 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
         setIntent()
         setObserver()
         setViews()
-
     }
 
     private fun setIntent(){
         viewModel.handleIntent(QueueIntent.GetCalls(queue.idQueue))
     }
     private fun setViews() = binding.run{
+        titleTv.text = queue.name
+        descricaoTv.text = queue.description
+        queue.status?.let {
+            val currentStatus = requireContext().getString(it)
+            val openingTime = queue.openingTime.toDate().toStringDate(NORMAL_DATE_WITH_HOURS_FORMAT)
+            val closingTime = queue.closingTime.toDate().toStringDate(NORMAL_DATE_WITH_HOURS_FORMAT)
+            statusTv.text = resources.getString(R.string.queue_status, currentStatus).fromHtml()
+            when(it){
+                R.string.opened_status -> {
+                    openTv.text = resources.getString(R.string.queue_opened, openingTime).fromHtml()
+                    closeTv.text = resources.getString(R.string.queue_will_close, closingTime).fromHtml()
+                }
+                R.string.closed_status, R.string.pendent_status -> {
+                    openTv.text = resources.getString(R.string.queue_will_open, openingTime).fromHtml()
+                    closeTv.text = resources.getString(R.string.queue_closed, closingTime).fromHtml()
+                }
+            }
+        }
+
         rvCalls.setLinearLayout(
             context = requireContext(),
             orientation = LinearLayoutManager.VERTICAL,
@@ -112,5 +119,4 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
         queueSwipe.isEnabled = loading
         queueSwipe.isRefreshing = loading
     }
-
 }

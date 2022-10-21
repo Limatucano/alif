@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ui.queue.QueueFragment"
+    tools:context=".view.ui.administrator.queue.QueueFragment"
     android:background="@color/white"
     android:id="@+id/queueSwipe">
 
@@ -23,13 +23,25 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/descricaoTv"
-                style="@style/InternalScreenDescription"
-                android:layout_width="wrap_content"
+                android:id="@+id/titleTv"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                style="@style/TitleLight"
                 android:layout_marginTop="@dimen/margin_default"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                tools:text="Teste"/>
+
+
+            <TextView
+                android:id="@+id/descricaoTv"
+                style="@style/InternalScreenDescription.Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_default"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleTv"
                 tools:text="Essa fila é destinada a pessoas que queiram fazer serviços simples." />
 
             <TextView

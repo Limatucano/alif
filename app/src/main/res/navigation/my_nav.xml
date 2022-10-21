@@ -107,7 +107,7 @@
         tools:layout="@layout/fragment_company_form" />
     <fragment
         android:id="@+id/queueFragment"
-        android:name="com.tcc.alif.view.ui.queue.QueueFragment"
+        android:name="com.tcc.alif.view.ui.administrator.queue.QueueFragment"
         android:label="fragment_queue"
         tools:layout="@layout/fragment_queue" >
         <argument
