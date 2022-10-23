@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.model.Call
+import com.tcc.alif.data.model.CallStatus
 import com.tcc.alif.data.model.Calls
 import com.tcc.alif.data.model.QueueResponse
 import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT
@@ -18,7 +19,6 @@ import com.tcc.alif.data.util.toStringDate
 import com.tcc.alif.databinding.FragmentQueueBinding
 import com.tcc.alif.view.adapter.CallsAdapter
 import com.tcc.alif.view.ui.BaseFragment
-import com.tcc.alif.view.ui.BaseState
 import com.tcc.alif.view.ui.ItemTouchHelperCallback
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,13 +42,10 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
         setupToolbar(
             title = getString(R.string.queue_title),
         )
-        setIntent()
+        viewModel.handleIntent(QueueIntent.GetCalls(queue.idQueue))
         setObserver()
         setViews()
-    }
-
-    private fun setIntent(){
-        viewModel.handleIntent(QueueIntent.GetCalls(queue.idQueue))
+        setListener()
     }
 
     private fun setViews() = binding.run{
@@ -84,16 +81,27 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
     private fun setObserver(){
         viewModel.state.observe(viewLifecycleOwner){ state ->
             when(state){
-                is BaseState.Loading -> updateLoading(state.loading)
-                is BaseState.Success<*> -> {
-                    setAdapter(state.response as Calls)
-                    updateAvailableQuantity(state.response as Calls)
+                is QueueState.CallUpdated -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
                     updateLoading(false)
                 }
-                is BaseState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
+                is QueueState.Loading -> updateLoading(state.loading)
+                is QueueState.Success<*> -> {
+                    setAdapter(state.response as Calls)
+                    updateAvailableQuantity(state.response)
+                    updateLoading(false)
+                }
+                is QueueState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+    private fun setListener(){
+        binding.queueSwipe.setOnRefreshListener {
+            viewModel.handleIntent(QueueIntent.GetCalls(queue.idQueue))
+        }
+    }
+
     private fun updateAvailableQuantity(calls: Calls) = binding.run{
         queue.quantity?.let { total ->
             val availableQuantity = total - calls.quantity
@@ -111,16 +119,48 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
     }
 
     private fun selectedCall(call : Call){
-        call.idConsumer
+        CallDetailBottomDialog(
+            context = requireContext(),
+            call = call,
+            action = {
+                updateCallStatus(
+                    callsIntent = it,
+                    idUser = call.idConsumer,
+                    idQueue = queue.idQueue
+                )
+            }
+        ).show()
     }
 
-    private fun setItemTouchHelper(active: Boolean){
+    private fun updateCallStatus(
+        callsIntent: CallsIntent,
+        idUser: String,
+        idQueue: String
+    ){
+        val status = when(callsIntent){
+            is CallsIntent.SetInProgress -> {
+                CallStatus.IN_PROGRESS
+            }
+            is CallsIntent.SetToFinish -> {
+                CallStatus.FINISHED
+            }
+        }
+        viewModel.handleIntent(
+            QueueIntent.UpdateCallStatus(
+                status = status,
+                idUser = idUser,
+                idQueue = idQueue
+            )
+        )
+    }
+
+    //TODO: implement update position
+    private fun setItemTouchHelper(active: Boolean) {
         itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(callsAdapter, active))
         itemTouchHelper.attachToRecyclerView(binding.rvCalls)
     }
 
     private fun updateLoading(loading : Boolean) = binding.run{
-        queueSwipe.isEnabled = loading
         queueSwipe.isRefreshing = loading
     }
 }

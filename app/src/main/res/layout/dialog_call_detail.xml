@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/margin_high"
+            android:layout_marginTop="@dimen/margin_default">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_margin="@dimen/margin_default"
+                android:text="@string/call_detail_dialog_title"/>
+
+            <LinearLayout
+                android:id="@+id/finishCall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lowGray"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status_to_finish"
+                    android:layout_margin="@dimen/margin_default"
+                    style="@style/InternalScreenDescription.Dark"
+                    app:drawableEndCompat="@drawable/ic_arrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/inProgressCall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lowGray"
+                android:orientation="vertical"
+                android:layout_marginTop="3dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status_in_progress"
+                    android:layout_margin="@dimen/margin_default"
+                    style="@style/InternalScreenDescription.Dark"
+                    app:drawableEndCompat="@drawable/ic_arrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cancelAction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lowGray"
+                android:orientation="vertical"
+                android:layout_marginTop="3dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel"
+                    android:gravity="center_vertical"
+                    android:layout_margin="@dimen/margin_default"
+                    style="@style/InternalScreenDescription.Dark"
+                    app:drawableEndCompat="@drawable/ic_baseline_close_24" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</ScrollView>

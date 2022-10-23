@@ -121,6 +121,11 @@
     <string name="closed_status">Fechado</string>
     <string name="pendent_status">Pendente</string>
 
+    <string name="call_detail_dialog_title">Escolha uma das opções disponíveis:</string>
+    <string name="status_to_finish">Finalizar Atendimento</string>
+    <string name="status_in_progress">Atendimento em Andamento</string>
+    <string name="cancel">Cancelar</string>
+
     <!--  states  -->
     <string name="RJ">Rio de Janeiro</string>
     <string name="MG">Minas Gerais</string>

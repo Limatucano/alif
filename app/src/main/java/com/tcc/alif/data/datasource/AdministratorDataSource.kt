@@ -3,6 +3,7 @@ package com.tcc.alif.data.datasource
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tcc.alif.data.model.*
 import com.tcc.alif.data.util.*
+import com.tcc.alif.data.util.Constants.SUCCESSFULLY_UPDATED
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -10,6 +11,51 @@ import javax.inject.Inject
 class AdministratorDataSource @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore
 ){
+
+    fun updateCallStatus(
+        status: CallStatus,
+        idQueue: String,
+        idUser: String
+    ): Flow<Response<String>> = flow{
+        emit(Response.loading(true))
+
+        getQueueCalls(
+            idQueue = idQueue
+        ).collect{
+
+            val serviceUpdated = QueueResponse()
+                .toQueueResponse(it.data)
+                .service
+                .map { service ->
+                    Service(
+                        enrollmentTime = service.enrollmentTime,
+                        status = if(service.userId == idUser) status.value else service.status,
+                        userId = service.userId
+                    )
+                }
+
+            firebaseFirestore
+                .collection(Constants.QUEUE_COLLECTION)
+                .document(it.id)
+                .update("service", serviceUpdated).await()
+
+        }
+        emit(Response.loading(false))
+        emit(Response.success(SUCCESSFULLY_UPDATED))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
+    private fun getQueueCalls(idQueue: String) = flow{
+        val queue = firebaseFirestore
+            .collection(Constants.QUEUE_COLLECTION)
+            .whereEqualTo("idQueue",idQueue)
+            .get()
+            .await()
+            .documents[0]
+
+        emit(queue)
+    }
 
     fun getCallsByQueue(idQueue: String) :Flow<Response<Calls>> = flow {
         emit(Response.loading(true))

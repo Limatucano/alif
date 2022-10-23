@@ -12,5 +12,7 @@ object Constants {
     const val USER_COLLECTION = "user"
     const val QUEUE_COLLECTION = "queue"
 
+    ////// message requests
     const val USER_UNAUTHORIZED = "Permissão Negada"
+    const val SUCCESSFULLY_UPDATED = "Atualizado com sucesso!"
 }

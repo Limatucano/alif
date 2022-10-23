@@ -63,9 +63,9 @@ data class QueueResponse(
 
 @Parcelize
 data class Service(
-    val enrollmentTime: Timestamp = Timestamp(0,0),
-    val status: String = "",
-    val userId: String = "",
+    var enrollmentTime: Timestamp = Timestamp(0,0),
+    var status: String = "",
+    var userId: String = "",
     var name: String = ""
 ) : Parcelable {
 

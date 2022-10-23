@@ -10,6 +10,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_arrow.xml" value="0.357" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_arrow_back.xml" value="0.2085" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_arrow_forward.xml" value="0.2085" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.248" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_edit.xml" value="0.195" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_full_logo.xml" value="0.2085" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_icone.xml" value="0.224" />
@@ -32,6 +33,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/call_item.xml" value="0.33605072463768115" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/company_item.xml" value="0.25" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/custom_toolbar.xml" value="0.33605072463768115" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/dialog_call_detail.xml" value="0.47647849462365593" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_companies.xml" value="0.22" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_company_form.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_employee.xml" value="0.19583333333333333" />
