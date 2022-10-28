@@ -16,6 +16,7 @@ data class Call(
     val employeeName : String,
     val employeeRole : String,
     val consumerName : String,
+    val enrollmentTime : Timestamp,
     val cellphone : String,
     val birthDate : String,
     val cpf : String

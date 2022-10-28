@@ -72,11 +72,14 @@ class AdministratorDataSource @Inject constructor(
                     idConsumer = userData.uid,
                     employeeName = "",
                     employeeRole = "",
+                    enrollmentTime = it.enrollmentTime,
                     consumerName = userData.name,
                     cellphone = userData.cellphone,
                     birthDate = userData.birthDate,
                     cpf = userData.cpf
                 )
+            }.sortedWith{ first, second ->
+                first.enrollmentTime.compareTo(second.enrollmentTime)
             },
             quantity = service.size
         )
