@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Queues(
-    var queues : List<QueueResponse>
+    var queues : List<QueueResponse> = listOf()
 ) : Parcelable
 
 @Parcelize
@@ -25,7 +25,8 @@ data class QueueResponse(
     val titleCategory : String = "",
     val averageTime : Int? = null,
     val employeeCreator : String? = "",
-    var service : List<Service> = listOf()
+    var service : List<Service> = listOf(),
+    val firstConsumers: List<Service> = listOf()
 ) : Parcelable{
 
     private fun getStatusStringRes(status : String) : Int =

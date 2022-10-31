@@ -140,6 +140,20 @@ class AdministratorDataSource @Inject constructor(
                         enrollmentTime = service.enrollmentTime,
                         status = service.status
                     )
+                }.sortedWith { first, second ->
+                    first.enrollmentTime.compareTo(second.enrollmentTime)
+                },
+                firstConsumers = queueResponse.service.filter{
+                    it.status == CallStatus.IN_HOLD.value
+                }.map { service ->
+                    Service(
+                        name = getUserData(service.userId).name,
+                        userId = service.userId,
+                        enrollmentTime = service.enrollmentTime,
+                        status = service.status
+                    )
+                }.sortedWith { first, second ->
+                    first.enrollmentTime.compareTo(second.enrollmentTime)
                 }
             )
         }

@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.model.CompanyResponse
+import com.tcc.alif.data.model.QueueResponse
 import com.tcc.alif.data.model.Queues
 import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentHomeLojistaBinding
@@ -20,9 +21,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment(private val company : CompanyResponse) : BaseFragment<FragmentHomeLojistaBinding>(FragmentHomeLojistaBinding::inflate) {
 
     private val viewModel : HomeViewModel by viewModels()
+    private lateinit var queuesAdapter: QueuesAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         setViews()
+        setAdapter()
         setObserver()
         setupToolbar(
             title = getString(R.string.queues_title)
@@ -49,11 +52,15 @@ class HomeFragment(private val company : CompanyResponse) : BaseFragment<Fragmen
                 is HomeState.Loading -> updateLoading(state.loading)
                 is HomeState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
                 is HomeState.QueuesData -> {
-                    setAdapter(state.queues)
+                    setAdapterItems(state.queues)
                     updateLoading(false)
                 }
             }
         }
+    }
+
+    private fun setAdapterItems(response : Queues){
+        queuesAdapter.queues = response
     }
 
     private fun updateLoading(loading : Boolean) = binding.run{
@@ -61,10 +68,14 @@ class HomeFragment(private val company : CompanyResponse) : BaseFragment<Fragmen
         homeSwipe.isRefreshing = loading
     }
 
-    private fun setAdapter(response : Queues) = binding.run{
-        rvQueues.adapter = QueuesAdapter(requireContext(),response){ queue ->
-            val direction = MainAdministratorFragmentDirections.actionMainAdministratorFragmentToQueueFragment(queue)
-            requireView().findNavController().navigate(direction)
+    private fun selectedQueue(queue: QueueResponse){
+        val direction = MainAdministratorFragmentDirections.actionMainAdministratorFragmentToQueueFragment(queue)
+        requireView().findNavController().navigate(direction)
+    }
+    private fun setAdapter() = binding.run{
+        queuesAdapter = QueuesAdapter(requireContext()){ queue ->
+            selectedQueue(queue)
         }
+        rvQueues.adapter = queuesAdapter
     }
 }

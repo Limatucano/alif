@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.tcc.alif.R
+import com.tcc.alif.data.model.Call
 import com.tcc.alif.data.model.QueueResponse
 import com.tcc.alif.data.model.Queues
 import com.tcc.alif.data.model.Service
@@ -16,16 +17,20 @@ import com.tcc.alif.databinding.QueuesHomeItemBinding
 
 class QueuesAdapter(
     private val context : Context,
-    private val queues : Queues,
     val action : (item : QueueResponse) -> Unit
 ) : RecyclerView.Adapter<QueuesAdapter.ViewHolder>(){
 
+    var queues: Queues = Queues()
+        set(value){
+            field = value
+            notifyDataSetChanged()
+        }
 
     inner class ViewHolder(private val binding : QueuesHomeItemBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(queue : QueueResponse) = binding.run{
             queueName.text = queue.name
-            setupFirstConsumers(queue.service)
+            setupFirstConsumers(queue.firstConsumers)
 
             queueStatus.text = queue.status?.let { context.getString(it) }
 
@@ -44,13 +49,10 @@ class QueuesAdapter(
         }
 
         private fun setupFirstConsumers(services: List<Service>) = binding.run{
-            val servicesSorted = services.sortedWith { first, second ->
-                first.enrollmentTime.compareTo(second.enrollmentTime)
-            }
 
-            val firstConsumerValue = servicesSorted.getOrNull(0)?.name
-            val secondConsumerValue = servicesSorted.getOrNull(1)?.name
-            val thirdConsumerValue = servicesSorted.getOrNull(2)?.name
+            val firstConsumerValue = services.getOrNull(0)?.name
+            val secondConsumerValue = services.getOrNull(1)?.name
+            val thirdConsumerValue = services.getOrNull(2)?.name
 
             firstLayout.setVisible( firstConsumerValue != null)
             secondLayout.setVisible(secondConsumerValue != null)
