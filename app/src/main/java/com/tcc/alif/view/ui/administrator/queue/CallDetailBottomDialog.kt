@@ -42,6 +42,10 @@ class CallDetailBottomDialog(
             action?.invoke(CallsIntent.SetInProgress(call))
             dismiss()
         }
+        inHoldCall.setOnClickListener {
+            action?.invoke(CallsIntent.SetInHold(call))
+            dismiss()
+        }
         cancelAction.setOnClickListener {
             dismiss()
         }

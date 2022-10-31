@@ -5,4 +5,5 @@ import com.tcc.alif.data.model.Call
 sealed class CallsIntent{
     data class SetInProgress(val call: Call) : CallsIntent()
     data class SetToFinish(val call: Call) : CallsIntent()
+    data class SetInHold(val call: Call) : CallsIntent()
 }

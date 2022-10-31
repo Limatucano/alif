@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.model.Call
 import com.tcc.alif.data.model.CallStatus
-import com.tcc.alif.data.model.Calls
 import com.tcc.alif.data.model.QueueResponse
 import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT
 import com.tcc.alif.data.util.emptyIfNull
@@ -19,14 +17,12 @@ import com.tcc.alif.data.util.toStringDate
 import com.tcc.alif.databinding.FragmentQueueBinding
 import com.tcc.alif.view.adapter.CallsAdapter
 import com.tcc.alif.view.ui.BaseFragment
-import com.tcc.alif.view.ui.ItemTouchHelperCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::inflate) {
 
     private lateinit var queue : QueueResponse
-    private lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var callsAdapter: CallsAdapter
     private val viewModel : QueueViewModel by viewModels()
 
@@ -91,7 +87,7 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
         viewModel.state.observe(viewLifecycleOwner){ state ->
             when(state){
                 is QueueState.CallUpdated -> {
-                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    viewModel.handleIntent(QueueIntent.GetCalls(queue.idQueue))
                     updateLoading(false)
                 }
                 is QueueState.Loading -> updateLoading(state.loading)
@@ -147,6 +143,9 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
             is CallsIntent.SetToFinish -> {
                 CallStatus.FINISHED
             }
+            is CallsIntent.SetInHold -> {
+                CallStatus.IN_HOLD
+            }
         }
         viewModel.handleIntent(
             QueueIntent.UpdateCallStatus(
@@ -155,12 +154,6 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
                 idQueue = idQueue
             )
         )
-    }
-
-    //TODO: implement update position
-    private fun setItemTouchHelper(active: Boolean) {
-        itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(callsAdapter, active))
-        itemTouchHelper.attachToRecyclerView(binding.rvCalls)
     }
 
     private fun updateLoading(loading : Boolean) = binding.run{

@@ -59,6 +59,22 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/inHoldCall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lowGray"
+                android:orientation="vertical"
+                android:layout_marginTop="3dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status_in_hold"
+                    android:layout_margin="@dimen/margin_default"
+                    style="@style/InternalScreenDescription.Dark"
+                    app:drawableEndCompat="@drawable/ic_arrow" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/cancelAction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

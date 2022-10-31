@@ -124,6 +124,7 @@
     <string name="call_detail_dialog_title">Escolha uma das opções disponíveis:</string>
     <string name="status_to_finish">Finalizar Atendimento</string>
     <string name="status_in_progress">Atendimento em Andamento</string>
+    <string name="status_in_hold">Atendimento em Espera</string>
     <string name="cancel">Cancelar</string>
 
     <!--  states  -->
