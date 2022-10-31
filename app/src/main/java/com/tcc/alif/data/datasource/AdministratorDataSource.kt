@@ -65,29 +65,51 @@ class AdministratorDataSource @Inject constructor(
             queue.documents[0].data
         ).service
 
-        val calls = Calls(
-            calls = service.map {
-                val userData = getUserData(it.userId)
-                Call(
-                    idConsumer = userData.uid,
-                    employeeName = "",
-                    employeeRole = "",
-                    enrollmentTime = it.enrollmentTime,
-                    consumerName = userData.name,
-                    cellphone = userData.cellphone,
-                    birthDate = userData.birthDate,
-                    cpf = userData.cpf
+        val calls : List<Call> = service.map { service ->
+                val userData = getUserData(service.userId)
+                generateCall(
+                    userData = userData,
+                    service = service
                 )
             }.sortedWith{ first, second ->
                 first.enrollmentTime.compareTo(second.enrollmentTime)
-            },
-            quantity = service.size
-        )
+            }
 
-        emit(Response.success(calls))
+        val callsAdjusted = mutableListOf<Call>()
+        CallStatus
+            .values()
+            .forEach {
+                val callFiltered = getFilteredCall(
+                    status = it,
+                    calls = calls
+                )
+                callsAdjusted.addAll(callFiltered)
+            }
+
+        val call = Calls(
+            calls = callsAdjusted,
+            quantity = calls.size
+        )
+        emit(Response.success(call))
     }.catch {
         emit(Response.error(it.message ?: UNKNOWN_ERROR))
     }.flowOn(Dispatchers.IO)
+
+    private fun getFilteredCall(status: CallStatus, calls: List<Call>) = calls.filter {
+            it.status == status
+        }
+
+    private fun generateCall(userData: SigninResponse, service: Service) = Call(
+        idConsumer = userData.uid,
+        employeeName = "",
+        employeeRole = "",
+        enrollmentTime = service.enrollmentTime,
+        consumerName = userData.name,
+        cellphone = userData.cellphone,
+        birthDate = userData.birthDate,
+        cpf = userData.cpf,
+        status = CallStatus.values().first{ it.value == service.status }
+    )
 
     fun getQueuesByCompany(idCompany: String) : Flow<Response<Queues>> = flow{
         emit(Response.Loading(true))

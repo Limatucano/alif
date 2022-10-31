@@ -34,11 +34,6 @@ class HomeFragment(private val company : CompanyResponse) : BaseFragment<Fragmen
         )
     }
 
-    private fun setListener() = binding.run {
-//        backIv.setOnClickListener {
-//            requireActivity().onBackPressed()
-//        }
-    }
     private fun setViews() = binding.run{
         rvQueues.setLinearLayout(
             context = requireContext(),

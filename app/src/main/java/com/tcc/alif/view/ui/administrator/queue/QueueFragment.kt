@@ -43,9 +43,18 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
             title = getString(R.string.queue_title),
         )
         viewModel.handleIntent(QueueIntent.GetCalls(queue.idQueue))
+        setAdapter()
         setObserver()
         setViews()
         setListener()
+    }
+
+    private fun setAdapter(){
+        callsAdapter = CallsAdapter(
+            context = requireContext(),
+            action = { selectedCall(it) }
+        )
+        binding.rvCalls.adapter = callsAdapter
     }
 
     private fun setViews() = binding.run{
@@ -86,9 +95,9 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
                     updateLoading(false)
                 }
                 is QueueState.Loading -> updateLoading(state.loading)
-                is QueueState.Success<*> -> {
-                    setAdapter(state.response as Calls)
-                    updateAvailableQuantity(state.response)
+                is QueueState.Calls -> {
+                    setAdapterItems(state.calls)
+                    updateAvailableQuantity(state.quantity)
                     updateLoading(false)
                 }
                 is QueueState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
@@ -102,20 +111,14 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
         }
     }
 
-    private fun updateAvailableQuantity(calls: Calls) = binding.run{
+    private fun updateAvailableQuantity(quantity: Int) = binding.run{
         queue.quantity?.let { total ->
-            val availableQuantity = total - calls.quantity
+            val availableQuantity = total - quantity
             availableQuantityTv.text = resources.getString(R.string.queue_available_quantity, availableQuantity.toString()).fromHtml()
         }
     }
-
-    private fun setAdapter(calls : Calls){
-        callsAdapter = CallsAdapter(
-            context = requireContext(),
-            calls = calls.calls,
-            action = { selectedCall(it) }
-        )
-        binding.rvCalls.adapter = callsAdapter
+    private fun setAdapterItems(calls: List<Call>){
+        callsAdapter.calls = calls
     }
 
     private fun selectedCall(call : Call){

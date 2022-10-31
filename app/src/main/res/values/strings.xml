@@ -167,4 +167,9 @@
     <string name="wholesaler">Comércio Atacadista</string>
     <string name="parking">Estacionamento</string>
 
+    <!--  status  -->
+    <string name="in_hold">Em Espera</string>
+    <string name="in_progress">Em Andamento</string>
+    <string name="finished">Finalizado</string>
+    <string name="canceled">Cancelado</string>
 </resources>

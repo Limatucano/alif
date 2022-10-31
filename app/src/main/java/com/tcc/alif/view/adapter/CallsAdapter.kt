@@ -5,20 +5,39 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tcc.alif.data.model.Call
+import com.tcc.alif.data.model.CallStatus
+import com.tcc.alif.data.util.setVisible
 import com.tcc.alif.databinding.CallItemBinding
 import com.tcc.alif.view.ui.ItemTouchHelperListener
 import java.util.*
 
 class CallsAdapter(
     private val context : Context,
-    private val calls : List<Call>,
     val action : (call : Call) -> Unit
 ) : RecyclerView.Adapter<CallsAdapter.ViewHolder>(),
     ItemTouchHelperListener{
 
+    var calls: List<Call> = listOf()
+        set(value){
+            field = value
+            notifyDataSetChanged()
+        }
+
     inner class ViewHolder(private val binding : CallItemBinding) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(call : Call) = binding.run {
+        fun bind(
+            call : Call,
+            previousCall: Call?
+        ) = binding.run {
+
+            sectionTitle.text = context.getString(call.status.text)
+            previousCall?.status?.equals(call.status)?.also { equal ->
+                if(equal){
+                    sectionTitle.setVisible(false)
+                    return@also
+                }
+                sectionTitle.setVisible(true)
+            }
             consumerName.text = call.consumerName
             consumerCpf.text = call.cpf
             consumerCellphone.text = call.cellphone
@@ -36,7 +55,10 @@ class CallsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(calls[position])
+        holder.bind(
+            call = calls[position],
+            previousCall = calls.getOrNull(position - 1)
+        )
     }
 
     override fun getItemCount(): Int = calls.size

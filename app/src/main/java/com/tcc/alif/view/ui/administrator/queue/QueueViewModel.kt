@@ -3,6 +3,7 @@ package com.tcc.alif.view.ui.administrator.queue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tcc.alif.data.model.Call
 import com.tcc.alif.data.model.CallStatus
 import com.tcc.alif.data.repository.AdministratorRepository
 import com.tcc.alif.data.util.request
@@ -51,7 +52,14 @@ class QueueViewModel @Inject constructor(
         viewModelScope.launch {
             repository.getCallsBy(idQueue = idQueue).request(
                 blockToRun = this,
-                onSuccess = { state.postValue(QueueState.Success(it)) },
+                onSuccess = {
+                    state.postValue(
+                        QueueState.Calls(
+                            calls = it.calls,
+                            quantity = it.quantity
+                        )
+                    )
+                },
                 onLoading = { state.postValue(QueueState.Loading(it)) },
                 onError = { state.postValue(QueueState.Error(it)) }
             )
