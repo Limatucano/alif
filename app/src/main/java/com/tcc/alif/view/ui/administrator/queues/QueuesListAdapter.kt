@@ -25,7 +25,7 @@ class QueuesListAdapter(
             queueName.text = queue.name
             queueStatus.text = queue.status?.let { context.getString(it) }
 
-            arrowButton.setOnClickListener {
+            root.setOnClickListener {
                 action.invoke(queue)
             }
         }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.model.CompanyResponse
@@ -12,6 +13,7 @@ import com.tcc.alif.data.model.Queues
 import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentQueuesBinding
 import com.tcc.alif.view.ui.BaseFragment
+import com.tcc.alif.view.ui.administrator.MainAdministratorFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -48,6 +50,11 @@ class QueuesFragment(
     }
 
     private fun setListeners() = binding.run{
+        addQueue.setOnClickListener {
+            val direction = MainAdministratorFragmentDirections.actionMainAdministratorFragmentToQueueFormFragment2()
+            requireView().findNavController().navigate(direction)
+        }
+
         searchField.setOnQueryTextListener(
             onTextChanged = { text ->
                 viewModel.handleIntent(
@@ -86,7 +93,8 @@ class QueuesFragment(
     }
 
     private fun queueSelected(queue: QueueResponse){
-
+        val direction = MainAdministratorFragmentDirections.actionMainAdministratorFragmentToQueueFormFragment2(queue)
+        requireView().findNavController().navigate(direction)
     }
 
     private fun setAdapter() = binding.run{

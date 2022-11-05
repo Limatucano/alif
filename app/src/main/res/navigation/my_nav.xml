@@ -99,6 +99,9 @@
         <action
             android:id="@+id/action_mainAdministratorFragment_to_queueFragment"
             app:destination="@id/queueFragment" />
+        <action
+            android:id="@+id/action_mainAdministratorFragment_to_queueFormFragment2"
+            app:destination="@id/queueFormFragment" />
     </fragment>
     <fragment
         android:id="@+id/companyFormFragment"
@@ -113,5 +116,15 @@
         <argument
             android:name="queue"
             app:argType="com.tcc.alif.data.model.QueueResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/queueFormFragment"
+        android:name="com.tcc.alif.view.ui.administrator.queues.QueueFormFragment"
+        android:label="QueueFormFragment" >
+        <argument
+            android:name="queue"
+            app:argType="com.tcc.alif.data.model.QueueResponse"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

@@ -107,6 +107,14 @@
     <string name="company_subtitle">Agora precisamos de algumas informações sobre a empresa.</string>
     <string name="uf_tv">Uf</string>
 
+    <string name="average_time">Tempo Médio</string>
+    <string name="closing_time">Hora de Fechamento</string>
+    <string name="opening_time">Hora de Abertura</string>
+    <string name="name_queue">Nome da Fila</string>
+    <string name="quantity_queue">Quantidade Limite</string>
+    <string name="status_queue">Status da Fila</string>
+    <string name="description_queue">Descrição</string>
+
     <string name="queues_title">Filas</string>
     <string name="queues_configuration">Configure suas Filas</string>
     <string name="queues_query_hint">Pesquise suas filas aqui</string>
