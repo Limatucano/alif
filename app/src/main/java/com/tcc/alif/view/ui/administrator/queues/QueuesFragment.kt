@@ -27,6 +27,7 @@ class QueuesFragment(
         setViews()
         setAdapter()
         setObserver()
+        setListeners()
         setupToolbar(
             title = getString(R.string.queues_configuration)
         )
@@ -46,6 +47,26 @@ class QueuesFragment(
         )
     }
 
+    private fun setListeners() = binding.run{
+        searchField.setOnQueryTextListener(
+            onTextChanged = { text ->
+                viewModel.handleIntent(
+                    intent = QueuesIntent.GetQueuesBy(
+                        idCompany = company.idCompany.toString(),
+                        filter = text
+                    )
+                )
+            },
+            onSubmitClicked = { text ->
+                viewModel.handleIntent(
+                    intent = QueuesIntent.GetQueuesBy(
+                        idCompany = company.idCompany.toString(),
+                        filter = text
+                    )
+                )
+            }
+        )
+    }
     private fun setObserver(){
         viewModel.state.observe(viewLifecycleOwner){ state ->
             when(state){

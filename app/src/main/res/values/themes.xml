@@ -14,10 +14,10 @@
     </style>
 
     <style name="InputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="colorOnSurface">@color/mediumGray</item>
-        <item name="hintTextColor">@color/highGray</item>
-        <item name="colorPrimary">@color/highGray</item>
-        <item name="colorAccent">@color/highGray</item>
+        <item name="colorOnSurface">@color/highGray</item>
+        <item name="hintTextColor">@color/BigGray</item>
+        <item name="colorPrimary">@color/BigGray</item>
+        <item name="colorAccent">@color/BigGray</item>
     </style>
 
     <style name="EditText">

@@ -10,5 +10,6 @@
     <color name="Gray">#ECECEC</color>
     <color name="mediumGray">#A5A5A5</color>
     <color name="highGray">#424242</color>
+    <color name="BigGray">#2C2C2C</color>
     <color name="whitebackground">#FAFAFA</color>
 </resources>
