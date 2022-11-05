@@ -109,6 +109,7 @@
 
     <string name="queues_title">Filas</string>
     <string name="queues_configuration">Configure suas Filas</string>
+    <string name="queues_query_hint">Pesquise suas filas aqui</string>
 
     <string name="queue_status"><![CDATA[<b>Status: </b>%s]]></string>
     <string name="queue_will_open"><![CDATA[<b>Abre às: </b>%s]]></string>

@@ -6,8 +6,6 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.widget.addTextChangedListener
-import com.google.android.material.textfield.TextInputLayout
 import com.tcc.alif.R
 import com.tcc.alif.data.util.size
 import com.tcc.alif.databinding.SearchFieldBinding
@@ -24,6 +22,7 @@ class SearchField @JvmOverloads constructor(
 
     private var binding: SearchFieldBinding
     private var minSearchSize: Int = DEFAULT_MIN_SEARCH_SIZE
+    private var hint: String? = ""
 
     init {
         binding = SearchFieldBinding.inflate(
@@ -43,6 +42,10 @@ class SearchField @JvmOverloads constructor(
             R.styleable.SearchField_minSearchSize,
             DEFAULT_MIN_SEARCH_SIZE
         )
+
+        hint = typeArray.getString(R.styleable.SearchField_hint)
+
+        binding.searchLayout.hint = hint.toString()
     }
 
     fun setOnQueryTextListener(

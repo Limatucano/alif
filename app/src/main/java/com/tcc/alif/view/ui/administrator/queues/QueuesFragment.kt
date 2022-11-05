@@ -67,6 +67,7 @@ class QueuesFragment(
             }
         )
     }
+
     private fun setObserver(){
         viewModel.state.observe(viewLifecycleOwner){ state ->
             when(state){

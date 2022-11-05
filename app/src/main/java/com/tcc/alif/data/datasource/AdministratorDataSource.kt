@@ -7,6 +7,7 @@ import com.tcc.alif.data.util.Constants.SUCCESSFULLY_UPDATED
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import okhttp3.internal.filterList
+import java.util.*
 import javax.inject.Inject
 
 class AdministratorDataSource @Inject constructor(
@@ -188,7 +189,7 @@ class AdministratorDataSource @Inject constructor(
 
         if(filter.isNotEmpty() || filter.isNotBlank()){
             queuesData.queues = queuesData.queues.filter {
-                it.name.startsWith(filter)
+                it.name.uppercase().startsWith(filter.uppercase())
             }
         }
 

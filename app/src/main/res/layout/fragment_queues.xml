@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:enabled="false"
     tools:context=".view.ui.administrator.queues.QueuesFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -18,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginHorizontal="@dimen/margin_small"
+            app:hint="@string/queues_query_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
