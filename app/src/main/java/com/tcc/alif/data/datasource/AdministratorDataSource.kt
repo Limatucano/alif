@@ -6,6 +6,7 @@ import com.tcc.alif.data.util.*
 import com.tcc.alif.data.util.Constants.SUCCESSFULLY_UPDATED
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import okhttp3.internal.filterList
 import javax.inject.Inject
 
 class AdministratorDataSource @Inject constructor(
@@ -111,7 +112,34 @@ class AdministratorDataSource @Inject constructor(
         status = CallStatus.values().first{ it.value == service.status }
     )
 
-    fun getQueuesByCompany(idCompany: String) : Flow<Response<Queues>> = flow{
+    fun getQueuesFiltered(
+        idCompany: String,
+        filter: String
+    ) : Flow<Response<Queues>> = flow {
+        emit(Response.Loading(true))
+        val queues = getQueues(idCompany)
+
+        val queuesData = Queues(
+            queues = queues.map {
+                QueueResponse().toQueueResponse(it.data)
+            }
+        )
+
+        val queuesFiltered = Queues(
+                queues = queuesData.queues.filter {
+                        it.name.startsWith(filter)
+                }
+            )
+
+        emit(Response.success(queuesFiltered))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
+    fun getQueuesByCompany(
+        idCompany: String,
+        filter: String = ""
+    ) : Flow<Response<Queues>> = flow{
         emit(Response.Loading(true))
         val queues = getQueues(idCompany)
 
@@ -156,6 +184,12 @@ class AdministratorDataSource @Inject constructor(
                     first.enrollmentTime.compareTo(second.enrollmentTime)
                 }
             )
+        }
+
+        if(filter.isNotEmpty() || filter.isNotBlank()){
+            queuesData.queues = queuesData.queues.filter {
+                it.name.startsWith(filter)
+            }
         }
 
         emit(Response.success(queuesData))

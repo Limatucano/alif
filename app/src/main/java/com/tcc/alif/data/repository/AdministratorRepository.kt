@@ -27,4 +27,11 @@ class AdministratorRepository @Inject constructor(
         idCompany = idCompany
     )
 
+    fun getQueuesFiltered(
+        idCompany: String,
+        filter: String
+    ) = administratorDataSource.getQueuesByCompany(
+        idCompany = idCompany,
+        filter = filter
+    )
 }

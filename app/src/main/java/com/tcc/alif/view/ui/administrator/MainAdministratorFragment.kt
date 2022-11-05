@@ -8,6 +8,7 @@ import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.databinding.FragmentMainAdministratorBinding
 import com.tcc.alif.view.ui.BaseFragment
 import com.tcc.alif.view.ui.administrator.home.HomeFragment
+import com.tcc.alif.view.ui.administrator.queues.QueuesFragment
 
 
 class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>(FragmentMainAdministratorBinding::inflate) {
@@ -29,7 +30,6 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
         //TODO : refactor names and include new fragments
         val homeFragment = HomeFragment(company)
         val funcionariosLojistaFragment = HomeFragment(company)
-        val filasLojistaFragment = HomeFragment(company)
         val perfilLojistaFragment = HomeFragment(company)
         val configLojistaFragment = HomeFragment(company)
 
@@ -38,7 +38,7 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.funcionarios_func->setCurrentFragment(funcionariosLojistaFragment)
-                R.id.filas_func->setCurrentFragment(filasLojistaFragment)
+                R.id.filas_func->setCurrentFragment(QueuesFragment(company))
                 R.id.config_func->setCurrentFragment(configLojistaFragment)
                 R.id.perfil_func->setCurrentFragment(perfilLojistaFragment)
                 R.id.home_func->setCurrentFragment(homeFragment)
