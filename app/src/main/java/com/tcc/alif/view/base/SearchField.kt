@@ -54,9 +54,7 @@ class SearchField @JvmOverloads constructor(
     ) = binding.run{
 
         searchLayout.setEndIconOnClickListener {
-            if(this.searchText.text.size() >= DEFAULT_MIN_SEARCH_SIZE){
-                onSubmitClicked.invoke(searchText.text.toString())
-            }
+            onSubmitClicked.invoke(searchText.text.toString())
         }
 
         searchText.addTextChangedListener(object : TextWatcher{
@@ -65,9 +63,7 @@ class SearchField @JvmOverloads constructor(
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable?) {
-                if(s.size() >= DEFAULT_MIN_SEARCH_SIZE){
-                    onTextChanged.invoke(s.toString())
-                }
+                onTextChanged.invoke(s.toString())
             }
         })
     }
