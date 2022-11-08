@@ -56,10 +56,9 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
         fillViews()
     }
 
-    //TODO: convert date to timestamp when save/edit queue
     //TODO: create category data (maybe to create a feat in configuration screen, when user can create all categories about them queues)
     private fun fillViews() = binding.run {
-        if(queue.idQueue.isEmpty()){
+        if(queue.idQueue.isNotEmpty()){
             nameQueueEt.setText(queue.name)
             averageTimeEt.setText(queue.averageTime.toString().emptyIfNull())
             descriptionEt.setText(queue.description)
@@ -88,7 +87,7 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
 
     private fun buildModel(){
         val queue = QueueRequest(
-            idQueue = generateUUID(),
+            idQueue = this.queue.idQueue.ifEmpty { generateUUID() },
             idCompany = this.queue.idCompany,
             name = binding.nameQueueEt.text.toString().emptyIfNull(),
             status = binding.statusAc.text.toString().emptyIfNull(),
@@ -113,7 +112,9 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
     }
 
     private fun updateQueue(queueRequest: QueueRequest){
-
+        viewModel.handleIntent(QueuesIntent.UpdateQueue(
+            queue = queueRequest
+        ))
     }
 
     private fun saveNewQueue(queueRequest: QueueRequest){
@@ -131,6 +132,10 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
                 }
                 is QueuesState.Loading -> setLoading(state.loading)
                 is QueuesState.Error -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    setLoading(false)
+                }
+                is QueuesState.QueueUpdated -> {
                     Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
                     setLoading(false)
                 }

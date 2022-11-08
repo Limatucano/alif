@@ -115,16 +115,16 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.tcc.alif.view.base.DateTimePicker
-                    android:id="@+id/closingTimeEt"
+                    android:id="@+id/openingTimeEt"
                     android:layout_marginTop="@dimen/margin_default"
-                    app:datehint="@string/closing_time"
+                    app:datehint="@string/opening_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <com.tcc.alif.view.base.DateTimePicker
-                    android:id="@+id/openingTimeEt"
+                    android:id="@+id/closingTimeEt"
                     android:layout_marginTop="@dimen/margin_default"
-                    app:datehint="@string/opening_time"
+                    app:datehint="@string/closing_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

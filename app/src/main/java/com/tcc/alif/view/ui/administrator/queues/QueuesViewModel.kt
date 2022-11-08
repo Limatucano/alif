@@ -29,6 +29,21 @@ class QueuesViewModel @Inject constructor(
             is QueuesIntent.SaveNewQueue -> {
                 saveNewQueue(intent.queue)
             }
+            is QueuesIntent.UpdateQueue -> {
+                updateQueue(intent.queue)
+            }
+        }
+    }
+
+    private fun updateQueue(queue: QueueRequest){
+        viewModelScope.launch {
+            repository.updateQueue(queue)
+                .request(
+                    blockToRun = this,
+                    onError = { state.postValue(QueuesState.Error(it)) },
+                    onLoading = { state.postValue(QueuesState.Loading(it)) },
+                    onSuccess = { state.postValue(QueuesState.QueueUpdated(it)) }
+                )
         }
     }
 

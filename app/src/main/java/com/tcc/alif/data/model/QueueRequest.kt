@@ -18,4 +18,19 @@ data class QueueRequest(
     val averageTime : Int,
     val employeeCreator : String,
     var service : List<Service> = listOf()
-): Parcelable
+): Parcelable{
+
+    companion object{
+        fun QueueRequest.modelToMap() =
+            mapOf(
+                "averageTime" to this.averageTime,
+                "category" to this.titleCategory,
+                "closingTime" to this.closingTime,
+                "description" to this.description,
+                "name" to this.name,
+                "openingTime" to this.openingTime,
+                "quantity" to this.quantity,
+                "status" to this.status.uppercase()
+            )
+    }
+}

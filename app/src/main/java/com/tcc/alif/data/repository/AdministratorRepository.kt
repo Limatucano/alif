@@ -40,4 +40,8 @@ class AdministratorRepository @Inject constructor(
     fun saveNewQueue(
         queue: QueueRequest
     ) = administratorDataSource.saveNewQueue(queue)
+
+    fun updateQueue(
+        queue: QueueRequest
+    ) = administratorDataSource.updateQueue(queue)
 }

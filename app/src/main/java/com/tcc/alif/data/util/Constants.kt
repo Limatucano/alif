@@ -16,6 +16,7 @@ object Constants {
     const val USER_UNAUTHORIZED = "Permissão Negada"
     const val SUCCESSFULLY_UPDATED = "Atualizado com sucesso!"
     const val QUEUE_SUCCESSFULLY_INSERTED = "Fila inserida com sucesso!"
+    const val QUEUE_SUCCESSFULLY_UPDATED = "Fila atualizada com sucesso!"
 
 
     const val STATE_NOT_MAPPED = "state not mapped"

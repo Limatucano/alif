@@ -2,20 +2,48 @@ package com.tcc.alif.data.datasource
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tcc.alif.data.model.*
-import com.tcc.alif.data.util.*
+import com.tcc.alif.data.model.QueueRequest.Companion.modelToMap
+import com.tcc.alif.data.util.Constants
 import com.tcc.alif.data.util.Constants.QUEUE_COLLECTION
 import com.tcc.alif.data.util.Constants.QUEUE_SUCCESSFULLY_INSERTED
+import com.tcc.alif.data.util.Constants.QUEUE_SUCCESSFULLY_UPDATED
 import com.tcc.alif.data.util.Constants.SUCCESSFULLY_UPDATED
+import com.tcc.alif.data.util.UNKNOWN_ERROR
+import com.tcc.alif.data.util.await
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.withContext
-import okhttp3.internal.filterList
-import java.util.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class AdministratorDataSource @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore
 ){
+
+    fun updateQueue(queue: QueueRequest): Flow<Response<String>> = flow{
+        emit(Response.loading(true))
+
+        val documentQueue : String? = getQueue(queue.idQueue)
+            .documents
+            .firstOrNull()?.id
+
+        if(documentQueue != null){
+            firebaseFirestore
+                .collection(QUEUE_COLLECTION)
+                .document(documentQueue)
+                .update(queue.modelToMap())
+                .await()
+        }else{
+            emit(Response.error(UNKNOWN_ERROR))
+            return@flow
+        }
+
+        emit(Response.loading(false))
+        emit(Response.success(QUEUE_SUCCESSFULLY_UPDATED))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
 
     fun saveNewQueue(queue: QueueRequest): Flow<Response<String>> = flow{
         emit(Response.loading(true))
