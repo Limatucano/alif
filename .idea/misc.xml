@@ -33,6 +33,9 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/call_item.xml" value="0.25" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/company_item.xml" value="0.25" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/custom_toolbar.xml" value="0.33605072463768115" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/date_time_picker.xml" value="0.1" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/date_time_picker_view.xml" value="0.33" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/date_time_picker_view_dialog.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/dialog_call_detail.xml" value="0.47647849462365593" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_companies.xml" value="0.22" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_company_form.xml" value="0.33" />
@@ -51,7 +54,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/minhas_filas_lojista.xml" value="0.33605072463768115" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/queues_home_item.xml" value="0.25" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/queues_item.xml" value="0.33" />
-        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/search_field.xml" value="0.3555253623188406" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/search_field.xml" value="0.25" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/menu/menu_queue.xml" value="0.33" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/btn_cancelar.xml" value="0.29814814814814816" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/btn_cancelarSaida.xml" value="0.24259259259259258" />

@@ -1,12 +1,11 @@
 package com.tcc.alif.data.util
 
-import com.google.firebase.Timestamp
+import android.content.Context
+import android.widget.EditText
 import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT
+import com.tcc.alif.view.base.DatePickerHelper
 import java.lang.Exception
 import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneId
 import java.util.*
 
 fun Date.toStringDate(format: String): String{
@@ -18,6 +17,16 @@ fun Date.toStringDate(format: String): String{
     }catch (e: Exception){
         "ERROR DATE PARSER"
     }
+}
+
+fun EditText.createDatePicker(context: Context){
+    DatePickerHelper(
+        context = context,
+        selectedDate = { calendar ->
+            this.setText(calendar.time.toStringDate(NORMAL_DATE_WITH_HOURS_FORMAT))
+        }
+    ).create()
+        .show()
 }
 
 object DateFormats{

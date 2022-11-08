@@ -114,49 +114,19 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/closingTimeTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/closing_time"
-                    android:textColorHint="@color/black"
-                    android:theme="@style/InputLayout"
+                <com.tcc.alif.view.base.DateTimePicker
+                    android:id="@+id/closingTimeEt"
                     android:layout_marginTop="@dimen/margin_default"
-                    app:boxBackgroundMode="filled"
-                    app:boxCollapsedPaddingTop="0dp"
-                    app:boxBackgroundColor="@null">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/closingTimeEt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/EditText"
-                        android:enabled="false"
-                        android:inputType="number"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/openingTimeTv"
+                    app:datehint="@string/closing_time"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/opening_time"
-                    android:textColorHint="@color/black"
-                    android:theme="@style/InputLayout"
+                    android:layout_height="wrap_content"/>
+
+                <com.tcc.alif.view.base.DateTimePicker
+                    android:id="@+id/openingTimeEt"
                     android:layout_marginTop="@dimen/margin_default"
-                    app:boxBackgroundMode="filled"
-                    app:boxCollapsedPaddingTop="0dp"
-                    app:boxBackgroundColor="@null">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/openingTimeEt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/EditText"
-                        android:enabled="false"
-                        android:inputType="number"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
+                    app:datehint="@string/opening_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/statusTv"
