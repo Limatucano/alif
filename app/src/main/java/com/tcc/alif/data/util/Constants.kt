@@ -15,4 +15,10 @@ object Constants {
     ////// message requests
     const val USER_UNAUTHORIZED = "Permissão Negada"
     const val SUCCESSFULLY_UPDATED = "Atualizado com sucesso!"
+    const val QUEUE_SUCCESSFULLY_INSERTED = "Fila inserida com sucesso!"
+
+
+    const val STATE_NOT_MAPPED = "state not mapped"
+    const val LANGUAGE_PT = "pt"
+    const val COUNTRY_BR = "BR"
 }

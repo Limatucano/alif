@@ -3,13 +3,18 @@ package com.tcc.alif.view.ui.administrator.queues
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.Timestamp
 import com.tcc.alif.R
+import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
+import com.tcc.alif.data.model.QueueRequest
 import com.tcc.alif.data.model.QueueResponse
 import com.tcc.alif.data.model.local.StatusQueue
+import com.tcc.alif.data.util.Constants.STATE_NOT_MAPPED
 import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT
-import com.tcc.alif.data.util.createDatePicker
+import com.tcc.alif.data.util.ValidateUtil.generateUUID
+import com.tcc.alif.data.util.dateFromString
 import com.tcc.alif.data.util.emptyIfNull
 import com.tcc.alif.data.util.toStringDate
 import com.tcc.alif.databinding.FragmentQueueFormBinding
@@ -20,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFormBinding::inflate) {
 
     private val viewModel : QueuesViewModel by viewModels()
-    private var queue: QueueResponse? = null
+    private lateinit var queue: QueueResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +59,7 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
     //TODO: convert date to timestamp when save/edit queue
     //TODO: create category data (maybe to create a feat in configuration screen, when user can create all categories about them queues)
     private fun fillViews() = binding.run {
-        queue?.let { queue ->
+        if(queue.idQueue.isEmpty()){
             nameQueueEt.setText(queue.name)
             averageTimeEt.setText(queue.averageTime.toString().emptyIfNull())
             descriptionEt.setText(queue.description)
@@ -73,9 +78,69 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
         openingTimeEt.setDateSelected{ calendar ->
             openingTimeEt.text = calendar.time.toStringDate(NORMAL_DATE_WITH_HOURS_FORMAT)
         }
+        closingTimeEt.setDateSelected { calendar ->
+            closingTimeEt.text = calendar.time.toStringDate(NORMAL_DATE_WITH_HOURS_FORMAT)
+        }
+        save.setOnClickListener {
+            buildModel()
+        }
+    }
+
+    private fun buildModel(){
+        val queue = QueueRequest(
+            idQueue = generateUUID(),
+            idCompany = this.queue.idCompany,
+            name = binding.nameQueueEt.text.toString().emptyIfNull(),
+            status = binding.statusAc.text.toString().emptyIfNull(),
+            quantity = binding.quantityEt.text.toString().toInt(),
+            description = binding.descriptionEt.text.toString().emptyIfNull(),
+            titleCategory = binding.categoryAc.text.toString().emptyIfNull(),
+            averageTime = binding.averageTimeEt.text.toString().toInt(),
+            employeeCreator = sharedPreferences.userId ?: EMPTY_STRING,
+            service = listOf(),
+            closingTime = binding.closingTimeEt.text.dateFromString(
+                NORMAL_DATE_WITH_HOURS_FORMAT)?.let { Timestamp(it) },
+            openingTime = binding.openingTimeEt.text.dateFromString(
+                NORMAL_DATE_WITH_HOURS_FORMAT)?.let { Timestamp(it) },
+        )
+
+        if(this.queue.idQueue.isEmpty()){
+            saveNewQueue(queue)
+            return
+        }
+        updateQueue(queue)
+
+    }
+
+    private fun updateQueue(queueRequest: QueueRequest){
+
+    }
+
+    private fun saveNewQueue(queueRequest: QueueRequest){
+        viewModel.handleIntent(QueuesIntent.SaveNewQueue(
+            queue = queueRequest
+        ))
     }
 
     private fun setObservers(){
+        viewModel.state.observe(viewLifecycleOwner){ state ->
+            when(state){
+                is QueuesState.QueueSaved -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    setLoading(false)
+                }
+                is QueuesState.Loading -> setLoading(state.loading)
+                is QueuesState.Error -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    setLoading(false)
+                }
+                else -> throw Exception(STATE_NOT_MAPPED)
+            }
+        }
+    }
+
+    private fun setLoading(loading: Boolean) = binding.run{
+        binding.queueFormSwipe.isRefreshing = loading
     }
 
 }

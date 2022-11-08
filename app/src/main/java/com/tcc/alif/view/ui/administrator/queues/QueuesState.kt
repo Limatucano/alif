@@ -8,4 +8,5 @@ sealed class QueuesState{
     data class Error(val message: String) : QueuesState()
     data class Loading(val loading: Boolean) : QueuesState()
     data class QueuesData(val queues: Queues) : QueuesState()
+    data class QueueSaved(val message: String) : QueuesState()
 }

@@ -123,8 +123,6 @@
         android:label="QueueFormFragment" >
         <argument
             android:name="queue"
-            app:argType="com.tcc.alif.data.model.QueueResponse"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:argType="com.tcc.alif.data.model.QueueResponse" />
     </fragment>
 </navigation>

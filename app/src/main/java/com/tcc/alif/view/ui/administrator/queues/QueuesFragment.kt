@@ -7,9 +7,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
+import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
 import com.tcc.alif.data.model.CompanyResponse
+import com.tcc.alif.data.model.QueueRequest
 import com.tcc.alif.data.model.QueueResponse
 import com.tcc.alif.data.model.Queues
+import com.tcc.alif.data.util.Constants.STATE_NOT_MAPPED
 import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentQueuesBinding
 import com.tcc.alif.view.ui.BaseFragment
@@ -51,7 +54,11 @@ class QueuesFragment(
 
     private fun setListeners() = binding.run{
         addQueue.setOnClickListener {
-            val direction = MainAdministratorFragmentDirections.actionMainAdministratorFragmentToQueueFormFragment2()
+            val direction = MainAdministratorFragmentDirections.actionMainAdministratorFragmentToQueueFormFragment2(
+                QueueResponse(
+                    idCompany = company.idCompany ?: EMPTY_STRING
+                )
+            )
             requireView().findNavController().navigate(direction)
         }
 
@@ -84,6 +91,7 @@ class QueuesFragment(
                     setAdapterItems(state.queues)
                     updateLoading(false)
                 }
+                else -> throw Exception(STATE_NOT_MAPPED)
             }
         }
     }

@@ -3,9 +3,7 @@ package com.tcc.alif.data.model
 import android.os.Parcelable
 import com.google.firebase.Timestamp
 import com.tcc.alif.R
-import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_FORMAT
 import com.tcc.alif.data.util.emptyIfNull
-import com.tcc.alif.data.util.toStringDate
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -16,6 +14,7 @@ data class Queues(
 @Parcelize
 data class QueueResponse(
     val idQueue : String = "",
+    val idCompany: String = "",
     val name : String = "",
     val status : Int? = null,
     val openingTime : Timestamp = Timestamp(0,0),
@@ -42,6 +41,7 @@ data class QueueResponse(
         }else{
             QueueResponse(
                 idQueue = map["idQueue"].toString().emptyIfNull(),
+                idCompany = map["idCompany"].toString().emptyIfNull(),
                 name = map["name"].toString().emptyIfNull(),
                 status = getStatusStringRes(map["status"].toString()),
                 openingTime = (map["openingTime"] as Timestamp),

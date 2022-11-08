@@ -3,9 +3,12 @@ package com.tcc.alif.data.datasource
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tcc.alif.data.model.*
 import com.tcc.alif.data.util.*
+import com.tcc.alif.data.util.Constants.QUEUE_COLLECTION
+import com.tcc.alif.data.util.Constants.QUEUE_SUCCESSFULLY_INSERTED
 import com.tcc.alif.data.util.Constants.SUCCESSFULLY_UPDATED
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
 import okhttp3.internal.filterList
 import java.util.*
 import javax.inject.Inject
@@ -13,6 +16,20 @@ import javax.inject.Inject
 class AdministratorDataSource @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore
 ){
+
+    fun saveNewQueue(queue: QueueRequest): Flow<Response<String>> = flow{
+        emit(Response.loading(true))
+
+        firebaseFirestore
+            .collection(QUEUE_COLLECTION)
+            .add(queue)
+            .await()
+
+        emit(Response.loading(false))
+        emit(Response.success(QUEUE_SUCCESSFULLY_INSERTED))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
 
     fun updateCallStatus(
         status: CallStatus,
@@ -37,7 +54,7 @@ class AdministratorDataSource @Inject constructor(
                 }
 
             firebaseFirestore
-                .collection(Constants.QUEUE_COLLECTION)
+                .collection(QUEUE_COLLECTION)
                 .document(it.id)
                 .update("service", serviceUpdated).await()
 
@@ -50,7 +67,7 @@ class AdministratorDataSource @Inject constructor(
 
     private fun getQueueCalls(idQueue: String) = flow{
         val queue = firebaseFirestore
-            .collection(Constants.QUEUE_COLLECTION)
+            .collection(QUEUE_COLLECTION)
             .whereEqualTo("idQueue",idQueue)
             .get()
             .await()
@@ -112,30 +129,6 @@ class AdministratorDataSource @Inject constructor(
         cpf = userData.cpf,
         status = CallStatus.values().first{ it.value == service.status }
     )
-
-    fun getQueuesFiltered(
-        idCompany: String,
-        filter: String
-    ) : Flow<Response<Queues>> = flow {
-        emit(Response.Loading(true))
-        val queues = getQueues(idCompany)
-
-        val queuesData = Queues(
-            queues = queues.map {
-                QueueResponse().toQueueResponse(it.data)
-            }
-        )
-
-        val queuesFiltered = Queues(
-                queues = queuesData.queues.filter {
-                        it.name.startsWith(filter)
-                }
-            )
-
-        emit(Response.success(queuesFiltered))
-    }.catch {
-        emit(Response.error(it.message ?: UNKNOWN_ERROR))
-    }.flowOn(Dispatchers.IO)
 
     fun getQueuesByCompany(
         idCompany: String,
@@ -199,13 +192,13 @@ class AdministratorDataSource @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     private suspend fun getQueues(idCompany: String) = firebaseFirestore
-        .collection(Constants.QUEUE_COLLECTION)
+        .collection(QUEUE_COLLECTION)
         .whereEqualTo("idCompany",idCompany)
         .get()
         .await()
 
     private suspend fun getQueue(idQueue: String) = firebaseFirestore
-        .collection(Constants.QUEUE_COLLECTION)
+        .collection(QUEUE_COLLECTION)
         .whereEqualTo("idQueue", idQueue)
         .get()
         .await()

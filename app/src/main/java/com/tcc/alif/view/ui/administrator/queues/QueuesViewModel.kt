@@ -3,6 +3,8 @@ package com.tcc.alif.view.ui.administrator.queues
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tcc.alif.data.model.QueueRequest
+import com.tcc.alif.data.model.QueueResponse
 import com.tcc.alif.data.repository.AdministratorRepository
 import com.tcc.alif.data.util.request
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,6 +26,21 @@ class QueuesViewModel @Inject constructor(
                     filter = intent.filter
                 )
             }
+            is QueuesIntent.SaveNewQueue -> {
+                saveNewQueue(intent.queue)
+            }
+        }
+    }
+
+    private fun saveNewQueue(queue: QueueRequest){
+        viewModelScope.launch {
+            repository.saveNewQueue(queue)
+                .request(
+                    blockToRun = this,
+                    onError = { state.postValue(QueuesState.Error(it)) },
+                    onLoading = { state.postValue(QueuesState.Loading(it)) },
+                    onSuccess = { state.postValue(QueuesState.QueueSaved(it)) }
+                )
         }
     }
 

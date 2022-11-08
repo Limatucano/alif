@@ -11,7 +11,7 @@
     <string name="lojista">Administrador</string>
     <string name="cadastrar_se">Criar conta</string>
     <string name="entrar">Entrar</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancelar</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -109,7 +109,7 @@
     <string name="company_subtitle">Agora precisamos de algumas informações sobre a empresa.</string>
     <string name="uf_tv">Uf</string>
 
-    <string name="average_time">Tempo Médio</string>
+    <string name="average_time">Tempo Médio (em minuto)</string>
     <string name="closing_time">Hora de Fechamento</string>
     <string name="opening_time">Hora de Abertura</string>
     <string name="name_queue">Nome da Fila</string>
