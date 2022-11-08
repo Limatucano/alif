@@ -90,7 +90,7 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
             idQueue = this.queue.idQueue.ifEmpty { generateUUID() },
             idCompany = this.queue.idCompany,
             name = binding.nameQueueEt.text.toString().emptyIfNull(),
-            status = binding.statusAc.text.toString().emptyIfNull(),
+            status = binding.statusAc.text.toString().emptyIfNull().uppercase(),
             quantity = binding.quantityEt.text.toString().toInt(),
             description = binding.descriptionEt.text.toString().emptyIfNull(),
             titleCategory = binding.categoryAc.text.toString().emptyIfNull(),
