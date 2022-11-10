@@ -1,7 +1,9 @@
 package com.tcc.alif.view.ui.administrator.configuration.qrcode
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.tcc.alif.R
 import com.tcc.alif.data.model.CompanyResponse
@@ -14,6 +16,7 @@ class QrCodeFragment : BaseFragment<FragmentQrcodeBinding>(FragmentQrcodeBinding
 
     private lateinit var company: CompanyResponse
     private val viewModel : QrCodeViewModel by viewModels()
+    private var qrCodeImage : Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +32,7 @@ class QrCodeFragment : BaseFragment<FragmentQrcodeBinding>(FragmentQrcodeBinding
             title = getString(R.string.qrcode_page)
         )
         setObserver()
-
+        setListener()
         company.idCompany?.let { idCompany ->
             viewModel.handleIntent(QrCodeIntent.GenerateQrCode(
                 idCompany = idCompany
@@ -37,10 +40,39 @@ class QrCodeFragment : BaseFragment<FragmentQrcodeBinding>(FragmentQrcodeBinding
         }
     }
 
+    private fun setListener() = binding.run{
+        print.setOnClickListener {
+            if(qrCodeImage != null){
+                viewModel.handleIntent(
+                    QrCodeIntent.PrintQrCode(
+                        qrCode = qrCodeImage!!,
+                        activity = requireActivity()
+                    )
+                )
+            }
+        }
+
+        share.setOnClickListener {
+            if(qrCodeImage != null){
+                viewModel.handleIntent(
+                    QrCodeIntent.ShareQrCode(
+                        qrCode = qrCodeImage!!,
+                        activity = requireActivity()
+                    )
+                )
+            }
+        }
+    }
+
     private fun setObserver(){
         viewModel.state.observe(viewLifecycleOwner){ state ->
             when(state){
-                is QrCodeState.QrCodeLoaded -> binding.qrCode.setImageBitmap(state.qrCode)
+                is QrCodeState.QrCodeLoaded -> {
+                    qrCodeImage = state.qrCode
+                    binding.qrCode.setImageBitmap(state.qrCode)
+                }
+                is QrCodeState.Error -> Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                is QrCodeState.QrCodePrinted, QrCodeState.QrCodeShared -> {}
             }
         }
     }

@@ -34,4 +34,36 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <Button
+        android:id="@+id/print"
+        style="@style/ButtonSecondary"
+        android:layout_width="0dp"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginHorizontal="10dp"
+        android:drawableEnd="@drawable/ic_print"
+        android:text="@string/print"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+
+    <Button
+        android:id="@+id/share"
+        style="@style/ButtonSecondary"
+        android:layout_width="0dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:drawableEnd="@drawable/ic_share"
+        android:text="@string/share"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
