@@ -43,6 +43,10 @@ android {
 
 dependencies {
 
+    //QRCode
+    implementation 'com.github.androidmads:QRGenerator:1.0.1'
+    implementation 'com.google.zxing:core:3.3.3'
+
     //Security
     implementation "androidx.security:security-crypto:1.0.0"
 

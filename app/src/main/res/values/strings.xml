@@ -120,6 +120,8 @@
     <string name="queues_title">Filas</string>
     <string name="queues_configuration">Configure suas Filas</string>
     <string name="queues_query_hint">Pesquise suas filas aqui</string>
+    <string name="configuration_page">Configurações</string>
+    <string name="qrcode_page">Meu QR-Code</string>
 
     <string name="queue_status"><![CDATA[<b>Status: </b>%s]]></string>
     <string name="queue_will_open"><![CDATA[<b>Abre às: </b>%s]]></string>
@@ -184,4 +186,10 @@
     <string name="in_progress">Em Andamento</string>
     <string name="finished">Finalizado</string>
     <string name="canceled">Cancelado</string>
+
+    <!--  configuration options  -->
+    <string name="change_password">Alterar Senha</string>
+    <string name="profile">Meu Perfil</string>
+    <string name="categories">Minhas Categorias</string>
+
 </resources>

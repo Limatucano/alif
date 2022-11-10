@@ -11,16 +11,25 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_arrow_back.xml" value="0.2085" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_arrow_forward.xml" value="0.2085" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.248" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_category.xml" value="0.2455" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_edit.xml" value="0.195" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_full_logo.xml" value="0.2085" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_icone.xml" value="0.224" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_icone__1_.xml" value="0.224" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_icone__2_.xml" value="0.224" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_icone__3_.xml" value="0.224" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_key.xml" value="0.2455" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_logo.xml" value="0.2085" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_logo__1_.xml" value="0.2355" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_qr_code.xml" value="0.2455" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_teste.xml" value="0.2035" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_three_dots_vert.xml" value="0.2355" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_wave_100s_953px.xml" value="0.2455" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/lojista.xml" value="0.2455" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/person.xml" value="0.2455" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/profile.xml" value="0.2455" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/profile_picture_placeholder.xml" value="0.2455" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/queue.xml" value="0.2455" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/radio_custom.xml" value="0.287" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/radio_selected.xml" value="0.287" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/radio_selector.xml" value="0.287" />
@@ -32,6 +41,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/activity_modo.xml" value="0.11851851851851852" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/call_item.xml" value="0.25" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/company_item.xml" value="0.25" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/configuration_options_item.xml" value="0.5" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/custom_toolbar.xml" value="0.33605072463768115" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/date_time_picker.xml" value="0.1" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/date_time_picker_view.xml" value="0.33" />
@@ -39,12 +49,14 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/dialog_call_detail.xml" value="0.47647849462365593" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_companies.xml" value="0.22" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_company_form.xml" value="0.33" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_configuration.xml" value="0.22" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_employee.xml" value="0.19583333333333333" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_first_cliente.xml" value="0.33016304347826086" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_home_lojista.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_main_administrator.xml" value="0.18" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_mode.xml" value="0.33" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_qrcode.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_queue.xml" value="0.25" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_queue_form.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_queues.xml" value="0.3555253623188406" />
@@ -55,6 +67,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/queues_home_item.xml" value="0.25" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/queues_item.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/search_field.xml" value="0.25" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/menu/bottom_nav_menu_lojista.xml" value="0.24010416666666667" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/menu/menu_queue.xml" value="0.33" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/btn_cancelar.xml" value="0.29814814814814816" />
         <entry key="..\:/Users/mathe/AndroidStudioProjects/alif/app/src/main/res/drawable/btn_cancelarSaida.xml" value="0.24259259259259258" />

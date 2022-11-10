@@ -56,7 +56,7 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
         fillViews()
     }
 
-    //TODO: create category data (maybe to create a feat in configuration screen, when user can create all categories about them queues)
+    //TODO: create category data (maybe to create a feat in configuration screen, then user can create all categories about them queues)
     private fun fillViews() = binding.run {
         if(queue.idQueue.isNotEmpty()){
             nameQueueEt.setText(queue.name)

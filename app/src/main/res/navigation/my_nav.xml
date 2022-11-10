@@ -102,6 +102,9 @@
         <action
             android:id="@+id/action_mainAdministratorFragment_to_queueFormFragment2"
             app:destination="@id/queueFormFragment" />
+        <action
+            android:id="@+id/toQrCodePage"
+            app:destination="@id/qrCodeFragment" />
     </fragment>
     <fragment
         android:id="@+id/companyFormFragment"
@@ -124,5 +127,13 @@
         <argument
             android:name="queue"
             app:argType="com.tcc.alif.data.model.QueueResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/qrCodeFragment"
+        android:name="com.tcc.alif.view.ui.administrator.configuration.qrcode.QrCodeFragment"
+        android:label="QrCodeFragment" >
+        <argument
+            android:name="company"
+            app:argType="com.tcc.alif.data.model.CompanyResponse" />
     </fragment>
 </navigation>

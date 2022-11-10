@@ -9,22 +9,17 @@
     <item
         android:id="@+id/filas_func"
         android:title="@string/filas"
-        android:icon="@drawable/queue">
-    </item>
+        android:icon="@drawable/queue"/>
+
     <item
         android:id="@+id/home_func"
         android:title="@string/inicio"
         android:checked="true"
         android:enabled="true"
         android:icon="@drawable/home_icon_foreground"/>
-    <item
-        android:id="@+id/perfil_func"
-        android:title="@string/perfil"
-        android:icon="@drawable/person"/>
+
     <item
         android:id="@+id/config_func"
         android:title="@string/configuracao"
         android:icon="@drawable/config_icon_foreground"/>
-
-
 </menu>
