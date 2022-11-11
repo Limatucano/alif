@@ -18,6 +18,7 @@ object Constants {
     const val QUEUE_SUCCESSFULLY_INSERTED = "Fila inserida com sucesso!"
     const val QUEUE_SUCCESSFULLY_UPDATED = "Fila atualizada com sucesso!"
     const val PASSWORD_UPDATED = "Senha atualizada com sucesso!"
+    const val SIGNIN_ERROR = "Credenciais inválidas"
 
     const val STATE_NOT_MAPPED = "state not mapped"
     const val LANGUAGE_PT = "pt"

@@ -16,7 +16,7 @@ class SigninRepositoryImpl @Inject constructor(
     private val dataSource: SignInDataSource
 ) : SigninRepository{
 
-    override suspend fun signin(signin: Signin): FirebaseUser? {
+    override suspend fun signin(signin: Signin): FirebaseUser {
         return dataSource.signIn(signin = signin)
     }
 

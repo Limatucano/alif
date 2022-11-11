@@ -40,8 +40,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         state.observe(viewLifecycleOwner){ state ->
             when(state){
                 is SigninState.Loading -> updateLoading(state.loading)
-                is SigninState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
+                is SigninState.Error -> {
+                    updateLoading(false)
+                    Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
+                }
                 is SigninState.Success -> {
+                    updateLoading(false)
                     setupSharedPreferences(state.user)
                     openHomeScreen(state.user)
                 }

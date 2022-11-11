@@ -16,7 +16,7 @@ class SignInDataSource @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore
 ) {
 
-    suspend fun signIn(signin: Signin) : FirebaseUser?{
+    suspend fun signIn(signin: Signin) : FirebaseUser {
         firebaseAuth.signInWithEmailAndPassword(
                 signin.email,
                 signin.password

@@ -8,6 +8,7 @@ import com.tcc.alif.data.model.Signin
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.model.local.AccountType
 import com.tcc.alif.data.repository.SigninRepository
+import com.tcc.alif.data.util.Constants.SIGNIN_ERROR
 import com.tcc.alif.data.util.Constants.USER_UNAUTHORIZED
 import com.tcc.alif.data.util.UNKNOWN_ERROR
 import com.tcc.alif.data.util.requestFirebase
@@ -43,8 +44,7 @@ class LoginViewModel @Inject constructor(
                     state.postValue(SigninState.Loading(false))
                 }
             } catch (e: FirebaseAuthException){
-                state.postValue(SigninState.Error(UNKNOWN_ERROR))
-                state.postValue(SigninState.Loading(false))
+                state.postValue(SigninState.Error(SIGNIN_ERROR))
             }
         }
     }
