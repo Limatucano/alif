@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="@dimen/margin_default">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tradeNameTv"

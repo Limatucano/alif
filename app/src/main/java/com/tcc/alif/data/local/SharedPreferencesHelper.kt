@@ -12,9 +12,19 @@ class SharedPreferencesHelper @Inject constructor(
         get() = sharedPreferences.getString(USER_ID, EMPTY_STRING)
         set(value) = sharedPreferences.edit().putString(USER_ID,value).apply()
 
+    var userEmail: String?
+        get() = sharedPreferences.getString(USER_EMAIL, EMPTY_STRING)
+        set(value) = sharedPreferences.edit().putString(USER_EMAIL,value).apply()
+
+    var userPassword: String?
+        get() = sharedPreferences.getString(USER_PASSWORD, EMPTY_STRING)
+        set(value) = sharedPreferences.edit().putString(USER_PASSWORD, value).apply()
+
     companion object{
         const val SHARED_PREFERENCES_NAME = "${BuildConfig.APPLICATION_ID}.ENCRYPT_SHARED_PREFERENCES"
         private const val USER_ID = "$SHARED_PREFERENCES_NAME.USER_ID"
+        private const val USER_EMAIL = "$SHARED_PREFERENCES_NAME.USER_EMAIL"
+        private const val USER_PASSWORD = "$SHARED_PREFERENCES_NAME.USER_PASSWORD"
         const val EMPTY_STRING = ""
     }
 }

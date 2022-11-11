@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
@@ -59,7 +60,7 @@ class QueuesFragment(
                     idCompany = company.idCompany ?: EMPTY_STRING
                 )
             )
-            requireView().findNavController().navigate(direction)
+            findNavController().navigate(direction)
         }
 
         searchField.setOnQueryTextListener(

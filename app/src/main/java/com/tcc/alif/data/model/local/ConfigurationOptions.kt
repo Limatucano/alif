@@ -3,28 +3,26 @@ package com.tcc.alif.data.model.local
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.tcc.alif.R
-import com.tcc.alif.view.ui.administrator.configuration.ConfigurationFragment.Companion.openChangePassword
-import com.tcc.alif.view.ui.administrator.configuration.ConfigurationFragment.Companion.openMyCategories
-import com.tcc.alif.view.ui.administrator.configuration.ConfigurationFragment.Companion.openProfile
+import com.tcc.alif.view.ui.administrator.configuration.ConfigurationIntent
 
 enum class ConfigurationOptions(
     @StringRes val title: Int,
     @DrawableRes val icon: Int,
-    val action: (() -> Unit)? = null
+    val intent: ConfigurationIntent
 ){
     MY_CATEGORIES(
         title = R.string.categories,
         icon = R.drawable.ic_category,
-        action = ::openMyCategories
+        intent = ConfigurationIntent.GoToMyCategories
     ),
     PROFILE(
         title = R.string.profile,
         icon = R.drawable.profile,
-        action = ::openProfile
+        intent = ConfigurationIntent.GoToProfile
     ),
     CHANGE_PASSWORD(
         title = R.string.change_password,
         icon = R.drawable.ic_key,
-        action = ::openChangePassword
+        intent = ConfigurationIntent.GoToChangePassword
     )
 }

@@ -16,8 +16,9 @@ open class BaseFragment<V: ViewBinding>(private val inflate : Inflate<V>) : Frag
     private lateinit var _binding : V
     val binding get() = _binding
 
-    @Inject
-    lateinit var sharedPreferences: SharedPreferencesHelper
+    val sharedPreferences: SharedPreferencesHelper by lazy {
+        (requireActivity() as MainActivity).sharedPreferences
+    }
 
     fun setupToolbar(
         title : String = "",

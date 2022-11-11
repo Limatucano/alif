@@ -111,6 +111,13 @@
     <string name="company_subtitle">Agora precisamos de algumas informações sobre a empresa.</string>
     <string name="uf_tv">Uf</string>
 
+    <string name="current_password">Senha Atual</string>
+    <string name="new_password">Senha Nova</string>
+    <string name="confirm_new_password">Confirme Senha Nova</string>
+    <string name="current_password_section">Digite aqui a senha usada atualmente no login.</string>
+    <string name="new_password_section">Digite aqui a nova senha que você deseja utilizar para realizar o login no aplicativo, após isso confirme a senha digitando novamente</string>
+    <string name="update_password_error"><![CDATA[Erro! Verifique as senhas preenchidas]]></string>
+
     <string name="average_time">Tempo Médio (em minuto)</string>
     <string name="closing_time">Hora de Fechamento</string>
     <string name="opening_time">Hora de Abertura</string>

@@ -8,7 +8,8 @@ import com.tcc.alif.data.model.local.ConfigurationOptions
 import com.tcc.alif.databinding.ConfigurationOptionsItemBinding
 
 class OptionConfigurationAdapter(
-    private val context: Context
+    private val context: Context,
+    val action: (intent: ConfigurationIntent) -> Unit
 ) : RecyclerView.Adapter<OptionConfigurationAdapter.ViewHolder>() {
 
     var options: List<ConfigurationOptions> = listOf()
@@ -26,7 +27,7 @@ class OptionConfigurationAdapter(
            optionTitle.text = context.getText(option.title)
 
            root.setOnClickListener {
-               option.action?.invoke()
+               action.invoke(option.intent)
            }
        }
     }

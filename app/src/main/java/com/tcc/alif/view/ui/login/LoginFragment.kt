@@ -42,11 +42,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 is SigninState.Loading -> updateLoading(state.loading)
                 is SigninState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
                 is SigninState.Success -> {
-                    sharedPreferences.userId = state.user.uid
+                    setupSharedPreferences(state.user)
                     openHomeScreen(state.user)
                 }
             }
         }
+    }
+
+    private fun setupSharedPreferences(user: SigninResponse ){
+        sharedPreferences.userId = user.uid
+        sharedPreferences.userEmail = user.email
+        sharedPreferences.userPassword = binding.passwordEdit.text.toString()
     }
 
     private fun setListeners() = binding.run {

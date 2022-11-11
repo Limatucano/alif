@@ -28,6 +28,7 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
 
         //TODO : Bug - When i come back from forms screen to queue screen, the bottomNavigation can't show right screen (think more about to use a side menu rather than bottom navigation)
         //TODO : refactor names and include new fragments
+        //TODO : Save company in shared preferences and to remove constructor params
         val homeFragment = HomeFragment(company)
         val funcionariosLojistaFragment = HomeFragment(company)
 

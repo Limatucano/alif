@@ -20,7 +20,8 @@ class ConfigurationFragment(
 
     private val optionsAdapter by lazy {
         OptionConfigurationAdapter(
-            context = requireContext()
+            context = requireContext(),
+            action = { openByIntent(it) }
         )
     }
 
@@ -52,21 +53,28 @@ class ConfigurationFragment(
         )
     }
 
-    private fun setAdapterItems(){
-        optionsAdapter.options = ConfigurationOptions.values().toList()
+    private fun openByIntent(intent: ConfigurationIntent){
+        when(intent){
+            is ConfigurationIntent.GoToChangePassword -> openChangePassword()
+            is ConfigurationIntent.GoToProfile -> openProfile()
+            is ConfigurationIntent.GoToMyCategories -> openMyCategories()
+        }
     }
 
-    companion object{
-        fun openMyCategories(){
-            //TODO: Implement navigation to myCategories screen
-        }
+    private fun openMyCategories(){
+        //TODO: Implement navigation to myCategories screen
+    }
 
-        fun openProfile(){
-            //TODO: Implement navigation to profile screen
-        }
+    private fun openProfile(){
+        //TODO: Implement navigation to profile screen
+    }
 
-        fun openChangePassword(){
-            //TODO: Implement navigation to change Password screen
-        }
+    private fun openChangePassword(){
+        val directions = MainAdministratorFragmentDirections.toChangePassword()
+        requireView().findNavController().navigate(directions)
+    }
+
+    private fun setAdapterItems(){
+        optionsAdapter.options = ConfigurationOptions.values().toList()
     }
 }

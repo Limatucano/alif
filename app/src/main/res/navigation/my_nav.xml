@@ -105,6 +105,9 @@
         <action
             android:id="@+id/toQrCodePage"
             app:destination="@id/qrCodeFragment" />
+        <action
+            android:id="@+id/toChangePassword"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/companyFormFragment"
@@ -136,4 +139,8 @@
             android:name="company"
             app:argType="com.tcc.alif.data.model.CompanyResponse" />
     </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.tcc.alif.view.ui.administrator.configuration.changepassword.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" />
 </navigation>
