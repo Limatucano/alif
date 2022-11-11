@@ -29,12 +29,18 @@ class ChangePasswordFragment: BaseFragment<FragmentChangepasswordBinding>(Fragme
         viewModel.state.observe(viewLifecycleOwner){ state ->
             when(state){
                 is ChangePasswordState.Loading -> setLoading(state.loading)
+                is ChangePasswordState.PasswordValidated -> {
+                    viewModel.handleIntent(ChangePasswordIntent.UpdatePassword(
+                        newPassword = state.newPassword
+                    ))
+                }
                 is ChangePasswordState.Error -> {
                     setLoading(false)
                     Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
                 }
                 is ChangePasswordState.PasswordUpdated -> {
                     setLoading(false)
+                    sharedPreferences.userPassword = state.password
                     Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -51,32 +57,14 @@ class ChangePasswordFragment: BaseFragment<FragmentChangepasswordBinding>(Fragme
             val currentPassword = currentPasswordEt.text.toString()
             val newPassword = newPasswordEt.text.toString()
             val confirmPassword = confirmNewPasswordEt.text.toString()
-            val isValid = validatePasswords(
-                currentPassword = currentPassword,
-                newPassword = newPassword,
-                confirmPassword = confirmPassword
-            )
-            if(isValid){
-                viewModel.handleIntent(ChangePasswordIntent.UpdatePassword(
-                    newPassword = newPassword
-                ))
-            }else{
-                Toast.makeText(requireContext(), getString(R.string.update_password_error), Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
-    //TODO: Return why the password is wrong
-    private fun validatePasswords(
-        currentPassword: String,
-        newPassword: String,
-        confirmPassword: String
-    ): Boolean{
-        return when{
-            currentPassword == newPassword -> false
-            newPassword != confirmPassword -> false
-            currentPassword != sharedPreferences.userPassword -> false
-            else -> true
+            viewModel.handleIntent(ChangePasswordIntent.ValidatePassword(
+                    validatePassword = sharedPreferences.userPassword ?: "",
+                    currentPassword = currentPassword,
+                    newPassword = newPassword,
+                    confirmPassword = confirmPassword
+                )
+            )
         }
     }
 }
