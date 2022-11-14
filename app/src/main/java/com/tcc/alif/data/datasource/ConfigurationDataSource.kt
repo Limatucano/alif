@@ -2,8 +2,17 @@ package com.tcc.alif.data.datasource
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.tcc.alif.data.model.CategoryResponse
+import com.tcc.alif.data.model.CategoryResponse.Companion.modelToMap
+import com.tcc.alif.data.model.QueueRequest.Companion.modelToMap
 import com.tcc.alif.data.model.Response
+import com.tcc.alif.data.util.Constants
+import com.tcc.alif.data.util.Constants.CATEGORY_COLLECTION
+import com.tcc.alif.data.util.Constants.CATEGORY_DELETED
+import com.tcc.alif.data.util.Constants.CATEGORY_INSERTED
+import com.tcc.alif.data.util.Constants.ID_COMPANY
 import com.tcc.alif.data.util.Constants.PASSWORD_UPDATED
+import com.tcc.alif.data.util.Constants.UID
 import com.tcc.alif.data.util.UNKNOWN_ERROR
 import com.tcc.alif.data.util.await
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +38,95 @@ class ConfigurationDataSource @Inject constructor(
             ?.await() ?: emit(Response.error(UNKNOWN_ERROR))
 
         emit(Response.Success(PASSWORD_UPDATED))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
+    fun getAllCategories(
+        idCompany: String
+    ): Flow<Response<List<CategoryResponse>>> = flow {
+        emit(Response.loading(true))
+       val categories =  firebaseFirestore
+            .collection(CATEGORY_COLLECTION)
+            .whereEqualTo(ID_COMPANY,idCompany)
+            .get()
+            .await()
+
+       val categoriesResponse = categories.map {
+           CategoryResponse().toCategoryResponse(it.data)
+       }
+
+       emit(Response.success(categoriesResponse))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
+    fun deleteCategory(
+        idCategory: String
+    ): Flow<Response<String>> = flow {
+        emit(Response.loading(true))
+
+        val categoryDocument = getDocumentCategory(idCategory)
+
+        if(categoryDocument != null){
+            firebaseFirestore
+                .collection(CATEGORY_COLLECTION)
+                .document(categoryDocument)
+                .delete()
+        }else{
+            emit(Response.error(UNKNOWN_ERROR))
+            return@flow
+        }
+        emit(Response.success(CATEGORY_DELETED))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
+    fun insertNewCategory(
+        category: CategoryResponse
+    ): Flow<Response<String>> = flow {
+        emit(Response.loading(true))
+
+        firebaseFirestore
+            .collection(CATEGORY_COLLECTION)
+            .add(category)
+
+        emit(Response.success(CATEGORY_INSERTED))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
+    private suspend fun getDocumentCategory(
+        idCategory: String
+    ) = firebaseFirestore
+            .collection(CATEGORY_COLLECTION)
+            .whereEqualTo(UID,idCategory)
+            .get()
+            .await()
+            .documents
+            .firstOrNull()
+            ?.id
+
+    fun editCategory(
+        category: CategoryResponse
+    ): Flow<Response<String>> = flow {
+        emit(Response.loading(true))
+
+
+        val documentCategory = getDocumentCategory(category.uid)
+
+        if(documentCategory != null){
+            firebaseFirestore
+                .collection(Constants.CATEGORY_COLLECTION)
+                .document(documentCategory)
+                .update(category.modelToMap())
+                .await()
+        }else{
+            emit(Response.error(UNKNOWN_ERROR))
+            return@flow
+        }
+
+        emit(Response.success(Constants.CATEGORY_UPDATED))
     }.catch {
         emit(Response.error(it.message ?: UNKNOWN_ERROR))
     }.flowOn(Dispatchers.IO)

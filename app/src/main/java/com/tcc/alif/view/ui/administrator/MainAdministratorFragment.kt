@@ -32,6 +32,7 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
         val homeFragment = HomeFragment(company)
         val funcionariosLojistaFragment = HomeFragment(company)
 
+        setupSharedPreferences(company)
         setCurrentFragment(homeFragment)
         binding.bottomNavigationView.menu.getItem(HOME_INDEX).isChecked = true
         binding.bottomNavigationView.setOnItemSelectedListener {
@@ -43,6 +44,11 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
             }
             true
         }
+    }
+
+    private fun setupSharedPreferences(company: CompanyResponse){
+        sharedPreferences.companyId = company.idCompany
+        sharedPreferences.companyName = company.tradeName
     }
 
     private fun setCurrentFragment(fragment: Fragment) =

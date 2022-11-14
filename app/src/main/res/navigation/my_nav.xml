@@ -84,10 +84,18 @@
             app:argType="com.tcc.alif.data.model.SigninResponse" />
         <action
             android:id="@+id/action_companiesFragment_to_mainAdministratorFragment"
-            app:destination="@id/mainAdministratorFragment" />
+            app:destination="@id/mainAdministratorFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_companiesFragment_to_companyFormFragment"
-            app:destination="@id/companyFormFragment" />
+            app:destination="@id/companyFormFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/mainAdministratorFragment"
@@ -98,16 +106,39 @@
             app:argType="com.tcc.alif.data.model.CompanyResponse" />
         <action
             android:id="@+id/action_mainAdministratorFragment_to_queueFragment"
-            app:destination="@id/queueFragment" />
+            app:destination="@id/queueFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_mainAdministratorFragment_to_queueFormFragment2"
-            app:destination="@id/queueFormFragment" />
+            app:destination="@id/queueFormFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/toQrCodePage"
-            app:destination="@id/qrCodeFragment" />
+            app:destination="@id/qrCodeFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/toChangePassword"
-            app:destination="@id/changePasswordFragment" />
+            app:destination="@id/changePasswordFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainAdministratorFragment_to_myCategoriesFragment"
+            app:destination="@id/myCategoriesFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/companyFormFragment"
@@ -143,4 +174,22 @@
         android:id="@+id/changePasswordFragment"
         android:name="com.tcc.alif.view.ui.administrator.configuration.changepassword.ChangePasswordFragment"
         android:label="ChangePasswordFragment" />
+    <fragment
+        android:id="@+id/myCategoriesFragment"
+        android:name="com.tcc.alif.view.ui.administrator.configuration.mycategories.MyCategoriesFragment"
+        android:label="MyCategoriesFragment" >
+        <action
+            android:id="@+id/action_myCategoriesFragment_to_myCategoryFormFragment"
+            app:destination="@id/myCategoryFormFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myCategoryFormFragment"
+        android:name="com.tcc.alif.view.ui.administrator.configuration.mycategories.MyCategoryFormFragment"
+        android:label="MyCategoryFormFragment" >
+        <argument
+            android:name="category"
+            app:argType="com.tcc.alif.data.model.CategoryResponse"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

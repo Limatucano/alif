@@ -110,6 +110,8 @@
     <string name="company_title">Empresa</string>
     <string name="company_subtitle">Agora precisamos de algumas informações sobre a empresa.</string>
     <string name="uf_tv">Uf</string>
+    <string name="category_name">Título da categoria</string>
+    <string name="category_title">Categoria</string>
 
     <string name="current_password">Senha Atual</string>
     <string name="new_password">Senha Nova</string>
@@ -117,6 +119,9 @@
     <string name="current_password_section">Digite aqui a senha usada atualmente no login.</string>
     <string name="new_password_section">Digite aqui a nova senha que você deseja utilizar para realizar o login no aplicativo, após isso confirme a senha digitando novamente</string>
     <string name="update_password_error"><![CDATA[Erro! Verifique as senhas preenchidas]]></string>
+    <string name="mycategories_title">Minhas Categorias</string>
+    <string name="edit_category">Editar Categoria</string>
+    <string name="delete_category">Excluir Categoria</string>
 
     <string name="average_time">Tempo Médio (em minuto)</string>
     <string name="closing_time">Hora de Fechamento</string>
@@ -200,5 +205,6 @@
     <string name="change_password">Alterar Senha</string>
     <string name="profile">Meu Perfil</string>
     <string name="categories">Minhas Categorias</string>
+    <string name="category_add_button_content_description">Botão para adicionar nova categoria</string>
 
 </resources>

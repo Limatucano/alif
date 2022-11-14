@@ -4,10 +4,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.tcc.alif.data.model.*
 import com.tcc.alif.data.model.QueueRequest.Companion.modelToMap
 import com.tcc.alif.data.util.Constants
+import com.tcc.alif.data.util.Constants.ID_COMPANY
+import com.tcc.alif.data.util.Constants.ID_QUEUE
 import com.tcc.alif.data.util.Constants.QUEUE_COLLECTION
 import com.tcc.alif.data.util.Constants.QUEUE_SUCCESSFULLY_INSERTED
 import com.tcc.alif.data.util.Constants.QUEUE_SUCCESSFULLY_UPDATED
 import com.tcc.alif.data.util.Constants.SUCCESSFULLY_UPDATED
+import com.tcc.alif.data.util.Constants.UID
 import com.tcc.alif.data.util.UNKNOWN_ERROR
 import com.tcc.alif.data.util.await
 import kotlinx.coroutines.Dispatchers
@@ -96,7 +99,7 @@ class AdministratorDataSource @Inject constructor(
     private fun getQueueCalls(idQueue: String) = flow{
         val queue = firebaseFirestore
             .collection(QUEUE_COLLECTION)
-            .whereEqualTo("idQueue",idQueue)
+            .whereEqualTo(ID_QUEUE,idQueue)
             .get()
             .await()
             .documents[0]
@@ -221,20 +224,20 @@ class AdministratorDataSource @Inject constructor(
 
     private suspend fun getQueues(idCompany: String) = firebaseFirestore
         .collection(QUEUE_COLLECTION)
-        .whereEqualTo("idCompany",idCompany)
+        .whereEqualTo(ID_COMPANY,idCompany)
         .get()
         .await()
 
     private suspend fun getQueue(idQueue: String) = firebaseFirestore
         .collection(QUEUE_COLLECTION)
-        .whereEqualTo("idQueue", idQueue)
+        .whereEqualTo(ID_QUEUE, idQueue)
         .get()
         .await()
 
     private suspend fun getUserData(userId: String): SigninResponse {
         val user = firebaseFirestore
             .collection(Constants.USER_COLLECTION)
-            .whereEqualTo("uid", userId)
+            .whereEqualTo(UID, userId)
             .get()
             .await()
         val userMapped = user.documents[0].data?.let {

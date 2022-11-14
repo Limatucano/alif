@@ -62,7 +62,7 @@ class ConfigurationFragment(
     }
 
     private fun openMyCategories(){
-        //TODO: Implement navigation to myCategories screen
+        requireView().findNavController().navigate(MainAdministratorFragmentDirections.actionMainAdministratorFragmentToMyCategoriesFragment())
     }
 
     private fun openProfile(){
@@ -70,8 +70,7 @@ class ConfigurationFragment(
     }
 
     private fun openChangePassword(){
-        val directions = MainAdministratorFragmentDirections.toChangePassword()
-        requireView().findNavController().navigate(directions)
+        requireView().findNavController().navigate(MainAdministratorFragmentDirections.toChangePassword())
     }
 
     private fun setAdapterItems(){
