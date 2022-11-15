@@ -20,6 +20,11 @@ enum class ConfigurationOptions(
         icon = R.drawable.profile,
         intent = ConfigurationIntent.GoToProfile
     ),
+    COMPANY_PROFILE(
+        title = R.string.company_profile,
+        icon = R.drawable.company,
+        intent = ConfigurationIntent.GoToCompanyProfile
+    ),
     CHANGE_PASSWORD(
         title = R.string.change_password,
         icon = R.drawable.ic_key,

@@ -58,6 +58,7 @@ class ConfigurationFragment(
             is ConfigurationIntent.GoToChangePassword -> openChangePassword()
             is ConfigurationIntent.GoToProfile -> openProfile()
             is ConfigurationIntent.GoToMyCategories -> openMyCategories()
+            is ConfigurationIntent.GoToCompanyProfile -> openCompanyProfile()
         }
     }
 
@@ -65,8 +66,12 @@ class ConfigurationFragment(
         requireView().findNavController().navigate(MainAdministratorFragmentDirections.actionMainAdministratorFragmentToMyCategoriesFragment())
     }
 
+    private fun openCompanyProfile(){
+        //TODO: Implement navigation to company profile screen
+    }
+
     private fun openProfile(){
-        //TODO: Implement navigation to profile screen
+        requireView().findNavController().navigate(MainAdministratorFragmentDirections.actionMainAdministratorFragmentToUserProfileFragment())
     }
 
     private fun openChangePassword(){

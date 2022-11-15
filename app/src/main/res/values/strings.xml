@@ -204,6 +204,7 @@
     <!--  configuration options  -->
     <string name="change_password">Alterar Senha</string>
     <string name="profile">Meu Perfil</string>
+    <string name="company_profile">Minha Empresa</string>
     <string name="categories">Minhas Categorias</string>
     <string name="category_add_button_content_description">Botão para adicionar nova categoria</string>
 

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.17831813576494426" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/company.xml" value="0.2195" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/config_icon_foreground.xml" value="0.2455" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/expand_less.xml" value="0.247" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/expand_more.xml" value="0.2355" />
@@ -51,6 +52,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/date_time_picker_view_dialog.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/dialog_call_detail.xml" value="0.47647849462365593" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/dialog_categories.xml" value="0.3423913043478261" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_administrator_profile.xml" value="0.27239583333333334" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_changepassword.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_companies.xml" value="0.22" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_company_form.xml" value="0.33" />
@@ -68,6 +70,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_queue_form.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_queues.xml" value="0.3555253623188406" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_splash.xml" value="0.11851851851851852" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_user_profile.xml" value="0.2734375" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/minhas_filas_home_item.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/minhas_filas_item.xml" value="0.36666666666666664" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/minhas_filas_lojista.xml" value="0.33605072463768115" />
