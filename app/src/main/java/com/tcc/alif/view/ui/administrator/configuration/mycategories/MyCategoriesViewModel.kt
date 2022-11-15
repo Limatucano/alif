@@ -54,7 +54,7 @@ class MyCategoriesViewModel @Inject constructor(
                 blockToRun = this,
                 onError = { state.postValue(MyCategoriesState.Error(it)) },
                 onLoading = { state.postValue(MyCategoriesState.Loading(it)) },
-                onSuccess = { state.postValue(MyCategoriesState.CategoryDeleted(it)) }
+                onSuccess = { state.postValue(MyCategoriesState.CategoryEdited(it)) }
             )
         }
     }

@@ -79,13 +79,11 @@ class MyCategoryFormFragment : BaseFragment<FragmentMycategoryFormBinding>(Fragm
                     CategoryResponse(
                         uid = args.category?.uid ?: "",
                         name = categoryNameEt.text.toString().emptyIfNull(),
-                        idCompany = args.category?.uid ?: ""
+                        idCompany = args.category?.idCompany ?: ""
                     )
                 )
             )
 
         }
-
-
     }
 }
