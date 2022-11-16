@@ -207,5 +207,6 @@
     <string name="company_profile">Minha Empresa</string>
     <string name="categories">Minhas Categorias</string>
     <string name="category_add_button_content_description">Botão para adicionar nova categoria</string>
+    <string name="exit">Sair</string>
 
 </resources>

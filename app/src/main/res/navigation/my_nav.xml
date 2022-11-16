@@ -141,7 +141,18 @@
             app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_mainAdministratorFragment_to_userProfileFragment"
-            app:destination="@id/userProfileFragment" />
+            app:destination="@id/userProfileFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainAdministratorFragment_to_modeFragment"
+            app:destination="@id/modeFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/companyFormFragment"

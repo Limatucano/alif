@@ -30,6 +30,8 @@ class ConfigurationDataSource @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) {
 
+    fun signOut() = firebaseAuth.signOut()
+
     fun updatePassword(
         newPassword: String
     ): Flow<Response<String>> = flow {

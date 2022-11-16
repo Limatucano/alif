@@ -2,6 +2,7 @@ package com.tcc.alif.view.ui.administrator.configuration
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
@@ -18,6 +19,8 @@ class ConfigurationFragment(
     private val company : CompanyResponse
 ) : BaseFragment<FragmentConfigurationBinding>(FragmentConfigurationBinding::inflate) {
 
+    private val viewModel : ConfigurationViewModel by viewModels()
+
     private val optionsAdapter by lazy {
         OptionConfigurationAdapter(
             context = requireContext(),
@@ -30,9 +33,18 @@ class ConfigurationFragment(
         setViews()
         setListener()
         setAdapterItems()
+        setObserver()
         setupToolbar(
             title = getString(R.string.configuration_page)
         )
+    }
+
+    private fun setObserver() {
+        viewModel.state.observe(viewLifecycleOwner){ state ->
+            when(state){
+                is ConfigurationState.ExitedSuccessfully -> goToModeScreen()
+            }
+        }
     }
 
     private fun setListener() = binding.run {
@@ -43,7 +55,7 @@ class ConfigurationFragment(
     }
 
     private fun setViews() = binding.run{
-        userName.text = company.tradeName
+        userName.text = sharedPreferences.companyName
         rvOptionsConfiguration.adapter = optionsAdapter
         rvOptionsConfiguration.setLinearLayout(
             context = requireContext(),
@@ -59,11 +71,28 @@ class ConfigurationFragment(
             is ConfigurationIntent.GoToProfile -> openProfile()
             is ConfigurationIntent.GoToMyCategories -> openMyCategories()
             is ConfigurationIntent.GoToCompanyProfile -> openCompanyProfile()
+            is ConfigurationIntent.Exit -> exit(intent)
         }
     }
 
+    private fun exit(intent: ConfigurationIntent){
+        viewModel.handleIntent(intent)
+    }
+
+    private fun goToModeScreen(){
+        requireView()
+            .findNavController()
+            .navigate(
+                MainAdministratorFragmentDirections.actionMainAdministratorFragmentToModeFragment()
+            )
+    }
+
     private fun openMyCategories(){
-        requireView().findNavController().navigate(MainAdministratorFragmentDirections.actionMainAdministratorFragmentToMyCategoriesFragment())
+        requireView()
+            .findNavController()
+            .navigate(
+                MainAdministratorFragmentDirections.actionMainAdministratorFragmentToMyCategoriesFragment()
+            )
     }
 
     private fun openCompanyProfile(){
@@ -71,11 +100,19 @@ class ConfigurationFragment(
     }
 
     private fun openProfile(){
-        requireView().findNavController().navigate(MainAdministratorFragmentDirections.actionMainAdministratorFragmentToUserProfileFragment())
+        requireView()
+            .findNavController()
+            .navigate(
+                MainAdministratorFragmentDirections.actionMainAdministratorFragmentToUserProfileFragment()
+            )
     }
 
     private fun openChangePassword(){
-        requireView().findNavController().navigate(MainAdministratorFragmentDirections.toChangePassword())
+        requireView()
+            .findNavController()
+            .navigate(
+                MainAdministratorFragmentDirections.toChangePassword()
+            )
     }
 
     private fun setAdapterItems(){

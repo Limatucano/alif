@@ -29,5 +29,10 @@ enum class ConfigurationOptions(
         title = R.string.change_password,
         icon = R.drawable.ic_key,
         intent = ConfigurationIntent.GoToChangePassword
+    ),
+    EXIT(
+        title = R.string.exit,
+        icon = R.drawable.ic_exit,
+        intent = ConfigurationIntent.Exit
     )
 }

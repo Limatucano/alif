@@ -44,4 +44,6 @@ class ConfigurationRepository @Inject constructor(
     ) = configurationDataSource.updateDataUser(
         userData = userData
     )
+
+    fun signOut() = configurationDataSource.signOut()
 }
