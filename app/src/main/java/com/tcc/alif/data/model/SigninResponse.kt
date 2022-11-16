@@ -23,7 +23,7 @@ data class SigninResponse(
             name = map["name"].toString().emptyIfNull(),
             cpf = map["cpf"].toString().emptyIfNull(),
             cellphone = map["cellphone"].toString().emptyIfNull(),
-            birthDate = map["birthdate"].toString().emptyIfNull(),
+            birthDate = map["birthDate"].toString().emptyIfNull(),
             email = map["email"].toString().emptyIfNull(),
             priority = map["priority"] as Boolean?,
             isConsumer = map["isConsumer"] as Boolean?,

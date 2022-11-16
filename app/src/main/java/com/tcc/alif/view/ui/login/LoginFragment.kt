@@ -53,10 +53,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-    private fun setupSharedPreferences(user: SigninResponse ){
-        sharedPreferences.userId = user.uid
-        sharedPreferences.userEmail = user.email
-        sharedPreferences.userPassword = binding.passwordEdit.text.toString()
+    private fun setupSharedPreferences(user: SigninResponse) = sharedPreferences.run{
+        userId = user.uid
+        userEmail = user.email
+        userPassword = binding.passwordEdit.text.toString()
+        userName = user.name
+        userCellphone = user.cellphone
+        userBirthday = user.birthDate
+        userDocument = user.cpf
     }
 
     private fun setListeners() = binding.run {

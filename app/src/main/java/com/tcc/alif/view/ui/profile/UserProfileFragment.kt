@@ -21,5 +21,13 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>(FragmentUse
             val dateFormat: String = if(timeIsEnabled) NORMAL_DATE_WITH_HOURS_FORMAT else NORMAL_DATE_FORMAT
             birthDay.text = calendar.time.toStringDate(dateFormat)
         }
+
+        sharedPreferences.run{
+            nameEt.setText(userName)
+            cpfEt.setText(userDocument)
+            emailEt.setText(userEmail)
+            cellphoneEt.setText(userCellphone)
+            birthDay.text = userBirthday.toString()
+        }
     }
 }
