@@ -6,6 +6,8 @@ import com.tcc.alif.data.model.CategoryResponse
 import com.tcc.alif.data.model.CategoryResponse.Companion.modelToMap
 import com.tcc.alif.data.model.QueueRequest.Companion.modelToMap
 import com.tcc.alif.data.model.Response
+import com.tcc.alif.data.model.SigninResponse
+import com.tcc.alif.data.model.SigninResponse.Companion.modelToMap
 import com.tcc.alif.data.util.Constants
 import com.tcc.alif.data.util.Constants.CATEGORY_COLLECTION
 import com.tcc.alif.data.util.Constants.CATEGORY_DELETED
@@ -13,6 +15,7 @@ import com.tcc.alif.data.util.Constants.CATEGORY_INSERTED
 import com.tcc.alif.data.util.Constants.ID_COMPANY
 import com.tcc.alif.data.util.Constants.PASSWORD_UPDATED
 import com.tcc.alif.data.util.Constants.UID
+import com.tcc.alif.data.util.Constants.USER_COLLECTION
 import com.tcc.alif.data.util.UNKNOWN_ERROR
 import com.tcc.alif.data.util.await
 import kotlinx.coroutines.Dispatchers
@@ -112,7 +115,6 @@ class ConfigurationDataSource @Inject constructor(
     ): Flow<Response<String>> = flow {
         emit(Response.loading(true))
 
-
         val documentCategory = getDocumentCategory(category.uid)
 
         if(documentCategory != null){
@@ -130,4 +132,38 @@ class ConfigurationDataSource @Inject constructor(
     }.catch {
         emit(Response.error(it.message ?: UNKNOWN_ERROR))
     }.flowOn(Dispatchers.IO)
+
+    fun updateDataUser(
+        userData: SigninResponse
+    ): Flow<Response<String>> = flow {
+        emit(Response.loading(true))
+
+        val document = getUserDocument(userData.uid)
+
+        if(document != null){
+            firebaseFirestore
+                .collection(USER_COLLECTION)
+                .document(document)
+                .update(userData.modelToMap())
+                .await()
+        }else{
+            emit(Response.error(UNKNOWN_ERROR))
+            return@flow
+        }
+
+        emit(Response.success(Constants.USER_UPDATED))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
+    private suspend fun getUserDocument(
+        idUser: String
+    ) = firebaseFirestore
+        .collection(USER_COLLECTION)
+        .whereEqualTo(UID,idUser)
+        .get()
+        .await()
+        .documents
+        .firstOrNull()
+        ?.id
 }

@@ -30,6 +30,7 @@ object Constants {
     const val CATEGORY_DELETED = "Categoria deletada com sucesso!"
     const val CATEGORY_INSERTED = "Categoria inserida com sucesso!"
     const val CATEGORY_UPDATED = "Categoria atualizada com sucesso!"
+    const val USER_UPDATED = "Usuário atualizado com sucesso!"
 
     const val STATE_NOT_MAPPED = "state not mapped"
     const val LANGUAGE_PT = "pt"

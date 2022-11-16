@@ -31,4 +31,15 @@ data class SigninResponse(
             companies = map["companies"] as List<String>,
             uid = map["uid"].toString().emptyIfNull()
         )
+
+    companion object {
+        fun SigninResponse.modelToMap() =
+            mapOf(
+                "name" to this.name,
+                "cpf" to this.cpf,
+                "email" to this.email,
+                "birthDate" to this.birthDate,
+                "cellphone" to this.cellphone
+            )
+    }
 }

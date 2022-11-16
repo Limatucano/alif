@@ -2,6 +2,7 @@ package com.tcc.alif.data.repository
 
 import com.tcc.alif.data.datasource.ConfigurationDataSource
 import com.tcc.alif.data.model.CategoryResponse
+import com.tcc.alif.data.model.SigninResponse
 import javax.inject.Inject
 
 class ConfigurationRepository @Inject constructor(
@@ -36,5 +37,11 @@ class ConfigurationRepository @Inject constructor(
         category: CategoryResponse
     ) = configurationDataSource.editCategory(
         category = category
+    )
+
+    fun updateUserData(
+        userData: SigninResponse
+    ) = configurationDataSource.updateDataUser(
+        userData = userData
     )
 }
