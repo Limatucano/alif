@@ -23,6 +23,9 @@ class DateTimePicker @JvmOverloads constructor(
 ){
     private var dialog: Dialog
     private var hint: String? = ""
+    private var timeIsEnabled : Boolean = true
+    private var dateIsEnabled : Boolean = true
+
     private var binding: DateTimePickerViewBinding = DateTimePickerViewBinding.inflate(
         LayoutInflater.from(context),
         this,
@@ -39,11 +42,11 @@ class DateTimePicker @JvmOverloads constructor(
             field = value
             binding.editText.setText(value)
         }
-        get(){
-            return field
-        }
 
-    private var listener : ((calendar: Calendar) -> Unit)? = null
+    private var listener : ((
+        calendar: Calendar,
+        timeIsEnabled: Boolean
+    ) -> Unit)? = null
 
     private val typeArray  = context.obtainStyledAttributes(
         attrs,
@@ -61,7 +64,7 @@ class DateTimePicker @JvmOverloads constructor(
         dialog.setContentView(dialogBinding.root)
     }
 
-    fun setDateSelected(listener: (Calendar) -> Unit){
+    fun setDateSelected(listener: (Calendar, Boolean) -> Unit){
         this.listener = listener
     }
 
@@ -79,8 +82,20 @@ class DateTimePicker @JvmOverloads constructor(
 
             dialogBinding.datePicker.run {
                 val dateSelected = Calendar.getInstance()
-                dateSelected.set(year, month, dayOfMonth, hour, minute)
-                listener?.invoke(dateSelected)
+
+                if(timeIsEnabled){
+                    dateSelected.set(Calendar.MINUTE, minute)
+                    dateSelected.set(Calendar.HOUR_OF_DAY, hour)
+                }
+                if(dateIsEnabled){
+                    dateSelected.set(Calendar.YEAR, year)
+                    dateSelected.set(Calendar.MONTH, month)
+                    dateSelected.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                }
+                listener?.invoke(
+                    dateSelected,
+                    timeIsEnabled
+                )
                 dialog.dismiss()
             }
 
@@ -100,8 +115,20 @@ class DateTimePicker @JvmOverloads constructor(
         }
     }
 
-    private fun setupView(){
+    private fun setupView() {
         hint = typeArray.getString(R.styleable.DateTimePicker_datehint)
+        timeIsEnabled = typeArray.getBoolean(R.styleable.DateTimePicker_timeIsEnabled, true)
+        dateIsEnabled = typeArray.getBoolean(R.styleable.DateTimePicker_dateIsEnabled, true)
+
+        if(!timeIsEnabled){
+            dialogBinding.timerRadio.setVisible(timeIsEnabled)
+            dialogBinding.timePicker.setVisible(timeIsEnabled)
+        }
+
+        if(!dateIsEnabled){
+            dialogBinding.dateRadio.setVisible(dateIsEnabled)
+            dialogBinding.datePicker.setVisible(dateIsEnabled)
+        }
 
         binding.layout.hint = hint.toString()
 

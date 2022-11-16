@@ -102,7 +102,14 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-<!--  TODO: Abstrair custom view para receber param e definir se quer data e hora ou somente um deles  -->
+            <com.tcc.alif.view.base.DateTimePicker
+                android:id="@+id/birthDay"
+                android:layout_marginTop="@dimen/margin_default"
+                app:datehint="@string/data_de_nascimento"
+                app:dateIsEnabled="true"
+                app:timeIsEnabled="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/save"

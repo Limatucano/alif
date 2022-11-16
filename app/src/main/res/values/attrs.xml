@@ -7,5 +7,7 @@
 
     <declare-styleable name="DateTimePicker">
         <attr name="datehint" format="string"/>
+        <attr name="timeIsEnabled" format="boolean"/>
+        <attr name="dateIsEnabled" format="boolean"/>
     </declare-styleable>
 </resources>

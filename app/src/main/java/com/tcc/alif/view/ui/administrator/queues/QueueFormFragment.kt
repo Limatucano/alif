@@ -74,10 +74,10 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
     }
 
     private fun setListener() = binding.run {
-        openingTimeEt.setDateSelected{ calendar ->
+        openingTimeEt.setDateSelected{ calendar, _ ->
             openingTimeEt.text = calendar.time.toStringDate(NORMAL_DATE_WITH_HOURS_FORMAT)
         }
-        closingTimeEt.setDateSelected { calendar ->
+        closingTimeEt.setDateSelected { calendar, _ ->
             closingTimeEt.text = calendar.time.toStringDate(NORMAL_DATE_WITH_HOURS_FORMAT)
         }
         save.setOnClickListener {
