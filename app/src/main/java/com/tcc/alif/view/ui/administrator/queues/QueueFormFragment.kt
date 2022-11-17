@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import com.google.firebase.Timestamp
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
+import com.tcc.alif.data.model.CategoryResponse
 import com.tcc.alif.data.model.QueueRequest
 import com.tcc.alif.data.model.QueueResponse
 import com.tcc.alif.data.model.local.StatusQueue
@@ -18,6 +19,7 @@ import com.tcc.alif.data.util.dateFromString
 import com.tcc.alif.data.util.emptyIfNull
 import com.tcc.alif.data.util.toStringDate
 import com.tcc.alif.databinding.FragmentQueueFormBinding
+import com.tcc.alif.view.base.CustomAdapter
 import com.tcc.alif.view.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +28,8 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
 
     private val viewModel : QueuesViewModel by viewModels()
     private lateinit var queue: QueueResponse
+    private var uidCategorySelected: String? = null
+    private lateinit var adapter: CustomAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +48,11 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
         setViews()
         setListener()
         setObservers()
+        viewModel.handleIntent(
+            QueuesIntent.GetAllCategories(
+                sharedPreferences.companyId.emptyIfNull()
+            )
+        )
     }
 
     private fun setViews() = binding.run{
@@ -56,7 +65,32 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
         fillViews()
     }
 
-    //TODO: create category data (maybe to create a feat in configuration screen, then user can create all categories about them queues)
+    private fun setupCategoryAdapter(categories: List<CategoryResponse>){
+        val categoriesMapped = categories.map { Pair(
+            it.uid, it.name
+        ) }
+
+        val adapter = CustomAdapter(
+            context = requireContext(),
+            values = categoriesMapped
+        )
+
+        binding.categoryAc.setAdapter(adapter)
+
+        if(queue.idQueue.isNotEmpty()){
+            val categoryByKey = adapter.getItemByKey(queue.titleCategory)
+            categoryByKey?.second?.let {
+                binding.categoryAc.setText(it)
+            }
+        }
+        binding.categoryAc.setOnItemClickListener { _, _, position, _ ->
+            val itemSelected = adapter.getItem(position)
+            uidCategorySelected = itemSelected.first
+            binding.categoryAc.setText(itemSelected.second)
+        }
+
+    }
+
     private fun fillViews() = binding.run {
         if(queue.idQueue.isNotEmpty()){
             nameQueueEt.setText(queue.name)
@@ -93,7 +127,7 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
             status = binding.statusAc.text.toString().emptyIfNull().uppercase(),
             quantity = binding.quantityEt.text.toString().toInt(),
             description = binding.descriptionEt.text.toString().emptyIfNull(),
-            titleCategory = binding.categoryAc.text.toString().emptyIfNull(),
+            titleCategory = uidCategorySelected ?: EMPTY_STRING,
             averageTime = binding.averageTimeEt.text.toString().toInt(),
             employeeCreator = sharedPreferences.userId ?: EMPTY_STRING,
             service = listOf(),
@@ -137,6 +171,10 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
                 }
                 is QueuesState.QueueUpdated -> {
                     Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    setLoading(false)
+                }
+                is QueuesState.AllCategories -> {
+                    setupCategoryAdapter(state.categories)
                     setLoading(false)
                 }
                 else -> throw Exception(STATE_NOT_MAPPED)

@@ -57,6 +57,8 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_changepassword.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_companies.xml" value="0.22" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_company_form.xml" value="0.33" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_config_cliente.xml" value="0.18802083333333333" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_config_lojista.xml" value="0.18802083333333333" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_configuration.xml" value="0.22" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_employee.xml" value="0.19583333333333333" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_first_cliente.xml" value="0.33016304347826086" />

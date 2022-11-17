@@ -4,16 +4,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tcc.alif.data.model.QueueRequest
-import com.tcc.alif.data.model.QueueResponse
 import com.tcc.alif.data.repository.AdministratorRepository
+import com.tcc.alif.data.repository.ConfigurationRepository
 import com.tcc.alif.data.util.request
+import com.tcc.alif.view.ui.administrator.configuration.mycategories.MyCategoriesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class QueuesViewModel @Inject constructor(
-    private val repository : AdministratorRepository
+    private val repository : AdministratorRepository,
+    private val configurationRepository: ConfigurationRepository
 ) : ViewModel(){
 
     val state = MutableLiveData<QueuesState>()
@@ -32,6 +34,20 @@ class QueuesViewModel @Inject constructor(
             is QueuesIntent.UpdateQueue -> {
                 updateQueue(intent.queue)
             }
+            is QueuesIntent.GetAllCategories -> {
+                getAllCategories(intent.idCompany)
+            }
+        }
+    }
+
+    private fun getAllCategories(idCompany: String){
+        viewModelScope.launch {
+            configurationRepository.getAllCategories(idCompany).request(
+                blockToRun = this,
+                onError = { state.postValue(QueuesState.Error(it)) },
+                onLoading = { state.postValue(QueuesState.Loading(it)) },
+                onSuccess = { state.postValue(QueuesState.AllCategories(it)) }
+            )
         }
     }
 

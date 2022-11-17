@@ -48,7 +48,7 @@ data class QueueResponse(
                 closingTime = (map["closingTime"] as Timestamp),
                 quantity = map["quantity"].toString().toInt(),
                 description = map["description"].toString().emptyIfNull(),
-                titleCategory = map["category"].toString().emptyIfNull(),
+                titleCategory = map["titleCategory"].toString().emptyIfNull(),
                 averageTime = map["averageTime"].toString().toInt(),
                 employeeCreator = "",
                 service = (map["service"] as ArrayList<HashMap<String, Any>>).map { Service().toListService(it) }

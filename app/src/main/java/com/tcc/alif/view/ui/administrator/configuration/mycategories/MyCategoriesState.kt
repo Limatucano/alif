@@ -2,7 +2,6 @@ package com.tcc.alif.view.ui.administrator.configuration.mycategories
 
 import com.tcc.alif.data.model.CategoryResponse
 
-//TODO: Improve CRUD states
 sealed class MyCategoriesState{
 
     data class Error(val message: String) : MyCategoriesState()

@@ -16,4 +16,8 @@ sealed class QueuesIntent{
     data class UpdateQueue(
         val queue: QueueRequest
     ) : QueuesIntent()
+
+    data class GetAllCategories(
+        val idCompany: String
+    ) : QueuesIntent()
 }

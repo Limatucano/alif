@@ -86,6 +86,7 @@ class DateTimePicker @JvmOverloads constructor(
                 if(timeIsEnabled){
                     dateSelected.set(Calendar.MINUTE, minute)
                     dateSelected.set(Calendar.HOUR_OF_DAY, hour)
+                    dateSelected.set(Calendar.SECOND, 0)
                 }
                 if(dateIsEnabled){
                     dateSelected.set(Calendar.YEAR, year)
