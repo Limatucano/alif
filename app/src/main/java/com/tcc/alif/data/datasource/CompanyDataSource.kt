@@ -6,10 +6,14 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.tcc.alif.data.api.CepService
+import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
 import com.tcc.alif.data.model.CompanyResponse
+import com.tcc.alif.data.model.CompanyResponse.Companion.modelToMap
 import com.tcc.alif.data.model.Response
 import com.tcc.alif.data.model.SigninResponse
+import com.tcc.alif.data.util.Constants
 import com.tcc.alif.data.util.Constants.COMPANY_COLLECTION
+import com.tcc.alif.data.util.Constants.ID_COMPANY
 import com.tcc.alif.data.util.Constants.USER_COLLECTION
 import com.tcc.alif.data.util.UNKNOWN_ERROR
 import com.tcc.alif.data.util.await
@@ -75,6 +79,40 @@ class CompanyDataSource @Inject constructor(
     }.catch {
         emit(Response.error(it.message ?: UNKNOWN_ERROR))
     }.flowOn(Dispatchers.IO)
+
+    fun updateCompany(
+        company: CompanyResponse,
+        idCompany: String
+    ): Flow<Response<String>> = flow {
+        emit(Response.loading(true))
+        val document = getCompanyDocument(idCompany)
+
+        if(document != null){
+            firebaseFirestore
+                .collection(COMPANY_COLLECTION)
+                .document(document)
+                .update(company.modelToMap())
+                .await()
+        }else{
+            emit(Response.error(UNKNOWN_ERROR))
+            return@flow
+        }
+
+        emit(Response.success(Constants.COMPANY_UPDATED))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
+    private suspend fun getCompanyDocument(
+        idCompany: String
+    ) = firebaseFirestore
+        .collection(COMPANY_COLLECTION)
+        .whereEqualTo(ID_COMPANY,idCompany)
+        .get()
+        .await()
+        .documents
+        .firstOrNull()
+        ?.id
 
     private fun getUserDocument(idUser: String) = flow{
         val userRef = firebaseFirestore

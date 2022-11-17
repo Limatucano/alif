@@ -3,6 +3,7 @@ package com.tcc.alif.view.ui.companies
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -17,7 +18,6 @@ import com.tcc.alif.data.util.MaskUtils.setCnpjMask
 import com.tcc.alif.data.util.MaskUtils.setZipCodeMask
 import com.tcc.alif.data.util.ValidateUtil.generateUUID
 import com.tcc.alif.data.util.emptyIfNull
-import com.tcc.alif.data.util.validateFields
 import com.tcc.alif.databinding.FragmentCompanyFormBinding
 import com.tcc.alif.view.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +26,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCompanyFormBinding::inflate) {
 
     private val viewModel : CompaniesViewModel by viewModels()
+    private var company: CompanyResponse? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val bundle = arguments ?: return
+        val args = CompanyFormFragmentArgs.fromBundle(bundle)
+        company = args.company
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,10 +45,29 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
         setViews()
         setListener()
         setObservers()
+        if(company != null){
+            setViewsToEdit()
+        }else{
+            getAddress()
+        }
+    }
+
+    private fun setViewsToEdit() = binding.run {
+        categoryAc.setText(company?.category.toString().emptyIfNull())
+        tradeNameEt.setText(company?.tradeName.toString().emptyIfNull())
+        ownerNameEt.setText(company?.ownerName.toString().emptyIfNull())
+        telephoneEt.setText(company?.telephone.toString().emptyIfNull())
+        streetEt.setText(company?.street.toString().emptyIfNull())
+        districtEt.setText(company?.district.toString().emptyIfNull())
+        numberEt.setText(company?.numberHouse.toString().emptyIfNull())
+        cityEt.setText(company?.city.toString().emptyIfNull())
+        zipEt.setText(company?.zipCode.toString().emptyIfNull())
+        ufAc.setText(company?.state.toString().emptyIfNull())
+        addressContinuedEt.setText(company?.addressContinued.toString().emptyIfNull())
+        cnpjEt.setText(company?.cnpj.toString().emptyIfNull())
     }
 
     private fun setViews() = binding.apply {
-
         telephoneEt.addTextChangedListener(telephoneEt.setCellphoneMask())
         cnpjEt.addTextChangedListener(cnpjEt.setCnpjMask())
         zipEt.addTextChangedListener(zipEt.setZipCodeMask())
@@ -65,16 +92,27 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
 
     private fun setListener() = binding.apply{
         saveCompany.setOnClickListener {
-            if(getRequiredFields().validateFields()){
+            if(company == null){
                 viewModel.handleIntent(
                     intent = CompanyIntent.SaveNewCompany(
                         company = generateModel(),
                         idUser = sharedPreferences.userId ?: EMPTY_STRING
                     )
                 )
+            } else {
+                viewModel.handleIntent(
+                    intent = CompanyIntent.UpdateCompany(
+                        company = generateModel(),
+                        idCompany = sharedPreferences.companyId ?: EMPTY_STRING
+                    )
+                )
             }
         }
 
+
+    }
+
+    private fun getAddress() = binding.run{
         zipEt.addTextChangedListener {
             val zipCode = it.toString()
             if(zipCode.isNotEmpty() && zipCode.length > MIN_ZIP_TO_REQUEST){
@@ -102,7 +140,10 @@ class CompanyFormFragment : BaseFragment<FragmentCompanyFormBinding>(FragmentCom
                     updateLoading(false)
                     updateAddress(state.addressResponse)
                 }
-                else -> throw IllegalArgumentException("State not mapped")
+                is CompanyState.CompanyUpdated -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    updateLoading(false)
+                }
             }
         }
     }

@@ -153,12 +153,25 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainAdministratorFragment_to_companyFormFragment"
+            app:destination="@id/companyFormFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/companyFormFragment"
         android:name="com.tcc.alif.view.ui.companies.CompanyFormFragment"
         android:label="fragment_company_form"
-        tools:layout="@layout/fragment_company_form" />
+        tools:layout="@layout/fragment_company_form" >
+        <argument
+            android:name="company"
+            app:argType="com.tcc.alif.data.model.CompanyResponse"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/queueFragment"
         android:name="com.tcc.alif.view.ui.administrator.queue.QueueFragment"
@@ -179,11 +192,7 @@
     <fragment
         android:id="@+id/qrCodeFragment"
         android:name="com.tcc.alif.view.ui.administrator.configuration.qrcode.QrCodeFragment"
-        android:label="QrCodeFragment" >
-        <argument
-            android:name="company"
-            app:argType="com.tcc.alif.data.model.CompanyResponse" />
-    </fragment>
+        android:label="QrCodeFragment" />
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.tcc.alif.view.ui.administrator.configuration.changepassword.ChangePasswordFragment"

@@ -21,9 +21,7 @@ import com.tcc.alif.view.ui.administrator.MainAdministratorFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class QueuesFragment(
-    private val company : CompanyResponse
-) : BaseFragment<FragmentQueuesBinding>(FragmentQueuesBinding::inflate) {
+class QueuesFragment : BaseFragment<FragmentQueuesBinding>(FragmentQueuesBinding::inflate) {
 
     private val viewModel : QueuesViewModel by viewModels()
     private lateinit var adapter: QueuesListAdapter
@@ -39,7 +37,7 @@ class QueuesFragment(
         )
         viewModel.handleIntent(
             intent = QueuesIntent.GetQueuesBy(
-                idCompany = company.idCompany.toString()
+                idCompany = sharedPreferences.companyId.toString()
             )
         )
     }
@@ -57,7 +55,7 @@ class QueuesFragment(
         addQueue.setOnClickListener {
             val direction = MainAdministratorFragmentDirections.actionMainAdministratorFragmentToQueueFormFragment2(
                 QueueResponse(
-                    idCompany = company.idCompany ?: EMPTY_STRING
+                    idCompany = sharedPreferences.companyId ?: EMPTY_STRING
                 )
             )
             findNavController().navigate(direction)
@@ -67,7 +65,7 @@ class QueuesFragment(
             onTextChanged = { text ->
                 viewModel.handleIntent(
                     intent = QueuesIntent.GetQueuesBy(
-                        idCompany = company.idCompany.toString(),
+                        idCompany = sharedPreferences.companyId.toString(),
                         filter = text
                     )
                 )
@@ -75,7 +73,7 @@ class QueuesFragment(
             onSubmitClicked = { text ->
                 viewModel.handleIntent(
                     intent = QueuesIntent.GetQueuesBy(
-                        idCompany = company.idCompany.toString(),
+                        idCompany = sharedPreferences.companyId.toString(),
                         filter = text
                     )
                 )

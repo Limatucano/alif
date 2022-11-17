@@ -42,4 +42,22 @@ data class CompanyResponse(
             addressContinued = map["addressContinued"].toString().emptyIfNull(),
             cnpj = map["cnpj"].toString().emptyIfNull()
         )
+
+    companion object{
+        fun CompanyResponse.modelToMap() =
+            mapOf(
+                "category" to category,
+                "tradeName" to tradeName,
+                "ownerName" to ownerName,
+                "telephone" to telephone,
+                "street" to street,
+                "district" to district,
+                "numberHouse" to numberHouse,
+                "city" to city,
+                "zipCode" to zipCode,
+                "state" to state,
+                "addressContinued" to addressContinued,
+                "cnpj" to cnpj
+            )
+    }
 }

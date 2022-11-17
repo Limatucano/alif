@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.tcc.alif.R
-import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.databinding.FragmentQrcodeBinding
 import com.tcc.alif.view.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,16 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class QrCodeFragment : BaseFragment<FragmentQrcodeBinding>(FragmentQrcodeBinding::inflate) {
 
-    private lateinit var company: CompanyResponse
     private val viewModel : QrCodeViewModel by viewModels()
     private var qrCodeImage : Bitmap? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val bundle = arguments ?: return
-        val args = QrCodeFragmentArgs.fromBundle(bundle)
-        company = args.company
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,7 +24,7 @@ class QrCodeFragment : BaseFragment<FragmentQrcodeBinding>(FragmentQrcodeBinding
         )
         setObserver()
         setListener()
-        company.idCompany?.let { idCompany ->
+        sharedPreferences.companyId?.let { idCompany ->
             viewModel.handleIntent(QrCodeIntent.GenerateQrCode(
                 idCompany = idCompany
             ))

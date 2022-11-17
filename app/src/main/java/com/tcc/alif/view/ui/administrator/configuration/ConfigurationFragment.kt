@@ -15,9 +15,7 @@ import com.tcc.alif.view.ui.administrator.MainAdministratorFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ConfigurationFragment(
-    private val company : CompanyResponse
-) : BaseFragment<FragmentConfigurationBinding>(FragmentConfigurationBinding::inflate) {
+class ConfigurationFragment : BaseFragment<FragmentConfigurationBinding>(FragmentConfigurationBinding::inflate) {
 
     private val viewModel : ConfigurationViewModel by viewModels()
 
@@ -49,7 +47,7 @@ class ConfigurationFragment(
 
     private fun setListener() = binding.run {
         qrCode.setOnClickListener {
-            val direction = MainAdministratorFragmentDirections.toQrCodePage(company)
+            val direction = MainAdministratorFragmentDirections.toQrCodePage()
             requireView().findNavController().navigate(direction)
         }
     }
@@ -96,7 +94,27 @@ class ConfigurationFragment(
     }
 
     private fun openCompanyProfile(){
-        //TODO: Implement navigation to company profile screen
+        requireView()
+            .findNavController()
+            .navigate(
+                MainAdministratorFragmentDirections.actionMainAdministratorFragmentToCompanyFormFragment(
+                    company = CompanyResponse(
+                        idCompany = sharedPreferences.companyId,
+                        category = sharedPreferences.companyCategory,
+                        tradeName = sharedPreferences.companyName,
+                        ownerName = sharedPreferences.companyOwner,
+                        telephone = sharedPreferences.companyTelephone,
+                        street = sharedPreferences.companyStreet,
+                        district = sharedPreferences.companyDistrict,
+                        numberHouse = sharedPreferences.companyNumber,
+                        city = sharedPreferences.companyCity,
+                        zipCode = sharedPreferences.companyZipCode,
+                        state = sharedPreferences.companyState,
+                        addressContinued = sharedPreferences.companyAddressContinued,
+                        cnpj = sharedPreferences.companyDocument
+                    )
+                )
+            )
     }
 
     private fun openProfile(){

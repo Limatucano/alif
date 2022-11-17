@@ -8,6 +8,7 @@ import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.data.model.Response
 import com.tcc.alif.data.repository.CompanyRepository
 import com.tcc.alif.data.util.request
+import com.tcc.alif.view.ui.administrator.configuration.mycategories.MyCategoriesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,6 +28,10 @@ class CompaniesViewModel @Inject constructor(
                 idUser = intent.idUser
             )
             is CompanyIntent.GetAddress -> getAddress(intent.cep)
+            is CompanyIntent.UpdateCompany -> updateCompany(
+                company = intent.company,
+                idCompany = intent.idCompany
+            )
         }
     }
 
@@ -54,6 +59,23 @@ class CompaniesViewModel @Inject constructor(
                     is Response.Success -> state.postValue(CompanyState.CompanySaved)
                 }
             }
+        }
+    }
+
+    private fun updateCompany(
+        company: CompanyResponse,
+        idCompany: String
+    ){
+        viewModelScope.launch {
+            repository.updateCompany(
+                company = company,
+                idCompany = idCompany
+            ).request(
+                blockToRun = this,
+                onError = { state.postValue(CompanyState.Error(it)) },
+                onLoading = { state.postValue(CompanyState.Loading(it)) },
+                onSuccess = { state.postValue(CompanyState.CompanyUpdated(it)) }
+            )
         }
     }
 

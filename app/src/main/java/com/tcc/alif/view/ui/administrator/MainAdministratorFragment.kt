@@ -27,8 +27,6 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
         super.onViewCreated(view, savedInstanceState)
 
         //TODO : Bug - When i come back from forms screen to queue screen, the bottomNavigation can't show right screen (think more about to use a side menu rather than bottom navigation)
-        //TODO : refactor names and include new fragments
-        //TODO : Save company in shared preferences and to remove constructor params
         val homeFragment = HomeFragment(company)
         val funcionariosLojistaFragment = HomeFragment(company)
 
@@ -38,17 +36,28 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.funcionarios_func->setCurrentFragment(funcionariosLojistaFragment)
-                R.id.filas_func->setCurrentFragment(QueuesFragment(company))
-                R.id.config_func->setCurrentFragment(ConfigurationFragment(company))
+                R.id.filas_func->setCurrentFragment(QueuesFragment())
+                R.id.config_func->setCurrentFragment(ConfigurationFragment())
                 R.id.home_func->setCurrentFragment(homeFragment)
             }
             true
         }
     }
 
-    private fun setupSharedPreferences(company: CompanyResponse){
-        sharedPreferences.companyId = company.idCompany
-        sharedPreferences.companyName = company.tradeName
+    private fun setupSharedPreferences(company: CompanyResponse) = sharedPreferences.run{
+        companyId = company.idCompany
+        companyName = company.tradeName
+        companyCategory = company.category
+        companyDocument = company.cnpj
+        companyOwner = company.ownerName
+        companyState = company.state
+        companyZipCode = company.zipCode
+        companyTelephone = company.telephone
+        companyStreet = company.street
+        companyDistrict = company.district
+        companyNumber = company.numberHouse
+        companyCity = company.city
+        companyAddressContinued = company.addressContinued
     }
 
     private fun setCurrentFragment(fragment: Fragment) =
