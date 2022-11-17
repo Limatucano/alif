@@ -14,10 +14,12 @@ class AdministratorRepository @Inject constructor(
     fun updateCallStatus(
         status: CallStatus,
         idQueue: String,
+        idEmployee: String,
         idUser: String
     ) = administratorDataSource.updateCallStatus(
         status = status,
         idQueue = idQueue,
+        idEmployee = idEmployee,
         idUser = idUser
     )
 

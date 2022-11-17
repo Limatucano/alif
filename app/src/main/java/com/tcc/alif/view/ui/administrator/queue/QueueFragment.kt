@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
+import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
 import com.tcc.alif.data.model.Call
 import com.tcc.alif.data.model.CallStatus
 import com.tcc.alif.data.model.QueueResponse
@@ -151,6 +152,7 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
             QueueIntent.UpdateCallStatus(
                 status = status,
                 idUser = idUser,
+                idEmployee = sharedPreferences.userId ?: EMPTY_STRING,
                 idQueue = idQueue
             )
         )

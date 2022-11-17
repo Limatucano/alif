@@ -8,116 +8,121 @@
     android:background="@color/white"
     android:id="@+id/queueSwipe">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/cardMain"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/pink"
-            android:paddingHorizontal="@dimen/margin_default"
-            android:paddingBottom="@dimen/margin_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/titleTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/TitleLight"
-                android:layout_marginTop="@dimen/margin_default"
-                tools:text="Teste"/>
-
-            <TextView
-                android:id="@+id/descricaoTv"
-                style="@style/InternalScreenDescription.Description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleTv"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Essa fila é destinada a pessoas que queiram fazer serviços simples." />
-
-            <TextView
-                android:id="@+id/statusTv"
-                style="@style/InternalScreenDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="@string/queue_status" />
-
-            <TextView
-                android:id="@+id/openTv"
-                style="@style/InternalScreenDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/statusTv"
-                app:layout_constraintTop_toBottomOf="@+id/statusTv"
-                tools:text="@string/queue_opened" />
-
-            <TextView
-                android:id="@+id/closeTv"
-                style="@style/InternalScreenDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/openTv"
-                app:layout_constraintTop_toBottomOf="@+id/openTv"
-                tools:text="@string/queue_closed" />
-
-            <TextView
-                android:id="@+id/quantityTotalTv"
-                style="@style/InternalScreenDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/openTv"
-                app:layout_constraintTop_toBottomOf="@+id/openTv"
-                tools:text="@string/quantity_total" />
-
-        </LinearLayout>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/availableQuantityCard"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_default"
-            app:cardBackgroundColor="@color/lowGray"
-            app:cardElevation="@dimen/card_elevation_default"
-            app:layout_constraintBottom_toBottomOf="@+id/cardMain"
-            app:layout_constraintTop_toBottomOf="@+id/cardMain"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
+                android:id="@+id/cardMain"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/pink"
+                android:paddingHorizontal="@dimen/margin_default"
+                android:paddingBottom="@dimen/margin_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/availableQuantityTv"
-                    style="@style/InternalScreenDescription.Dark"
+                    android:id="@+id/titleTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_default"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    style="@style/TitleLight"
+                    android:layout_marginTop="@dimen/margin_default"
+                    tools:text="Teste"/>
+
+                <TextView
+                    android:id="@+id/descricaoTv"
+                    style="@style/InternalScreenDescription.Description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/queue_available_quantity" />
+                    app:layout_constraintTop_toBottomOf="@+id/titleTv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="Essa fila é destinada a pessoas que queiram fazer serviços simples." />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/statusTv"
+                    style="@style/InternalScreenDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/queue_status" />
 
-        </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/openTv"
+                    style="@style/InternalScreenDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/statusTv"
+                    app:layout_constraintTop_toBottomOf="@+id/statusTv"
+                    tools:text="@string/queue_opened" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCalls"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="@dimen/margin_default"
-            app:layout_constraintTop_toBottomOf="@+id/availableQuantityCard" />
+                <TextView
+                    android:id="@+id/closeTv"
+                    style="@style/InternalScreenDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/openTv"
+                    app:layout_constraintTop_toBottomOf="@+id/openTv"
+                    tools:text="@string/queue_closed" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/quantityTotalTv"
+                    style="@style/InternalScreenDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/openTv"
+                    app:layout_constraintTop_toBottomOf="@+id/openTv"
+                    tools:text="@string/quantity_total" />
+
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/availableQuantityCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_default"
+                app:cardBackgroundColor="@color/lowGray"
+                app:cardElevation="@dimen/card_elevation_default"
+                app:layout_constraintBottom_toBottomOf="@+id/cardMain"
+                app:layout_constraintTop_toBottomOf="@+id/cardMain"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/availableQuantityTv"
+                        style="@style/InternalScreenDescription.Dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_default"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/queue_available_quantity" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCalls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="@dimen/margin_default"
+                app:layout_constraintTop_toBottomOf="@+id/availableQuantityCard" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

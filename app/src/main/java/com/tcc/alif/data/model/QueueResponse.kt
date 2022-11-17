@@ -67,6 +67,7 @@ data class Service(
     var enrollmentTime: Timestamp = Timestamp(0,0),
     var status: String = "",
     var userId: String = "",
+    var employeeResponsible: String = "",
     var name: String = ""
 ) : Parcelable {
 

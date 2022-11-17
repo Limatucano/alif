@@ -24,6 +24,7 @@ class QueueViewModel @Inject constructor(
             is QueueIntent.UpdateCallStatus -> updateCallStatus(
                 status = intent.status,
                 idUser = intent.idUser,
+                idEmployee = intent.idEmployee,
                 idQueue = intent.idQueue
             )
         }
@@ -32,12 +33,14 @@ class QueueViewModel @Inject constructor(
     private fun updateCallStatus(
         status: CallStatus,
         idUser: String,
+        idEmployee: String,
         idQueue: String
     ){
         viewModelScope.launch {
             repository.updateCallStatus(
                 status = status,
                 idUser = idUser,
+                idEmployee = idEmployee,
                 idQueue = idQueue
             ).request(
                 blockToRun = this,

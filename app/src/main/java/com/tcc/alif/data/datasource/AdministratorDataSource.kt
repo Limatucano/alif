@@ -65,6 +65,7 @@ class AdministratorDataSource @Inject constructor(
     fun updateCallStatus(
         status: CallStatus,
         idQueue: String,
+        idEmployee: String,
         idUser: String
     ): Flow<Response<String>> = flow{
         emit(Response.loading(true))
@@ -80,6 +81,7 @@ class AdministratorDataSource @Inject constructor(
                     Service(
                         enrollmentTime = service.enrollmentTime,
                         status = if(service.userId == idUser) status.value else service.status,
+                        employeeResponsible = if(service.userId == idUser) idEmployee else service.employeeResponsible,
                         userId = service.userId
                     )
                 }

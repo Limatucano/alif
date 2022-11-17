@@ -7,6 +7,7 @@ sealed class QueueIntent{
     data class UpdateCallStatus(
         val status: CallStatus,
         val idUser: String,
+        val idEmployee: String,
         val idQueue: String
     ) : QueueIntent()
 }
