@@ -50,7 +50,7 @@ data class QueueResponse(
                 description = map["description"].toString().emptyIfNull(),
                 titleCategory = map["titleCategory"].toString().emptyIfNull(),
                 averageTime = map["averageTime"].toString().toInt(),
-                employeeCreator = "",
+                employeeCreator = map["employeeCreator"].toString().emptyIfNull(),
                 service = (map["service"] as ArrayList<HashMap<String, Any>>).map { Service().toListService(it) }
             )
         }

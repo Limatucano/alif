@@ -12,7 +12,7 @@ object Constants {
     const val USER_COLLECTION = "user"
     const val QUEUE_COLLECTION = "queue"
     const val CATEGORY_COLLECTION = "category"
-
+    const val EMPLOYEE_COLLECTION = "employee"
 
     ////// columns
     const val ID_COMPANY = "idCompany"

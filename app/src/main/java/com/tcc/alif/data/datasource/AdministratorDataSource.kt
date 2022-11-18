@@ -236,7 +236,7 @@ class AdministratorDataSource @Inject constructor(
         .get()
         .await()
 
-    private suspend fun getUserData(userId: String): SigninResponse {
+    suspend fun getUserData(userId: String): SigninResponse {
         val user = firebaseFirestore
             .collection(Constants.USER_COLLECTION)
             .whereEqualTo(UID, userId)

@@ -154,6 +154,9 @@
     <string name="status_in_progress">Atendimento em Andamento</string>
     <string name="status_in_hold">Atendimento em Espera</string>
 
+    <string name="employee_screen_search">Pesquise seus funcionários aqui</string>
+    <string name="employee_screen_title">Meus Funcionários</string>
+
     <!--  states  -->
     <string name="RJ">Rio de Janeiro</string>
     <string name="MG">Minas Gerais</string>

@@ -8,6 +8,7 @@ import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.databinding.FragmentMainAdministratorBinding
 import com.tcc.alif.view.ui.BaseFragment
 import com.tcc.alif.view.ui.administrator.configuration.ConfigurationFragment
+import com.tcc.alif.view.ui.administrator.employees.EmployeeFragment
 import com.tcc.alif.view.ui.administrator.home.HomeFragment
 import com.tcc.alif.view.ui.administrator.queues.QueuesFragment
 
@@ -28,14 +29,13 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
 
         //TODO : Bug - When i come back from forms screen to queue screen, the bottomNavigation can't show right screen (think more about to use a side menu rather than bottom navigation)
         val homeFragment = HomeFragment(company)
-        val funcionariosLojistaFragment = HomeFragment(company)
 
         setupSharedPreferences(company)
         setCurrentFragment(homeFragment)
         binding.bottomNavigationView.menu.getItem(HOME_INDEX).isChecked = true
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.funcionarios_func->setCurrentFragment(funcionariosLojistaFragment)
+                R.id.funcionarios_func->setCurrentFragment(EmployeeFragment())
                 R.id.filas_func->setCurrentFragment(QueuesFragment())
                 R.id.config_func->setCurrentFragment(ConfigurationFragment())
                 R.id.home_func->setCurrentFragment(homeFragment)

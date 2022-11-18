@@ -5,10 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tcc.alif.data.api.AlifService
 import com.tcc.alif.data.api.CepService
-import com.tcc.alif.data.datasource.AdministratorDataSource
-import com.tcc.alif.data.datasource.CompanyDataSource
-import com.tcc.alif.data.datasource.ConfigurationDataSource
-import com.tcc.alif.data.datasource.SignInDataSource
+import com.tcc.alif.data.datasource.*
 import com.tcc.alif.data.repository.*
 import dagger.Module
 import dagger.Provides
@@ -70,6 +67,22 @@ class RepositoryModule {
         administratorDataSource: AdministratorDataSource
     ) : AdministratorRepository = AdministratorRepository(
         administratorDataSource = administratorDataSource
+    )
+
+    @Provides
+    fun provideEmployeeDataSource(
+        firebaseFirestore: FirebaseFirestore,
+        administratorDataSource: AdministratorDataSource
+    ) : EmployeeDataSource = EmployeeDataSource(
+        firebaseFirestore = firebaseFirestore,
+        administratorDataSource = administratorDataSource
+    )
+
+    @Provides
+    fun provideEmployeeRepository(
+        employeeDataSource: EmployeeDataSource
+    ) : EmployeeRepository = EmployeeRepository(
+        employeeDataSource = employeeDataSource
     )
 
     @Provides
