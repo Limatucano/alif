@@ -18,4 +18,10 @@ class EmployeeRepository @Inject constructor(
         idCompany = idCompany,
         idUser = idUser
     )
+
+    fun searchEmployee(
+        cpf: String
+    ) = employeeDataSource.searchEmployee(
+        cpf = cpf
+    )
 }

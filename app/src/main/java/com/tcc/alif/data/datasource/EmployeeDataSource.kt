@@ -5,10 +5,12 @@ import com.tcc.alif.data.model.EmployeeResponse
 import com.tcc.alif.data.model.EmployeeResponse.Companion.ACCEPTED_STATUS
 import com.tcc.alif.data.model.Response
 import com.tcc.alif.data.model.SigninResponse
+import com.tcc.alif.data.util.Constants.CPF
 import com.tcc.alif.data.util.Constants.EMPLOYEE_COLLECTION
 import com.tcc.alif.data.util.Constants.EMPLOYEE_DELETED
 import com.tcc.alif.data.util.Constants.ID_COMPANY
 import com.tcc.alif.data.util.Constants.ID_USER
+import com.tcc.alif.data.util.Constants.USER_COLLECTION
 import com.tcc.alif.data.util.UNKNOWN_ERROR
 import com.tcc.alif.data.util.await
 import kotlinx.coroutines.Dispatchers
@@ -63,6 +65,32 @@ class EmployeeDataSource @Inject constructor(
 
             emit(Response.success(EMPLOYEE_DELETED))
         }
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
+    fun searchEmployee(
+        cpf: String
+    ) : Flow<Response<SigninResponse>> = flow {
+        emit(Response.loading(true))
+
+        val userTask = firebaseFirestore
+            .collection(USER_COLLECTION)
+            .whereEqualTo(CPF, cpf)
+            .get()
+            .await()
+            .documents
+            .firstOrNull()
+            ?.data
+
+        if(userTask == null){
+            emit(Response.error(UNKNOWN_ERROR))
+        }else{
+            val user = SigninResponse().toSignResponse(userTask)
+
+            emit(Response.success(user))
+        }
+
     }.catch {
         emit(Response.error(it.message ?: UNKNOWN_ERROR))
     }.flowOn(Dispatchers.IO)

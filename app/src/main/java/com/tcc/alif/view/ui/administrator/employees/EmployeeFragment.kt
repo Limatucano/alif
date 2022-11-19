@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
@@ -12,6 +13,7 @@ import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentEmployeeBinding
 import com.tcc.alif.view.base.TwoOptionsBottomDialog
 import com.tcc.alif.view.ui.BaseFragment
+import com.tcc.alif.view.ui.administrator.MainAdministratorFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -103,5 +105,8 @@ class EmployeeFragment : BaseFragment<FragmentEmployeeBinding>(FragmentEmployeeB
     }
 
     private fun setListener() = binding.run {
+        addEmployee.setOnClickListener {
+            requireView().findNavController().navigate(MainAdministratorFragmentDirections.actionMainAdministratorFragmentToNewEmployeeFragment())
+        }
     }
 }

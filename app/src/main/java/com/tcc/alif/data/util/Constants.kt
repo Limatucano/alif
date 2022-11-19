@@ -19,6 +19,7 @@ object Constants {
     const val ID_QUEUE = "idQueue"
     const val ID_USER = "idUser"
     const val UID = "uid"
+    const val CPF = "cpf"
 
     ////// message requests
     const val USER_UNAUTHORIZED = "Permissão Negada"

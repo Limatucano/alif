@@ -157,6 +157,8 @@
     <string name="employee_screen_search">Pesquise seus funcionários aqui</string>
     <string name="employee_screen_title">Meus Funcionários</string>
     <string name="employee_screen_dialog_message">Tem certeza que deseja excluir esse funcionário? Essa ação é irreversível.</string>
+    <string name="employee_screen_new_hint">Pesquise um novo funcionário pelo cpf</string>
+    <string name="employee_screen_new_title">Novo Funcionário</string>
 
     <string name="warning">Atenção!</string>
     <string name="yes">Sim</string>

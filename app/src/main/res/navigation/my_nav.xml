@@ -160,6 +160,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainAdministratorFragment_to_newEmployeeFragment"
+            app:destination="@id/newEmployeeFragment" />
     </fragment>
     <fragment
         android:id="@+id/companyFormFragment"
@@ -219,4 +222,8 @@
         android:id="@+id/userProfileFragment"
         android:name="com.tcc.alif.view.ui.profile.UserProfileFragment"
         android:label="UserProfileFragment" />
+    <fragment
+        android:id="@+id/newEmployeeFragment"
+        android:name="com.tcc.alif.view.ui.administrator.newEmployee.NewEmployeeFragment"
+        android:label="NewEmployeeFragment" />
 </navigation>

@@ -4,11 +4,11 @@ import android.widget.EditText
 
 object MaskUtils {
 
-    private const val CELLPHONE_MASK = "(##) #####-####"
-    private const val CPF_MASK = "###.###.###-##"
-    private const val CNPJ_MASK = "##.###.###/####-##"
-    private const val DATE_MASK = "##/##/####"
-    private const val ZIPCODE_MASK = "#####-###"
+    const val CELLPHONE_MASK = "(##) #####-####"
+    const val CPF_MASK = "###.###.###-##"
+    const val CNPJ_MASK = "##.###.###/####-##"
+    const val DATE_MASK = "##/##/####"
+    const val ZIPCODE_MASK = "#####-###"
 
     fun EditText.setZipCodeMask() = Mask.mask(
         mask = ZIPCODE_MASK,
