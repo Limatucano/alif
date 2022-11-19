@@ -8,6 +8,7 @@ import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.util.Constants.CPF
 import com.tcc.alif.data.util.Constants.EMPLOYEE_COLLECTION
 import com.tcc.alif.data.util.Constants.EMPLOYEE_DELETED
+import com.tcc.alif.data.util.Constants.EMPLOYEE_SUCCESSFULLY_INSERTED
 import com.tcc.alif.data.util.Constants.ID_COMPANY
 import com.tcc.alif.data.util.Constants.ID_USER
 import com.tcc.alif.data.util.Constants.USER_COLLECTION
@@ -15,6 +16,7 @@ import com.tcc.alif.data.util.UNKNOWN_ERROR
 import com.tcc.alif.data.util.await
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import java.lang.Exception
 import javax.inject.Inject
 
 class EmployeeDataSource @Inject constructor(
@@ -89,6 +91,25 @@ class EmployeeDataSource @Inject constructor(
             val user = SigninResponse().toSignResponse(userTask)
 
             emit(Response.success(user))
+        }
+
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
+    fun addNewEmployee(
+        employee: EmployeeResponse
+    ): Flow<Response<String>> = flow {
+        emit(Response.loading(true))
+
+        try {
+            firebaseFirestore
+                .collection(EMPLOYEE_COLLECTION)
+                .add(employee)
+                .await()
+            emit(Response.success(EMPLOYEE_SUCCESSFULLY_INSERTED))
+        }catch (e: Exception){
+            emit(Response.error(UNKNOWN_ERROR))
         }
 
     }.catch {

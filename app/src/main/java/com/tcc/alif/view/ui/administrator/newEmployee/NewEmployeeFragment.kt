@@ -5,8 +5,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.tcc.alif.R
+import com.tcc.alif.data.model.EmployeeResponse
+import com.tcc.alif.data.model.EmployeeResponse.Companion.WAITING_STATUS
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.util.MaskUtils.CPF_MASK
+import com.tcc.alif.data.util.emptyIfNull
 import com.tcc.alif.data.util.setVisible
 import com.tcc.alif.databinding.FragmentNewEmployeeBinding
 import com.tcc.alif.view.ui.BaseFragment
@@ -53,6 +56,10 @@ class NewEmployeeFragment : BaseFragment<FragmentNewEmployeeBinding>(FragmentNew
                     )
                     updateLoading(false)
                 }
+                is NewEmployeeState.EmployeeInserted -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    updateLoading(false)
+                }
             }
         }
     }
@@ -66,6 +73,16 @@ class NewEmployeeFragment : BaseFragment<FragmentNewEmployeeBinding>(FragmentNew
         if(user != null){
             employeeName.text = user.name
         }
+
+        employeeContainer.setOnClickListener {
+            viewModel.handleIntent(NewEmployeeIntent.InsertEmployee(
+                employee = EmployeeResponse(
+                    idCompany = sharedPreferences.companyId.toString().emptyIfNull(),
+                    idUser = user?.uid.toString().emptyIfNull(),
+                    status = WAITING_STATUS
+                )
+            ))
+        }
     }
 
     private fun updateLoading(loading: Boolean) = binding.run{
@@ -73,11 +90,6 @@ class NewEmployeeFragment : BaseFragment<FragmentNewEmployeeBinding>(FragmentNew
     }
 
     private fun setListener() = binding.run {
-
-        arrowButton.setOnClickListener {
-
-        }
-
         searchField.setOnQueryTextListener(
             onTextChanged = {
                 viewModel.handleIntent(NewEmployeeIntent.SearchEmployee(it))

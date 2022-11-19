@@ -1,6 +1,7 @@
 package com.tcc.alif.data.repository
 
 import com.tcc.alif.data.datasource.EmployeeDataSource
+import com.tcc.alif.data.model.EmployeeResponse
 import javax.inject.Inject
 
 class EmployeeRepository @Inject constructor(
@@ -23,5 +24,11 @@ class EmployeeRepository @Inject constructor(
         cpf: String
     ) = employeeDataSource.searchEmployee(
         cpf = cpf
+    )
+
+    fun addNewEmployee(
+        employee: EmployeeResponse
+    ) = employeeDataSource.addNewEmployee(
+        employee = employee
     )
 }
