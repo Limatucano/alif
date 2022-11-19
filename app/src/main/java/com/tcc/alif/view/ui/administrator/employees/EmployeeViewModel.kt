@@ -19,6 +19,27 @@ class EmployeeViewModel @Inject constructor(
     fun handleIntent(intent: EmployeeIntent){
         when(intent){
             is EmployeeIntent.GetMyEmployees -> getMyEmployees(intent.idCompany)
+            is EmployeeIntent.DeleteEmployee -> deleteEmployee(
+                idCompany = intent.idCompany,
+                idUser = intent.idUser
+            )
+        }
+    }
+
+    private fun deleteEmployee(
+        idCompany: String,
+        idUser: String
+    ){
+        viewModelScope.launch {
+            employeeRepository.deleteEmployee(
+                idUser = idUser,
+                idCompany = idCompany
+            ).request(
+                blockToRun = this,
+                onError = { state.postValue(EmployeeState.Error(it)) },
+                onLoading = { state.postValue(EmployeeState.Loading(it)) },
+                onSuccess = { state.postValue(EmployeeState.EmployeeDeleted(it)) }
+            )
         }
     }
 

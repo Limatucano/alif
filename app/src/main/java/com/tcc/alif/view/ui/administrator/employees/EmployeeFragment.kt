@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
+import com.tcc.alif.data.model.SigninResponse
+import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentEmployeeBinding
+import com.tcc.alif.view.base.TwoOptionsBottomDialog
 import com.tcc.alif.view.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,6 +19,13 @@ class EmployeeFragment : BaseFragment<FragmentEmployeeBinding>(FragmentEmployeeB
 
     private val viewModel: EmployeeViewModel by viewModels()
 
+    private val employeesAdapter by lazy {
+        EmployeeAdapter(
+            context = requireContext(),
+            action = { showTwoOptionDialog(it) }
+        )
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -22,10 +33,38 @@ class EmployeeFragment : BaseFragment<FragmentEmployeeBinding>(FragmentEmployeeB
             title = getString(R.string.employee_screen_title)
         )
         setListener()
+        setViews()
         setObserver()
+        getAllEmployees()
+    }
+
+    private fun setViews() = binding.run{
+        rvMyEmployees.adapter = employeesAdapter
+        rvMyEmployees.setLinearLayout(
+            context = requireContext(),
+            orientation = LinearLayoutManager.VERTICAL,
+            reverseLayout = false,
+            withItemDecoration = true
+        )
+    }
+
+    private fun showTwoOptionDialog(employee: SigninResponse){
+        TwoOptionsBottomDialog(
+            context = requireContext(),
+            message = getString(R.string.employee_screen_dialog_message),
+            saveText = R.string.yes,
+            cancelText = R.string.no,
+            saveAction = {
+                deleteEmployee(employee)
+            }
+        ).show()
+    }
+
+    private fun deleteEmployee(employee: SigninResponse){
         viewModel.handleIntent(
-            intent = EmployeeIntent.GetMyEmployees(
-                idCompany = sharedPreferences.companyId ?: EMPTY_STRING
+            intent = EmployeeIntent.DeleteEmployee(
+                idCompany = sharedPreferences.companyId ?: EMPTY_STRING,
+                idUser = employee.uid
             )
         )
     }
@@ -36,14 +75,27 @@ class EmployeeFragment : BaseFragment<FragmentEmployeeBinding>(FragmentEmployeeB
                 is EmployeeState.Loading -> updateLoading(state.loading)
                 is EmployeeState.Employees -> {
                     updateLoading(false)
-                    //TODO: create adapter and show employees
+                    employeesAdapter.employees = state.employees
                 }
                 is EmployeeState.Error -> {
                     Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
                     updateLoading(false)
                 }
+                is EmployeeState.EmployeeDeleted -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    updateLoading(false)
+                    getAllEmployees()
+                }
             }
         }
+    }
+
+    private fun getAllEmployees(){
+        viewModel.handleIntent(
+            intent = EmployeeIntent.GetMyEmployees(
+                idCompany = sharedPreferences.companyId ?: EMPTY_STRING
+            )
+        )
     }
 
     private fun updateLoading(loading: Boolean) = binding.run {

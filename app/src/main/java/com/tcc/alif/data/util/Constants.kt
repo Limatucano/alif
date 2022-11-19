@@ -17,6 +17,7 @@ object Constants {
     ////// columns
     const val ID_COMPANY = "idCompany"
     const val ID_QUEUE = "idQueue"
+    const val ID_USER = "idUser"
     const val UID = "uid"
 
     ////// message requests
@@ -32,6 +33,7 @@ object Constants {
     const val CATEGORY_UPDATED = "Categoria atualizada com sucesso!"
     const val USER_UPDATED = "Usuário atualizado com sucesso!"
     const val COMPANY_UPDATED = "Empresa atualizada com sucesso!"
+    const val EMPLOYEE_DELETED = "Funcionário deletado com sucesso!"
 
     const val STATE_NOT_MAPPED = "state not mapped"
     const val LANGUAGE_PT = "pt"

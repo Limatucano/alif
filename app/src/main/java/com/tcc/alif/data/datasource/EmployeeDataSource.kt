@@ -6,7 +6,9 @@ import com.tcc.alif.data.model.EmployeeResponse.Companion.ACCEPTED_STATUS
 import com.tcc.alif.data.model.Response
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.util.Constants.EMPLOYEE_COLLECTION
+import com.tcc.alif.data.util.Constants.EMPLOYEE_DELETED
 import com.tcc.alif.data.util.Constants.ID_COMPANY
+import com.tcc.alif.data.util.Constants.ID_USER
 import com.tcc.alif.data.util.UNKNOWN_ERROR
 import com.tcc.alif.data.util.await
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +41,44 @@ class EmployeeDataSource @Inject constructor(
     }.catch {
         emit(Response.error(it.message ?: UNKNOWN_ERROR))
     }.flowOn(Dispatchers.IO)
+
+    fun deleteEmployee(
+        idCompany: String,
+        idUser: String
+    ) : Flow<Response<String>> = flow {
+        emit(Response.loading(true))
+
+        val document = getEmployeeDocument(
+            idCompany = idCompany,
+            idUser = idUser
+        )
+
+        if(document == null){
+            emit(Response.error(UNKNOWN_ERROR))
+        }else{
+            firebaseFirestore
+                .collection(EMPLOYEE_COLLECTION)
+                .document(document)
+                .delete()
+
+            emit(Response.success(EMPLOYEE_DELETED))
+        }
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
+    private suspend fun getEmployeeDocument(
+        idCompany: String,
+        idUser: String
+    ) = firebaseFirestore
+            .collection(EMPLOYEE_COLLECTION)
+            .whereEqualTo(ID_COMPANY, idCompany)
+            .whereEqualTo(ID_USER, idUser)
+            .get()
+            .await()
+            .documents
+            .firstOrNull()
+            ?.id
 
     private fun employees(
         idCompany: String

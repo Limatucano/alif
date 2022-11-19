@@ -12,6 +12,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_arrow_back.xml" value="0.2085" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_arrow_forward.xml" value="0.2085" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.248" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.241" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_category.xml" value="0.2455" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_edit.xml" value="0.195" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_exit.xml" value="0.2195" />
@@ -53,6 +54,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/date_time_picker_view_dialog.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/dialog_call_detail.xml" value="0.47647849462365593" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/dialog_categories.xml" value="0.3423913043478261" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/dialog_two_options.xml" value="0.3269927536231884" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/employees_item.xml" value="0.3423913043478261" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_administrator_profile.xml" value="0.27239583333333334" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_changepassword.xml" value="0.33" />
@@ -61,7 +63,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_config_cliente.xml" value="0.18802083333333333" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_config_lojista.xml" value="0.18802083333333333" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_configuration.xml" value="0.22" />
-        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_employee.xml" value="0.33" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_employee.xml" value="0.25" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_first_cliente.xml" value="0.33016304347826086" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_home_lojista.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_login.xml" value="0.25" />

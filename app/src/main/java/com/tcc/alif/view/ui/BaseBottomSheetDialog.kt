@@ -5,13 +5,16 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.WindowManager
+import android.widget.FrameLayout
 import androidx.annotation.StyleRes
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tcc.alif.R
 
 abstract class BaseBottomSheetDialog(
     context: Context,
-    @StyleRes styleRes: Int = R.style.DialogStyle
+    @StyleRes styleRes: Int = R.style.DialogStyle,
+    private val isCancelable: Boolean = true
 ) : BottomSheetDialog(
     context,
     styleRes
@@ -29,6 +32,11 @@ abstract class BaseBottomSheetDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setParams()
+        setCancelable(isCancelable)
+        setOnShowListener {
+            val sheet = findViewById<FrameLayout>(R.id.design_bottom_sheet)
+            sheet?.let { BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED }
+        }
     }
 
     protected fun setParams(){

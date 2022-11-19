@@ -19,21 +19,21 @@
             tools:text="Matheus Lima Corrêa" />
 
         <TextView
-            android:id="@+id/cpfMasked"
+            android:id="@+id/cpf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="123.***.***-20"
+            tools:text="123.123.123-20"
             android:maxLines="1"
             app:layout_constraintStart_toStartOf="@+id/name"
             app:layout_constraintTop_toBottomOf="@+id/name" />
 
 
         <ImageButton
-            android:id="@+id/arrow_button"
+            android:id="@+id/deleteButton"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/ic_three_dots_vert"
+            android:background="@drawable/ic_delete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

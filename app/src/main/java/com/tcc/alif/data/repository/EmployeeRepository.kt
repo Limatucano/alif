@@ -10,4 +10,12 @@ class EmployeeRepository @Inject constructor(
     fun getMyEmployee(idCompany: String) = employeeDataSource.getMyEmployee(
         idCompany = idCompany
     )
+
+    fun deleteEmployee(
+        idCompany: String,
+        idUser: String
+    ) = employeeDataSource.deleteEmployee(
+        idCompany = idCompany,
+        idUser = idUser
+    )
 }
