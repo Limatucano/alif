@@ -5,5 +5,6 @@ sealed class ConfigurationIntent{
     object GoToMyCategories: ConfigurationIntent()
     object GoToProfile: ConfigurationIntent()
     object GoToCompanyProfile: ConfigurationIntent()
+    object GoToMyBusinessRequests: ConfigurationIntent()
     object Exit : ConfigurationIntent()
 }

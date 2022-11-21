@@ -2,10 +2,12 @@ package com.tcc.alif.data.datasource
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tcc.alif.data.model.EmployeeResponse
-import com.tcc.alif.data.model.EmployeeResponse.Companion.ACCEPTED_STATUS
+import com.tcc.alif.data.model.EmployeeResponse.Companion.getStatus
 import com.tcc.alif.data.model.Response
 import com.tcc.alif.data.model.SigninResponse
+import com.tcc.alif.data.model.local.Employee
 import com.tcc.alif.data.util.Constants.CPF
+import com.tcc.alif.data.util.Constants.EMPLOYEE_ALREADY_EXISTS
 import com.tcc.alif.data.util.Constants.EMPLOYEE_COLLECTION
 import com.tcc.alif.data.util.Constants.EMPLOYEE_DELETED
 import com.tcc.alif.data.util.Constants.EMPLOYEE_SUCCESSFULLY_INSERTED
@@ -26,19 +28,20 @@ class EmployeeDataSource @Inject constructor(
 
     fun getMyEmployee(
         idCompany: String
-    ): Flow<Response<List<SigninResponse>>> = flow {
+    ): Flow<Response<List<Employee>>> = flow {
         emit(Response.loading(true))
 
         employees(idCompany).collect{
-            val users = it.filter {
-                    employee -> employee.status == ACCEPTED_STATUS
-            }.map { user ->
-                SigninResponse(
+            val users = it.map { user ->
+                Employee(
                     cpf = administratorDataSource.getUserData(user.idUser).cpf,
                     name = administratorDataSource.getUserData(user.idUser).name,
                     uid = administratorDataSource.getUserData(user.idUser).uid,
-                    cellphone = administratorDataSource.getUserData(user.idUser).cellphone
+                    cellphone = administratorDataSource.getUserData(user.idUser).cellphone,
+                    statusRequest = user.getStatus()
                 )
+            }.sortedBy { employee ->
+                employee.statusRequest
             }
             emit(Response.success(users))
         }
@@ -103,11 +106,20 @@ class EmployeeDataSource @Inject constructor(
         emit(Response.loading(true))
 
         try {
-            firebaseFirestore
-                .collection(EMPLOYEE_COLLECTION)
-                .add(employee)
-                .await()
-            emit(Response.success(EMPLOYEE_SUCCESSFULLY_INSERTED))
+            employees(employee.idCompany).collect{ response ->
+                val employeeFiltered = response.firstOrNull {
+                    it.idUser == employee.idUser
+                }
+                if(employeeFiltered == null){
+                       firebaseFirestore
+                        .collection(EMPLOYEE_COLLECTION)
+                        .add(employee)
+                        .await()
+                    emit(Response.success(EMPLOYEE_SUCCESSFULLY_INSERTED))
+                }else if(employeeFiltered != null){
+                    emit(Response.error(EMPLOYEE_ALREADY_EXISTS))
+                }
+            }
         }catch (e: Exception){
             emit(Response.error(UNKNOWN_ERROR))
         }

@@ -70,7 +70,12 @@ class ConfigurationFragment : BaseFragment<FragmentConfigurationBinding>(Fragmen
             is ConfigurationIntent.GoToMyCategories -> openMyCategories()
             is ConfigurationIntent.GoToCompanyProfile -> openCompanyProfile()
             is ConfigurationIntent.Exit -> exit(intent)
+            is ConfigurationIntent.GoToMyBusinessRequests -> openMyBusinessRequests()
         }
+    }
+
+    private fun openMyBusinessRequests(){
+
     }
 
     private fun exit(intent: ConfigurationIntent){

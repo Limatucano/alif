@@ -5,7 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="@dimen/margin_default">
+    android:paddingBottom="@dimen/margin_default">
+
+        <TextView
+            android:id="@+id/sectionTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Em Andamento"
+            style="@style/Title.Section"
+            android:background="@color/Gray"
+            android:padding="@dimen/margin_small"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:id="@+id/name"
@@ -14,8 +26,9 @@
             android:layout_marginStart="15dp"
             style="@style/TitleList"
             android:maxLines="1"
+            android:layout_marginTop="@dimen/margin_default"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sectionTitle"
             tools:text="Matheus Lima Corrêa" />
 
         <TextView
@@ -34,7 +47,7 @@
             android:layout_height="24dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/ic_delete"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/cpf"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

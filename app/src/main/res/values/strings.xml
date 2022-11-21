@@ -159,6 +159,9 @@
     <string name="employee_screen_dialog_message">Tem certeza que deseja excluir esse funcionário? Essa ação é irreversível.</string>
     <string name="employee_screen_new_hint">Pesquise um novo funcionário pelo cpf</string>
     <string name="employee_screen_new_title">Novo Funcionário</string>
+    <string name="employee_waiting_status">Aguardando Aceite</string>
+    <string name="employee_refused_status">Recusado pelo Usuário</string>
+    <string name="employee_accepted_status">Meus Funcionários</string>
 
     <string name="warning">Atenção!</string>
     <string name="yes">Sim</string>

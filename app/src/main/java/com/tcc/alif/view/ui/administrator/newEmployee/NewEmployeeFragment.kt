@@ -6,8 +6,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.tcc.alif.R
 import com.tcc.alif.data.model.EmployeeResponse
-import com.tcc.alif.data.model.EmployeeResponse.Companion.WAITING_STATUS
 import com.tcc.alif.data.model.SigninResponse
+import com.tcc.alif.data.model.local.EmployeeStatus
 import com.tcc.alif.data.util.MaskUtils.CPF_MASK
 import com.tcc.alif.data.util.emptyIfNull
 import com.tcc.alif.data.util.setVisible
@@ -36,7 +36,6 @@ class NewEmployeeFragment : BaseFragment<FragmentNewEmployeeBinding>(FragmentNew
         searchField.addTextChangedListener(CPF_MASK)
     }
 
-    //TODO: agrupar funcionarios pelo status
     //TODO: Criar option para ver minhas solicitações de fazer parte da empresa
     private fun setObserver(){
         viewModel.state.observe(viewLifecycleOwner){ state ->
@@ -81,7 +80,7 @@ class NewEmployeeFragment : BaseFragment<FragmentNewEmployeeBinding>(FragmentNew
                 employee = EmployeeResponse(
                     idCompany = sharedPreferences.companyId.toString().emptyIfNull(),
                     idUser = user?.uid.toString().emptyIfNull(),
-                    status = WAITING_STATUS
+                    status = EmployeeStatus.WAITING_STATUS.value
                 )
             ))
         }

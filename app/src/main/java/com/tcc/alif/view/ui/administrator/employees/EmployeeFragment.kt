@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
-import com.tcc.alif.data.model.SigninResponse
+import com.tcc.alif.data.model.local.Employee
 import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentEmployeeBinding
 import com.tcc.alif.view.base.TwoOptionsBottomDialog
@@ -50,7 +50,7 @@ class EmployeeFragment : BaseFragment<FragmentEmployeeBinding>(FragmentEmployeeB
         )
     }
 
-    private fun showTwoOptionDialog(employee: SigninResponse){
+    private fun showTwoOptionDialog(employee: Employee){
         TwoOptionsBottomDialog(
             context = requireContext(),
             message = getString(R.string.employee_screen_dialog_message),
@@ -62,7 +62,7 @@ class EmployeeFragment : BaseFragment<FragmentEmployeeBinding>(FragmentEmployeeB
         ).show()
     }
 
-    private fun deleteEmployee(employee: SigninResponse){
+    private fun deleteEmployee(employee: Employee){
         viewModel.handleIntent(
             intent = EmployeeIntent.DeleteEmployee(
                 idCompany = sharedPreferences.companyId ?: EMPTY_STRING,

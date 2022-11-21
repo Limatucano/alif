@@ -1,7 +1,9 @@
 package com.tcc.alif.data.model
 
 import android.os.Parcelable
+import com.tcc.alif.data.model.local.EmployeeStatus
 import com.tcc.alif.data.util.emptyIfNull
+import com.tcc.alif.view.ui.administrator.employees.EmployeeAdapter
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -24,8 +26,8 @@ data class EmployeeResponse(
     }
 
     companion object {
-        const val WAITING_STATUS = "AGUARDANDO"
-        const val REFUSED_STATUS = "RECUSADO"
-        const val ACCEPTED_STATUS = "ACEITO"
+
+        fun EmployeeResponse.getStatus() : EmployeeStatus? =
+            EmployeeStatus.values().firstOrNull { it.value == this.status }
     }
 }

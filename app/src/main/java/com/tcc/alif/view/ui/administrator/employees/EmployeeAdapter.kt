@@ -4,15 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.tcc.alif.data.model.SigninResponse
+import com.tcc.alif.data.model.local.Employee
+import com.tcc.alif.data.util.setVisible
 import com.tcc.alif.databinding.EmployeesItemBinding
 
 class EmployeeAdapter(
     private val context: Context,
-    val action: (item: SigninResponse) -> Unit
+    val action: (item: Employee) -> Unit
 ) : RecyclerView.Adapter<EmployeeAdapter.ViewHolder>(){
 
-    var employees: List<SigninResponse> = listOf()
+    var employees: List<Employee> = listOf()
         set(value){
             field = value
             notifyDataSetChanged()
@@ -22,12 +23,20 @@ class EmployeeAdapter(
         private val binding: EmployeesItemBinding
     ) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: SigninResponse) = binding.run{
-            name.text = item.name
-            cpf.text = item.cpf
+        fun bind(
+            currentEmployee: Employee,
+            previousEmployee: Employee?
+        ) = binding.run{
+
+            sectionTitle.text = currentEmployee.statusRequest?.text?.let { context.getString(it) }
+            previousEmployee?.statusRequest?.equals(currentEmployee.statusRequest)?.also { equal ->
+                sectionTitle.setVisible(!equal)
+            }
+            name.text = currentEmployee.name
+            cpf.text = currentEmployee.cpf
 
             deleteButton.setOnClickListener {
-                action.invoke(item)
+                action.invoke(currentEmployee)
             }
         }
     }
@@ -42,7 +51,10 @@ class EmployeeAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(employees[position])
+        holder.bind(
+            currentEmployee = employees[position],
+            previousEmployee = employees.getOrNull(position - 1)
+        )
     }
 
     override fun getItemCount(): Int = employees.size
