@@ -1,11 +1,13 @@
 package com.tcc.alif.data.datasource
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.tcc.alif.data.model.BusinessRequestsResponse
 import com.tcc.alif.data.model.EmployeeResponse
 import com.tcc.alif.data.model.EmployeeResponse.Companion.getStatus
 import com.tcc.alif.data.model.Response
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.model.local.Employee
+import com.tcc.alif.data.model.local.EmployeeStatus
 import com.tcc.alif.data.util.Constants.CPF
 import com.tcc.alif.data.util.Constants.EMPLOYEE_ALREADY_EXISTS
 import com.tcc.alif.data.util.Constants.EMPLOYEE_COLLECTION
@@ -23,15 +25,47 @@ import javax.inject.Inject
 
 class EmployeeDataSource @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore,
-    private val administratorDataSource: AdministratorDataSource
+    private val administratorDataSource: AdministratorDataSource,
+    private val companyDataSource: CompanyDataSource
 ){
+
+    fun getMyBusinessRequests(
+        idUser: String
+    ): Flow<Response<List<BusinessRequestsResponse>>> = flow {
+        emit(Response.loading(true))
+
+        employees(
+            value = idUser,
+            param = ID_USER
+        ).collect{ requests ->
+            val requestsFiltered = requests.filter { it.status ==  EmployeeStatus.WAITING_STATUS.value }
+
+            val businessRequests = requestsFiltered.map { e ->
+                BusinessRequestsResponse(
+                    idCompany = e.idCompany,
+                    idUser = e.idUser,
+                    status = e.status,
+                    cnpj = companyDataSource.getCompany(e.idCompany).cnpj ?: "",
+                    tradeName = companyDataSource.getCompany(e.idCompany).tradeName ?: ""
+                )
+            }
+            emit(Response.success(businessRequests))
+        }
+
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
 
     fun getMyEmployee(
         idCompany: String
     ): Flow<Response<List<Employee>>> = flow {
         emit(Response.loading(true))
 
-        employees(idCompany).collect{
+        employees(
+            value = idCompany,
+            param = ID_COMPANY
+        ).collect{
             val users = it.map { user ->
                 Employee(
                     cpf = administratorDataSource.getUserData(user.idUser).cpf,
@@ -106,7 +140,10 @@ class EmployeeDataSource @Inject constructor(
         emit(Response.loading(true))
 
         try {
-            employees(employee.idCompany).collect{ response ->
+            employees(
+                value = employee.idCompany,
+                param = ID_COMPANY
+            ).collect{ response ->
                 val employeeFiltered = response.firstOrNull {
                     it.idUser == employee.idUser
                 }
@@ -142,11 +179,12 @@ class EmployeeDataSource @Inject constructor(
             ?.id
 
     private fun employees(
-        idCompany: String
+        value: String,
+        param: String
     ) : Flow<List<EmployeeResponse>> = flow {
         val employees = firebaseFirestore
             .collection(EMPLOYEE_COLLECTION)
-            .whereEqualTo(ID_COMPANY, idCompany)
+            .whereEqualTo(param, value)
             .get()
             .await()
 

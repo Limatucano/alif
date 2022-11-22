@@ -162,7 +162,19 @@
             app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_mainAdministratorFragment_to_newEmployeeFragment"
-            app:destination="@id/newEmployeeFragment" />
+            app:destination="@id/newEmployeeFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainAdministratorFragment_to_businessRequestsFragment"
+            app:destination="@id/businessRequestsFragment"
+            app:popUpTo="@+id/mainAdministratorFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/companyFormFragment"
@@ -226,4 +238,8 @@
         android:id="@+id/newEmployeeFragment"
         android:name="com.tcc.alif.view.ui.administrator.newEmployee.NewEmployeeFragment"
         android:label="NewEmployeeFragment" />
+    <fragment
+        android:id="@+id/businessRequestsFragment"
+        android:name="com.tcc.alif.view.ui.administrator.configuration.businessRequests.BusinessRequestsFragment"
+        android:label="BusinessRequestsFragment" />
 </navigation>

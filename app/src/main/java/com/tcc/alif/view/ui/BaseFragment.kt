@@ -8,7 +8,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.tcc.alif.data.local.SharedPreferencesHelper
-import javax.inject.Inject
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 open class BaseFragment<V: ViewBinding>(private val inflate : Inflate<V>) : Fragment() {

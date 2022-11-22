@@ -26,6 +26,7 @@ class ConfigurationFragment : BaseFragment<FragmentConfigurationBinding>(Fragmen
         )
     }
 
+    //TODO: Create rule in user, and show option by rule
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViews()
@@ -75,7 +76,11 @@ class ConfigurationFragment : BaseFragment<FragmentConfigurationBinding>(Fragmen
     }
 
     private fun openMyBusinessRequests(){
-
+        requireView()
+            .findNavController()
+            .navigate(
+                MainAdministratorFragmentDirections.actionMainAdministratorFragmentToBusinessRequestsFragment()
+            )
     }
 
     private fun exit(intent: ConfigurationIntent){

@@ -11,6 +11,7 @@ import com.tcc.alif.databinding.CustomToolbarBinding
 import android.os.Build
 import android.view.View
 import android.view.WindowManager
+import androidx.navigation.fragment.NavHostFragment
 
 typealias Factory<T> = (LayoutInflater) -> T
 

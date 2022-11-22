@@ -10,4 +10,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     @Inject
     lateinit var sharedPreferences: SharedPreferencesHelper
+
+    override fun onPause() {
+        sharedPreferences.lastScreen = ""
+        super.onPause()
+    }
 }

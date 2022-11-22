@@ -8,6 +8,10 @@ class EmployeeRepository @Inject constructor(
     private val employeeDataSource: EmployeeDataSource
 ) {
 
+    fun getMyBusinessRequests(idUser: String) = employeeDataSource.getMyBusinessRequests(
+        idUser = idUser
+    )
+
     fun getMyEmployee(idCompany: String) = employeeDataSource.getMyEmployee(
         idCompany = idCompany
     )

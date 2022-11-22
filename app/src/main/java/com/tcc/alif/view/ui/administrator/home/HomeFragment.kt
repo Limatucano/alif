@@ -18,7 +18,7 @@ import com.tcc.alif.view.ui.administrator.MainAdministratorFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment(private val company : CompanyResponse) : BaseFragment<FragmentHomeLojistaBinding>(FragmentHomeLojistaBinding::inflate) {
+class HomeFragment : BaseFragment<FragmentHomeLojistaBinding>(FragmentHomeLojistaBinding::inflate) {
 
     private val viewModel : HomeViewModel by viewModels()
     private lateinit var queuesAdapter: QueuesAdapter
@@ -32,7 +32,7 @@ class HomeFragment(private val company : CompanyResponse) : BaseFragment<Fragmen
         )
         viewModel.handleIntent(
             HomeIntent.GetQueuesBy(
-                idCompany = company.idCompany.toString()
+                idCompany = sharedPreferences.companyId.toString()
             )
         )
     }

@@ -1,6 +1,7 @@
 package com.tcc.alif.data.local
 
 import android.content.SharedPreferences
+import androidx.fragment.app.Fragment
 import com.tcc.alif.BuildConfig
 import javax.inject.Inject
 
@@ -88,8 +89,13 @@ class SharedPreferencesHelper @Inject constructor(
         get() = sharedPreferences.getString(COMPANY_ADDRESS_CONTINUED, EMPTY_STRING)
         set(value) = sharedPreferences.edit().putString(COMPANY_ADDRESS_CONTINUED, value).apply()
 
+    var lastScreen: String?
+        get() = sharedPreferences.getString(LAST_SCREEN, EMPTY_STRING)
+        set(value) = sharedPreferences.edit().putString(LAST_SCREEN, value).apply()
+
     companion object{
         const val SHARED_PREFERENCES_NAME = "${BuildConfig.APPLICATION_ID}.ENCRYPT_SHARED_PREFERENCES"
+        private const val LAST_SCREEN = "$SHARED_PREFERENCES_NAME.LAST_SCREEN"
         private const val USER_ID = "$SHARED_PREFERENCES_NAME.USER_ID"
         private const val USER_EMAIL = "$SHARED_PREFERENCES_NAME.USER_EMAIL"
         private const val USER_PASSWORD = "$SHARED_PREFERENCES_NAME.USER_PASSWORD"

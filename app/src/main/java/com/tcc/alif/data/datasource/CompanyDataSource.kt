@@ -1,12 +1,10 @@
 package com.tcc.alif.data.datasource
 
-import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.tcc.alif.data.api.CepService
-import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
 import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.data.model.CompanyResponse.Companion.modelToMap
 import com.tcc.alif.data.model.Response
@@ -14,6 +12,7 @@ import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.util.Constants
 import com.tcc.alif.data.util.Constants.COMPANY_COLLECTION
 import com.tcc.alif.data.util.Constants.ID_COMPANY
+import com.tcc.alif.data.util.Constants.UID
 import com.tcc.alif.data.util.Constants.USER_COLLECTION
 import com.tcc.alif.data.util.UNKNOWN_ERROR
 import com.tcc.alif.data.util.await
@@ -117,12 +116,24 @@ class CompanyDataSource @Inject constructor(
     private fun getUserDocument(idUser: String) = flow{
         val userRef = firebaseFirestore
             .collection(USER_COLLECTION)
-            .whereEqualTo("uid",idUser)
+            .whereEqualTo(UID,idUser)
             .get()
             .await()
             .documents[0]
             .id
 
         emit(userRef)
+    }
+
+    suspend fun getCompany(idCompany: String): CompanyResponse {
+        val response = firebaseFirestore
+            .collection(COMPANY_COLLECTION)
+            .whereEqualTo(ID_COMPANY, idCompany)
+            .get()
+            .await()
+        val responseMapped = response.documents[0].data?.let {
+            CompanyResponse().toCompanyResponse(it)
+        }
+        return responseMapped ?: CompanyResponse()
     }
 }

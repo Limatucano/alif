@@ -30,6 +30,11 @@ enum class ConfigurationOptions(
         icon = R.drawable.ic_key,
         intent = ConfigurationIntent.GoToChangePassword
     ),
+    BUSINESS_REQUESTS(
+        title = R.string.business_requests,
+        icon = R.drawable.ic_notification,
+        intent = ConfigurationIntent.GoToMyBusinessRequests
+    ),
     EXIT(
         title = R.string.exit,
         icon = R.drawable.ic_exit,

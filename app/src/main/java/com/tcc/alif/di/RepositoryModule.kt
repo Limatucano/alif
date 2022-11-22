@@ -72,10 +72,12 @@ class RepositoryModule {
     @Provides
     fun provideEmployeeDataSource(
         firebaseFirestore: FirebaseFirestore,
-        administratorDataSource: AdministratorDataSource
+        administratorDataSource: AdministratorDataSource,
+        companyDataSource: CompanyDataSource
     ) : EmployeeDataSource = EmployeeDataSource(
         firebaseFirestore = firebaseFirestore,
-        administratorDataSource = administratorDataSource
+        administratorDataSource = administratorDataSource,
+        companyDataSource = companyDataSource
     )
 
     @Provides
