@@ -27,23 +27,43 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //TODO : Bug - When i come back from forms screen to queue screen, the bottomNavigation can't show right screen (think more about to use a side menu rather than bottom navigation)
-        val homeFragment = HomeFragment(company)
+        val homeFragment = HomeFragment()
 
         setupSharedPreferences(company)
-        setCurrentFragment(homeFragment)
-        binding.bottomNavigationView.menu.getItem(HOME_INDEX).isChecked = true
+        setCurrentFragment(getCurrentFragment().first)
+        binding.bottomNavigationView.menu.getItem(getCurrentFragment().second).isChecked = true
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.funcionarios_func->setCurrentFragment(EmployeeFragment())
-                R.id.filas_func->setCurrentFragment(QueuesFragment())
-                R.id.config_func->setCurrentFragment(ConfigurationFragment())
-                R.id.home_func->setCurrentFragment(homeFragment)
+                R.id.funcionarios_func->{
+                    sharedPreferences.lastScreen = EmployeeFragment().javaClass.simpleName
+                    setCurrentFragment(EmployeeFragment())
+                }
+                R.id.filas_func->{
+                    sharedPreferences.lastScreen = QueuesFragment().javaClass.simpleName
+                    setCurrentFragment(QueuesFragment())
+                }
+                R.id.config_func->{
+                    sharedPreferences.lastScreen = ConfigurationFragment().javaClass.simpleName
+                    setCurrentFragment(ConfigurationFragment())
+                }
+                R.id.home_func->{
+                    sharedPreferences.lastScreen = HomeFragment().javaClass.simpleName
+                    setCurrentFragment(homeFragment)
+                }
             }
             true
         }
     }
 
+    private fun getCurrentFragment() : Pair<Fragment, Int>{
+        return when(sharedPreferences.lastScreen){
+            "EmployeeFragment" -> Pair(EmployeeFragment(), EMPLOYEE_INDEX)
+            "QueuesFragment" -> Pair(QueuesFragment(), QUEUES_INDEX)
+            "HomeFragment" -> Pair(HomeFragment(), HOME_INDEX)
+            "ConfigurationFragment" -> Pair(ConfigurationFragment(), CONFIGURATION_INDEX)
+            else -> Pair(HomeFragment(), HOME_INDEX)
+        }
+    }
     private fun setupSharedPreferences(company: CompanyResponse) = sharedPreferences.run{
         companyId = company.idCompany
         companyName = company.tradeName
@@ -63,11 +83,17 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
     private fun setCurrentFragment(fragment: Fragment) =
         requireActivity().supportFragmentManager.beginTransaction().apply {
             replace(R.id.flFragment, fragment)
+            setCustomAnimations(
+                R.anim.nav_default_enter_anim,
+                R.anim.nav_default_exit_anim
+            )
             commit()
         }
 
     companion object{
+        const val EMPLOYEE_INDEX = 0
+        const val QUEUES_INDEX = 1
         const val HOME_INDEX = 2
+        const val CONFIGURATION_INDEX = 3
     }
-
 }
