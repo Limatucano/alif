@@ -1,12 +1,21 @@
 package com.tcc.alif.data.repository
 
 import com.tcc.alif.data.datasource.EmployeeDataSource
+import com.tcc.alif.data.model.BusinessRequestsResponse
 import com.tcc.alif.data.model.EmployeeResponse
 import javax.inject.Inject
 
 class EmployeeRepository @Inject constructor(
     private val employeeDataSource: EmployeeDataSource
 ) {
+
+    fun updateBusinessRequest(
+        businessRequest: BusinessRequestsResponse,
+        newStatus: String
+    ) = employeeDataSource.updateBusinessRequest(
+        businessRequest = businessRequest,
+        newStatus = newStatus
+    )
 
     fun getMyBusinessRequests(idUser: String) = employeeDataSource.getMyBusinessRequests(
         idUser = idUser

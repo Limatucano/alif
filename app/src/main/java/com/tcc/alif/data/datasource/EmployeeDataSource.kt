@@ -15,6 +15,8 @@ import com.tcc.alif.data.util.Constants.EMPLOYEE_DELETED
 import com.tcc.alif.data.util.Constants.EMPLOYEE_SUCCESSFULLY_INSERTED
 import com.tcc.alif.data.util.Constants.ID_COMPANY
 import com.tcc.alif.data.util.Constants.ID_USER
+import com.tcc.alif.data.util.Constants.STATUS
+import com.tcc.alif.data.util.Constants.BUSINESS_ADJUSTED
 import com.tcc.alif.data.util.Constants.USER_COLLECTION
 import com.tcc.alif.data.util.UNKNOWN_ERROR
 import com.tcc.alif.data.util.await
@@ -28,6 +30,31 @@ class EmployeeDataSource @Inject constructor(
     private val administratorDataSource: AdministratorDataSource,
     private val companyDataSource: CompanyDataSource
 ){
+
+    fun updateBusinessRequest(
+        businessRequest: BusinessRequestsResponse,
+        newStatus: String
+    ): Flow<Response<String>> = flow {
+        emit(Response.loading(true))
+
+        val document = getEmployeeDocument(
+            idCompany = businessRequest.idCompany,
+            idUser = businessRequest.idUser
+        )
+        if(document == null){
+            emit(Response.error(UNKNOWN_ERROR))
+        }else{
+            firebaseFirestore
+                .collection(EMPLOYEE_COLLECTION)
+                .document(document)
+                .update(STATUS, newStatus)
+
+            emit(Response.success(BUSINESS_ADJUSTED))
+        }
+
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
 
     fun getMyBusinessRequests(
         idUser: String
@@ -55,7 +82,6 @@ class EmployeeDataSource @Inject constructor(
     }.catch {
         emit(Response.error(it.message ?: UNKNOWN_ERROR))
     }.flowOn(Dispatchers.IO)
-
 
     fun getMyEmployee(
         idCompany: String

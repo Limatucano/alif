@@ -7,6 +7,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
+import com.tcc.alif.data.model.BusinessRequestsResponse
+import com.tcc.alif.data.model.local.EmployeeStatus
 import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentBusinessRequestsBinding
 import com.tcc.alif.view.ui.BaseFragment
@@ -19,8 +21,18 @@ class BusinessRequestsFragment : BaseFragment<FragmentBusinessRequestsBinding>(F
     private val adapter by lazy {
         BusinessRequestsAdapter(
             context = requireContext(),
-            accept = {},
-            refuse = {}
+            accept = {
+                updateStatusBusinessRequest(
+                    businessRequestsResponse = it,
+                    newStatus = EmployeeStatus.ACCEPTED_STATUS
+                )
+            },
+            refuse = {
+                updateStatusBusinessRequest(
+                    businessRequestsResponse = it,
+                    newStatus = EmployeeStatus.REFUSED_STATUS
+                )
+            }
         )
     }
 
@@ -32,9 +44,15 @@ class BusinessRequestsFragment : BaseFragment<FragmentBusinessRequestsBinding>(F
         )
         setObserver()
         setViews()
-        viewModel.handleIntent(BusinessRequestIntent.GetAllBusinessRequests(
-            sharedPreferences.userId ?: EMPTY_STRING
-        ))
+        getAllBusinessRequests()
+    }
+
+    private fun getAllBusinessRequests(){
+        viewModel.handleIntent(
+            BusinessRequestIntent.GetAllBusinessRequests(
+                idUser = sharedPreferences.userId ?: EMPTY_STRING
+            )
+        )
     }
 
     private fun setViews() = binding.run {
@@ -59,8 +77,25 @@ class BusinessRequestsFragment : BaseFragment<FragmentBusinessRequestsBinding>(F
                     adapter.businessRequests = state.requests
                     updateLoading(false)
                 }
+                is BusinessRequestState.BusinessUpdated -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    getAllBusinessRequests()
+                    updateLoading(false)
+                }
             }
         }
+    }
+
+    private fun updateStatusBusinessRequest(
+        businessRequestsResponse: BusinessRequestsResponse,
+        newStatus: EmployeeStatus
+    ){
+        viewModel.handleIntent(
+            BusinessRequestIntent.UpdateBusinessRequest(
+                businessRequest = businessRequestsResponse,
+                newStatus = newStatus.value
+            )
+        )
     }
 
     private fun updateLoading(loading: Boolean) = binding.run {
