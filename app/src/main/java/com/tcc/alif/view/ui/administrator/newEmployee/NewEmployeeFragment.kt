@@ -36,7 +36,6 @@ class NewEmployeeFragment : BaseFragment<FragmentNewEmployeeBinding>(FragmentNew
         searchField.addTextChangedListener(CPF_MASK)
     }
 
-    //TODO: Criar option para ver minhas solicitações de fazer parte da empresa
     private fun setObserver(){
         viewModel.state.observe(viewLifecycleOwner){ state ->
             when(state){
