@@ -42,7 +42,7 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
         super.onViewCreated(view, savedInstanceState)
 
         setupToolbar(
-            title = getString(R.string.company_form_title),
+            title = getString(R.string.queue_form_title),
             navigationBack = true
         )
         setViews()

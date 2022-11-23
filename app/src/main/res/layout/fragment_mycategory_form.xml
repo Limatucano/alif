@@ -17,7 +17,7 @@
             android:id="@+id/categoryNameTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nome_fantasia_tv"
+            android:hint="@string/category_name"
             android:textColorHint="@color/black"
             android:theme="@style/InputLayout"
             app:boxBackgroundMode="filled"
