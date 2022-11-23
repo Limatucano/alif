@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_loginFragment_to_companiesFragment"
             app:destination="@id/companiesFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_firstOptionsFragment"
+            app:destination="@id/firstOptionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/modeFragment"
@@ -242,4 +245,28 @@
         android:id="@+id/businessRequestsFragment"
         android:name="com.tcc.alif.view.ui.administrator.configuration.businessRequests.BusinessRequestsFragment"
         android:label="BusinessRequestsFragment" />
+    <fragment
+        android:id="@+id/firstOptionsFragment"
+        android:name="com.tcc.alif.view.ui.administrator.firstOptions.FirstOptionsFragment"
+        android:label="FirstOptionsFragment" >
+        <argument
+            android:name="user"
+            app:argType="com.tcc.alif.data.model.SigninResponse" />
+        <action
+            android:id="@+id/action_firstOptionsFragment_to_companiesFragment"
+            app:destination="@id/companiesFragment"
+            app:popUpTo="@+id/mainAdministratorFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_firstOptionsFragment_to_businessRequestsFragment"
+            app:destination="@id/businessRequestsFragment"
+            app:popUpTo="@+id/mainAdministratorFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>

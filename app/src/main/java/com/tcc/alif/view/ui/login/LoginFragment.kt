@@ -86,7 +86,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun openHomeScreen(signinResponse : SigninResponse){
         when(mode){
             AccountType.ADMINISTRATOR -> {
-                val direction = LoginFragmentDirections.actionLoginFragmentToCompaniesFragment(signinResponse)
+                val direction = LoginFragmentDirections.actionLoginFragmentToFirstOptionsFragment(signinResponse)
                 requireView().findNavController().navigate(direction)
             }
             AccountType.CONSUMER -> {

@@ -112,6 +112,7 @@
     <string name="uf_tv">Uf</string>
     <string name="category_name">Título da categoria</string>
     <string name="category_title">Categoria</string>
+    <string name="first_options_title">Opções iniciais</string>
 
     <string name="current_password">Senha Atual</string>
     <string name="new_password">Senha Nova</string>
