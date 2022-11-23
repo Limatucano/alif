@@ -4,6 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tcc.alif.data.model.BusinessRequestsResponse
+import com.tcc.alif.data.model.CompanyResponse
+import com.tcc.alif.data.model.local.EmployeeStatus
+import com.tcc.alif.data.repository.CompanyRepository
 import com.tcc.alif.data.repository.EmployeeRepository
 import com.tcc.alif.data.util.request
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BusinessRequestViewModel @Inject constructor(
-    private val repository: EmployeeRepository
+    private val repository: EmployeeRepository,
+    private val companyRepository: CompanyRepository
 ) : ViewModel() {
 
     val state = MutableLiveData<BusinessRequestState>()
@@ -41,6 +45,20 @@ class BusinessRequestViewModel @Inject constructor(
                 onError = { state.postValue(BusinessRequestState.Error(it)) },
                 onLoading = { state.postValue(BusinessRequestState.Loading(it)) }
             )
+
+            if(newStatus == EmployeeStatus.ACCEPTED_STATUS.value){
+                companyRepository.saveNewCompany(
+                    company = CompanyResponse(
+                        idCompany = businessRequest.idCompany,
+                    ),
+                    idUser = businessRequest.idUser
+                ).request(
+                        blockToRun = this,
+                        onSuccess = { },
+                        onError = { state.postValue(BusinessRequestState.Error(it)) },
+                        onLoading = { state.postValue(BusinessRequestState.Loading(it)) }
+                    )
+            }
         }
     }
 

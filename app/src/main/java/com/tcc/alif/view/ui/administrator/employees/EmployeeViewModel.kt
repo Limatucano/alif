@@ -3,6 +3,7 @@ package com.tcc.alif.view.ui.administrator.employees
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tcc.alif.data.repository.CompanyRepository
 import com.tcc.alif.data.repository.EmployeeRepository
 import com.tcc.alif.data.util.request
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,7 +12,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EmployeeViewModel @Inject constructor(
-    private val employeeRepository: EmployeeRepository
+    private val employeeRepository: EmployeeRepository,
+    private val companyRepository: CompanyRepository
 ) : ViewModel() {
 
     val state = MutableLiveData<EmployeeState>()
@@ -38,7 +40,23 @@ class EmployeeViewModel @Inject constructor(
                 blockToRun = this,
                 onError = { state.postValue(EmployeeState.Error(it)) },
                 onLoading = { state.postValue(EmployeeState.Loading(it)) },
-                onSuccess = { state.postValue(EmployeeState.EmployeeDeleted(it)) }
+                onSuccess = {
+                    companyRepository.removeCompany(
+                        idUser = idUser,
+                        idCompany = idCompany
+                    ).request(
+                        blockToRun = this,
+                        onError = { removeCompany ->
+                            state.postValue(EmployeeState.Error(removeCompany))
+                        },
+                        onLoading = { removeCompany ->
+                            state.postValue(EmployeeState.Loading(removeCompany))
+                        },
+                        onSuccess = { _ ->
+                            state.postValue(EmployeeState.EmployeeDeleted(it))
+                        }
+                    )
+                }
             )
         }
     }

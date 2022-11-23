@@ -18,19 +18,24 @@ data class SigninResponse(
     val uid: String = ""
 ) : Parcelable{
 
-    fun toSignResponse(map: MutableMap<String, Any>) =
-        SigninResponse(
-            name = map["name"].toString().emptyIfNull(),
-            cpf = map["cpf"].toString().emptyIfNull(),
-            cellphone = map["cellphone"].toString().emptyIfNull(),
-            birthDate = map["birthDate"].toString().emptyIfNull(),
-            email = map["email"].toString().emptyIfNull(),
-            priority = map["priority"] as Boolean?,
-            isConsumer = map["isConsumer"] as Boolean?,
-            isAdministrator = map["isAdministrator"] as Boolean?,
-            companies = map["companies"] as List<String>,
-            uid = map["uid"].toString().emptyIfNull()
-        )
+    fun toSignResponse(map: MutableMap<String, Any>?) : SigninResponse{
+        return if(map == null){
+            SigninResponse()
+        }else{
+            SigninResponse(
+                name = map["name"].toString().emptyIfNull(),
+                cpf = map["cpf"].toString().emptyIfNull(),
+                cellphone = map["cellphone"].toString().emptyIfNull(),
+                birthDate = map["birthDate"].toString().emptyIfNull(),
+                email = map["email"].toString().emptyIfNull(),
+                priority = map["priority"] as Boolean?,
+                isConsumer = map["isConsumer"] as Boolean?,
+                isAdministrator = map["isAdministrator"] as Boolean?,
+                companies = map["companies"] as List<String>,
+                uid = map["uid"].toString().emptyIfNull()
+            )
+        }
+    }
 
     companion object {
         fun SigninResponse.modelToMap() =

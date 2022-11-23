@@ -63,12 +63,16 @@ class EmployeeFragment : BaseFragment<FragmentEmployeeBinding>(FragmentEmployeeB
     }
 
     private fun deleteEmployee(employee: Employee){
-        viewModel.handleIntent(
-            intent = EmployeeIntent.DeleteEmployee(
-                idCompany = sharedPreferences.companyId ?: EMPTY_STRING,
-                idUser = employee.uid
+        if(employee.uid != sharedPreferences.userId){
+            viewModel.handleIntent(
+                intent = EmployeeIntent.DeleteEmployee(
+                    idCompany = sharedPreferences.companyId ?: EMPTY_STRING,
+                    idUser = employee.uid
+                )
             )
-        )
+        } else{
+            Toast.makeText(requireContext(), getString(R.string.delete_employee_error), Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setObserver(){

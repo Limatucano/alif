@@ -1,11 +1,8 @@
 package com.tcc.alif.data.datasource
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.tcc.alif.data.model.BusinessRequestsResponse
-import com.tcc.alif.data.model.EmployeeResponse
+import com.tcc.alif.data.model.*
 import com.tcc.alif.data.model.EmployeeResponse.Companion.getStatus
-import com.tcc.alif.data.model.Response
-import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.model.local.Employee
 import com.tcc.alif.data.model.local.EmployeeStatus
 import com.tcc.alif.data.util.Constants.CPF

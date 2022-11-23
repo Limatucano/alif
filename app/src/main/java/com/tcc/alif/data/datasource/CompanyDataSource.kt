@@ -30,15 +30,34 @@ class CompanyDataSource @Inject constructor(
     fun getAllCompaniesByUser(idUser: String) : Flow<Response<QuerySnapshot>> = flow{
         emit(Response.Loading(true))
         getCompaniesID(idUser).collect{
-            val userResponse = SigninResponse().toSignResponse(it.documents[0].data!!)
+            val userResponse = SigninResponse().toSignResponse(it.documents[0].data)
+            val companiesToSearch = userResponse.companies.filter { filter -> filter.isNotEmpty() }
             val companies = firebaseFirestore
                 .collection(COMPANY_COLLECTION)
-                .whereIn("idCompany",userResponse.companies)
+                .whereIn("idCompany",companiesToSearch)
                 .get()
                 .await()
             this.emit(Response.Success(companies))
         }
-        //emit(Response.loading(false))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
+    fun removeCompany(
+        idUser: String,
+        idCompany: String
+    ) : Flow<Response<String>> = flow {
+        emit(Response.Loading(true))
+        getUserDocument(
+            idUser = idUser
+        ).collect {
+            firebaseFirestore
+                .collection(USER_COLLECTION)
+                .document(it)
+                .update("companies", FieldValue.arrayRemove(idCompany))
+                .await()
+            this.emit(Response.Success(""))
+        }
     }.catch {
         emit(Response.error(it.message ?: UNKNOWN_ERROR))
     }.flowOn(Dispatchers.IO)

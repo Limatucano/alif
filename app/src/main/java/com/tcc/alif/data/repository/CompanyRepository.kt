@@ -18,6 +18,14 @@ class CompanyRepository @Inject constructor(
         idUser = idUser
     )
 
+    fun removeCompany(
+        idUser: String,
+        idCompany: String
+    ) = dataSource.removeCompany(
+        idUser = idUser,
+        idCompany = idCompany
+    )
+
     fun updateCompany(
         company: CompanyResponse,
         idCompany: String
