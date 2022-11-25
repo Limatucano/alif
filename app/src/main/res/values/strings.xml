@@ -107,6 +107,7 @@
     <string name="cep_tv">Cep</string>
     <string name="cnpj_tv">CNPJ</string>
     <string name="category_tv">Categoria</string>
+    <string name="employee_responsible">Funcionário Responsável</string>
     <string name="complemento_tv">Complemento</string>
     <string name="company_title">Empresa</string>
     <string name="company_subtitle">Agora precisamos de algumas informações sobre a empresa.</string>

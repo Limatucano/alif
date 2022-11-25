@@ -2,6 +2,7 @@ package com.tcc.alif.view.ui.administrator.queues
 
 import com.tcc.alif.data.model.CategoryResponse
 import com.tcc.alif.data.model.Queues
+import com.tcc.alif.data.model.local.Employee
 
 
 sealed class QueuesState{
@@ -11,4 +12,5 @@ sealed class QueuesState{
     data class QueueSaved(val message: String) : QueuesState()
     data class QueueUpdated(val message: String) : QueuesState()
     data class AllCategories(val categories: List<CategoryResponse>) : QueuesState()
+    data class MyEmployees(val employees: List<Employee>) : QueuesState()
 }

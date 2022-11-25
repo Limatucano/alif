@@ -190,7 +190,8 @@ class AdministratorDataSource @Inject constructor(
                 description = queueResponse.description,
                 titleCategory = queueResponse.titleCategory,
                 averageTime = queueResponse.averageTime,
-                employeeCreator = "",
+                employeeCreator = queueResponse.employeeCreator,
+                employeeResponsible = queueResponse.employeeResponsible,
                 service = queueResponse.service.map { service ->
                     Service(
                         name = getUserData(service.userId).name,

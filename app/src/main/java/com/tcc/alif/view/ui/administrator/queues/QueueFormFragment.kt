@@ -11,6 +11,7 @@ import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
 import com.tcc.alif.data.model.CategoryResponse
 import com.tcc.alif.data.model.QueueRequest
 import com.tcc.alif.data.model.QueueResponse
+import com.tcc.alif.data.model.local.Employee
 import com.tcc.alif.data.model.local.StatusQueue
 import com.tcc.alif.data.util.Constants.STATE_NOT_MAPPED
 import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT
@@ -29,7 +30,7 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
     private val viewModel : QueuesViewModel by viewModels()
     private lateinit var queue: QueueResponse
     private var uidCategorySelected: String? = null
-    private lateinit var adapter: CustomAdapter
+    private var uidEmployeeSelected: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,11 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
         setObservers()
         viewModel.handleIntent(
             QueuesIntent.GetAllCategories(
+                sharedPreferences.companyId.emptyIfNull()
+            )
+        )
+        viewModel.handleIntent(
+            QueuesIntent.GetMyEmployees(
                 sharedPreferences.companyId.emptyIfNull()
             )
         )
@@ -88,7 +94,32 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
             uidCategorySelected = itemSelected.first
             binding.categoryAc.setText(itemSelected.second)
         }
+    }
 
+    private fun setupEmployeesAdapter(employees: List<Employee>){
+        val employeesMapped = employees.map {
+            Pair(
+                it.uid, "${it.name} - ${it.cpf}"
+            )
+        }
+        val adapter = CustomAdapter(
+            context = requireContext(),
+            values = employeesMapped
+        )
+
+        binding.employeeAc.setAdapter(adapter)
+
+        if(queue.idQueue.isNotEmpty()){
+            val employeeByKey = adapter.getItemByKey(queue.employeeResponsible ?: EMPTY_STRING)
+            employeeByKey?.second?.let {
+                binding.employeeAc.setText(it)
+            }
+        }
+        binding.employeeAc.setOnItemClickListener { _, _, position, _ ->
+            val itemSelected = adapter.getItem(position)
+            uidEmployeeSelected = itemSelected.first
+            binding.employeeAc.setText(itemSelected.second)
+        }
     }
 
     private fun fillViews() = binding.run {
@@ -128,6 +159,7 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
             quantity = binding.quantityEt.text.toString().toInt(),
             description = binding.descriptionEt.text.toString().emptyIfNull(),
             titleCategory = uidCategorySelected ?: EMPTY_STRING,
+            employeeResponsible = uidEmployeeSelected ?: EMPTY_STRING,
             averageTime = binding.averageTimeEt.text.toString().toInt(),
             employeeCreator = sharedPreferences.userId ?: EMPTY_STRING,
             service = listOf(),
@@ -175,6 +207,10 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
                 }
                 is QueuesState.AllCategories -> {
                     setupCategoryAdapter(state.categories)
+                    setLoading(false)
+                }
+                is QueuesState.MyEmployees -> {
+                    setupEmployeesAdapter(state.employees)
                     setLoading(false)
                 }
                 else -> throw Exception(STATE_NOT_MAPPED)

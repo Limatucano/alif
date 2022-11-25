@@ -114,6 +114,28 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/employeeTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/employee_responsible"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColorHint="@color/black"
+                    android:theme="@style/InputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    app:boxBackgroundMode="filled"
+                    app:boxCollapsedPaddingTop="0dp"
+                    app:boxBackgroundColor="@null">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/employeeAc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:theme="@style/EditText" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <com.tcc.alif.view.base.DateTimePicker
                     android:id="@+id/openingTimeEt"
                     android:layout_marginTop="@dimen/margin_default"

@@ -17,6 +17,7 @@ data class QueueRequest(
     val description : String,
     val titleCategory : String,
     val averageTime : Int,
+    val employeeResponsible: String,
     val employeeCreator : String,
     var service : List<Service> = listOf()
 ): Parcelable{
@@ -31,6 +32,7 @@ data class QueueRequest(
                 openingTime = this.openingTime,
                 closingTime = this.closingTime,
                 quantity = this.quantity ?: 0,
+                employeeResponsible = this.employeeResponsible ?: EMPTY_STRING,
                 description = this.description ?: EMPTY_STRING,
                 titleCategory = this.titleCategory,
                 averageTime = this.averageTime ?: 0,
@@ -45,6 +47,7 @@ data class QueueRequest(
                 "closingTime" to this.closingTime,
                 "description" to this.description,
                 "name" to this.name,
+                "employeeResponsible" to this.employeeResponsible,
                 "openingTime" to this.openingTime,
                 "quantity" to this.quantity,
                 "status" to this.status.uppercase()

@@ -20,4 +20,8 @@ sealed class QueuesIntent{
     data class GetAllCategories(
         val idCompany: String
     ) : QueuesIntent()
+
+    data class GetMyEmployees(
+        val idCompany: String
+    ) : QueuesIntent()
 }

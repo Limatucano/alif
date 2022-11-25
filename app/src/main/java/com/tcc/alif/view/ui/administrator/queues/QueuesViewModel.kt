@@ -7,6 +7,7 @@ import com.tcc.alif.data.model.QueueRequest
 import com.tcc.alif.data.model.QueueRequest.Companion.modelToMap
 import com.tcc.alif.data.repository.AdministratorRepository
 import com.tcc.alif.data.repository.ConfigurationRepository
+import com.tcc.alif.data.repository.EmployeeRepository
 import com.tcc.alif.data.util.request
 import com.tcc.alif.view.ui.administrator.configuration.mycategories.MyCategoriesState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class QueuesViewModel @Inject constructor(
     private val repository : AdministratorRepository,
-    private val configurationRepository: ConfigurationRepository
+    private val configurationRepository: ConfigurationRepository,
+    private val employeeRepository: EmployeeRepository
 ) : ViewModel(){
 
     val state = MutableLiveData<QueuesState>()
@@ -38,6 +40,20 @@ class QueuesViewModel @Inject constructor(
             is QueuesIntent.GetAllCategories -> {
                 getAllCategories(intent.idCompany)
             }
+            is QueuesIntent.GetMyEmployees -> {
+                getMyEmployees(intent.idCompany)
+            }
+        }
+    }
+
+    private fun getMyEmployees(idCompany: String){
+        viewModelScope.launch {
+            employeeRepository.getMyEmployee(idCompany).request(
+                blockToRun = this,
+                onError = { state.postValue(QueuesState.Error(it)) },
+                onLoading = { state.postValue(QueuesState.Loading(it)) },
+                onSuccess = { state.postValue(QueuesState.MyEmployees(it)) }
+            )
         }
     }
 
