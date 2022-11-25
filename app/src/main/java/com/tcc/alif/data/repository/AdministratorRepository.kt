@@ -2,9 +2,7 @@ package com.tcc.alif.data.repository
 
 import com.tcc.alif.data.datasource.AdministratorDataSource
 import com.tcc.alif.data.model.CallStatus
-import com.tcc.alif.data.model.Calls
 import com.tcc.alif.data.model.QueueRequest
-import com.tcc.alif.data.model.QueueResponse
 import javax.inject.Inject
 
 class AdministratorRepository @Inject constructor(
@@ -44,6 +42,10 @@ class AdministratorRepository @Inject constructor(
     ) = administratorDataSource.saveNewQueue(queue)
 
     fun updateQueue(
-        queue: QueueRequest
-    ) = administratorDataSource.updateQueue(queue)
+        idQueue: String,
+        queue: Map<String, Comparable<*>?>
+    ) = administratorDataSource.updateQueue(
+        idQueue = idQueue,
+        queue = queue
+    )
 }

@@ -1,4 +1,4 @@
-package com.tcc.alif.view.adapter
+package com.tcc.alif.view.ui.administrator.queue
 
 import android.content.Context
 import android.view.LayoutInflater

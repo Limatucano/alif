@@ -3,11 +3,11 @@ package com.tcc.alif.view.ui.administrator.queue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tcc.alif.data.model.Call
 import com.tcc.alif.data.model.CallStatus
+import com.tcc.alif.data.model.local.StatusQueue
 import com.tcc.alif.data.repository.AdministratorRepository
+import com.tcc.alif.data.util.Constants.STATUS
 import com.tcc.alif.data.util.request
-import com.tcc.alif.view.ui.BaseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,6 +18,7 @@ class QueueViewModel @Inject constructor(
 ): ViewModel(){
 
     val state = MutableLiveData<QueueState>()
+
     fun handleIntent(intent : QueueIntent){
         when(intent){
             is QueueIntent.GetCalls -> getCallsBy(intent.idQueue)
@@ -27,6 +28,29 @@ class QueueViewModel @Inject constructor(
                 idEmployee = intent.idEmployee,
                 idQueue = intent.idQueue
             )
+            is QueueIntent.UpdateQueueStatus -> updateQueueStatus(
+                status = intent.status,
+                idQueue = intent.idQueue
+            )
+        }
+    }
+
+    private fun updateQueueStatus(
+        idQueue: String,
+        status: StatusQueue
+    ){
+        viewModelScope.launch {
+            repository.updateQueue(
+                idQueue = idQueue,
+                queue = mapOf(
+                    STATUS to status.request
+                )
+            ).request(
+                    blockToRun = this,
+                    onError = { state.postValue(QueueState.Error(it)) },
+                    onLoading = { state.postValue(QueueState.Loading(it)) },
+                    onSuccess = { state.postValue(QueueState.QueueUpdated(it)) }
+                )
         }
     }
 

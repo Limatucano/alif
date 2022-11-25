@@ -10,13 +10,11 @@ import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
 import com.tcc.alif.data.model.Call
 import com.tcc.alif.data.model.CallStatus
 import com.tcc.alif.data.model.QueueResponse
+import com.tcc.alif.data.model.local.StatusQueue
+import com.tcc.alif.data.model.local.StatusQueue.Companion.getByStringRes
+import com.tcc.alif.data.util.*
 import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT
-import com.tcc.alif.data.util.emptyIfNull
-import com.tcc.alif.data.util.fromHtml
-import com.tcc.alif.data.util.setLinearLayout
-import com.tcc.alif.data.util.toStringDate
 import com.tcc.alif.databinding.FragmentQueueBinding
-import com.tcc.alif.view.adapter.CallsAdapter
 import com.tcc.alif.view.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +23,13 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
 
     private lateinit var queue : QueueResponse
     private lateinit var callsAdapter: CallsAdapter
+    private lateinit var currentStatusQueue : StatusQueue
+    private val actionsAdapter: ActionsAdapter by lazy {
+        ActionsAdapter(
+            context = requireContext(),
+            action = { updateQueueStatus(it) }
+        )
+    }
     private val viewModel : QueueViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +56,7 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
             context = requireContext(),
             action = { selectedCall(it) }
         )
+        binding.rvActions.adapter = actionsAdapter
         binding.rvCalls.adapter = callsAdapter
     }
 
@@ -59,22 +65,11 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
         descricaoTv.text = queue.description
         quantityTotalTv.text = resources.getString(R.string.quantity_total, queue.quantity.toString().emptyIfNull()).fromHtml()
 
-        queue.status?.let {
-            val currentStatus = requireContext().getString(it)
-            val openingTime = queue.openingTime.toDate().toStringDate(NORMAL_DATE_WITH_HOURS_FORMAT)
-            val closingTime = queue.closingTime.toDate().toStringDate(NORMAL_DATE_WITH_HOURS_FORMAT)
-            statusTv.text = resources.getString(R.string.queue_status, currentStatus).fromHtml()
-            when(it){
-                R.string.opened_status -> {
-                    openTv.text = resources.getString(R.string.queue_opened, openingTime).fromHtml()
-                    closeTv.text = resources.getString(R.string.queue_will_close, closingTime).fromHtml()
-                }
-                R.string.closed_status, R.string.pendent_status -> {
-                    openTv.text = resources.getString(R.string.queue_will_open, openingTime).fromHtml()
-                    closeTv.text = resources.getString(R.string.queue_closed, closingTime).fromHtml()
-                }
-            }
-        }
+        setCurrentStatus(getByStringRes(queue.status))
+        rvActions.setGridLayout(
+            context = requireContext(),
+            spanCount = 2
+        )
 
         rvCalls.setLinearLayout(
             context = requireContext(),
@@ -82,6 +77,24 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
             reverseLayout = false,
             withItemDecoration = true
         )
+    }
+
+    private fun setCurrentStatus(status: StatusQueue) = binding.run{
+        currentStatusQueue = status
+        val currentStatus = requireContext().getString(status.text)
+        val openingTime = queue.openingTime.toDate().toStringDate(NORMAL_DATE_WITH_HOURS_FORMAT)
+        val closingTime = queue.closingTime.toDate().toStringDate(NORMAL_DATE_WITH_HOURS_FORMAT)
+        statusTv.text = resources.getString(R.string.queue_status, currentStatus).fromHtml()
+        when(status){
+            StatusQueue.OPEN -> {
+                openTv.text = resources.getString(R.string.queue_opened, openingTime).fromHtml()
+                closeTv.text = resources.getString(R.string.queue_will_close, closingTime).fromHtml()
+            }
+            StatusQueue.CLOSED -> {
+                openTv.text = resources.getString(R.string.queue_will_open, openingTime).fromHtml()
+                closeTv.text = resources.getString(R.string.queue_closed, closingTime).fromHtml()
+            }
+        }
     }
 
     private fun setObserver(){
@@ -97,7 +110,15 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
                     updateAvailableQuantity(state.quantity)
                     updateLoading(false)
                 }
-                is QueueState.Error -> Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
+                is QueueState.Error -> {
+                    Toast.makeText(requireContext(), "ERRO ${state.message}", Toast.LENGTH_SHORT).show()
+                    updateLoading(false)
+                }
+                is QueueState.QueueUpdated -> {
+                    setCurrentStatus(currentStatusQueue)
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    updateLoading(false)
+                }
             }
         }
     }
@@ -130,6 +151,16 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
                 )
             }
         ).show()
+    }
+
+    private fun updateQueueStatus(status: StatusQueue){
+        currentStatusQueue = status
+        viewModel.handleIntent(
+            QueueIntent.UpdateQueueStatus(
+                status = status,
+                idQueue = queue.idQueue
+            )
+        )
     }
 
     private fun updateCallStatus(

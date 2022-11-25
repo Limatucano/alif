@@ -5,6 +5,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.EditText
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -58,6 +59,16 @@ fun View.translate(
     val anim = AnimationUtils.loadAnimation(this.context,animId)
     if(duration != null) anim.duration = duration
     startAnimation(anim)
+}
+
+fun RecyclerView.setGridLayout(
+    context : Context,
+    spanCount : Int
+){
+    this.layoutManager = GridLayoutManager(
+        context,
+        spanCount
+    )
 }
 
 fun RecyclerView.setLinearLayout(

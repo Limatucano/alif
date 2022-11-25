@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tcc.alif.data.model.QueueRequest
+import com.tcc.alif.data.model.QueueRequest.Companion.modelToMap
 import com.tcc.alif.data.repository.AdministratorRepository
 import com.tcc.alif.data.repository.ConfigurationRepository
 import com.tcc.alif.data.util.request
@@ -53,7 +54,10 @@ class QueuesViewModel @Inject constructor(
 
     private fun updateQueue(queue: QueueRequest){
         viewModelScope.launch {
-            repository.updateQueue(queue)
+            repository.updateQueue(
+                idQueue = queue.idQueue,
+                queue = queue.modelToMap()
+            )
                 .request(
                     blockToRun = this,
                     onError = { state.postValue(QueuesState.Error(it)) },

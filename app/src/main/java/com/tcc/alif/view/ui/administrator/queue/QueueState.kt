@@ -10,4 +10,5 @@ sealed class QueueState{
     ): QueueState()
     data class Loading(val loading: Boolean) : QueueState()
     data class Error(val message: String) : QueueState()
+    data class QueueUpdated(val message: String) : QueueState()
 }

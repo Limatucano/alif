@@ -3,6 +3,7 @@ package com.tcc.alif.data.datasource
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tcc.alif.data.model.*
 import com.tcc.alif.data.model.QueueRequest.Companion.modelToMap
+import com.tcc.alif.data.model.local.StatusQueue
 import com.tcc.alif.data.util.Constants
 import com.tcc.alif.data.util.Constants.ID_COMPANY
 import com.tcc.alif.data.util.Constants.ID_QUEUE
@@ -23,11 +24,13 @@ import javax.inject.Inject
 class AdministratorDataSource @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore
 ){
-
-    fun updateQueue(queue: QueueRequest): Flow<Response<String>> = flow{
+    fun updateQueue(
+        idQueue: String,
+        queue: Map<String, Comparable<*>?>
+    ): Flow<Response<String>> = flow{
         emit(Response.loading(true))
 
-        val documentQueue : String? = getQueue(queue.idQueue)
+        val documentQueue : String? = getQueue(idQueue)
             .documents
             .firstOrNull()?.id
 
@@ -35,7 +38,7 @@ class AdministratorDataSource @Inject constructor(
             firebaseFirestore
                 .collection(QUEUE_COLLECTION)
                 .document(documentQueue)
-                .update(queue.modelToMap())
+                .update(queue)
                 .await()
         }else{
             emit(Response.error(UNKNOWN_ERROR))

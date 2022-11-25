@@ -150,7 +150,9 @@
     <string name="queue_available_quantity"><![CDATA[Quantidade Disponível: <b>%s</b>]]></string>
     <string name="queue_title">Fila</string>
     <string name="opened_status">Aberto</string>
+    <string name="opened_status_button">Abrir Fila</string>
     <string name="closed_status">Fechado</string>
+    <string name="closed_status_button">Fechar Fila</string>
     <string name="pendent_status">Pendente</string>
 
     <string name="call_detail_dialog_title">Escolha uma das opções disponíveis:</string>

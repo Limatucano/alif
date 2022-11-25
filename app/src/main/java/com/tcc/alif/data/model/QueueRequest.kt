@@ -2,6 +2,7 @@ package com.tcc.alif.data.model
 
 import android.os.Parcelable
 import com.google.firebase.Timestamp
+import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -21,6 +22,22 @@ data class QueueRequest(
 ): Parcelable{
 
     companion object{
+        fun QueueResponse.toQueueRequest(status: String) =
+            QueueRequest(
+                idQueue = this.idQueue,
+                idCompany = this.idCompany,
+                name = this.name,
+                status = status,
+                openingTime = this.openingTime,
+                closingTime = this.closingTime,
+                quantity = this.quantity ?: 0,
+                description = this.description ?: EMPTY_STRING,
+                titleCategory = this.titleCategory,
+                averageTime = this.averageTime ?: 0,
+                employeeCreator = this.employeeCreator ?: EMPTY_STRING,
+                service = this.service
+            )
+
         fun QueueRequest.modelToMap() =
             mapOf(
                 "averageTime" to this.averageTime,

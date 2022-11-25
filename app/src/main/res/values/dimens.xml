@@ -8,6 +8,7 @@
     <dimen name="margin_higher">72dp</dimen>
 
     <dimen name="card_elevation_default">10dp</dimen>
+    <dimen name="card_elevation_item">4dp</dimen>
 
     <dimen name="image_profile_size">70dp</dimen>
     <dimen name="floating_button_margin">30dp</dimen>
