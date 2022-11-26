@@ -178,7 +178,7 @@ class AdministratorDataSource @Inject constructor(
                 QueueResponse().toQueueResponse(it.data)
             }
         )
-
+        val filterrr = filter
         queuesData.queues = queuesData.queues.map { queueResponse ->
             QueueResponse(
                 idQueue = queueResponse.idQueue,
@@ -216,8 +216,7 @@ class AdministratorDataSource @Inject constructor(
                 }
             )
         }
-
-        if(filter.isNotEmpty() || filter.isNotBlank()){
+        if(filter.isNotEmpty()){
             queuesData.queues = queuesData.queues.filter {
                 it.name.uppercase().startsWith(filter.uppercase())
             }

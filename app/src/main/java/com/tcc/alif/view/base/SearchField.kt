@@ -87,7 +87,7 @@ class SearchField @JvmOverloads constructor(
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable?) {
-                if(s.toString().length > minSearchSize){
+                if(s.toString().length >= minSearchSize){
                     onTextChanged.invoke(s.toString())
                 }
             }
