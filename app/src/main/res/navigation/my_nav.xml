@@ -43,8 +43,8 @@
             android:name="mode"
             app:argType="com.tcc.alif.data.model.local.AccountType" />
         <action
-            android:id="@+id/action_loginFragment_to_homeClienteFragment"
-            app:destination="@id/homeClienteFragment"
+            android:id="@+id/toHomeConsumerFragment"
+            app:destination="@id/HomeConsumerFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_right"
@@ -70,9 +70,9 @@
             />
     </fragment>
     <fragment
-        android:id="@+id/homeClienteFragment"
+        android:id="@+id/HomeConsumerFragment"
         android:name="com.tcc.alif.view.ui.consumer.HomeConsumerFragment"
-        android:label="HomeClienteFragment" >
+        android:label="HomeConsumerFragment" >
         <argument
             android:name="user"
             app:argType="com.tcc.alif.data.model.SigninResponse" />

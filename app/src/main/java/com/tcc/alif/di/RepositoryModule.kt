@@ -93,4 +93,18 @@ class RepositoryModule {
     ) : CompanyRepository = CompanyRepository(
         dataSource = companyDataSource
     )
+
+    @Provides
+    fun provideHomeDataSource(
+        firebaseFirestore: FirebaseFirestore
+    ) : HomeDataSource = HomeDataSource(
+        firestore = firebaseFirestore
+    )
+
+    @Provides
+    fun provideHomeRepository(
+        homeDataSource: HomeDataSource
+    ): HomeRepository = HomeRepository(
+        homeDataSource = homeDataSource
+    )
 }

@@ -230,4 +230,12 @@
     <string name="business_requests">Solicitações de Empresas</string>
     <string name="exit">Sair</string>
 
+    <!--  home consumer options  -->
+    <string name="home_consumer_options_my_queues">Minhas Filas</string>
+    <string name="home_consumer_options_queues">Filas</string>
+    <string name="home_consumer_profile">Perfil</string>
+
+    <string name="home_consumer_username">Olá! %s</string>
+    <string name="home_consumer_subtitle">Essas são as suas opções:</string>
+    <string name="home_consumer_historic">Histórico</string>
 </resources>

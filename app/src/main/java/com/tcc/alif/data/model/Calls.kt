@@ -44,5 +44,11 @@ enum class CallStatus(
     CANCELED(
         value = "CANCELADO",
         text = R.string.canceled
-    )
+    );
+
+    companion object{
+        fun getTextByValue(value: String) = values().firstOrNull {
+                it.value == value
+            }?.text ?: FINISHED.text
+    }
 }

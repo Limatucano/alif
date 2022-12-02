@@ -2,16 +2,14 @@ package com.tcc.alif.view.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
 import com.tcc.alif.R
 import com.tcc.alif.data.util.setVisible
 import com.tcc.alif.databinding.CustomToolbarBinding
-import android.os.Build
-import android.view.View
-import android.view.WindowManager
-import androidx.navigation.fragment.NavHostFragment
 
 typealias Factory<T> = (LayoutInflater) -> T
 
@@ -46,7 +44,7 @@ open class BaseActivity<V : ViewBinding>(val inflate : Factory<V>) : AppCompatAc
         showStatusBar(true)
     }
 
-    fun showStatusBar(darkIcons: Boolean = false) {
+    private fun showStatusBar(darkIcons: Boolean = false) {
         setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
         if (darkIcons) window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         else window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE

@@ -73,8 +73,8 @@ fun RecyclerView.setGridLayout(
 
 fun RecyclerView.setLinearLayout(
     context : Context,
-    orientation : Int,
-    reverseLayout : Boolean,
+    orientation : Int ,
+    reverseLayout : Boolean = false,
     withItemDecoration : Boolean = false
 ){
     this.layoutManager = LinearLayoutManager(

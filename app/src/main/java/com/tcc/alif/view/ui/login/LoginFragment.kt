@@ -90,7 +90,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 requireView().findNavController().navigate(direction)
             }
             AccountType.CONSUMER -> {
-                val direction = LoginFragmentDirections.actionLoginFragmentToHomeClienteFragment(signinResponse)
+                val direction = LoginFragmentDirections.toHomeConsumerFragment(signinResponse)
                 requireView().findNavController().navigate(direction)
             }
         }

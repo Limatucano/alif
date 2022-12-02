@@ -18,6 +18,8 @@ object Constants {
     const val ID_COMPANY = "idCompany"
     const val ID_QUEUE = "idQueue"
     const val ID_USER = "idUser"
+    const val USER_ID = "userId"
+    const val SERVICE = "service"
     const val UID = "uid"
     const val CPF = "cpf"
     const val STATUS = "status"

@@ -178,7 +178,7 @@ class AdministratorDataSource @Inject constructor(
                 QueueResponse().toQueueResponse(it.data)
             }
         )
-        val filterrr = filter
+
         queuesData.queues = queuesData.queues.map { queueResponse ->
             QueueResponse(
                 idQueue = queueResponse.idQueue,

@@ -7,6 +7,7 @@
     <dimen name="margin_normal">24dp</dimen>
     <dimen name="margin_higher">72dp</dimen>
 
+    <dimen name="dialog_radius">20dp</dimen>
     <dimen name="card_elevation_default">10dp</dimen>
     <dimen name="card_elevation_item">4dp</dimen>
 
