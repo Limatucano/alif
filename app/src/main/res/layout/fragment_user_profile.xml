@@ -19,12 +19,21 @@
             android:orientation="vertical"
             android:padding="@dimen/margin_default">
 
+            <ImageView
+                android:id="@+id/userPicture"
+                android:layout_width="@dimen/margin_higher"
+                android:layout_height="@dimen/margin_higher"
+                android:src="@drawable/profile_picture_placeholder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/nome"
                 android:textColorHint="@color/black"
+                android:layout_marginTop="@dimen/margin_default"
                 android:theme="@style/InputLayout"
                 app:boxBackgroundMode="filled"
                 app:boxCollapsedPaddingTop="0dp"

@@ -1,4 +1,4 @@
-package com.tcc.alif.view.ui.consumer
+package com.tcc.alif.view.ui.consumer.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

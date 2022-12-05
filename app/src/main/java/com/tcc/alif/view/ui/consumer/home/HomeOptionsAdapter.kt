@@ -1,4 +1,4 @@
-package com.tcc.alif.view.ui.consumer
+package com.tcc.alif.view.ui.consumer.home
 
 import android.content.Context
 import android.view.LayoutInflater

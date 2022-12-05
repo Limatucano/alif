@@ -1,4 +1,4 @@
-package com.tcc.alif.view.ui.consumer
+package com.tcc.alif.view.ui.consumer.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,8 +8,7 @@ import com.tcc.alif.data.model.HistoricService
 import com.tcc.alif.databinding.ItemHistoricBinding
 
 class HistoricAdapter(
-    private val context: Context,
-    private val action: (HistoricService) -> Unit
+    private val context: Context
 ) : RecyclerView.Adapter<HistoricAdapter.ViewHolder>(){
 
     var historicService: List<HistoricService> = listOf()
@@ -26,10 +25,6 @@ class HistoricAdapter(
             queueName.text = item.queueName
             historicInsertedDate.text = item.insertedDate
             historicStatus.text = context.getString(item.status)
-
-            root.setOnClickListener {
-                action.invoke(item)
-            }
         }
     }
 

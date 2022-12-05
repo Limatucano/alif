@@ -46,6 +46,19 @@
             app:layout_constraintTop_toBottomOf="@+id/userName"
             android:text="@string/home_consumer_subtitle" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homeOptionsRv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            tools:itemCount="3"
+            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/item_home_consumer"
+            tools:spanCount="3" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -54,21 +67,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeOptionsRv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:nestedScrollingEnabled="false"
-                tools:itemCount="3"
-                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_home_consumer"
-                tools:spanCount="3" />
+            app:layout_constraintTop_toBottomOf="@+id/homeOptionsRv">
 
             <TextView
                 android:id="@+id/historicTitle"
@@ -80,7 +79,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homeOptionsRv"
+                app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/home_consumer_historic" />
 
             <androidx.recyclerview.widget.RecyclerView

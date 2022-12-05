@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.tcc.alif.R
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_FORMAT
 import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT
@@ -23,6 +24,9 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>(FragmentUse
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupToolbar(
+            title = getString(R.string.perfil)
+        )
         setViews()
         setListener()
         setObserver()
@@ -70,6 +74,10 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>(FragmentUse
                     uid = sharedPreferences.userId.toString().emptyIfNull()
                 )
             ))
+        }
+
+        userPicture.setOnClickListener {
+            //TODO: Implement edit, display and take new picture
         }
     }
 

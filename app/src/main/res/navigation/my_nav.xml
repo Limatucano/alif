@@ -71,11 +71,18 @@
     </fragment>
     <fragment
         android:id="@+id/HomeConsumerFragment"
-        android:name="com.tcc.alif.view.ui.consumer.HomeConsumerFragment"
+        android:name="com.tcc.alif.view.ui.consumer.home.HomeConsumerFragment"
         android:label="HomeConsumerFragment" >
         <argument
             android:name="user"
             app:argType="com.tcc.alif.data.model.SigninResponse" />
+        <action
+            android:id="@+id/toUserProfile"
+            app:destination="@id/userProfileFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/companiesFragment"
