@@ -50,5 +50,9 @@ enum class CallStatus(
         fun getTextByValue(value: String) = values().firstOrNull {
                 it.value == value
             }?.text ?: FINISHED.text
+
+        fun getCallStatusByValue(value: String) = values().firstOrNull {
+            it.value == value
+        } ?: FINISHED
     }
 }

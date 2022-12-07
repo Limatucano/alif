@@ -1,97 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/blue">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/home_swipe">
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/userName"
-            style="@style/TitleLight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_marginHorizontal="@dimen/margin_default"
-            app:layout_constraintBottom_toBottomOf="@+id/userPicture"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/userPicture"
-            tools:text="Olá, Matheus Lima Corrêa" />
-
-        <ImageView
-            android:id="@+id/userPicture"
-            android:layout_width="@dimen/margin_higher"
-            android:layout_height="@dimen/margin_higher"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginHorizontal="@dimen/margin_default"
-            android:src="@drawable/profile_picture_placeholder"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView4"
-            style="@style/InternalScreenDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_default"
-            android:layout_marginTop="@dimen/margin_higher"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userName"
-            android:text="@string/home_consumer_subtitle" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/homeOptionsRv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
-            tools:itemCount="3"
-            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/item_home_consumer"
-            tools:spanCount="3" />
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="@color/blue">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/background_dialog"
-            android:layout_marginTop="@dimen/margin_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeOptionsRv">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/historicTitle"
-                style="@style/InternalScreenDescription.Dark"
+                android:id="@+id/userName"
+                style="@style/TitleLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginHorizontal="@dimen/margin_default"
+                app:layout_constraintBottom_toBottomOf="@+id/userPicture"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/userPicture"
+                tools:text="Olá, Matheus Lima Corrêa" />
+
+            <ImageView
+                android:id="@+id/userPicture"
+                android:layout_width="@dimen/margin_higher"
+                android:layout_height="@dimen/margin_higher"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginHorizontal="@dimen/margin_default"
+                android:src="@drawable/profile_picture_placeholder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/InternalScreenDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_default"
-                android:layout_marginTop="@dimen/margin_normal"
-                android:textStyle="bold"
+                android:layout_marginTop="@dimen/margin_higher"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="@string/home_consumer_historic" />
+                app:layout_constraintTop_toBottomOf="@+id/userName"
+                android:text="@string/home_consumer_subtitle" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/historicRv"
-                android:layout_width="match_parent"
+                android:id="@+id/homeOptionsRv"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/historicTitle"
-                tools:listitem="@layout/item_historic"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                tools:itemCount="3"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_home_consumer"
+                tools:spanCount="3" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/background_dialog"
+                android:layout_marginTop="@dimen/margin_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/homeOptionsRv">
+
+                <TextView
+                    android:id="@+id/historicTitle"
+                    style="@style/InternalScreenDescription.Dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/home_consumer_historic" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/historicRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/historicTitle"
+                    tools:listitem="@layout/item_historic"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

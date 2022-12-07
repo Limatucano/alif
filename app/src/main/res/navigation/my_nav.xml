@@ -83,6 +83,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/toMyQueuesConsumer"
+            app:destination="@id/myQueuesConsumerFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/companiesFragment"
@@ -276,4 +283,8 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+    <fragment
+        android:id="@+id/myQueuesConsumerFragment"
+        android:name="com.tcc.alif.view.ui.consumer.myqueues.MyQueuesConsumerFragment"
+        android:label="MyQueuesConsumerFragment" />
 </navigation>

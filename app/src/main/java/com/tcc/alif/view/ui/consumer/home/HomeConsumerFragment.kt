@@ -56,7 +56,9 @@ class HomeConsumerFragment : BaseFragment<FragmentHomeConsumerBinding>(FragmentH
     //TODO: Implement navigation
     private fun openOption(homeConsumer: HomeConsumerOptions){
         when(homeConsumer){
-            HomeConsumerOptions.MY_QUEUES -> {}
+            HomeConsumerOptions.MY_QUEUES -> {
+                openMyQueues()
+            }
             HomeConsumerOptions.QUEUES -> {}
             HomeConsumerOptions.PROFILE -> {
                 openProfile()
@@ -68,6 +70,22 @@ class HomeConsumerFragment : BaseFragment<FragmentHomeConsumerBinding>(FragmentH
         userPicture.setOnClickListener {
             openProfile()
         }
+
+        homeSwipe.setOnRefreshListener {
+            viewModel.handleIntent(
+                HomeConsumerIntent.LoadHistoric(
+                    idUser = args.user.uid
+                )
+            )
+        }
+    }
+
+    private fun openMyQueues(){
+        requireView()
+            .findNavController()
+            .navigate(
+                HomeConsumerFragmentDirections.toMyQueuesConsumer()
+            )
     }
 
     private fun openProfile(){
@@ -80,12 +98,20 @@ class HomeConsumerFragment : BaseFragment<FragmentHomeConsumerBinding>(FragmentH
 
     private fun setObserver() = viewModel.state.observe(viewLifecycleOwner){ state ->
         when(state){
-            is HomeConsumerState.Error -> Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
-            is HomeConsumerState.Loading -> {}
+            is HomeConsumerState.Error -> {
+                Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                updateLoading(false)
+            }
+            is HomeConsumerState.Loading -> updateLoading(state.loading)
             is HomeConsumerState.Historic -> {
                 historicAdapter.historicService = state.historic
+                updateLoading(false)
             }
         }
+    }
+
+    private fun updateLoading(loading: Boolean) = binding.run{
+        homeSwipe.isRefreshing = loading
     }
 
     private fun setView() = binding.run {

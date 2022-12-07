@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tcc.alif.data.model.HistoricService
+import com.tcc.alif.data.util.DateFormats
+import com.tcc.alif.data.util.toStringDate
 import com.tcc.alif.databinding.ItemHistoricBinding
 
 class HistoricAdapter(
@@ -23,8 +25,8 @@ class HistoricAdapter(
 
         fun bind(item: HistoricService) = binding.run {
             queueName.text = item.queueName
-            historicInsertedDate.text = item.insertedDate
-            historicStatus.text = context.getString(item.status)
+            historicInsertedDate.text = item.insertedDate.toDate().toStringDate(DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT)
+            historicStatus.text = context.getString(item.status.text)
         }
     }
 

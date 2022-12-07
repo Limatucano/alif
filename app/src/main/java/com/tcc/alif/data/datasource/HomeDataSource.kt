@@ -37,8 +37,8 @@ class HomeDataSource @Inject constructor(
                     historic.add(
                         HistoricService(
                             queueName = queue.name,
-                            insertedDate = service.enrollmentTime.toDate().toStringDate(DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT),
-                            status = CallStatus.getTextByValue(service.status),
+                            insertedDate = service.enrollmentTime,
+                            status = CallStatus.getCallStatusByValue(service.status),
                             idUser = idUser
                         )
                     )
@@ -46,7 +46,12 @@ class HomeDataSource @Inject constructor(
             }
         }
 
-        emit(Response.success(historic.toList()))
+        val historicAdjusted = historic.sortedWith{ first, second ->
+                first.insertedDate.compareTo(second.insertedDate)
+        }.filter {
+            it.status == CallStatus.FINISHED || it.status == CallStatus.CANCELED
+        }
+        emit(Response.success(historicAdjusted))
     }.catch {
         emit(Response.error(it.message ?: UNKNOWN_ERROR))
     }.flowOn(Dispatchers.IO)
