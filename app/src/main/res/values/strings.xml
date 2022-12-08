@@ -176,6 +176,10 @@
     <string name="employee_refused_status">Recusado pelo Usuário</string>
     <string name="employee_accepted_status">Meus Funcionários</string>
 
+    <string name="my_queues_consumer_position">#%s</string>
+    <string name="my_queues_consumer_position_in_progress">Em Andamento</string>
+    <string name="my_queues_estimated_time">Tempo Estimado: %s</string>
+
     <string name="warning">Atenção!</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>

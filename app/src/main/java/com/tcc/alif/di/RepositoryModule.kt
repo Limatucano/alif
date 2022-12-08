@@ -3,7 +3,6 @@ package com.tcc.alif.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.tcc.alif.data.api.AlifService
 import com.tcc.alif.data.api.CepService
 import com.tcc.alif.data.datasource.*
 import com.tcc.alif.data.repository.*
@@ -106,5 +105,21 @@ class RepositoryModule {
         homeDataSource: HomeDataSource
     ): HomeRepository = HomeRepository(
         homeDataSource = homeDataSource
+    )
+
+    @Provides
+    fun provideConsumerDataSource(
+        firebaseFirestore: FirebaseFirestore,
+        companyDataSource: CompanyDataSource
+    ) : ConsumerDataSource = ConsumerDataSource(
+        firebaseFirestore = firebaseFirestore,
+        companyDataSource = companyDataSource
+    )
+
+    @Provides
+    fun provideConsumerRepository(
+        consumerDataSource: ConsumerDataSource
+    ) : ConsumerRepository = ConsumerRepository(
+        consumerDataSource = consumerDataSource
     )
 }
