@@ -51,7 +51,7 @@
 
     <style name="SubTitle">
         <item name="android:textColor">@color/highGray</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="InternalScreenDescription.Description">

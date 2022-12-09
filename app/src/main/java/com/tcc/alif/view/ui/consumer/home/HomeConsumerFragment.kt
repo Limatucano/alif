@@ -53,13 +53,16 @@ class HomeConsumerFragment : BaseFragment<FragmentHomeConsumerBinding>(FragmentH
         )
     }
 
-    //TODO: Implement navigation
+    //TODO: think more about to add a new option to search companies
+    //TODO: add new option to configure notifications, app exit,
     private fun openOption(homeConsumer: HomeConsumerOptions){
         when(homeConsumer){
             HomeConsumerOptions.MY_QUEUES -> {
                 openMyQueues()
             }
-            HomeConsumerOptions.QUEUES -> {}
+            HomeConsumerOptions.QUEUES -> {
+                openQueues()
+            }
             HomeConsumerOptions.PROFILE -> {
                 openProfile()
             }
@@ -78,6 +81,14 @@ class HomeConsumerFragment : BaseFragment<FragmentHomeConsumerBinding>(FragmentH
                 )
             )
         }
+    }
+
+    private fun openQueues(){
+        requireView()
+            .findNavController()
+            .navigate(
+                HomeConsumerFragmentDirections.toQueuesConsumer()
+            )
     }
 
     private fun openMyQueues(){

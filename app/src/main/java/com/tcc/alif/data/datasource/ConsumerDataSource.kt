@@ -21,6 +21,38 @@ class ConsumerDataSource @Inject constructor(
     private val companyDataSource: CompanyDataSource
 ) {
 
+    fun searchQueues(
+        filter: String
+    ) : Flow<Response<List<QueueResponse>>> = flow {
+        emit(Response.loading(true))
+
+        getQueues().collect{ queues ->
+            val response = queues.filter {
+                it.name.uppercase().startsWith(filter.uppercase())
+            }
+            val responseMapped = response.map {
+                QueueResponse(
+                    idQueue = it.idQueue,
+                    idCompany = it.idCompany,
+                    companyName = companyDataSource.getCompany(it.idCompany).tradeName ?: "",
+                    name = it.name,
+                    status = it.status,
+                    openingTime = it.openingTime,
+                    closingTime = it.closingTime,
+                    quantity = it.quantity,
+                    description = it.description,
+                    titleCategory = it.titleCategory,
+                    employeeResponsible = it.employeeResponsible,
+                    averageTime = it.averageTime,
+                    employeeCreator = it.employeeCreator
+                )
+            }
+            emit(Response.success(responseMapped))
+        }
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
     fun getMyQueues(
         idUser: String
     ) : Flow<Response<List<MyQueuesResponse>>> = flow {

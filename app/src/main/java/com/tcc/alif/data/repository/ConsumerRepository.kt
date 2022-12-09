@@ -8,4 +8,6 @@ class ConsumerRepository @Inject constructor(
 ) {
 
     fun getMyQueues(idUser: String) = consumerDataSource.getMyQueues(idUser)
+
+    fun searchQueues(filter: String) = consumerDataSource.searchQueues(filter)
 }

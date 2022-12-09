@@ -15,6 +15,7 @@ data class Queues(
 data class QueueResponse(
     val idQueue : String = "",
     val idCompany: String = "",
+    var companyName: String = "",
     val name : String = "",
     val status : Int? = null,
     val openingTime : Timestamp = Timestamp(0,0),
