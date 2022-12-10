@@ -297,5 +297,13 @@
     <fragment
         android:id="@+id/queuesConsumerFragment"
         android:name="com.tcc.alif.view.ui.consumer.queues.QueuesConsumerFragment"
-        android:label="QueuesConsumerFragment" />
+        android:label="QueuesConsumerFragment" >
+        <action
+            android:id="@+id/toQrCode"
+            app:destination="@id/QrCodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/QrCodeFragment"
+        android:name="com.tcc.alif.view.ui.consumer.qrcode.QrCodeFragment"
+        android:label="AbstractQrCodeFragment" />
 </navigation>

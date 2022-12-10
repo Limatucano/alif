@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.util.setLinearLayout
@@ -15,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class QueuesConsumerFragment : BaseFragment<FragmentQueuesConsumerBinding>(FragmentQueuesConsumerBinding::inflate) {
 
     private val viewModel: QueuesConsumerViewModel by viewModels()
+    //TODO: implement navigation
     private val adapter: QueuesConsumerAdapter by lazy {
         QueuesConsumerAdapter(
             context = requireContext(),
@@ -70,5 +72,9 @@ class QueuesConsumerFragment : BaseFragment<FragmentQueuesConsumerBinding>(Fragm
                 viewModel.handleIntent(QueuesConsumerIntent.SearchQueues(it))
             }
         )
+
+        qrCode.setOnClickListener {
+            requireView().findNavController().navigate(QueuesConsumerFragmentDirections.toQrCode())
+        }
     }
 }
