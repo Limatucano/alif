@@ -18,13 +18,24 @@ class QueuesConsumerViewModel @Inject constructor(
 
     fun handleIntent(intent: QueuesConsumerIntent){
         when(intent){
-            is QueuesConsumerIntent.SearchQueues -> { searchQueues(intent.filter) }
+            is QueuesConsumerIntent.SearchQueues -> {
+                searchQueues(
+                    filter = intent.filter,
+                    byQrCode = intent.byQrCode
+                )
+            }
         }
     }
 
-    private fun searchQueues(filter: String){
+    private fun searchQueues(
+        filter: String,
+        byQrCode: Boolean
+    ){
         viewModelScope.launch {
-            repository.searchQueues(filter).request(
+            repository.searchQueues(
+                filter = filter,
+                byQrCode = byQrCode
+            ).request(
                 blockToRun = this,
                 onSuccess = { state.postValue(QueuesConsumerState.Queues(it)) },
                 onLoading = { state.postValue(QueuesConsumerState.Loading(it)) },

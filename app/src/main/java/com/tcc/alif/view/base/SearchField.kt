@@ -1,7 +1,6 @@
 package com.tcc.alif.view.base
 
 import android.content.Context
-import android.renderscript.ScriptGroup
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
@@ -10,9 +9,6 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.tcc.alif.R
 import com.tcc.alif.data.util.Mask
-import com.tcc.alif.data.util.MaskUtils
-import com.tcc.alif.data.util.MaskUtils.setCpfMask
-import com.tcc.alif.data.util.size
 import com.tcc.alif.databinding.SearchFieldBinding
 
 class SearchField @JvmOverloads constructor(
@@ -56,6 +52,10 @@ class SearchField @JvmOverloads constructor(
         binding.searchLayout.hint = hint.toString()
     }
 
+    fun setText(text: String) {
+        binding.searchText.setText(text)
+    }
+
     fun addTextChangedListener(mask: String) = binding.run{
         searchText.addTextChangedListener(
             Mask.mask(
@@ -87,7 +87,7 @@ class SearchField @JvmOverloads constructor(
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable?) {
-                if(s.toString().length >= minSearchSize){
+                if(s.toString().length > minSearchSize){
                     onTextChanged.invoke(s.toString())
                 }
             }

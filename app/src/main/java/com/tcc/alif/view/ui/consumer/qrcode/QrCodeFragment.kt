@@ -6,6 +6,7 @@ import android.graphics.Path
 import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
+import androidx.navigation.findNavController
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.DefaultDecoderFactory
 import com.tcc.alif.data.util.PermissionHelper
@@ -70,8 +71,15 @@ class QrCodeFragment :
         with(qrCodeView){
             decodeSingle {
                 stopDecoding()
-                it.text?.let {
-                    //TODO: return with the data
+                it.text?.let { qrCode ->
+                    findNavController()
+                        .previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set(
+                            QR_CODE_KEY,
+                            qrCode
+                        )
+                    findNavController().popBackStack()
                 }
             }
             resume()
@@ -96,8 +104,9 @@ class QrCodeFragment :
     }
 
     companion object{
-        const val LINE_ANIMATION_DURATION = 4000L
-        const val LINE_ANIMATION_Y = 900F
-        const val LINE_ANIMATION_X = 0F
+        private const val LINE_ANIMATION_DURATION = 4000L
+        private const val LINE_ANIMATION_Y = 900F
+        private const val LINE_ANIMATION_X = 0F
+        const val QR_CODE_KEY = "QrCode"
     }
 }

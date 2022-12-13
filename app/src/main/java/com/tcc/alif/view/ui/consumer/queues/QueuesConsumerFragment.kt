@@ -5,11 +5,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentQueuesConsumerBinding
 import com.tcc.alif.view.ui.BaseFragment
+import com.tcc.alif.view.ui.consumer.qrcode.QrCodeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -57,6 +59,17 @@ class QueuesConsumerFragment : BaseFragment<FragmentQueuesConsumerBinding>(Fragm
                 is QueuesConsumerState.Loading -> updateLoading(state.loading)
             }
         }
+
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<String>(QrCodeFragment.QR_CODE_KEY)
+            ?.observe(viewLifecycleOwner){ qrCode ->
+                viewModel.handleIntent(QueuesConsumerIntent.SearchQueues(
+                    filter = qrCode,
+                    byQrCode = true
+                ))
+            }
     }
 
     private fun updateLoading(loading: Boolean) = binding.run {

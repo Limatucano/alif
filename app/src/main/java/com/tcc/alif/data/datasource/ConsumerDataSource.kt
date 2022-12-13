@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ConsumerDataSource @Inject constructor(
@@ -22,13 +21,20 @@ class ConsumerDataSource @Inject constructor(
 ) {
 
     fun searchQueues(
-        filter: String
+        filter: String,
+        byQrCode: Boolean
     ) : Flow<Response<List<QueueResponse>>> = flow {
         emit(Response.loading(true))
 
         getQueues().collect{ queues ->
-            val response = queues.filter {
-                it.name.uppercase().startsWith(filter.uppercase())
+            val response = if(byQrCode){
+                queues.filter{
+                    it.idQueue == filter
+                }
+            } else {
+                queues.filter {
+                    it.name.uppercase().startsWith(filter.uppercase())
+                }
             }
             val responseMapped = response.map {
                 QueueResponse(
