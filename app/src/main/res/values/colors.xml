@@ -7,6 +7,7 @@
     <color name="pink">#D9597B</color>
     <color name="red">#c53929</color>
     <color name="black">#131313</color>
+    <color name="alphaBlack">#66131313</color>
     <color name="white">#FFFFFF</color>
     <color name="lowGray">#FFF7F7</color>
     <color name="Gray">#ECECEC</color>

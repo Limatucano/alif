@@ -1,11 +1,15 @@
 package com.tcc.alif.view.ui.consumer.qrcode
 
 import android.Manifest
+import android.animation.ObjectAnimator
+import android.graphics.Path
 import android.os.Bundle
 import android.view.View
+import android.view.animation.LinearInterpolator
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.DefaultDecoderFactory
 import com.tcc.alif.data.util.PermissionHelper
+import com.tcc.alif.data.util.openAppSystemSettings
 import com.tcc.alif.databinding.FragmentQrcodeAbstractBinding
 import com.tcc.alif.view.ui.BaseFragment
 
@@ -15,20 +19,37 @@ class QrCodeFragment :
 {
 
     private var isShowingScanner = false
-
     private val permissionHelper : PermissionHelper = PermissionHelper(
         fragment = this,
         permission = Manifest.permission.CAMERA,
         onPermissionResult = this
     )
 
-    //TODO: implement view in camera
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar(
             title = ""
         )
         setView()
+        animateScanner()
+    }
+
+    private fun animateScanner() = binding.run {
+        val path = Path().apply {
+            rLineTo(
+                LINE_ANIMATION_X,
+                LINE_ANIMATION_Y
+            )
+        }
+        ObjectAnimator.ofFloat(lineScanner, View.X, View.Y, path).apply {
+            duration = LINE_ANIMATION_DURATION
+            interpolator = LinearInterpolator()
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+            if(!isStarted){
+                start()
+            }
+        }
     }
 
     private fun setView() = binding.run {
@@ -50,7 +71,7 @@ class QrCodeFragment :
             decodeSingle {
                 stopDecoding()
                 it.text?.let {
-
+                    //TODO: return with the data
                 }
             }
             resume()
@@ -71,6 +92,12 @@ class QrCodeFragment :
         deniedPermissions: List<String>,
         deniedPermissionsWithNeverAskAgain: List<String>
     ) {
-        //TODO: Implement modal to go to settings
+        requireContext().openAppSystemSettings()
+    }
+
+    companion object{
+        const val LINE_ANIMATION_DURATION = 4000L
+        const val LINE_ANIMATION_Y = 900F
+        const val LINE_ANIMATION_X = 0F
     }
 }
