@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
@@ -49,6 +50,7 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
         setObserver()
         setViews()
         setListener()
+        inflateMenu(R.menu.menu_queue)
     }
 
     private fun setAdapter(){
@@ -126,6 +128,15 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
     private fun setListener(){
         binding.queueSwipe.setOnRefreshListener {
             viewModel.handleIntent(QueueIntent.GetCalls(queue.idQueue))
+        }
+        menuItemListener{ item ->
+            when(item.itemId){
+                R.id.action_qrCode -> {
+                    requireView().findNavController().navigate(
+                        QueueFragmentDirections.actionQueueFragmentToQrCodeFragment2(queue.idQueue)
+                    )
+                }
+            }
         }
     }
 

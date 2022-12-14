@@ -4,7 +4,9 @@ import android.app.Activity
 import android.graphics.Bitmap
 
 sealed class QrCodeIntent{
-    data class GenerateQrCode(val idCompany: String) : QrCodeIntent()
+    data class GenerateQrCode(
+        val value: String
+    ) : QrCodeIntent()
     data class PrintQrCode(
         val qrCode: Bitmap,
         val activity: Activity

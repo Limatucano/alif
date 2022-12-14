@@ -4,21 +4,17 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.net.Uri
-import androidmads.library.qrgenearator.QRGContents
-import androidmads.library.qrgenearator.QRGEncoder
 import androidx.core.content.FileProvider
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.print.PrintHelper
-import com.tcc.alif.R
+import com.tcc.alif.data.util.generateQrCode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import java.io.FileOutputStream
 import javax.inject.Inject
-
 
 @HiltViewModel
 class QrCodeViewModel @Inject constructor(
@@ -29,7 +25,7 @@ class QrCodeViewModel @Inject constructor(
 
     fun handleIntent(intent: QrCodeIntent){
         when(intent){
-            is QrCodeIntent.GenerateQrCode -> generateQrCode(intent.idCompany)
+            is QrCodeIntent.GenerateQrCode -> generateQrCode(intent.value)
             is QrCodeIntent.PrintQrCode -> printQrCode(
                 qrCode = intent.qrCode,
                 activity = intent.activity
@@ -110,18 +106,10 @@ class QrCodeViewModel @Inject constructor(
         }
     }
 
-    private fun generateQrCode(idCompany: String){
-        val encoder = QRGEncoder(
-            idCompany,
-            null,
-            QRGContents.Type.TEXT,
-            QR_CODE_SIZE
-        )
-        encoder.colorBlack = Color.TRANSPARENT
-        encoder.colorWhite = context.resources.getColor(R.color.pink, null)
+    private fun generateQrCode(value: String){
         state.postValue(
             QrCodeState.QrCodeLoaded(
-                qrCode = encoder.bitmap
+                qrCode = context.generateQrCode(value = value)
             )
         )
     }

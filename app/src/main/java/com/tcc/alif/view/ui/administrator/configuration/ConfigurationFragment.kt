@@ -48,7 +48,7 @@ class ConfigurationFragment : BaseFragment<FragmentConfigurationBinding>(Fragmen
 
     private fun setListener() = binding.run {
         qrCode.setOnClickListener {
-            val direction = MainAdministratorFragmentDirections.toQrCodePage()
+            val direction = MainAdministratorFragmentDirections.toQrCodePage(sharedPreferences.companyId ?: "")
             requireView().findNavController().navigate(direction)
         }
     }

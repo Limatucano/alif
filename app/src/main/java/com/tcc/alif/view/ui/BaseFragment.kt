@@ -2,6 +2,7 @@ package com.tcc.alif.view.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
@@ -33,6 +34,18 @@ open class BaseFragment<V: ViewBinding>(private val inflate : Inflate<V>) : Frag
 
     fun getToolbar() : Toolbar = (requireActivity() as BaseActivity<*>).getToolbar()
 
+    fun inflateMenu(menu: Int) = (requireActivity() as BaseActivity<*>).inflateMenu(menu)
+
+    fun menuItemListener(menuItemClicked: (item: MenuItem) -> Unit){
+        (requireActivity() as BaseActivity<*>).menuItemListener{
+            menuItemClicked.invoke(it)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (requireActivity() as BaseActivity<*>).removeMenu()
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

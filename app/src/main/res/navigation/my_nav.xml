@@ -219,6 +219,9 @@
         <argument
             android:name="queue"
             app:argType="com.tcc.alif.data.model.QueueResponse" />
+        <action
+            android:id="@+id/action_queueFragment_to_qrCodeFragment2"
+            app:destination="@id/qrCodeFragment" />
     </fragment>
     <fragment
         android:id="@+id/queueFormFragment"
@@ -231,7 +234,11 @@
     <fragment
         android:id="@+id/qrCodeFragment"
         android:name="com.tcc.alif.view.ui.administrator.configuration.qrcode.QrCodeFragment"
-        android:label="QrCodeFragment" />
+        android:label="QrCodeFragment" >
+        <argument
+            android:name="value"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.tcc.alif.view.ui.administrator.configuration.changepassword.ChangePasswordFragment"

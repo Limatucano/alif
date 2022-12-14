@@ -2,6 +2,7 @@ package com.tcc.alif.view.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,19 @@ open class BaseActivity<V : ViewBinding>(val inflate : Factory<V>) : AppCompatAc
 
     private val customToolbar: CustomToolbarBinding by lazy {
         CustomToolbarBinding.bind(findViewById(R.id.toolbarLayout))
+    }
+
+    fun inflateMenu(menu: Int) = customToolbar.run {
+        toolbar.inflateMenu(menu)
+    }
+
+    fun removeMenu() = customToolbar.toolbar.menu.clear()
+
+    fun menuItemListener(menuItemClicked: (item: MenuItem) -> Unit){
+        customToolbar.toolbar.setOnMenuItemClickListener {
+            menuItemClicked.invoke(it)
+            return@setOnMenuItemClickListener true
+        }
     }
 
     fun setupToolbar(
