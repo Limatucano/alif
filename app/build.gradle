@@ -19,7 +19,8 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-
+        buildConfigField "String", "ONE_SIGNAL_API_KEY", ONE_SIGNAL_API_KEY
+        buildConfigField "String", "ONE_SIGNAL_API", ONE_SIGNAL_API
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -42,6 +43,9 @@ android {
 }
 
 dependencies {
+
+    //OneSignal
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
 
     //QRCode
     implementation 'com.github.androidmads:QRGenerator:1.0.1'

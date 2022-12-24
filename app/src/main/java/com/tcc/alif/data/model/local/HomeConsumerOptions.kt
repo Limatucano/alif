@@ -19,5 +19,9 @@ enum class HomeConsumerOptions(
     PROFILE(
         title = R.string.home_consumer_profile,
         icon = R.drawable.ic_profile
+    ),
+    COMPANIES(
+        title = R.string.home_consumer_companies,
+        icon = R.drawable.ic_store
     )
 }

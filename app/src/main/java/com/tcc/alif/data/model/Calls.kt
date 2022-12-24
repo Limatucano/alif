@@ -22,7 +22,8 @@ data class Call(
     val cellphone : String,
     val birthDate : String,
     val status : CallStatus,
-    val cpf : String
+    val cpf : String,
+    val email: String
 ): Parcelable
 
 enum class CallStatus(

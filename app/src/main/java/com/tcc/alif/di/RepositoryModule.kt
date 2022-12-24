@@ -4,6 +4,7 @@ package com.tcc.alif.di
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tcc.alif.data.api.CepService
+import com.tcc.alif.data.api.OneSignalService
 import com.tcc.alif.data.datasource.*
 import com.tcc.alif.data.repository.*
 import dagger.Module
@@ -40,9 +41,11 @@ class RepositoryModule {
 
     @Provides
     fun provideAdministratorDataSource(
-        firebaseFirestore: FirebaseFirestore
+        firebaseFirestore: FirebaseFirestore,
+        oneSignalService: OneSignalService
     ) : AdministratorDataSource = AdministratorDataSource(
-        firebaseFirestore = firebaseFirestore
+        firebaseFirestore = firebaseFirestore,
+        oneSignalService = oneSignalService
     )
 
     @Provides

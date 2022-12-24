@@ -7,6 +7,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
+import com.google.firebase.messaging.ktx.remoteMessage
 import com.tcc.alif.R
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.model.local.HomeConsumerOptions
@@ -51,10 +54,15 @@ class HomeConsumerFragment : BaseFragment<FragmentHomeConsumerBinding>(FragmentH
                 idUser = args.user.uid
             )
         )
+
+        val firebaseMessaging = Firebase.messaging
+        firebaseMessaging.send(remoteMessage("114053584588@fcm.googleapis.com"){
+            messageId = messageId.toString()
+            addData("message","testando")
+            addData("title","teste")
+        })
     }
 
-    //TODO: think more about to add a new option to search companies
-    //TODO: add new option to configure notifications, app exit,
     private fun openOption(homeConsumer: HomeConsumerOptions){
         when(homeConsumer){
             HomeConsumerOptions.MY_QUEUES -> {
@@ -65,6 +73,9 @@ class HomeConsumerFragment : BaseFragment<FragmentHomeConsumerBinding>(FragmentH
             }
             HomeConsumerOptions.PROFILE -> {
                 openProfile()
+            }
+            HomeConsumerOptions.COMPANIES -> {
+                openCompanies()
             }
         }
     }
@@ -81,6 +92,10 @@ class HomeConsumerFragment : BaseFragment<FragmentHomeConsumerBinding>(FragmentH
                 )
             )
         }
+    }
+
+    private fun openCompanies(){
+
     }
 
     private fun openQueues(){

@@ -7,9 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
-import com.tcc.alif.data.model.CompanyResponse
-import com.tcc.alif.data.model.QueueResponse
-import com.tcc.alif.data.model.Queues
+import com.tcc.alif.data.model.*
 import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentHomeLojistaBinding
 import com.tcc.alif.view.adapter.QueuesAdapter

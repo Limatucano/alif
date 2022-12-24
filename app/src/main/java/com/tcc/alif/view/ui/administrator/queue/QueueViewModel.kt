@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tcc.alif.data.model.CallStatus
+import com.tcc.alif.data.model.NotificationRequest
 import com.tcc.alif.data.model.local.StatusQueue
 import com.tcc.alif.data.repository.AdministratorRepository
 import com.tcc.alif.data.util.Constants.STATUS
@@ -32,7 +33,17 @@ class QueueViewModel @Inject constructor(
                 status = intent.status,
                 idQueue = intent.idQueue
             )
+            is QueueIntent.SendNotification -> sendPushNotification(intent.notificationRequest)
         }
+    }
+
+    private fun sendPushNotification(notificationRequest: NotificationRequest){
+        viewModelScope.request(
+            blockToRun = { repository.sendPushNotification(notificationRequest) },
+            onSuccess = {},
+            onLoading = {},
+            onError = { state.postValue(QueueState.Error(it)) }
+        )
     }
 
     private fun updateQueueStatus(

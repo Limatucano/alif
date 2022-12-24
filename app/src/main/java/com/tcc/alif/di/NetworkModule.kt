@@ -4,8 +4,10 @@ import android.app.Application
 import android.content.Context
 import com.tcc.alif.data.api.AlifService
 import com.tcc.alif.data.api.CepService
+import com.tcc.alif.data.api.OneSignalService
 import com.tcc.alif.data.util.Constants.API_BASE_URL
 import com.tcc.alif.data.util.Constants.API_CEP_URL
+import com.tcc.alif.data.util.Constants.API_ONE_SIGNAL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +27,7 @@ private const val CONNECT_TIMEOUT = 30L
 
 @Qualifier annotation class ApiRetrofit
 @Qualifier annotation class CepRetrofit
+@Qualifier annotation class OneSignalRetrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -89,6 +92,26 @@ object NetworkModule {
             .addConverterFactory(gsonConverterFactory)
             .client(okHttpClient)
             .build()
+    }
+
+    @Singleton
+    @Provides
+    @OneSignalRetrofit
+    fun provideOneSignalInstance(
+        gsonConverterFactory: GsonConverterFactory,
+        okHttpClient: OkHttpClient
+    ) : Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(API_ONE_SIGNAL)
+            .addConverterFactory(gsonConverterFactory)
+            .client(okHttpClient)
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideOneSignalService(@OneSignalRetrofit retrofit: Retrofit) : OneSignalService {
+        return retrofit.create(OneSignalService::class.java)
     }
 
     @Singleton

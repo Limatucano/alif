@@ -1,9 +1,8 @@
 package com.tcc.alif.data.datasource
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.tcc.alif.data.api.OneSignalService
 import com.tcc.alif.data.model.*
-import com.tcc.alif.data.model.QueueRequest.Companion.modelToMap
-import com.tcc.alif.data.model.local.StatusQueue
 import com.tcc.alif.data.util.Constants
 import com.tcc.alif.data.util.Constants.ID_COMPANY
 import com.tcc.alif.data.util.Constants.ID_QUEUE
@@ -22,8 +21,14 @@ import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class AdministratorDataSource @Inject constructor(
-    private val firebaseFirestore: FirebaseFirestore
+    private val firebaseFirestore: FirebaseFirestore,
+    private val oneSignalService: OneSignalService
 ){
+
+    suspend fun sendPushNotification(
+        notificationRequest: NotificationRequest
+    ) = oneSignalService.sendPushNotification(notification = notificationRequest)
+
     fun updateQueue(
         idQueue: String,
         queue: Map<String, Comparable<*>?>
@@ -163,7 +168,8 @@ class AdministratorDataSource @Inject constructor(
         cellphone = userData.cellphone,
         birthDate = userData.birthDate,
         cpf = userData.cpf,
-        status = CallStatus.values().first{ it.value == service.status }
+        status = CallStatus.values().first{ it.value == service.status },
+        email = userData.email
     )
 
     fun getQueuesByCompany(

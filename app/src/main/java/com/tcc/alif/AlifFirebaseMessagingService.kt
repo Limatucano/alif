@@ -59,7 +59,7 @@ class AlifFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager.createNotificationChannel(NotificationChannel(
             CHANNEL,
             getString(R.string.app_name),
-            NotificationManager.IMPORTANCE_DEFAULT
+            NotificationManager.IMPORTANCE_HIGH
         ))
         notificationManager.notify(msgCounter, notificationBuilder.build())
         msgCounter += 1

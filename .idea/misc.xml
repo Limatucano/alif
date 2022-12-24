@@ -37,6 +37,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_qr_code.xml" value="0.2455" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_queues.xml" value="0.2775" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_share.xml" value="0.196" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_store.xml" value="0.196" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_teste.xml" value="0.2035" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_three_dots_vert.xml" value="0.2355" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/drawable/ic_wave_100s_953px.xml" value="0.2455" />
@@ -77,6 +78,7 @@
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_business_requests.xml" value="0.3269927536231884" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_changepassword.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_companies.xml" value="0.22" />
+        <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_companies_consumer.xml" value="0.48723118279569894" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_company_form.xml" value="0.33" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_config_cliente.xml" value="0.18802083333333333" />
         <entry key="..\:/TCC/Codes/alif/app/src/main/res/layout/fragment_config_lojista.xml" value="0.18802083333333333" />

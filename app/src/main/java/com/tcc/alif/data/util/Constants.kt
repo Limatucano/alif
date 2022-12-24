@@ -3,9 +3,15 @@ package com.tcc.alif.data.util
 object Constants {
     const val API_BASE_URL = "https://backend-api-alif.herokuapp.com/"
     const val API_CEP_URL = "https://viacep.com.br/ws/"
+    const val API_ONE_SIGNAL = "https://onesignal.com/api/v1/"
 
     const val ADMINISTRATOR_MODE = "A"
     const val CONSUMER_MODE = "C"
+
+    const val PUSH_NOTIFICATION_FEATURE = true
+
+    const val PUSH_NOTIFICATION_TITLE = "Sua hora está chegando!"
+    const val PUSH_NOTIFICATION_NAME = "ALIF atualização de atendimento"
 
     ////// collections
     const val COMPANY_COLLECTION = "company"

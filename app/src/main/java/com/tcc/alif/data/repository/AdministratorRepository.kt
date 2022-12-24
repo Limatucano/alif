@@ -2,12 +2,16 @@ package com.tcc.alif.data.repository
 
 import com.tcc.alif.data.datasource.AdministratorDataSource
 import com.tcc.alif.data.model.CallStatus
+import com.tcc.alif.data.model.NotificationRequest
 import com.tcc.alif.data.model.QueueRequest
 import javax.inject.Inject
 
 class AdministratorRepository @Inject constructor(
     private val administratorDataSource: AdministratorDataSource
 ) {
+
+    suspend fun sendPushNotification(notificationRequest: NotificationRequest) =
+        administratorDataSource.sendPushNotification(notificationRequest)
 
     fun updateCallStatus(
         status: CallStatus,

@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import com.onesignal.OneSignal
 import com.tcc.alif.data.model.Signin
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.model.local.AccountType
@@ -47,6 +48,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 is SigninState.Success -> {
                     updateLoading(false)
                     setupSharedPreferences(state.user)
+                    OneSignal.setEmail(state.user.email)
+                    OneSignal.setExternalUserId(state.user.email)
                     openHomeScreen(state.user)
                 }
             }

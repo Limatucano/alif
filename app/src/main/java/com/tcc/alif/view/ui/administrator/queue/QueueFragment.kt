@@ -8,9 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
-import com.tcc.alif.data.model.Call
-import com.tcc.alif.data.model.CallStatus
-import com.tcc.alif.data.model.QueueResponse
+import com.tcc.alif.data.model.*
 import com.tcc.alif.data.model.local.StatusQueue
 import com.tcc.alif.data.model.local.StatusQueue.Companion.getByStringRes
 import com.tcc.alif.data.util.*
@@ -110,6 +108,7 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
                 is QueueState.Calls -> {
                     setAdapterItems(state.calls)
                     updateAvailableQuantity(state.quantity)
+                    sendNotification(state.calls)
                     updateLoading(false)
                 }
                 is QueueState.Error -> {
@@ -123,6 +122,25 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
                 }
             }
         }
+    }
+
+    private fun sendNotification(calls: List<Call>){
+        val nextCall = calls.filter{ call ->
+            call.status == CallStatus.IN_HOLD
+        }.sortedWith { first, second ->
+            first.enrollmentTime.compareTo(second.enrollmentTime)
+        }[0]
+
+        viewModel.handleIntent(
+            QueueIntent.SendNotification(
+                NotificationRequest(
+                    contents = ContentData(en = getString(R.string.push_notification_call_updated_message, queue.name)),
+                    headings = ContentData(en = Constants.PUSH_NOTIFICATION_TITLE),
+                    name = Constants.PUSH_NOTIFICATION_NAME,
+                    includeExternalUserIds = listOf(nextCall.email)
+                )
+            )
+        )
     }
 
     private fun setListener(){
