@@ -308,9 +308,20 @@
         <action
             android:id="@+id/toQrCode"
             app:destination="@id/QrCodeFragment" />
+        <action
+            android:id="@+id/toQueueConsumer"
+            app:destination="@id/queueConsumerFragment" />
     </fragment>
     <fragment
         android:id="@+id/QrCodeFragment"
         android:name="com.tcc.alif.view.ui.consumer.qrcode.QrCodeFragment"
         android:label="AbstractQrCodeFragment" />
+    <fragment
+        android:id="@+id/queueConsumerFragment"
+        android:name="com.tcc.alif.view.ui.consumer.queuedetail.QueueConsumerFragment"
+        android:label="QueueConsumerFragment" >
+        <argument
+            android:name="queue"
+            app:argType="com.tcc.alif.data.model.QueueResponse" />
+    </fragment>
 </navigation>

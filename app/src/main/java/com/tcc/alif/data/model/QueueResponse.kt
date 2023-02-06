@@ -67,6 +67,7 @@ data class QueueResponse(
 
 @Parcelize
 data class Service(
+    var idService: String = "",
     var enrollmentTime: Timestamp = Timestamp(0,0),
     var status: String = "",
     var userId: String = "",
@@ -76,8 +77,20 @@ data class Service(
 
     fun toListService(map: HashMap<String,Any>) =
         Service(
+            idService = map["idService"].toString().emptyIfNull(),
+            employeeResponsible = map["employeeResponsible"].toString().emptyIfNull(),
             enrollmentTime = (map["enrollmentTime"] as Timestamp),
             status = map["status"].toString().emptyIfNull(),
             userId = map["userId"].toString().emptyIfNull()
         )
+
+    companion object{
+        fun Service.modelToMap() = mapOf(
+            "enrollmentTime" to enrollmentTime,
+            "employeeResponsible" to employeeResponsible,
+            "idService" to idService,
+            "status" to status,
+            "userId" to userId
+        )
+    }
 }

@@ -87,6 +87,7 @@ class AdministratorDataSource @Inject constructor(
                 .service
                 .map { service ->
                     Service(
+                        idService = service.idService,
                         enrollmentTime = service.enrollmentTime,
                         status = if(service.userId == idUser) status.value else service.status,
                         employeeResponsible = if(service.userId == idUser) idEmployee else service.employeeResponsible,
@@ -159,7 +160,11 @@ class AdministratorDataSource @Inject constructor(
             it.status == status
         }
 
-    private fun generateCall(userData: SigninResponse, service: Service) = Call(
+    private fun generateCall(
+        userData: SigninResponse,
+        service: Service
+    ) = Call(
+        idService = service.idService,
         idConsumer = userData.uid,
         employeeName = "",
         employeeRole = "",
@@ -200,6 +205,7 @@ class AdministratorDataSource @Inject constructor(
                 employeeResponsible = queueResponse.employeeResponsible,
                 service = queueResponse.service.map { service ->
                     Service(
+                        idService = service.idService,
                         name = getUserData(service.userId).name,
                         userId = service.userId,
                         enrollmentTime = service.enrollmentTime,
@@ -212,6 +218,7 @@ class AdministratorDataSource @Inject constructor(
                     it.status == CallStatus.IN_HOLD.value
                 }.map { service ->
                     Service(
+                        idService = service.idService,
                         name = getUserData(service.userId).name,
                         userId = service.userId,
                         enrollmentTime = service.enrollmentTime,

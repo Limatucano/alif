@@ -180,6 +180,11 @@
     <string name="my_queues_consumer_position_in_progress">Em Andamento</string>
     <string name="my_queues_estimated_time">Tempo Estimado: %s</string>
 
+    <string name="queue_consumer_average_time_message"><![CDATA[<b>%s min<br>em média</b><br>para ser atendido.]]></string>
+    <string name="queue_consumer_quantity_before_me"><![CDATA[<b>%s<br>pessoas</b><br>na fila]]></string>
+    <string name="queue_consumer_button_subscribe">Inscrever-se</string>
+    <string name="queue_consumer_button_cancel">Cancelar Inscrição</string>
+
     <string name="warning">Atenção!</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>

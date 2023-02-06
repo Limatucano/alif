@@ -14,6 +14,7 @@ data class Calls(
 
 @Parcelize
 data class Call(
+    val idService: String,
     val idConsumer : String,
     val employeeName : String,
     val employeeRole : String,

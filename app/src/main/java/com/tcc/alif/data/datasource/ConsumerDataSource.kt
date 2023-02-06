@@ -1,11 +1,11 @@
 package com.tcc.alif.data.datasource
 
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.tcc.alif.data.model.CallStatus
-import com.tcc.alif.data.model.MyQueuesResponse
-import com.tcc.alif.data.model.QueueResponse
-import com.tcc.alif.data.model.Response
+import com.tcc.alif.data.model.*
+import com.tcc.alif.data.model.Service.Companion.modelToMap
 import com.tcc.alif.data.util.Constants
+import com.tcc.alif.data.util.Constants.SERVICE
 import com.tcc.alif.data.util.UNKNOWN_ERROR
 import com.tcc.alif.data.util.await
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +19,34 @@ class ConsumerDataSource @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore,
     private val companyDataSource: CompanyDataSource
 ) {
+    fun cancelSubscription(
+        idQueue: String,
+        service: Service
+    ) : Flow<Response<String>> = flow {
+        emit(Response.loading(true))
+
+        val document = getQueueDocument(idQueue)
+        val serviceAdjusted = service.copy(status = CallStatus.CANCELED.value)
+        if(document != null){
+            firebaseFirestore
+                .collection(Constants.QUEUE_COLLECTION)
+                .document(document)
+                .update(SERVICE,FieldValue.arrayRemove(service.modelToMap()))
+                .await()
+            firebaseFirestore
+                .collection(Constants.QUEUE_COLLECTION)
+                .document(document)
+                .update(SERVICE, FieldValue.arrayUnion(serviceAdjusted.modelToMap()))
+                .await()
+        }else{
+            emit(Response.error(UNKNOWN_ERROR))
+            return@flow
+        }
+
+        emit(Response.success(Constants.CANCELLED_SUBSCRIPTION))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
 
     fun searchQueues(
         filter: String,
@@ -77,11 +105,14 @@ class ConsumerDataSource @Inject constructor(
                     if(service.userId == idUser){
                         myQueues.add(
                             MyQueuesResponse(
+                                idService = service.idService,
                                 idQueue = queue.idQueue,
                                 queueName = queue.name,
                                 consumerPosition = (quantityInProgress - (index + 1)) * -1,
                                 estimatedTime = queue.averageTime?.times(index - 1),
                                 idUser = idUser,
+                                employeeResponsible = service.employeeResponsible,
+                                enrollmentTime = service.enrollmentTime,
                                 companyName = companyDataSource.getCompany(queue.idCompany).tradeName ?: "",
                                 status = CallStatus.getCallStatusByValue(service.status)
                             )
@@ -94,6 +125,17 @@ class ConsumerDataSource @Inject constructor(
     }.catch {
         emit(Response.error(it.message ?: UNKNOWN_ERROR))
     }.flowOn(Dispatchers.IO)
+
+    private suspend fun getQueueDocument(
+        idQueue: String
+    ) = firebaseFirestore
+        .collection(Constants.QUEUE_COLLECTION)
+        .whereEqualTo(Constants.ID_QUEUE,idQueue)
+        .get()
+        .await()
+        .documents
+        .firstOrNull()
+        ?.id
 
     private fun getQueues() : Flow<List<QueueResponse>> = flow{
         val response = firebaseFirestore

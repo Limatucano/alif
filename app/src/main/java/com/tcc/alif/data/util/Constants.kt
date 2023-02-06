@@ -47,6 +47,7 @@ object Constants {
     const val EMPLOYEE_SUCCESSFULLY_INSERTED = "Funcionário adicionado com sucesso!"
     const val EMPLOYEE_ALREADY_EXISTS = "Funcionário já existe!"
     const val BUSINESS_ADJUSTED = "Notificação atualizada com sucesso!"
+    const val CANCELLED_SUBSCRIPTION = "Inscrição cancelada com sucesso!"
 
     const val STATE_NOT_MAPPED = "state not mapped"
     const val LANGUAGE_PT = "pt"

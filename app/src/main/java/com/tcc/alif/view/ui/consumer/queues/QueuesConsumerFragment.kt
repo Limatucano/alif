@@ -18,11 +18,18 @@ import dagger.hilt.android.AndroidEntryPoint
 class QueuesConsumerFragment : BaseFragment<FragmentQueuesConsumerBinding>(FragmentQueuesConsumerBinding::inflate) {
 
     private val viewModel: QueuesConsumerViewModel by viewModels()
-    //TODO: implement navigation
+
     private val adapter: QueuesConsumerAdapter by lazy {
         QueuesConsumerAdapter(
             context = requireContext(),
-            action = {}
+            action = { queue ->
+                requireView()
+                    .findNavController()
+                    .navigate(
+                        QueuesConsumerFragmentDirections
+                            .toQueueConsumer(queue)
+                    )
+            }
         )
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -54,13 +54,6 @@ class HomeConsumerFragment : BaseFragment<FragmentHomeConsumerBinding>(FragmentH
                 idUser = args.user.uid
             )
         )
-
-        val firebaseMessaging = Firebase.messaging
-        firebaseMessaging.send(remoteMessage("114053584588@fcm.googleapis.com"){
-            messageId = messageId.toString()
-            addData("message","testando")
-            addData("title","teste")
-        })
     }
 
     private fun openOption(homeConsumer: HomeConsumerOptions){

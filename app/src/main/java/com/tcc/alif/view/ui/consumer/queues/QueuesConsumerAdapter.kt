@@ -9,7 +9,7 @@ import com.tcc.alif.databinding.QueuesConsumerItemBinding
 
 class QueuesConsumerAdapter(
     private val context: Context,
-    private val action: () -> Unit
+    private val action: (queue: QueueResponse) -> Unit
 ) : RecyclerView.Adapter<QueuesConsumerAdapter.ViewHolder>() {
 
     var queues: List<QueueResponse> = listOf()
@@ -26,6 +26,10 @@ class QueuesConsumerAdapter(
             queueName.text = item.name
             companyName.text = item.companyName
             queueStatus.text = item.status?.let { context.getString(it) }
+
+            root.setOnClickListener {
+                action.invoke(item)
+            }
         }
     }
 
