@@ -11,4 +11,9 @@ sealed class QueueConsumerIntent{
         val idQueue: String,
         val service: Service
     ) : QueueConsumerIntent()
+
+    data class Subscribe(
+        val idQueue: String,
+        val service: Service
+    ) : QueueConsumerIntent()
 }

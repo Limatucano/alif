@@ -31,6 +31,35 @@ class QueueConsumerViewModel @Inject constructor(
                     service = intent.service
                 )
             }
+            is QueueConsumerIntent.Subscribe -> {
+                subscribe(
+                    idQueue = intent.idQueue,
+                    service = intent.service
+                )
+            }
+        }
+    }
+
+    private fun subscribe(
+        idQueue: String,
+        service: Service
+    ){
+        viewModelScope.launch {
+            repository.subscribe(
+                idQueue = idQueue,
+                service = service
+            ).request(
+                blockToRun = this,
+                onError = {
+                    state.postValue(QueueConsumerState.Error(it))
+                },
+                onLoading = {
+                    state.postValue(QueueConsumerState.Loading(it))
+                },
+                onSuccess = {
+                    state.postValue(QueueConsumerState.Subscribed(it))
+                }
+            )
         }
     }
 
@@ -75,7 +104,7 @@ class QueueConsumerViewModel @Inject constructor(
                         it.idQueue == idQueue
                     }
                     state.postValue(
-                        QueueConsumerState.SubscribedQueue(
+                        QueueConsumerState.AlreadySubscribed(
                             isSubscribed = (myQueues.isNotEmpty() && queue != null),
                             idService = queue?.idService,
                             response = queue

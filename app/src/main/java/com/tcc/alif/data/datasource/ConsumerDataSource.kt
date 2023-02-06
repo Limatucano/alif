@@ -19,6 +19,28 @@ class ConsumerDataSource @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore,
     private val companyDataSource: CompanyDataSource
 ) {
+    fun subscribe(
+        idQueue: String,
+        service: Service
+    ) : Flow<Response<String>> = flow {
+        emit(Response.loading(true))
+        val document = getQueueDocument(idQueue)
+        if(document != null){
+            firebaseFirestore
+                .collection(Constants.QUEUE_COLLECTION)
+                .document(document)
+                .update(SERVICE, FieldValue.arrayUnion(service.modelToMap()))
+                .await()
+        }else{
+            emit(Response.error(UNKNOWN_ERROR))
+            return@flow
+        }
+
+        emit(Response.success(Constants.SUBSCRIPTION_SUCCESSFULLY))
+    }.catch {
+        emit(Response.error(it.message ?: UNKNOWN_ERROR))
+    }.flowOn(Dispatchers.IO)
+
     fun cancelSubscription(
         idQueue: String,
         service: Service

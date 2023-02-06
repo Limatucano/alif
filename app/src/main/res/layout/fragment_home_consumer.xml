@@ -19,32 +19,23 @@
             <TextView
                 android:id="@+id/userName"
                 style="@style/TitleLight"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginHorizontal="@dimen/margin_default"
                 android:textSize="18sp"
-                android:layout_marginHorizontal="@dimen/margin_default"
-                app:layout_constraintBottom_toBottomOf="@+id/userPicture"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/userPicture"
-                tools:text="Olá, Matheus Lima Corrêa" />
-
-            <ImageView
-                android:id="@+id/userPicture"
-                android:layout_width="@dimen/margin_higher"
-                android:layout_height="@dimen/margin_higher"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginHorizontal="@dimen/margin_default"
-                android:src="@drawable/profile_picture_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Olá, Matheus Lima Corrêa" />
 
             <TextView
                 android:id="@+id/textView4"
                 style="@style/InternalScreenDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"
                 android:layout_marginHorizontal="@dimen/margin_default"
-                android:layout_marginTop="@dimen/margin_higher"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/userName"
@@ -65,7 +56,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:background="@drawable/background_dialog"
                 android:layout_marginTop="@dimen/margin_default"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -89,13 +80,13 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/historicRv"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    tools:itemCount="10"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/historicTitle"
-                    tools:listitem="@layout/item_historic"/>
+                    tools:itemCount="20"
+                    tools:listitem="@layout/item_historic" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

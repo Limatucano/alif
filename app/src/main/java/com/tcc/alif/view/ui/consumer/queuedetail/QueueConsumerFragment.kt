@@ -5,13 +5,16 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.google.firebase.Timestamp
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper
+import com.tcc.alif.data.model.CallStatus
 import com.tcc.alif.data.model.MyQueuesResponse
 import com.tcc.alif.data.model.Service
 import com.tcc.alif.data.model.local.StatusQueue
 import com.tcc.alif.data.model.local.StatusQueue.Companion.getByStringRes
 import com.tcc.alif.data.util.*
+import com.tcc.alif.data.util.ValidateUtil.generateUUID
 import com.tcc.alif.databinding.FragmentQueueConsumerBinding
 import com.tcc.alif.view.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,6 +49,7 @@ class QueueConsumerFragment: BaseFragment<FragmentQueueConsumerBinding>(Fragment
         )
     }
     private fun setListener() = binding.run {
+        //TODO: implementar dialog com motivo do cancelamento
         cancelSubscription.setOnClickListener {
             viewModel.handleIntent(
                 QueueConsumerIntent.CancelSubscription(
@@ -61,7 +65,18 @@ class QueueConsumerFragment: BaseFragment<FragmentQueueConsumerBinding>(Fragment
             )
         }
         subscribe.setOnClickListener {
-
+            viewModel.handleIntent(
+                QueueConsumerIntent.Subscribe(
+                    idQueue = args.queue.idQueue,
+                    service = Service(
+                        idService = generateUUID(),
+                        userId = sharedPreferences.userId ?: SharedPreferencesHelper.EMPTY_STRING,
+                        enrollmentTime = Timestamp.now(),
+                        status = CallStatus.IN_HOLD.value,
+                        employeeResponsible = args.queue.employeeResponsible ?: SharedPreferencesHelper.EMPTY_STRING,
+                    )
+                )
+            )
         }
     }
 
@@ -75,7 +90,7 @@ class QueueConsumerFragment: BaseFragment<FragmentQueueConsumerBinding>(Fragment
                     updateLoading(false)
                     Toast.makeText(requireContext(),state.message,Toast.LENGTH_SHORT).show()
                 }
-                is QueueConsumerState.SubscribedQueue -> {
+                is QueueConsumerState.AlreadySubscribed -> {
                     updateLoading(false)
                     if(state.idService?.isNotEmpty() == true){
                         idService = state.idService
@@ -86,12 +101,23 @@ class QueueConsumerFragment: BaseFragment<FragmentQueueConsumerBinding>(Fragment
                     controlButton(state.isSubscribed)
                 }
                 is QueueConsumerState.CanceledSubscription -> {
-                    checkIfUserIsSubscribed()
-                    updateLoading(false)
-                    Toast.makeText(requireContext(),state.message,Toast.LENGTH_SHORT).show()
+                    updateScreen(state.message)
+                }
+                is QueueConsumerState.Subscribed -> {
+                    updateScreen(state.message)
                 }
             }
         }
+    }
+
+    private fun updateScreen(message: String){
+        checkIfUserIsSubscribed()
+        updateLoading(false)
+        Toast.makeText(
+            requireContext(),
+            message,
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun controlButton(userIsSubscribed: Boolean) = binding.run {
@@ -126,6 +152,8 @@ class QueueConsumerFragment: BaseFragment<FragmentQueueConsumerBinding>(Fragment
                 StatusQueue.CLOSED -> {
                     openTv.text = resources.getString(R.string.queue_will_open, openingTime).fromHtml()
                     closeTv.text = resources.getString(R.string.queue_closed, closingTime).fromHtml()
+                    cancelSubscription.setVisible(false)
+                    subscribe.setVisible(false)
                 }
             }
         }

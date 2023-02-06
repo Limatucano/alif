@@ -10,6 +10,14 @@ class ConsumerRepository @Inject constructor(
 
     fun getMyQueues(idUser: String) = consumerDataSource.getMyQueues(idUser)
 
+    fun subscribe(
+        idQueue: String,
+        service: Service
+    ) = consumerDataSource.subscribe(
+        idQueue = idQueue,
+        service = service
+    )
+
     fun cancelSubscription(
         idQueue: String,
         service: Service

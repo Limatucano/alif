@@ -74,10 +74,6 @@ class HomeConsumerFragment : BaseFragment<FragmentHomeConsumerBinding>(FragmentH
     }
 
     private fun setListener() = binding.run {
-        userPicture.setOnClickListener {
-            openProfile()
-        }
-
         homeSwipe.setOnRefreshListener {
             viewModel.handleIntent(
                 HomeConsumerIntent.LoadHistoric(
