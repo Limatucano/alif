@@ -3,6 +3,7 @@ package com.tcc.alif.view.ui.consumer.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tcc.alif.data.repository.ConfigurationRepository
 import com.tcc.alif.data.repository.HomeRepository
 import com.tcc.alif.data.util.request
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,7 +12,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeConsumerViewModel @Inject constructor(
-    private val homeRepository: HomeRepository
+    private val homeRepository: HomeRepository,
+    private val configurationRepository: ConfigurationRepository
 ) : ViewModel() {
 
     val state = MutableLiveData<HomeConsumerState>()
@@ -19,7 +21,13 @@ class HomeConsumerViewModel @Inject constructor(
     fun handleIntent(intent: HomeConsumerIntent){
         when(intent){
             is HomeConsumerIntent.LoadHistoric -> loadMyHistoric(intent.idUser)
+            is HomeConsumerIntent.Exit -> signOut()
         }
+    }
+
+    private fun signOut(){
+        configurationRepository.signOut()
+        state.postValue(HomeConsumerState.ExitedSuccessfully)
     }
 
     private fun loadMyHistoric(idUser: String){

@@ -91,7 +91,11 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
                 closeTv.text = resources.getString(R.string.queue_will_close, closingTime).fromHtml()
             }
             StatusQueue.CLOSED -> {
-                openTv.text = resources.getString(R.string.queue_will_open, openingTime).fromHtml()
+                if(openingTime.dateFromString(NORMAL_DATE_WITH_HOURS_FORMAT)?.before(getCurrentDate(NORMAL_DATE_WITH_HOURS_FORMAT)) == true){
+                    openTv.text = resources.getString(R.string.queue_opened, openingTime).fromHtml()
+                }else{
+                    openTv.text = resources.getString(R.string.queue_will_open, openingTime).fromHtml()
+                }
                 closeTv.text = resources.getString(R.string.queue_closed, closingTime).fromHtml()
             }
         }
@@ -129,18 +133,20 @@ class QueueFragment : BaseFragment<FragmentQueueBinding>(FragmentQueueBinding::i
             call.status == CallStatus.IN_HOLD
         }.sortedWith { first, second ->
             first.enrollmentTime.compareTo(second.enrollmentTime)
-        }[0]
+        }.firstOrNull()
 
-        viewModel.handleIntent(
-            QueueIntent.SendNotification(
-                NotificationRequest(
-                    contents = ContentData(en = getString(R.string.push_notification_call_updated_message, queue.name)),
-                    headings = ContentData(en = Constants.PUSH_NOTIFICATION_TITLE),
-                    name = Constants.PUSH_NOTIFICATION_NAME,
-                    includeExternalUserIds = listOf(nextCall.email)
+        if(nextCall != null){
+            viewModel.handleIntent(
+                QueueIntent.SendNotification(
+                    NotificationRequest(
+                        contents = ContentData(en = getString(R.string.push_notification_call_updated_message, queue.name)),
+                        headings = ContentData(en = Constants.PUSH_NOTIFICATION_TITLE),
+                        name = Constants.PUSH_NOTIFICATION_NAME,
+                        includeExternalUserIds = listOf(nextCall.email)
+                    )
                 )
             )
-        )
+        }
     }
 
     private fun setListener(){

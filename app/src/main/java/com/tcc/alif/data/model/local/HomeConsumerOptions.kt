@@ -23,5 +23,9 @@ enum class HomeConsumerOptions(
     COMPANIES(
         title = R.string.home_consumer_companies,
         icon = R.drawable.ic_store
+    ),
+    EXIT(
+        title = R.string.home_consumer_exit,
+        icon = R.drawable.ic_exit_white
     )
 }

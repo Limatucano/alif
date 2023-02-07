@@ -3,8 +3,10 @@ package com.tcc.alif.view.ui.consumer.queuedetail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tcc.alif.data.model.CallStatus
 import com.tcc.alif.data.model.Service
 import com.tcc.alif.data.repository.ConsumerRepository
+import com.tcc.alif.data.util.ValidateUtil.generateUUID
 import com.tcc.alif.data.util.request
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -47,7 +49,7 @@ class QueueConsumerViewModel @Inject constructor(
         viewModelScope.launch {
             repository.subscribe(
                 idQueue = idQueue,
-                service = service
+                service = service.copy(idService = generateUUID())
             ).request(
                 blockToRun = this,
                 onError = {
@@ -100,7 +102,9 @@ class QueueConsumerViewModel @Inject constructor(
                     state.postValue(QueueConsumerState.Loading(it))
                 },
                 onSuccess = { myQueues ->
-                    val queue = myQueues.firstOrNull {
+                    val queue = myQueues.filter {
+                        it.status == CallStatus.IN_HOLD || it.status == CallStatus.IN_PROGRESS
+                    }.firstOrNull {
                         it.idQueue == idQueue
                     }
                     state.postValue(

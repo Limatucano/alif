@@ -7,9 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.ktx.messaging
-import com.google.firebase.messaging.ktx.remoteMessage
 import com.tcc.alif.R
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.model.local.HomeConsumerOptions
@@ -17,6 +14,7 @@ import com.tcc.alif.data.util.setGridLayout
 import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentHomeConsumerBinding
 import com.tcc.alif.view.ui.BaseFragment
+import com.tcc.alif.view.ui.administrator.MainAdministratorFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -70,7 +68,18 @@ class HomeConsumerFragment : BaseFragment<FragmentHomeConsumerBinding>(FragmentH
             HomeConsumerOptions.COMPANIES -> {
                 openCompanies()
             }
+            HomeConsumerOptions.EXIT -> {
+                viewModel.handleIntent(HomeConsumerIntent.Exit)
+            }
         }
+    }
+
+    private fun goToModeScreen(){
+        requireView()
+            .findNavController()
+            .navigate(
+                HomeConsumerFragmentDirections.toModeFragment()
+            )
     }
 
     private fun setListener() = binding.run {
@@ -121,6 +130,9 @@ class HomeConsumerFragment : BaseFragment<FragmentHomeConsumerBinding>(FragmentH
             is HomeConsumerState.Historic -> {
                 historicAdapter.historicService = state.historic
                 updateLoading(false)
+            }
+            is HomeConsumerState.ExitedSuccessfully -> {
+                goToModeScreen()
             }
         }
     }

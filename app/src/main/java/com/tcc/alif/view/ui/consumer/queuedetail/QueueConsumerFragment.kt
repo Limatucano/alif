@@ -10,6 +10,8 @@ import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper
 import com.tcc.alif.data.model.CallStatus
 import com.tcc.alif.data.model.MyQueuesResponse
+import com.tcc.alif.data.model.QueueResponse
+import com.tcc.alif.data.model.QueueResponse.Companion.CLOSED_STATUS
 import com.tcc.alif.data.model.Service
 import com.tcc.alif.data.model.local.StatusQueue
 import com.tcc.alif.data.model.local.StatusQueue.Companion.getByStringRes
@@ -150,7 +152,12 @@ class QueueConsumerFragment: BaseFragment<FragmentQueueConsumerBinding>(Fragment
                     closeTv.text = resources.getString(R.string.queue_will_close, closingTime).fromHtml()
                 }
                 StatusQueue.CLOSED -> {
-                    openTv.text = resources.getString(R.string.queue_will_open, openingTime).fromHtml()
+                    if(openingTime.dateFromString(DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT)?.before(getCurrentDate(
+                            DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT)) == true){
+                        openTv.text = resources.getString(R.string.queue_opened, openingTime).fromHtml()
+                    }else{
+                        openTv.text = resources.getString(R.string.queue_will_open, openingTime).fromHtml()
+                    }
                     closeTv.text = resources.getString(R.string.queue_closed, closingTime).fromHtml()
                     cancelSubscription.setVisible(false)
                     subscribe.setVisible(false)

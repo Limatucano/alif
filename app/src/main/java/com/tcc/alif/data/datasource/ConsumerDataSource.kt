@@ -95,7 +95,7 @@ class ConsumerDataSource @Inject constructor(
                     status = it.status,
                     openingTime = it.openingTime,
                     closingTime = it.closingTime,
-                    quantity = it.quantity,
+                    quantity = it.service.filter { service -> CallStatus.getCallStatusByValue(service.status) == CallStatus.IN_HOLD }.size,
                     description = it.description,
                     titleCategory = it.titleCategory,
                     employeeResponsible = it.employeeResponsible,

@@ -1,6 +1,7 @@
 package com.tcc.alif.data.model
 
 import android.os.Parcelable
+import androidx.annotation.StringRes
 import com.google.firebase.Timestamp
 import com.tcc.alif.R
 import com.tcc.alif.data.util.emptyIfNull
@@ -30,12 +31,7 @@ data class QueueResponse(
     val firstConsumers: List<Service> = listOf()
 ) : Parcelable{
 
-    private fun getStatusStringRes(status : String) : Int =
-        when(status){
-            OPENED_STATUS -> R.string.opened_status
-            CLOSED_STATUS -> R.string.closed_status
-            else -> R.string.pendent_status
-        }
+
 
     fun toQueueResponse(map: MutableMap<String, Any>?): QueueResponse{
         return if(map == null){
@@ -62,6 +58,20 @@ data class QueueResponse(
     companion object {
         const val OPENED_STATUS = "ABERTO"
         const val CLOSED_STATUS = "FECHADO"
+
+        fun getStatusStringRes(status : String) : Int =
+            when(status){
+                OPENED_STATUS -> R.string.opened_status
+                CLOSED_STATUS -> R.string.closed_status
+                else -> R.string.pendent_status
+            }
+
+        fun getStatusByRes(@StringRes stringRes: Int?): String =
+            when(stringRes){
+                R.string.opened_status -> OPENED_STATUS
+                R.string.closed_status -> CLOSED_STATUS
+                else -> CLOSED_STATUS
+            }
     }
 }
 

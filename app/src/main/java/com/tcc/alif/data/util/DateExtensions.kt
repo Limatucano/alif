@@ -9,6 +9,17 @@ import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
+fun getCurrentDate(
+    dateFormat: String,
+    locale: Locale = Locale(Constants.LANGUAGE_PT, Constants.COUNTRY_BR),
+): Date?{
+    val date = SimpleDateFormat(
+        dateFormat,
+        locale
+    )
+    return date.format(Date()).dateFromString(dateFormat)
+}
+
 fun Date.toStringDate(format: String): String{
     return try {
         val dateFormat = SimpleDateFormat(format, Locale.getDefault())
