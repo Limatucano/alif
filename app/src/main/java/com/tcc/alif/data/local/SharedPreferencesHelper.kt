@@ -93,6 +93,10 @@ class SharedPreferencesHelper @Inject constructor(
         get() = sharedPreferences.getString(LAST_SCREEN, EMPTY_STRING)
         set(value) = sharedPreferences.edit().putString(LAST_SCREEN, value).apply()
 
+    var userRole: String?
+        get() = sharedPreferences.getString(USER_ROLE, EMPTY_STRING)
+        set(value) = sharedPreferences.edit().putString(USER_ROLE, value).apply()
+
     companion object{
         const val SHARED_PREFERENCES_NAME = "${BuildConfig.APPLICATION_ID}.ENCRYPT_SHARED_PREFERENCES"
         private const val LAST_SCREEN = "$SHARED_PREFERENCES_NAME.LAST_SCREEN"
@@ -116,6 +120,7 @@ class SharedPreferencesHelper @Inject constructor(
         private const val COMPANY_NUMBER = "$SHARED_PREFERENCES_NAME.COMPANY_NUMBER"
         private const val COMPANY_CITY = "$SHARED_PREFERENCES_NAME.COMPANY_CITY"
         private const val COMPANY_ADDRESS_CONTINUED = "$SHARED_PREFERENCES_NAME.COMPANY_ADDRESS_CONTINUED"
+        private const val USER_ROLE = "$SHARED_PREFERENCES_NAME.USER_ROLE"
         const val EMPTY_STRING = ""
     }
 }

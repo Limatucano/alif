@@ -256,5 +256,8 @@
     <string name="home_consumer_subtitle">Essas são as suas opções:</string>
     <string name="home_consumer_historic">Histórico</string>
 
+    <string name="company_role_admin">Administrador</string>
+    <string name="company_role_employee">Funcionário</string>
+
     <string name="push_notification_call_updated_message">Você é o próximo na fila %s. Fique atento e esteja pronto para ser chamado! :)</string>
 </resources>

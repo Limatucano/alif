@@ -78,6 +78,7 @@ class MainAdministratorFragment : BaseFragment<FragmentMainAdministratorBinding>
         companyNumber = company.numberHouse
         companyCity = company.city
         companyAddressContinued = company.addressContinued
+        userRole = company.role
     }
 
     private fun setCurrentFragment(fragment: Fragment) =

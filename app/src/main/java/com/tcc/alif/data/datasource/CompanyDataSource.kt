@@ -3,7 +3,6 @@ package com.tcc.alif.data.datasource
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 import com.tcc.alif.data.api.CepService
 import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.data.model.CompanyResponse.Companion.modelToMap
@@ -17,7 +16,10 @@ import com.tcc.alif.data.util.Constants.USER_COLLECTION
 import com.tcc.alif.data.util.UNKNOWN_ERROR
 import com.tcc.alif.data.util.await
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class CompanyDataSource @Inject constructor(
@@ -27,17 +29,25 @@ class CompanyDataSource @Inject constructor(
 
     suspend fun getAddress(cep: String) = cepService.getAddress(cep)
 
-    fun getAllCompaniesByUser(idUser: String) : Flow<Response<QuerySnapshot>> = flow{
+    fun getAllCompaniesByUser(idUser: String) : Flow<Response<List<CompanyResponse>>> = flow{
         emit(Response.Loading(true))
         getCompaniesID(idUser).collect{
             val userResponse = SigninResponse().toSignResponse(it.documents[0].data)
-            val companiesToSearch = userResponse.companies.filter { filter -> filter.isNotEmpty() }
-            val companies = firebaseFirestore
+            val companiesToSearch = userResponse.companies.filter { filter -> filter.companyId.isNotEmpty() }.map { map -> map.companyId }
+            val response = firebaseFirestore
                 .collection(COMPANY_COLLECTION)
                 .whereIn("idCompany",companiesToSearch)
                 .get()
                 .await()
-            this.emit(Response.Success(companies))
+            val companies = response.map { map -> CompanyResponse().toCompanyResponse(map = map.data) }
+            val companiesWithRole = companies.map { company ->
+                company.copy(
+                    role = userResponse.companies.firstOrNull{ user ->
+                        user.companyId == company.idCompany
+                    }?.role ?: ""
+                )
+            }
+            this.emit(Response.Success(companiesWithRole))
         }
     }.catch {
         emit(Response.error(it.message ?: UNKNOWN_ERROR))

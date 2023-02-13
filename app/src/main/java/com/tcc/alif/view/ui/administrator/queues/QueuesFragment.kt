@@ -10,11 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
 import com.tcc.alif.data.model.CompanyResponse
+import com.tcc.alif.data.model.CompanyRole.Companion.getRoleByValue
 import com.tcc.alif.data.model.QueueRequest
 import com.tcc.alif.data.model.QueueResponse
 import com.tcc.alif.data.model.Queues
+import com.tcc.alif.data.util.Constants
 import com.tcc.alif.data.util.Constants.STATE_NOT_MAPPED
 import com.tcc.alif.data.util.setLinearLayout
+import com.tcc.alif.data.util.setVisible
 import com.tcc.alif.databinding.FragmentQueuesBinding
 import com.tcc.alif.view.ui.BaseFragment
 import com.tcc.alif.view.ui.administrator.MainAdministratorFragmentDirections
@@ -43,6 +46,7 @@ class QueuesFragment : BaseFragment<FragmentQueuesBinding>(FragmentQueuesBinding
     }
 
     private fun setViews() = binding.run{
+        addQueue.setVisible(getRoleByValue(sharedPreferences.userRole).permissions[Constants.PERMISSION_ADD_QUEUE] == true)
         rvQueuesAll.setLinearLayout(
             context = requireContext(),
             orientation = LinearLayoutManager.VERTICAL,

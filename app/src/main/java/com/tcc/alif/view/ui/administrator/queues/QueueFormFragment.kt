@@ -9,16 +9,15 @@ import com.google.firebase.Timestamp
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
 import com.tcc.alif.data.model.CategoryResponse
+import com.tcc.alif.data.model.CompanyRole
 import com.tcc.alif.data.model.QueueRequest
 import com.tcc.alif.data.model.QueueResponse
 import com.tcc.alif.data.model.local.Employee
 import com.tcc.alif.data.model.local.StatusQueue
+import com.tcc.alif.data.util.*
 import com.tcc.alif.data.util.Constants.STATE_NOT_MAPPED
 import com.tcc.alif.data.util.DateFormats.NORMAL_DATE_WITH_HOURS_FORMAT
 import com.tcc.alif.data.util.ValidateUtil.generateUUID
-import com.tcc.alif.data.util.dateFromString
-import com.tcc.alif.data.util.emptyIfNull
-import com.tcc.alif.data.util.toStringDate
 import com.tcc.alif.databinding.FragmentQueueFormBinding
 import com.tcc.alif.view.base.CustomAdapter
 import com.tcc.alif.view.ui.BaseFragment
@@ -68,6 +67,7 @@ class QueueFormFragment : BaseFragment<FragmentQueueFormBinding>(FragmentQueueFo
             StatusQueue.values().map { getString(it.text) }
         )
         statusAc.setAdapter(statusAdapter)
+        save.setVisible(CompanyRole.getRoleByValue(sharedPreferences.userRole).permissions[Constants.PERMISSION_EDIT_QUEUE] == true)
         fillViews()
     }
 

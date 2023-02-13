@@ -81,20 +81,18 @@ class CompaniesViewModel @Inject constructor(
 
     private fun getAllCompanies(idUser : String){
         viewModelScope.launch {
-            repository.getAllCompaniesByUser(idUser = idUser).collect{ response ->
-                when(response){
-                    is Response.Loading -> state.postValue(CompanyState.Loading(response.loading))
-                    is Response.Error -> state.postValue(CompanyState.Error(response.message))
-                    is Response.Success -> {
-                        val companies = Companies(
-                            companies = response.data.map {
-                                CompanyResponse().toCompanyResponse(map = it.data)
-                            }
-                        )
-                        state.postValue(CompanyState.Success(companies))
-                    }
+            repository.getAllCompaniesByUser(idUser = idUser).request(
+                blockToRun = this,
+                onError = {
+                    state.postValue(CompanyState.Error(it))
+                          },
+                onLoading = {
+                    state.postValue(CompanyState.Loading(it))
+                            },
+                onSuccess = {
+                    state.postValue(CompanyState.Success(Companies(companies = it)))
                 }
-            }
+            )
         }
     }
 }

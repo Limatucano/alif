@@ -16,13 +16,23 @@
             tools:text="TESTE teste" />
 
         <TextView
-            android:id="@+id/companyCnpj"
+            android:id="@+id/companyRole"
             style="@style/SubTitle"
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/companyName"
             app:layout_constraintTop_toBottomOf="@+id/companyName"
+            tools:text="Funcionário" />
+
+        <TextView
+            android:id="@+id/companyCnpj"
+            style="@style/SubTitle"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/companyRole"
+            app:layout_constraintTop_toBottomOf="@+id/companyRole"
             tools:text="1233.1234.1234-0000" />
 
         <TextView

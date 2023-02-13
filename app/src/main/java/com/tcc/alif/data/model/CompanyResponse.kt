@@ -18,6 +18,7 @@ data class CompanyResponse(
     val telephone : String? = null,
     val street : String? = null,
     val district : String? = null,
+    var role: String = "",
     val numberHouse : String? = null,
     val city : String? = null,
     val zipCode : String? = null,

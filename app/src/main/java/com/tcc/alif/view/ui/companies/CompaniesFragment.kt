@@ -37,7 +37,11 @@ class CompaniesFragment : BaseFragment<FragmentCompaniesBinding>(FragmentCompani
             title = getString(R.string.companies_title)
         )
         if(user.isAdministrator != null){
-            viewModel.handleIntent(CompanyIntent.GetAllCompanies(user.uid))
+            viewModel.handleIntent(
+                CompanyIntent.GetAllCompanies(
+                    idUser = user.uid
+                )
+            )
         }
         setObservers()
         setListeners()

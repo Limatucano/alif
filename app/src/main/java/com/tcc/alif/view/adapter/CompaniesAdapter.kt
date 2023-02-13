@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tcc.alif.data.model.Companies
-import com.tcc.alif.data.model.Company
 import com.tcc.alif.data.model.CompanyResponse
 import com.tcc.alif.databinding.CompanyItemBinding
 
@@ -22,6 +21,7 @@ class CompaniesAdapter(
             companyName.text = company.tradeName
             companyAddress.text = "${company.street}, ${company.numberHouse}"
             companyCnpj.text = company.cnpj
+            companyRole.text = company.role
 
             root.setOnClickListener {
                 action.invoke(company)
