@@ -9,6 +9,7 @@ import com.tcc.alif.data.model.CompanyResponse.Companion.modelToMap
 import com.tcc.alif.data.model.Response
 import com.tcc.alif.data.model.SigninResponse
 import com.tcc.alif.data.util.Constants
+import com.tcc.alif.data.util.Constants.COMPANIES
 import com.tcc.alif.data.util.Constants.COMPANY_COLLECTION
 import com.tcc.alif.data.util.Constants.ID_COMPANY
 import com.tcc.alif.data.util.Constants.UID
@@ -98,7 +99,15 @@ class CompanyDataSource @Inject constructor(
             firebaseFirestore
                 .collection(USER_COLLECTION)
                 .document(it)
-                .update("companies", FieldValue.arrayUnion(company.idCompany)).await()
+                .update(
+                    COMPANIES,
+                    FieldValue.arrayUnion(
+                        mapOf(
+                            "companyId" to company.idCompany,
+                            "role" to company.role
+                        )
+                    )
+                ).await()
         }
 
         emit(Response.loading(false))

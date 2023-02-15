@@ -4,7 +4,6 @@ import android.os.Parcelable
 import androidx.annotation.StringRes
 import com.tcc.alif.R
 import com.tcc.alif.data.model.MyCompany.Companion.toMyCompany
-import com.tcc.alif.data.util.Constants.PERMISSION_ADD_COMPANY
 import com.tcc.alif.data.util.Constants.PERMISSION_ADD_EMPLOYEE
 import com.tcc.alif.data.util.Constants.PERMISSION_ADD_QUEUE
 import com.tcc.alif.data.util.Constants.PERMISSION_ADD_RESPONSIBLE_EMPLOYEE_QUEUE
@@ -27,7 +26,6 @@ sealed class CompanyRole(
         value = PERMISSION_ADMIN_ROLE,
         permissions = mapOf(
             PERMISSION_EDIT_COMPANY to true,
-            PERMISSION_ADD_COMPANY to true,
             PERMISSION_ADD_RESPONSIBLE_EMPLOYEE_QUEUE to true,
             PERMISSION_ADD_QUEUE to true,
             PERMISSION_EDIT_QUEUE to true,
@@ -42,7 +40,6 @@ sealed class CompanyRole(
         value = PERMISSION_EMPLOYEE_ROLE,
         permissions = mapOf(
             PERMISSION_EDIT_COMPANY to false,
-            PERMISSION_ADD_COMPANY to false,
             PERMISSION_ADD_RESPONSIBLE_EMPLOYEE_QUEUE to false,
             PERMISSION_ADD_QUEUE to false,
             PERMISSION_EDIT_QUEUE to false,

@@ -18,6 +18,7 @@ class EmployeeAdapter(
             field = value
             notifyDataSetChanged()
         }
+    var canBeRemoved: Boolean = true
 
     inner class ViewHolder(
         private val binding: EmployeesItemBinding
@@ -28,6 +29,9 @@ class EmployeeAdapter(
             previousEmployee: Employee?
         ) = binding.run{
 
+            if(!canBeRemoved){
+                deleteButton.setVisible(false)
+            }
             sectionTitle.text = currentEmployee.statusRequest?.text?.let { context.getString(it) }
             previousEmployee?.statusRequest?.equals(currentEmployee.statusRequest)?.also { equal ->
                 sectionTitle.setVisible(!equal)

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tcc.alif.data.model.Companies
 import com.tcc.alif.data.model.CompanyResponse
+import com.tcc.alif.data.model.CompanyRole.Companion.getRoleByValue
 import com.tcc.alif.databinding.CompanyItemBinding
 
 class CompaniesAdapter(
@@ -21,7 +22,7 @@ class CompaniesAdapter(
             companyName.text = company.tradeName
             companyAddress.text = "${company.street}, ${company.numberHouse}"
             companyCnpj.text = company.cnpj
-            companyRole.text = company.role
+            companyRole.text = context.getString(getRoleByValue(company.role).text)
 
             root.setOnClickListener {
                 action.invoke(company)

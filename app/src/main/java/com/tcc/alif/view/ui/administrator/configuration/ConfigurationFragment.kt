@@ -7,7 +7,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.model.CompanyResponse
+import com.tcc.alif.data.model.CompanyRole
 import com.tcc.alif.data.model.local.ConfigurationOptions
+import com.tcc.alif.data.util.Constants
 import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentConfigurationBinding
 import com.tcc.alif.view.ui.BaseFragment
@@ -144,6 +146,14 @@ class ConfigurationFragment : BaseFragment<FragmentConfigurationBinding>(Fragmen
     }
 
     private fun setAdapterItems(){
-        optionsAdapter.options = ConfigurationOptions.values().toList()
+        val configurationOptions = ConfigurationOptions.values().toMutableList()
+        if(CompanyRole.getRoleByValue(sharedPreferences.userRole).permissions[Constants.PERMISSION_CATEGORY_QUEUE] == false){
+            configurationOptions.remove(ConfigurationOptions.MY_CATEGORIES)
+        }
+        if(CompanyRole.getRoleByValue(sharedPreferences.userRole).permissions[Constants.PERMISSION_EDIT_COMPANY] == false){
+            configurationOptions.remove(ConfigurationOptions.COMPANY_PROFILE)
+        }
+
+        optionsAdapter.options = configurationOptions
     }
 }

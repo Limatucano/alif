@@ -8,7 +8,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tcc.alif.R
 import com.tcc.alif.data.local.SharedPreferencesHelper.Companion.EMPTY_STRING
+import com.tcc.alif.data.model.CompanyRole
 import com.tcc.alif.data.model.local.Employee
+import com.tcc.alif.data.util.Constants
 import com.tcc.alif.data.util.setLinearLayout
 import com.tcc.alif.databinding.FragmentEmployeeBinding
 import com.tcc.alif.view.base.TwoOptionsBottomDialog
@@ -81,6 +83,7 @@ class EmployeeFragment : BaseFragment<FragmentEmployeeBinding>(FragmentEmployeeB
                 is EmployeeState.Loading -> updateLoading(state.loading)
                 is EmployeeState.Employees -> {
                     updateLoading(false)
+                    employeesAdapter.canBeRemoved = CompanyRole.getRoleByValue(sharedPreferences.userRole).permissions[Constants.PERMISSION_REMOVE_EMPLOYEE] == true
                     employeesAdapter.employees = state.employees
                 }
                 is EmployeeState.Error -> {

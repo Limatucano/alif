@@ -29,6 +29,7 @@ object Constants {
     const val UID = "uid"
     const val CPF = "cpf"
     const val STATUS = "status"
+    const val COMPANIES = "companies"
 
     ////// message requests
     const val USER_UNAUTHORIZED = "Permissão Negada"
@@ -51,7 +52,6 @@ object Constants {
     const val SUBSCRIPTION_SUCCESSFULLY = "Inscrição realizada com sucesso!"
 
     const val PERMISSION_EDIT_COMPANY = "PERMISSION_EDIT_COMPANY"
-    const val PERMISSION_ADD_COMPANY = "PERMISSION_ADD_COMPANY"
     const val PERMISSION_ADD_RESPONSIBLE_EMPLOYEE_QUEUE = "PERMISSION_ADD_RESPONSIBLE_EMPLOYEE_QUEUE"
     const val PERMISSION_ADD_QUEUE = "PERMISSION_ADD_QUEUE"
     const val PERMISSION_EDIT_QUEUE = "PERMISSION_EDIT_QUEUE"

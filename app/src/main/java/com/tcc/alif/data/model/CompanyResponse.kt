@@ -2,6 +2,7 @@ package com.tcc.alif.data.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.tcc.alif.data.util.Constants
 import com.tcc.alif.data.util.emptyIfNull
 import kotlinx.parcelize.Parcelize
 
@@ -18,7 +19,7 @@ data class CompanyResponse(
     val telephone : String? = null,
     val street : String? = null,
     val district : String? = null,
-    var role: String = "",
+    var role: String = Constants.PERMISSION_ADMIN_ROLE,
     val numberHouse : String? = null,
     val city : String? = null,
     val zipCode : String? = null,
@@ -54,6 +55,7 @@ data class CompanyResponse(
                 "street" to street,
                 "district" to district,
                 "numberHouse" to numberHouse,
+                "role" to role,
                 "city" to city,
                 "zipCode" to zipCode,
                 "state" to state,
